@@ -1,0 +1,31 @@
+{
+  "colorList": ["#ff0000", "#00ff00", "#0000ff"],
+  "meshes": {
+    "1": {
+      "attributeList": ["circum", "height", "open"],
+      "type": "cone",
+      "name": "name of object",
+      "position": [0, 1, 0],
+      "colorIndex": 1,
+      "rotation": [0, 0, 0],
+      "circum": 24,
+      "height": 24,
+      "open": true
+    },
+    "2": {
+      "attributeList": ["dim"],
+      "type": "square",
+      "name": "test for save file",
+      "position": [-1, 1, -1],
+      "colorIndex": 2,
+      "rotation": [3.4, 1.86, 1],
+      "dim": [1, 1]
+    }
+  }
+  //approximate calculation 74 + x(225)
+  //c is length of colorList (largely doesn't matter)
+  //20 shapes worst case ~ 4.5MB
+  //50,000 monthly users
+  //1,000,000,000 STORAGE
+  //about 25 shapes for 3 files per person
+}

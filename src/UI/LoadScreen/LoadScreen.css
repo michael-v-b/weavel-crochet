@@ -1,0 +1,34 @@
+.load-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: #bfedf5;
+  z-index: 1000000;
+}
+
+.load-logo {
+  height: 30%;
+  border-radius: 100px;
+}
+
+.load-dots-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 20vh;
+  height: 10vh;
+}
+.load-dot {
+  background-color: rgb(255, 235, 123);
+  border-color: white;
+  border-style: solid;
+  border-radius: 100px;
+  width: 20%;
+  aspect-ratio: 1/1;
+}

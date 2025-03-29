@@ -1,0 +1,102 @@
+.web-container {
+  height: 97vh;
+  width: 99vw;
+  background-color: #bfedf5;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-logo {
+  height: 20%;
+  margin-bottom: 3%;
+  border-radius: 100px;
+}
+/*Continer for login window*/
+.login-window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 400px;
+  width: 350px; /*hard coded might need to redo*/
+
+  background-color: rgb(255, 255, 255);
+
+  border-color: rgb(255, 235, 123);
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 25px;
+}
+
+/*Text on top of window*/
+.login-request {
+  font-family: "Pacifico", "cursive";
+  font-size: 35px;
+  color: rgb(255, 219, 18);
+  user-select: none;
+  text-decoration: underline;
+  margin-bottom: 10%;
+}
+/*Input fields*/
+.login-field {
+  border-radius: 15px;
+  border-style: solid;
+  border-color: rgb(162, 162, 162);
+  margin-bottom: 10%;
+}
+
+/*Text above input fields*/
+.login-field-name {
+  user-select: none;
+  text-align: center;
+  width: 200%;
+  font-family: "Nunito", sans-serif;
+  font-size: 25px;
+  font-weight: 800;
+  color: rgb(113, 215, 233);
+  margin-top: 10%;
+}
+
+/*Only shows up when error is made*/
+.warning-message {
+  color: red;
+  text-align: center;
+  width: 200%;
+  margin-bottom: 10%;
+}
+
+/*Location formatting for log in button*/
+.login-button-container {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  margin-bottom: 10%;
+}
+
+.login-button {
+  user-select: none;
+  height: 100%;
+  width: 35%;
+
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 19px;
+  text-align: center;
+  background-color: rgb(109, 243, 255);
+  color: white;
+  border-radius: 5px;
+  padding: 2%;
+}
+
+/*"I don't have an account"*/
+.register {
+  font-family: "Nunito", sans-serif;
+  text-align: center;
+  font-weight: 500;
+  text-decoration: underline dotted;
+  color: rgb(137, 137, 137);
+}

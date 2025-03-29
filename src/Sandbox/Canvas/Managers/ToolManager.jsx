@@ -1,0 +1,68 @@
+import Translater from "../Tools/Translater";
+import Rotater from "../Tools/Rotater";
+import { useEffect, forwardRef, useImperativeHandle, useRef } from "react";
+import useStore from "../../DevTools/store";
+
+/**
+ * @typedef {ToolManager} - manages whether a tool should be active
+ * which tool should be active and where it shoudl be located.
+ *@property {Raycaster} raycaster - raycaster object, mainly to be passed donw to other tools.
+ * @property {RotaterRef} rotaterRef - reference to the rotater object.
+ * @returns {Component} - lists all of the tools and activates them based on the tool property.
+ */
+
+const ToolManager = forwardRef(({ raycaster, rotaterRef, ...props }, ref) => {
+  const tool = useStore((state) => state.tool);
+  const avgPosition = useStore((state) => state.avgPosition);
+  const setAvgPosition = useStore((state) => state.setAvgPosition);
+  const selectedList = useStore((state) => state.selectedMeshes);
+  const updateAvgPosition = useStore((state) => state.updateAvgPosition);
+  const translaterRef = useRef(null);
+
+  /**
+   *Finds average position of all objects in selectedList,
+   *then updates state and sends it in getAvgPosition callback functions.
+   */
+
+  /**
+   * Activates the widget based on current tool.
+   *@param {[Widget]} widgetMeshes - lists all widgets that ray intersected
+   * @param {event } event - used to pass to tool objects
+   */
+  const handleRay = (widgetMeshes, event) => {
+    if (widgetMeshes.length <= 0) {
+      return;
+    }
+    if (tool == "translate") {
+      translaterRef.current.handleRay(widgetMeshes, event);
+    }
+    if (tool == "rotate") {
+      rotaterRef.current.handleRay(widgetMeshes, event);
+    }
+  };
+
+  /**
+   * Updates position if selectedList changes and there is an object selected.
+   */
+  useEffect(() => {
+    if (selectedList.length > 0) {
+      updateAvgPosition();
+    }
+  }, [selectedList]);
+
+  useImperativeHandle(ref, () => ({
+    handleRay,
+  }));
+
+  return (
+    <>
+      <mesh>
+        <Translater ref={translaterRef} raycaster={raycaster} />
+
+        <Rotater ref={rotaterRef} raycaster={raycaster} />
+      </mesh>
+    </>
+  );
+});
+
+export default ToolManager;

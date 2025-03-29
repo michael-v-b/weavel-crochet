@@ -1,0 +1,50 @@
+.attribute {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: black;
+  justify-content: flex-start;
+}
+.attribute-name {
+  background-color: #d6eaf8;
+  color: black !important;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  margin-right: 2%;
+  padding: 2%;
+  border-radius: 5px;
+}
+.position-attribute {
+  justify-content: space-evenly !important;
+}
+.field-style {
+  justify-content: center;
+  flex-direction: center;
+  text-align: center;
+  border-radius: 5px;
+
+  border: solid;
+  border-color: gray;
+  border-width: 2px;
+}
+.small {
+  width: 20%;
+}
+.large {
+  width: 80%;
+}
+.position-field-style {
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  flex-direction: center;
+  text-align: center;
+  border-radius: 5px;
+  border: solid;
+  border-color: gray;
+  border-width: 2px;
+}
+.stitch-text {
+  margin-left: 1%;
+  font-size: 2vw;
+}

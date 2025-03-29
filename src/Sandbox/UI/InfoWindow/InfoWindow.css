@@ -1,0 +1,27 @@
+.info-window {
+  background-color: #aed6f1;
+  border-color: #85c1e9;
+  border-width: 2px;
+  border-style: solid;
+  height: 50%;
+  width: 98%;
+  border-radius: 15px;
+  overflow-x: wrap;
+}
+.info-title-bar {
+  height: 6%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: #d6eaf8;
+  margin-bottom: 3%;
+  border-radius: 25px;
+}
+.info {
+  height: 90%;
+  width: 100%;
+  padding: 1%;
+  overflow-wrap: break-word;
+  overflow-y: auto;
+}

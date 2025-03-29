@@ -1,0 +1,28 @@
+.banner-profile {
+  background-color: #bfedf5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+}
+
+.profile-dropdown {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  background-color: #ffffff;
+  border-radius: 0px 0px 7px 7px;
+  border-color: yellow;
+  border-width: 0px 3px 3px 3px;
+  transition: 0.5s;
+  overflow: hidden;
+  z-index: 1000;
+}
+.profile-dropdown-option {
+  background-color: #ffffff;
+  z-index: 1000;
+}

@@ -1,0 +1,44 @@
+.draw-button-style {
+  user-select: none;
+  margin-left: 1%;
+  margin-right: 1%;
+  height: 20%;
+  aspect-ratio: 1 / 1;
+  background-color: #ebf5fb;
+  border-color: #6fbeff;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+.color-button-container-style {
+  display: inline-flex;
+  height: fit-content;
+  width: fit-content;
+  margin: 1%;
+  position: relative;
+  overflow: visible;
+}
+.color-button-style {
+  user-select: none;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: auto;
+
+  overflow: visible;
+
+  background-color: #ebf5fb;
+
+  border-radius: 5px;
+  border-width: 0px;
+}
+.color-picker-container {
+  position: absolute;
+  top: 100%;
+  z-index: 999;
+  overflow: visible;
+}
+.motion-button {
+  user-select:none;
+}

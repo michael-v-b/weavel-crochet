@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pacifico&display=swap");
+:root {
+  --banner-text-outline-color: #fbba17;
+  --logo-yellow: rgb(255, 235, 123);
+  --logo-blue: #bfedf5;
+}
+.banner-style {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+
+  width: 98vw;
+  height: 12vh;
+
+  background-color: #bfedf5;
+  z-index: 1000;
+}
+.banner-home {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  height: 96%;
+  aspect-ratio: 1/1;
+
+  background-color: var(--logo-blue);
+  margin-right: 3%;
+
+  border-radius: 5px;
+  border-color: var(--logo-yellow);
+  border-style: solid;
+  border-width: 3px;
+}
+.left-container {
+  display: flex;
+  flex-display: row;
+  align-items: center;
+
+  height: 100%;
+  width: 100vw;
+}
+.right-container {
+  z-index: 1000;
+  display: flex;
+  flex-direction: row-reverse;
+  user-select: none;
+
+  height: 100%;
+  width: 100vw;
+}
+
+.banner-image {
+  height: 100%;
+  width: auto;
+  aspect-ratio: 1/1;
+  margin-right: 3%;
+  margin-left: 3%;
+  border-radius: 100px;
+}
+.banner-text-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 65vw;
+  overflow: hidden;
+}
+.banner-text {
+  text-wrap: nowrap;
+  font-family: "Pacifico", serif;
+  font-size: 5vh;
+  color: rgb(255, 235, 123);
+  text-shadow: 2px 2px 0 var(--banner-text-outline-color),
+    -2px 2px 0 var(--banner-text-outline-color),
+    2px -2px 0 var(--banner-text-outline-color),
+    -2px -2px 0 var(--banner-text-outline-color);
+}

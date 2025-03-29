@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pacifico&display=swap");
+
+.name-tag-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 81vw;
+  height: 7vh;
+}
+.name-tag {
+  width: 90vw;
+  height: 4vh;
+  color: rgb(52, 108, 168);
+
+  width: auto;
+
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 4vh;
+  background-color: #b9daf1;
+  border-style: solid;
+  border-color: #85c1e9;
+  border-radius: 10px;
+}

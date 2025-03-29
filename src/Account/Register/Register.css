@@ -1,0 +1,95 @@
+/*Billy Weevil*/
+.register-logo {
+  height: 20%;
+  margin-bottom: 3%;
+  border-radius: 100px;
+}
+
+/*Window that holds all of the information*/
+.register-window {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 400px; /*hard- coded, may need to change*/
+  width: 350px;
+
+  background-color: rgb(255, 255, 255);
+
+  border-color: rgb(255, 235, 123);
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 25px;
+}
+
+/*Title at the top of the window*/
+.register-request {
+  font-family: "Pacifico", "cursive";
+  font-size: 30px;
+  color: rgb(255, 219, 18);
+  user-select: none;
+  text-decoration: underline;
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+/*Centers inputs in registration screen*/
+.register-inputs {
+  height: 70%;
+  width: 50%;
+  margin-bottom: 10%;
+}
+
+/*The input fields*/
+.register-field {
+  border-radius: 15px;
+  border-style: solid;
+  border-color: rgb(162, 162, 162);
+  margin-bottom: 5%;
+}
+
+/*The text above the input fields*/
+.register-field-name {
+  user-select: none;
+  font-family: "Nunito", sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  width: 300%;
+  color: rgb(113, 215, 233);
+  text-align: center;
+}
+
+/*The 'Create Account' button*/
+.register-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  user-select: none;
+
+  border-radius: 5px;
+  padding: 3%;
+  margin: 5%;
+  background-color: rgb(109, 243, 255);
+
+  color: white;
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+}
+/*Warning message*/
+/*only appears on failed attempts*/
+.warning {
+  color: red;
+  text-align: center;
+  width: 200%;
+}
+
+/*I already have an account...*/
+.login {
+  font-family: "Nunito", sans-serif;
+  text-align: center;
+  font-weight: 500;
+  text-decoration: underline dotted;
+  color: rgb(137, 137, 137);
+}
