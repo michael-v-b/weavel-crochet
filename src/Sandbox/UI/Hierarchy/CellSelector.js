@@ -6,7 +6,7 @@ import {
   useImperativeHandle,
 } from "react";
 
-const CellSelector = forwardRef(({...props}, ref) => {
+const CellSelector = forwardRef((_, ref) => {
   CellSelector.displayName = "CellSelector";
 
   const meshList = useStore((state) => state.meshList);

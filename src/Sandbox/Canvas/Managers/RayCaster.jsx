@@ -6,7 +6,7 @@ import { Vector2,Vector3} from "three";
 /**
  *@typedef {RayCaster} a class used to fire rays and provide information from those rays
  */
-const RayCaster = forwardRef(({ ...props }, ref) => {
+const RayCaster = forwardRef((_, ref) => {
   RayCaster.displayName = "RayCaster";
   const { scene, camera, gl } = useThree();
   const pointer = useRef(new Vector2());

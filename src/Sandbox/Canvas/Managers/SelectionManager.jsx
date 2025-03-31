@@ -6,7 +6,7 @@ import useStore from "../../DevTools/store";
  *@typedef {SelectionManager} manages which objects are selected and updates them on canvas, hierarchy and InfoWindow
  *disables SelectionManager when in camera mode.
  */
-const SelectionManager = forwardRef(( {...props},ref) => {
+const SelectionManager = forwardRef(( _,ref) => {
   SelectionManager.displayName = "SelectionManager";
 
   let widgetList = [];

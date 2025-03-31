@@ -35,7 +35,7 @@ const Projects = () => {
    * Creates projects based on user's supabase.
    */
   const getProjects = async () => {
-    const { data, error } = await supabase.from("Projects").select("*");
+    const { data, _error } = await supabase.from("Projects").select("*");
 
     const tempNames = [];
     for (let i = 0; i < data.length; i++) {

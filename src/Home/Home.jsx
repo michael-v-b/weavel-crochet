@@ -1,14 +1,12 @@
 import Banner from "../UI/Banner/Banner";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { useNavigate } from "react-router";
 import "./Home.css";
 const Home = () => {
   const [bubblePlayed, setBubblePlayed] = useState(false);
   const BUBBLE_SIZE = 30;
   const BUBBLE_RATIO = 0.5;
   const BUBBLE_DELAY = 0.7;
-  const navigate = useNavigate();
   const heroSpace = useAnimation();
   const heroText = useAnimation();
   const screenshot = useAnimation();

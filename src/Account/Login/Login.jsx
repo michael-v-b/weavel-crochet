@@ -1,7 +1,7 @@
 import "./Login.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../../assets/logo.png";
 import supabase from "../../supabase";
 import useGlobalStore from "../../globalStore";
@@ -122,7 +122,7 @@ const Login = () => {
             onClick={handleRegisterClick}
           >
             {" "}
-            I don't have an account...
+            I do not have an account...
           </motion.div>
         </div>
       </div>

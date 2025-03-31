@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from "react";
+import  { forwardRef, useImperativeHandle } from "react";
 import useGlobalStore from "../globalStore";
 import supabase from "../supabase";
 
@@ -6,7 +6,8 @@ import supabase from "../supabase";
  *@typedef {ProjectManager} - Handles interactions with supabase that involve the Projects
  *table or bucket.
  */
-const ProjectManager = forwardRef(({ ...props }, ref) => {
+const ProjectManager = forwardRef((_, ref) => {
+  ProjectManager.displayName = "ProjectManager";
   const authData = useGlobalStore((state) => state.authData);
 
   /**
@@ -22,11 +23,19 @@ const ProjectManager = forwardRef(({ ...props }, ref) => {
       0,
       selectData[0].num_of_projects + incrementNum
     );
+    
+    if (selectError) {
+      console.log("selectError: " + selectError);
+    }
 
     const { error: updateError } = await supabase
       .from("Profiles")
       .update({ num_of_projects: new_num_of_projects })
       .eq("user_id", authData.user.id);
+
+      if(updateError) {
+        console.log("updateError: " + updateError);
+      }
   };
 
   /**
@@ -76,13 +85,13 @@ const ProjectManager = forwardRef(({ ...props }, ref) => {
   const removeProject = async (project_id) => {
     addNumOfProjects(-1);
 
-    const { error: deleteError } = await supabase
+    const { error: _deleteError } = await supabase
       .from("Projects")
       .delete()
       .eq("project_id", project_id);
 
     const path = "" + authData.user.id + "/" + project_id + "/data.json";
-    const { data, error } = await supabase.storage
+    const { _data, _error } = await supabase.storage
       .from("Project Files")
       .remove([path]);
   };
