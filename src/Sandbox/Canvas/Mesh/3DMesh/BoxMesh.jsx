@@ -6,6 +6,7 @@ import useStore from "../../../DevTools/store";
  * @typedef {BoxMesh} - Gives properties for Box Mesh, inherits Selectable Mesh
  */
 const BoxMesh = forwardRef(({ id, ...props }, ref) => {
+  BoxMesh.displayName = "Box Mesh";
   const attributeList = ["dim"];
   const CONV_RATE = useStore((state) => state.CONV_RATE);
   const approx = Math.ceil(CONV_RATE * 2);

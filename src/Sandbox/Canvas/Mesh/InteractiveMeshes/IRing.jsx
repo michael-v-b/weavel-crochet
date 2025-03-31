@@ -8,7 +8,8 @@ import { forwardRef} from "react";
  * @property {Set} materialProps - gives properties to be added to Material Object
  * @returns {motion.mesh} - an interactive ring mesh
  */
-const IRing = forwardRef(({ lineWidth, meshProps, materialProps }, ref) => {
+const IRing = forwardRef(({ lineWidth, meshProps, materialProps }) => {
+  IRing.displayName = "Interactive Ring";
   return (
     <motion.mesh
       {...meshProps}

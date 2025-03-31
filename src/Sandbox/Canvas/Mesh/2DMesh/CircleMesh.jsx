@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useEffect } from "react";
+import { forwardRef, useState, useEffect } from "react";
 import SelectableMesh from "../SelectableMesh";
 import useStore from "../../../DevTools/store";
 
@@ -6,6 +6,7 @@ import useStore from "../../../DevTools/store";
  * @typedef {CircleMesh} - Gives properties for Circle Mesh, inherits Selectable Mesh
  */
 const CircleMesh = forwardRef(({ id, ...props }, ref) => {
+  CircleMesh.displayName = "Circle Mesh";
   const attributeList = ["circum"];
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);

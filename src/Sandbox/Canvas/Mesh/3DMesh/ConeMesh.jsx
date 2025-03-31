@@ -7,6 +7,7 @@ import useStore from "../../../DevTools/store";
  * @typedef {ConeMesh} - Gives properties for Cone Mesh, inherits Selectable Mesh
  */
 const ConeMesh = forwardRef(({ id, ...props }, ref) => {
+  ConeMesh.displayName = "Cone Mesh";
   const attributeList = ["circum", "height", "open"];
 
   const projectFile = useStore((state) => state.projectFile);

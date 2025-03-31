@@ -6,6 +6,7 @@ import useStore from "../../../DevTools/store";
  *@typedef {CapsuleMesh} - Gives properties for Capsule Mesh, inherits Selectable Mesh
  */
 const CapsuleMesh = forwardRef(({ id, ...props }, ref) => {
+  CapsuleMesh.displayName = "Capsule Mesh";
   const attributeList = ["circum", "height"];
 
   const projectFile = useStore((state) => state.projectFile);

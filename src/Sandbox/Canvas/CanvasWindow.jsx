@@ -21,15 +21,15 @@ import useStore from "../DevTools/store";
 const CanvasWindow = forwardRef(
   (
     {
-      getMeshes,
       historyRef,
       selectionManagerRef,
       meshSpawnerRef,
       children,
-      ...props
     },
     ref
   ) => {
+
+    CanvasWindow.displayName = "Canvas Window";
     const mode = useStore((state) => state.mode);
 
     const raycasterRef = useRef(null);

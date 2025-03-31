@@ -1,5 +1,5 @@
 import IRing from "../../Mesh/InteractiveMeshes/IRing";
-import React, { forwardRef, useRef, useImperativeHandle } from "react";
+import { forwardRef, useRef, useImperativeHandle } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 
 /**
@@ -8,6 +8,7 @@ import { useFrame, useThree } from "@react-three/fiber";
  *which are associated with the x, y, and z axis respectively
  */
 const RotateWidget = forwardRef(({ ...props }, ref) => {
+  RotateWidget.displayName = "Rotate Widget";
   const { camera } = useThree();
   const widgetRef = useRef(null);
   const lineWidth = 0.05;

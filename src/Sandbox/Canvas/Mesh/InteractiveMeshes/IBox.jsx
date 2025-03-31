@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef} from "react";
 import { motion } from "framer-motion-3d";
 
 /**
@@ -9,6 +9,7 @@ import { motion } from "framer-motion-3d";
  * @returns {motion.mesh} - an interactive box mesh
  */
 const IBox = forwardRef(({ dim = 1, meshProps, materialProps }, ref) => {
+  IBox.displayName = "Interactive Box";
   return (
     <motion.mesh
       ref={ref}

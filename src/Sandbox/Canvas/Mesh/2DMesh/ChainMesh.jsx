@@ -3,6 +3,7 @@ import SelectableMesh from "../SelectableMesh";
 import useStore from "../../../DevTools/store";
 
 const ChainMesh = forwardRef(({ id, ...props }, ref) => {
+  ChainMesh.displayName = "Chain Mesh";
   const CONV_RATE = useStore((state) => state.CONV_RATE);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);

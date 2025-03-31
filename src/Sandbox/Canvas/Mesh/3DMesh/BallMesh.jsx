@@ -6,6 +6,7 @@ import useStore from "../../../DevTools/store";
  * @typedef {BallMesh} -Gives properties for Ball Mesh, inherits Selectable Mesh
  */
 const BallMesh = forwardRef(({ id, ...props }, ref) => {
+  BallMesh.displayName = "Ball Mesh";
   const attributeList = ["circum"];
 
   const projectFile = useStore((state) => state.projectFile);

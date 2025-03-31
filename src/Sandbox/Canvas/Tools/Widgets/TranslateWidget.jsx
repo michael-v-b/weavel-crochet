@@ -1,5 +1,5 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import React, { useRef, useEffect, forwardRef } from "react";
+import  {forwardRef } from "react";
 import IBox from "../../Mesh/InteractiveMeshes/IBox.jsx";
 import ILine from "../../Mesh/InteractiveMeshes/ILine.jsx";
 
@@ -9,6 +9,7 @@ import ILine from "../../Mesh/InteractiveMeshes/ILine.jsx";
  *which are associated with the x, y, and z axis respectively
  */
 const TranslateWidget = forwardRef(({ ...props }, ref) => {
+  TranslateWidget.displayName = "Translate Widget";
   const lineSize = 0.2;
   const { camera } = useThree();
 

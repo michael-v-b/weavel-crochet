@@ -1,4 +1,4 @@
-import { forwardRef, useState, useEffect, useMemo } from "react";
+import { forwardRef, useState, useEffect} from "react";
 import SelectableMesh from "../SelectableMesh";
 import useStore from "../../../DevTools/store";
 
@@ -6,6 +6,7 @@ import useStore from "../../../DevTools/store";
  *@typedef {SquareMesh} - Gives properties for Square Mesh, inherits Selectable Mesh
  */
 const SquareMesh = forwardRef(({ id, ...props }, ref) => {
+  SquareMesh.displayName = "SquareMesh";
   const attributeList = ["dim"];
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);

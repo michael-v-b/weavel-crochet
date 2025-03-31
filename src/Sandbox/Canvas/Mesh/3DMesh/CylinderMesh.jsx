@@ -7,6 +7,8 @@ import useStore from "../../../DevTools/store";
  * @typedef {CylinderMesh} - Gives properties for Cylinder Mesh, inherits Selectable Mesh
  */
 const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
+  CylinderMesh.displayName = "Cylinder Mesh";
+
   const attributeList = ["circum", "height", "open"];
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);

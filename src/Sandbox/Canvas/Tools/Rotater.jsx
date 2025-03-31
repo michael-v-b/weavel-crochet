@@ -7,7 +7,7 @@ import {
   useRef,
 } from "react";
 import { Vector3, Quaternion } from "three";
-import { useThree, useFrame } from "@react-three/fiber";
+import { useThree} from "@react-three/fiber";
 import useStore from "../../DevTools/store";
 
 /**
@@ -15,7 +15,8 @@ import useStore from "../../DevTools/store";
  *@property {Raycaster} raycaster - raycaster object used to handle mouse position.
  *@returns {RotateWidget}
  */
-const Rotater = forwardRef(({ raycaster, ...props }, ref) => {
+const Rotater = forwardRef(({ _ }, ref) => {
+  Rotater.displayName = "Rotater";
   const selectedList = useStore((state) => state.selectedMeshes);
   const avgPosition = useStore((state) => state.avgPosition);
   const undoList = useStore((state) => state.undoList);
@@ -27,7 +28,7 @@ const Rotater = forwardRef(({ raycaster, ...props }, ref) => {
 
 
   let totalAngle = 0;
-  const { camera, scene, gl } = useThree();
+  const { camera, gl } = useThree();
   const [action, setAction] = useState(["rotate"]);
 
   const [isDragging, setDragging] = useState(false);

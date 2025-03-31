@@ -4,6 +4,8 @@ import useStore from "../../../DevTools/store";
 import { BufferGeometry, BufferAttribute } from "three";
 
 const SiloMesh = forwardRef(({ id, ...props }, ref) => {
+  SiloMesh.displayName = "Silo Mesh";
+  
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
   const CONV_RATE = useStore((state) => state.CONV_RATE);
   const projectFile = useStore((state) => state.projectFile);

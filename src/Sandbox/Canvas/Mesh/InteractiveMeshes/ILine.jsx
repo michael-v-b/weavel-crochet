@@ -1,5 +1,5 @@
 import { motion } from "framer-motion-3d";
-import React, { useRef, forwardRef } from "react";
+import  { forwardRef } from "react";
 
 /**
  * @typedef {ILine} - Interactive line that increases in size when mouse is hovered over it represented by a flat cylinder
@@ -12,8 +12,9 @@ import React, { useRef, forwardRef } from "react";
 const ILine = forwardRef(
   (
     { lineWidth = 0.1, lineLength = 2, meshProps, materialProps, children },
-    ref
+    _
   ) => {
+    ILine.displayName = "Interactive Line";
     return (
       <motion.mesh
         {...meshProps}
