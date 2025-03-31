@@ -1,4 +1,4 @@
-import React, {
+import  {
   forwardRef,
   useImperativeHandle,
   useEffect,
@@ -22,7 +22,7 @@ import { useNavigate} from "react-router";
  * ID
  */
 
-const ProjectReader = forwardRef(({ meshSpawnerRef, ...props }, ref) => {
+const ProjectReader = forwardRef(({ meshSpawnerRef }, ref) => {
   ProjectReader.displayName = "ProjectReader";
   let readProject = useRef(false);
   let numFinished = 0;

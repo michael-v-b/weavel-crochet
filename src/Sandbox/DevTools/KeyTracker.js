@@ -11,7 +11,7 @@ import useStore from "./store";
  *@typedef {Object} KeyTracker - keeps track of which keys are pressed throughout entire project
  */
 const KeyTracker = forwardRef(({ ...props }, ref) => {
-  const KeyTracker.displayName = "KeyTracker";
+  KeyTracker.displayName = "KeyTracker";
   const keysPressed = useStore((state) => state.keysPressed);
   const setKeysPressed = useStore((state) => state.setKeysPressed);
 
@@ -22,9 +22,12 @@ const KeyTracker = forwardRef(({ ...props }, ref) => {
    */
   const handleKeyDown = (event) => {
     const newKey = event.code;
-    if (!keysPressed.includes(newKey)) {
-      setKeysPressed([...keysPressed, newKey]);
-    }
+    setKeysPressed((prevKeys) => {
+      if (!prevKeys.includes(newKey)) {
+        return [...prevKeys, newKey];
+      }
+      return prevKeys;
+    });
   };
 
   /**
@@ -32,15 +35,18 @@ const KeyTracker = forwardRef(({ ...props }, ref) => {
    *Readds 'keydown' event listener.
    */
   const handleKeyUp = (event) => {
+    
     const newKey = event.code;
-    const keyIndex = keysPressed.indexOf(newKey);
-    if (keyIndex != -1) {
-      keysPressed.splice(keyIndex, 1);
-      setKeysPressed([...keysPressed]);
-    }
-    window.addEventListener("keydown", handleKeyDown);
+    setKeysPressed((prevKeys)=>{
+      return prevKeys.filter((key) => key != newKey);
+    })
+      //setKeysPressed([...tempKeysPressed]);
+  
   };
 
+  useEffect(()=>{
+    console.log("keysPressed real: " + keysPressed)
+  },[keysPressed]);
   /*
    *adds key listener that triggers key up and down methods on mount and unmount.
    */

@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useEffect } from "react";
 import useStore from "./store";
-import { useThree, invalidate } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
 import { Vector3 } from "three";
 
 /**
@@ -8,7 +8,9 @@ import { Vector3 } from "three";
  * undo name change
  */
 const History = forwardRef(
-  ({ rotaterRef, deleterRef, meshSpawnerRef, ...props }, ref) => {
+  ({ rotaterRef, deleterRef, meshSpawnerRef}, ref) => {
+    History.displayName = "History";
+
     const { scene } = useThree();
 
     const keysPressed = useStore((state) => state.keysPressed);

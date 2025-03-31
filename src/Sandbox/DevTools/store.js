@@ -32,7 +32,11 @@ const useStore = create((set) => ({
   setFocused: (newFocused) => set({ isFocused: newFocused }),
 
   keysPressed: [],
-  setKeysPressed: (newKeysPressed) => set({ keysPressed: newKeysPressed }),
+  setKeysPressed: (newKeys) =>
+    set((state) => ({
+      keysPressed:
+        typeof newKeys === "function" ? newKeys(state.keysPressed) : newKeys,
+    })),
 
   selectedMeshes: [],
   setSelectedMeshes: (newSelectedList) =>

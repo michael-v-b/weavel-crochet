@@ -4,9 +4,6 @@ import HierarchyCell from "./HierarchyCell";
 import useStore from "../../DevTools/store";
 import CellSelector from "./CellSelector";
 import  {
-  useState,
-  forwardRef,
-  useImperativeHandle,
   useRef,
 } from "react";
 
@@ -16,11 +13,11 @@ import  {
  * to all of the SelectionManager's public properties and methods.
  *@returns {Component} - a list of Hierarchy Cell objects associated with each mesh in the scene.
  */
-const Hierarchy = forwardRef(({ selectionManager, ...props }, ref) => {
+const Hierarchy = ({ selectionManager}) => {
+  Hierarchy.displayName = "Object List";
+
   const cellSelectorRef = useRef(null);
   const meshList = useStore((state) => state.meshList);
-  const keysPressed = useStore((state) => state.keysPressed);
-  const selectedMeshes = useStore((state) => state.selectedMeshes);
 
   /**
    * only allows one cell to be selected unless control or shit is pressed.
@@ -53,6 +50,6 @@ const Hierarchy = forwardRef(({ selectionManager, ...props }, ref) => {
       </div>
     </div>
   );
-});
+};
 
 export default Hierarchy;

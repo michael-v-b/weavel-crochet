@@ -1,12 +1,14 @@
 import useStore from "../../DevTools/store";
-import React, {
+import {
   useState,
   useEffect,
   forwardRef,
   useImperativeHandle,
 } from "react";
 
-const CellSelector = forwardRef(({ ...props }, ref) => {
+const CellSelector = forwardRef(({...props}, ref) => {
+  CellSelector.displayName = "CellSelector";
+
   const meshList = useStore((state) => state.meshList);
   const keysPressed = useStore((state) => state.keysPressed);
   const [controlPressed, setControlPressed] = useState(false);
@@ -22,34 +24,46 @@ const CellSelector = forwardRef(({ ...props }, ref) => {
    *@param {Number} hi - high number
    */
   const fillCells = (lo, hi) => {
+    console.log("lo: " + lo  + " hi: " + hi);
     for (let i = lo; i < hi; i++) {
       const cellRef = meshList[i].userData.cellRef;
-      cellRef.setSelection(true);
+      cellRef.current.setSelection(true);
     }
   };
   /**
    * turns on all the update cells between selected cell and not
    */
   const shiftUpdateCells = (id) => {
+    console.log("shift cell update");
     let lo = -1;
     let clickedCellFound = false;
 
     for (let i = 0; i < meshList.length; i++) {
-      const cellRef = meshList[i].userData.cellRef;
 
-      if (cellRef.id == id) {
+      //current Cell
+      const currentCell = meshList[i].userData.cellRef.current;
+      
+
+      // if current cell was most recently pressed
+      if (currentCell.id == id) {
         clickedCellFound = true;
 
+        //if this is lowest number set lo
         if (lo == -1) {
           lo = i;
         } else {
+          //end and fill all cells
           fillCells(lo, i);
           return;
         }
-      } else if (cellRef.isPressed) {
+      
+      } else if (currentCell.isPressed) {
+
+        //if already passed clicked cell and new cell is pressed end
         if (clickedCellFound) {
           fillCells(lo, i);
           return;
+        //otherwise continue
         } else {
           lo = i;
         }
@@ -69,9 +83,12 @@ const CellSelector = forwardRef(({ ...props }, ref) => {
 
     //deactivates all entries
     for (let i = 0; i < meshList.length; i++) {
+
+ 
+      
       const cellRef = meshList[i].userData.cellRef;
-      if (cellRef.id != id) {
-        cellRef.setSelection(false);
+      if (cellRef.current.id != id) {
+        cellRef.current.setSelection(false);
       }
     }
   };
