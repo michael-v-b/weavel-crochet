@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle,useEffect } from "react";
 
 import useStore from "../../DevTools/store";
 
@@ -6,7 +6,9 @@ import useStore from "../../DevTools/store";
  *@typedef {SelectionManager} manages which objects are selected and updates them on canvas, hierarchy and InfoWindow
  *disables SelectionManager when in camera mode.
  */
-const SelectionManager = forwardRef(({ ...props }, ref) => {
+const SelectionManager = forwardRef(( {...props},ref) => {
+  SelectionManager.displayName = "SelectionManager";
+
   let widgetList = [];
   let objectList = [];
 
@@ -16,6 +18,10 @@ const SelectionManager = forwardRef(({ ...props }, ref) => {
   const selectedList = useStore((state) => state.selectedMeshes);
   const setSelectedList = useStore((state) => state.setSelectedMeshes);
 
+  useEffect(()=>{
+    console.log("selectedList: " + selectedList);
+  },[selectedList]);
+
   let tempSelectedList = selectedList; //templist so updates can happen immediately, before state is changed
 
   /**
@@ -24,6 +30,7 @@ const SelectionManager = forwardRef(({ ...props }, ref) => {
   const clearSelectedList = () => {
     for (let i = 0; i < selectedList.length; i++) {
       selectedList[i].userData.setSelected(false);
+
       selectedList[i].userData.cellRef.current.setPressed(false);
     }
     tempSelectedList = [];
@@ -51,8 +58,8 @@ const SelectionManager = forwardRef(({ ...props }, ref) => {
         ...tempSelectedList.slice(objectIndex + 1),
       ];
     }
-    //update hierarchy cell
-    object.userData.cellRef.current.setPressed(selected);
+    
+   object.userData.cellRef.current.setPressed(selected);
     setSelectedList(tempSelectedList);
   };
 

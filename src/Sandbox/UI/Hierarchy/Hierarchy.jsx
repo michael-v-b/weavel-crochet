@@ -35,7 +35,8 @@ const Hierarchy = forwardRef(({ selectionManager, ...props }, ref) => {
       <div className="side-title-bar">Object List</div>
       <div className="hierarchy">
         <CellSelector ref={cellSelectorRef} />
-        {meshList.map((object, index) => {
+        {meshList.map((object) => {
+          const index = object.userData.idNumber;
           return (
             <HierarchyCell
               key={index}

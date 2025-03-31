@@ -3,13 +3,12 @@ import React, {
   useImperativeHandle,
   useEffect,
   useRef,
-  useState,
 } from "react";
 import { Vector3, Euler } from "three";
 import useStore from "./store";
 import useGlobalStore from "../../globalStore";
 import supabase from "../../supabase";
-import { useLocation } from "react-router";
+import { useNavigate} from "react-router";
 //import project from "../../color_test.json";
 
 /**
@@ -24,6 +23,7 @@ import { useLocation } from "react-router";
  */
 
 const ProjectReader = forwardRef(({ meshSpawnerRef, ...props }, ref) => {
+  ProjectReader.displayName = "ProjectReader";
   let readProject = useRef(false);
   let numFinished = 0;
   const setColorList = useStore((state) => state.setColorList);
@@ -40,13 +40,8 @@ const ProjectReader = forwardRef(({ meshSpawnerRef, ...props }, ref) => {
   const CONV_RATE = useStore((state) => state.CONV_RATE);
   const authData = useGlobalStore((state) => state.authData);
 
-  const [meshesLeft, setMeshesLeft] = useState(10);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (meshesLeft == 0) {
-      setMeshLoading(false);
-    }
-  }, [meshesLeft]);
 
   useEffect(() => {
     initializeProject();

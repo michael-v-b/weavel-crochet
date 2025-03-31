@@ -11,6 +11,7 @@ import useStore from "./store";
  *@typedef {Object} KeyTracker - keeps track of which keys are pressed throughout entire project
  */
 const KeyTracker = forwardRef(({ ...props }, ref) => {
+  const KeyTracker.displayName = "KeyTracker";
   const keysPressed = useStore((state) => state.keysPressed);
   const setKeysPressed = useStore((state) => state.setKeysPressed);
 

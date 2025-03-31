@@ -6,7 +6,7 @@ import SquarePattern from "./SquarePattern";
  *@returns {string} - a crochet pattern to make a box.
  */
 const BoxPattern = (object) => {
-  objectData = object.userData.meshData;
+  const objectData = object.userData.meshData;
   const x = objectData.xDim;
   const y = objectData.yDim;
   const z = objectData.zDim;

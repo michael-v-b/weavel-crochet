@@ -25,7 +25,8 @@ import useStore from "../../DevTools/store";
  * @property {[string]} colorList - a list of colors available in project
  * @returns {Node} - a list of corresponding mesh components according to the meshes list.
  */
-const MeshSpawner = forwardRef(({ ...props }, ref) => {
+const MeshSpawner = forwardRef(( {...props},ref) => {
+  MeshSpawner.displayName = "MeshSpawner";
   const [meshes, setMeshes] = useState([]); //used to rerender list once completed
   const [action, setAction] = useState([["create"], []]);
   const undoList = useStore((state) => state.undoList);
@@ -34,7 +35,6 @@ const MeshSpawner = forwardRef(({ ...props }, ref) => {
   const setMeshList = useStore((state) => state.setMeshList);
   const OBJECT_LIMIT = useStore((state) => state.OBJECT_LIMIT);
   const projectFile = useStore((state) => state.projectFile);
-  const setProjectFile = useStore((state) => state.setProjectFile);
 
   // list of all shapeComponents and the values of their meshTypes
   // add shape here when creating a new shape

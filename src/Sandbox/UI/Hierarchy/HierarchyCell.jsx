@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
  * @property {UpdateCellsCallback} updateCells - call back function for when mouse is pressed.
  * @returns {Component} - a component with the name of the object inside of it.
  */
+// eslint-disable-next-line react/display-name
 const HierarchyCell = forwardRef(
   ({ id, objectRef, selectionManager, name, updateCells, ...props }, ref) => {
     const [isPressed, setPressed] = useState(false);

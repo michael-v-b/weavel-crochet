@@ -1,12 +1,13 @@
 import { useThree } from "@react-three/fiber";
 import { useRef, forwardRef, useImperativeHandle } from "react";
 import * as THREE from "three";
-import { Vector2,Vector3, Raycaster } from "three";
+import { Vector2,Vector3} from "three";
 
 /**
  *@typedef {RayCaster} a class used to fire rays and provide information from those rays
  */
 const RayCaster = forwardRef(({ ...props }, ref) => {
+  RayCaster.displayName = "RayCaster";
   const { scene, camera, gl } = useThree();
   const pointer = useRef(new Vector2());
   const raycaster = useRef(new THREE.Raycaster());
