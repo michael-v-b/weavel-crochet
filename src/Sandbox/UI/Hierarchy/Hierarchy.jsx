@@ -4,6 +4,7 @@ import HierarchyCell from "./HierarchyCell";
 import useStore from "../../DevTools/store";
 import CellSelector from "./CellSelector";
 import  {
+  useEffect,
   useRef,
 } from "react";
 
@@ -27,6 +28,11 @@ const Hierarchy = ({ selectionManager}) => {
     cellSelectorRef.current.updateCells(id);
   };
 
+  useEffect(()=>{
+    console.log("meshList: ")
+    console.dir(meshList);
+  },[meshList]);
+
   return (
     <div className="side-window">
       <div className="side-title-bar">Object List</div>
@@ -34,8 +40,10 @@ const Hierarchy = ({ selectionManager}) => {
         <CellSelector ref={cellSelectorRef} />
         {meshList.map((object) => {
           const index = object.userData.idNumber;
+          const cellRef = object.userData.cellRef;
           return (
             <HierarchyCell
+              ref = {cellRef}
               key={index}
               id={index}
               selectionManager={selectionManager}

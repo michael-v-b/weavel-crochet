@@ -14,6 +14,7 @@ import useStore from "../../DevTools/store";
 
 const Deleter = forwardRef(
   ({ selectionManagerRef, getMeshes, meshSpawnerRef }, ref) => {
+    Deleter.displayName = "Deleter";
     const { scene } = useThree();
     const [action, setAction] = useState(["delete"]);
     const isFocused = useStore((state) => state.isFocused);

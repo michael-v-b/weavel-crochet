@@ -35,6 +35,8 @@ const MeshSpawner = forwardRef(( {...props},ref) => {
   const setMeshList = useStore((state) => state.setMeshList);
   const OBJECT_LIMIT = useStore((state) => state.OBJECT_LIMIT);
   const projectFile = useStore((state) => state.projectFile);
+  const cellList = useStore((state)=>state.cellList);
+  const setCellList = useStore((state)=>state.setCellList);
 
   // list of all shapeComponents and the values of their meshTypes
   // add shape here when creating a new shape
@@ -77,11 +79,16 @@ const MeshSpawner = forwardRef(( {...props},ref) => {
       return;
     }
     const newMeshRef = React.createRef();
+    const newCellRef = React.createRef();
     const id = tempId == "" ? crypto.randomUUID() : tempId;
+    setMeshes([...meshes, [shape, newMeshRef, id,newCellRef]]);
+
+   
+    
+
+
 
     //determines whether action is saved by undo button
-
-    setMeshes([...meshes, [shape, newMeshRef, id]]);
     if (update) {
       //update project file
       projectFile.meshes[id] = {};
@@ -176,6 +183,7 @@ const MeshSpawner = forwardRef(( {...props},ref) => {
         const meshRef = valuePair[1];
         const shape = valuePair[0];
         const id = valuePair[2];
+        const cellRef = valuePair[3];
         const capitalName = shape.charAt(0).toUpperCase() + shape.slice(1);
 
         //sets MeshComponent to corresponding shape
@@ -188,6 +196,7 @@ const MeshSpawner = forwardRef(( {...props},ref) => {
             name={
               shapeComponents[shape] ? capitalName : shape + " not implemented"
             }
+            hierarchyRef = {cellRef}
             colorList={colorList}
             position={[0, 1, 0]}
           />

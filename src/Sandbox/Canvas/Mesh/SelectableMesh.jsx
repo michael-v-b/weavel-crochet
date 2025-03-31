@@ -4,7 +4,6 @@ import {
   useEffect,
   useState,
   useRef,
-  useImperativeHandle,
 } from "react";
 import { DoubleSide } from "three";
 
@@ -18,23 +17,18 @@ import { DoubleSide } from "three";
  */
 const SelectableMesh = forwardRef(
   (
-    { id, colorList, meshType, meshData, children, materialProps, ...props },
+    { id, colorList, meshType, meshData, children, hierarchyRef, materialProps, ...props },
     ref
   ) => {
+    SelectableMesh.displayName = "Selectable Mesh";
+    
     const [selected, setSelected] = useState(false);
     const [outlineWeight, setOutlineWeight] = useState(0);
-    const cellRef = useRef(null);
+    const cellRef = useRef(hierarchyRef);
     const [colorIndex, setColorIndex] = useState(1);
     const idNumber = id;
-    const meshRef = useRef(null);
 
-    /**
-     *sets cellRef value in the object.
-     * @param {HierarchyCellReference} tempCellRef - the ref cellRef is set to.
-     */
-    const handleCellRef = (tempCellRef) => {
-      cellRef.current = tempCellRef;
-    };
+
 
     /**
      * update outline weight of mesh when selected.
@@ -52,7 +46,6 @@ const SelectableMesh = forwardRef(
           idNumber,
           selected,
           setSelected,
-          handleCellRef,
           colorIndex,
           setColorIndex,
           cellRef,

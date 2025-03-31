@@ -11,10 +11,9 @@ import useStore from "../../DevTools/store";
  * @returns {Component} - lists all of the tools and activates them based on the tool property.
  */
 
-const ToolManager = forwardRef(({ raycaster, rotaterRef, ...props }, ref) => {
+const ToolManager = forwardRef(({ raycaster, rotaterRef}, ref) => {
+  ToolManager.displayName = "Tool Manager";
   const tool = useStore((state) => state.tool);
-  const avgPosition = useStore((state) => state.avgPosition);
-  const setAvgPosition = useStore((state) => state.setAvgPosition);
   const selectedList = useStore((state) => state.selectedMeshes);
   const updateAvgPosition = useStore((state) => state.updateAvgPosition);
   const translaterRef = useRef(null);

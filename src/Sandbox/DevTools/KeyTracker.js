@@ -44,9 +44,7 @@ const KeyTracker = forwardRef(({ ...props }, ref) => {
   
   };
 
-  useEffect(()=>{
-    console.log("keysPressed real: " + keysPressed)
-  },[keysPressed]);
+
   /*
    *adds key listener that triggers key up and down methods on mount and unmount.
    */

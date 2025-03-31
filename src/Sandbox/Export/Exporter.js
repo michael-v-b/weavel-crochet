@@ -22,6 +22,7 @@ import banner from "../../assets/banner.png";
  * - chain
  */
 const Exporter = forwardRef(({ ...props }, ref) => {
+  Exporter.displayName = "Exporter";
   const colorList = useStore((state) => state.colorList);
   const meshList = useStore((state) => state.meshList);
   const projectName = useStore((state) => state.projectName);
@@ -180,7 +181,6 @@ const Exporter = forwardRef(({ ...props }, ref) => {
 
     //doc.text("Sew all pieces together",row);
 
-    console.log("this should export a pdf");
     doc.save("weavel-project");
   };
 

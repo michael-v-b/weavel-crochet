@@ -45,6 +45,7 @@ const useStore = create((set) => ({
   meshList: [],
   setMeshList: (newMeshList) => set({ meshList: newMeshList }),
 
+
   colorList: ["#ff0000"],
   setColorList: (newColorList) => set({ colorList: newColorList }),
 

@@ -76,7 +76,6 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
     };
     //connect walls
     for (let i = 0; i < segments + 1; i++) {
-      console.log("FRONT_OFFSET: " + FRONT_OFFSET);
       a = inRange(i, segments, 2);
       b = inRange(i + 1, segments, 2);
       c = inRange(i, segments, FRONT_OFFSET + 2);

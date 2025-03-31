@@ -1,4 +1,4 @@
-import React, {
+import {
   useState,
   useImperativeHandle,
   forwardRef,
@@ -20,7 +20,6 @@ const HierarchyCell = forwardRef(
   ({ id, objectRef, selectionManager, name, updateCells, ...props }, ref) => {
     const [isPressed, setPressed] = useState(false);
     const [cellName, setName] = useState(name);
-    const localRef = useRef(null);
     /**
      * sets the cell to the pressed state and selects its corresponding object.
      * Should only occur after being clicked.
@@ -28,6 +27,7 @@ const HierarchyCell = forwardRef(
     const handleClick = () => {
       updateCells(id);
       setSelection(!isPressed);
+      
     };
 
     const setSelection = (selection) => {
@@ -35,7 +35,7 @@ const HierarchyCell = forwardRef(
       selectionManager.current.setObjectSelected(objectRef, selection);
     };
 
-    useImperativeHandle(localRef, () => ({
+    useImperativeHandle(ref, () => ({
       isPressed,
       setPressed,
       setName,
@@ -44,13 +44,12 @@ const HierarchyCell = forwardRef(
     }));
 
     useEffect(() => {
-      objectRef.userData.handleCellRef(localRef.current);
+      //objectRef.userData.handleCellRef(ref);
       setName(objectRef.name);
     }, []);
 
     return (
       <motion.div
-        ref={ref}
         style={{
           userSelect: "none",
           overflow: "hidden",

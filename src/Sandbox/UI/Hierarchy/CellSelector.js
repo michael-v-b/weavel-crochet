@@ -24,7 +24,6 @@ const CellSelector = forwardRef(({...props}, ref) => {
    *@param {Number} hi - high number
    */
   const fillCells = (lo, hi) => {
-    console.log("lo: " + lo  + " hi: " + hi);
     for (let i = lo; i < hi; i++) {
       const cellRef = meshList[i].userData.cellRef;
       cellRef.current.setSelection(true);
@@ -34,7 +33,7 @@ const CellSelector = forwardRef(({...props}, ref) => {
    * turns on all the update cells between selected cell and not
    */
   const shiftUpdateCells = (id) => {
-    console.log("shift cell update");
+
     let lo = -1;
     let clickedCellFound = false;
 
@@ -58,7 +57,6 @@ const CellSelector = forwardRef(({...props}, ref) => {
         }
       
       } else if (currentCell.isPressed) {
-
         //if already passed clicked cell and new cell is pressed end
         if (clickedCellFound) {
           fillCells(lo, i);
