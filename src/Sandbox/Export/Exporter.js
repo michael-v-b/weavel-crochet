@@ -141,7 +141,7 @@ const Exporter = forwardRef(({ ...props }, ref) => {
 
     addRow(20, doc);
     //iterate through every mesh and its mesh pattern to the list.
-    for (i = 0; i < meshList.length; i++) {
+    for (let i = 0; i < meshList.length; i++) {
       let stringList = [];
       const object = meshList[i];
 
