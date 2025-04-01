@@ -3,8 +3,8 @@ import {
   useImperativeHandle,
   forwardRef,
   useEffect,
-  useRef,
 } from "react";
+import "./Hierarchy.css";
 import { motion } from "framer-motion";
 
 /**
@@ -44,23 +44,29 @@ const HierarchyCell = forwardRef(
     }));
 
     useEffect(() => {
-      //objectRef.userData.handleCellRef(ref);
       setName(objectRef.name);
     }, []);
 
     return (
       <motion.div
         style={{
+          
+          display:"flex",
+          alignItems:"center",
+          
           userSelect: "none",
           overflow: "hidden",
           textWrap: "nowrap",
           backgroundColor: isPressed ? "#76b8e3" : "#d6eaf8",
           color: "black",
           borderRadius: "5px",
+
           height: "4vh",
           width: "95%",
+
           marginBottom: "3px",
           paddingLeft: "10px",
+          
         }}
         whileHover={{
           scale: 1.05,

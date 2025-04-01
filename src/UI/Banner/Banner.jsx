@@ -43,7 +43,7 @@ const Banner = () => {
         {!auth && (
           <>
             <motion.div
-              className="banner-home"
+              className="banner-login"
               whileHover={{ scale: 1.1, backgroundColor: "#e6fbff" }}
               whileTap={{ scale: 0.8 }}
               onClick={handleRegisterClick}
@@ -51,7 +51,7 @@ const Banner = () => {
               Sign Up{" "}
             </motion.div>
             <motion.div
-              className="banner-home"
+              className="banner-login"
               whileHover={{ scale: 1.1, backgroundColor: "#e6fbff" }}
               whileTap={{ scale: 0.8 }}
               onClick={handleLoginClick}

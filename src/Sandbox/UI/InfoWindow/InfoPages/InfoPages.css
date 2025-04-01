@@ -3,6 +3,9 @@
   flex-direction: row;
   align-items: center;
   color: black;
+  font-family:"Nunito",sans-serif;
+  font-weight:600;
+  font-size:1vw;
   justify-content: flex-start;
 }
 .attribute-name {
@@ -46,5 +49,5 @@
 }
 .stitch-text {
   margin-left: 1%;
-  font-size: 2vw;
+  font-size: 1vw;
 }

@@ -21,6 +21,7 @@ import useStore from "../../DevTools/store";
  *is passed onto Translate Widget
  */
 const Translater = forwardRef(({ raycaster, ...props }, ref) => {
+  Translater.displayName = "Translater";
   const meshRef = useRef(null);
   let selectedPositionMapRef = useRef(null);
   let tempDisplacement = [0, 0, 0];
