@@ -117,7 +117,7 @@ const SelectionManager = forwardRef(( _,ref) => {
       setObjectSelected(objectList[0], !getObjectSelected(objectList[0]));
     } else {
       let currentIndex = checkList(objectList);
-
+      clearSelectedList();
       if (currentIndex == -1) {
         setObjectSelected(objectList[0], true);
       } else {
