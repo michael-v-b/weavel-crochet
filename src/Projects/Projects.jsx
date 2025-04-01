@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import supabase from "../supabase";
 import ProjectManager from "./ProjectManager";
+import AuthTester from "../AuthTester";
 import "./Projects.css";
 
 const Projects = () => {
@@ -18,11 +19,8 @@ const Projects = () => {
   const clickedX = useRef(false);
 
   useEffect(() => {
-    if (!auth) {
-      navigate("/login");
-    } else {
       getProjects();
-    }
+    
 
     document.addEventListener("click", handleClick);
 
@@ -96,7 +94,7 @@ const Projects = () => {
     <div className="projects-web-container">
       <ProjectManager ref={projectManagerRef} />
       <Banner />
-
+      <AuthTester reroute = {"/login"}/>
       <div className="projects-container">
         <div className="projects-title-bar">
           <div className="projects-title">Your Projects</div>

@@ -28,10 +28,6 @@ const Hierarchy = ({ selectionManager}) => {
     cellSelectorRef.current.updateCells(id);
   };
 
-  useEffect(()=>{
-    console.log("meshList: ")
-    console.dir(meshList);
-  },[meshList]);
 
   return (
     <div className="side-window">

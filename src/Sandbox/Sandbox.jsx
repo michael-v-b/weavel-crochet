@@ -19,6 +19,7 @@ import Exporter from "./Export/Exporter";
 import { useRef, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import useGlobalStore from "../globalStore";
+import AuthTester from "../AuthTester";
 import { motion } from "framer-motion";
 
 import supabase from "../supabase";
@@ -58,16 +59,13 @@ const Sandbox = () => {
     const jsonBlob = new Blob([JSON.stringify(projectFile)], {
       type: "application/json",
     });
+
     const { data, error } = await supabase.storage
       .from("Project Files")
       .upload(path, jsonBlob, { upsert: true });
   };
 
   useEffect(() => {
-    if (!auth) {
-      navigate("/");
-      return;
-    }
     setNameLoading(true);
     setMeshLoading(true);
     //loading is set false in name tag
@@ -75,10 +73,10 @@ const Sandbox = () => {
 
   //updates file when change occurs but only if projectId is correct.
   useEffect(() => {
+  
     const currentURL = location.pathname;
     const idIndex = currentURL.indexOf("sandbox/");
     const tempId = currentURL.substring(idIndex + "sandbox/".length);
-
     if (auth && projectId == tempId && projectFile != null) {
       uploadFile();
     }
@@ -91,6 +89,7 @@ const Sandbox = () => {
 
         <ProjectReader ref={projectReaderRef} meshSpawnerRef={meshSpawnerRef} />
         <Banner />
+        <AuthTester reroute = {"/"} />
         <NameTag />
         <div className="sandbox">
           <Exporter ref={exporterRef} />

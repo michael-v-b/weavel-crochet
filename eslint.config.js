@@ -37,7 +37,6 @@ export default [
       'react/prop-types':'off',
       'react/no-unknown-property':'off',
       'jsx-quotes':'off',
-      "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     },
   },
 ]

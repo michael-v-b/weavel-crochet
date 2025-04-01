@@ -39,13 +39,17 @@ const ProjectReader = forwardRef(({ meshSpawnerRef }, ref) => {
   const setMeshLoading = useStore((state) => state.setMeshLoading);
   const CONV_RATE = useStore((state) => state.CONV_RATE);
   const authData = useGlobalStore((state) => state.authData);
+  const auth = useGlobalStore((state)=>state.auth);
 
   const navigate = useNavigate();
 
 
   useEffect(() => {
-    initializeProject();
-  }, []);
+    if(auth) {
+        initializeProject();
+    }
+
+  }, [auth]);
   /**
    * Reset project to avoid opening previously opened projects
    */

@@ -6,6 +6,7 @@ import {
 } from "react";
 import "./Hierarchy.css";
 import { motion } from "framer-motion";
+import { setWireframeOverride } from "@react-three/drei/materials/WireframeMaterial";
 
 /**
  * @typedef {HierarchyCell} - a single portion of the hierarchy, each cell represents a single mesh.

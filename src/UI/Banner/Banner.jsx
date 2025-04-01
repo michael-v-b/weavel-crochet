@@ -24,6 +24,7 @@ const Banner = () => {
     navigate("/login");
   };
 
+
   return (
     <div className="banner-style">
       <div className="left-container">

@@ -1,6 +1,8 @@
 import Banner from "../UI/Banner/Banner";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
+import AuthTester from "../AuthTester";
+
 import "./Home.css";
 const Home = () => {
   const [bubblePlayed, setBubblePlayed] = useState(false);
@@ -63,6 +65,7 @@ const Home = () => {
   return (
     <>
       <Banner />
+      <AuthTester/>
       <div className="home-page-container">
         <motion.div
           initial={{ opacity: 0, height: 0 }}

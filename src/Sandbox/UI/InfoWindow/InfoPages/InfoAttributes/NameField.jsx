@@ -43,8 +43,11 @@ const NameField = ({ object }) => {
     setUndoList(...[undoList]);
     setAction(["name"]);
 
+
     //actually change name
-    object.userData.cellRef.setName(name);
+    console.log("object");
+    console.dir(object);
+    object.userData.cellRef.current.setName(name);
     object.name = name;
 
     //update project file
