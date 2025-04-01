@@ -10,8 +10,6 @@ import useStore from "../../../../DevTools/store";
  */
 const ColorField = ({ object }) => {
   const colorList = useStore((state) => state.colorList);
-  const undoList = useStore((state) => state.undoList);
-  const setUndoList = useStore((state) => state.setUndoList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
 
@@ -20,8 +18,6 @@ const ColorField = ({ object }) => {
   const [currentColor, setCurrentColor] = useState(
     colorList[objectData.colorIndex - 1]
   );
-  const [action, setAction] = useState(["objectColor"]);
-
   const [isWhite, setWhite] = useState(false);
 
   /**
@@ -35,7 +31,7 @@ const ColorField = ({ object }) => {
     setCurrentColor(newColor);
     objectData.setColorIndex(value);
     setCurrentIndex(value);
-    testWhite();
+    setWhite(testWhite(object.material.color));
 
     //update project file
     const newMesh = projectFile.meshes[object.userData.idNumber];
@@ -47,13 +43,26 @@ const ColorField = ({ object }) => {
    * tests whether the object's current color is dark enough to warrant changing
    * the field's color to white.
    */
-  const testWhite = () => {
-    const objectColor = object.material.color;
+  const testWhite = (tempColor) => {
 
-    if (Math.max(objectColor.r, objectColor.g, objectColor.b) < 0.5) {
-      setWhite(true);
+
+    let r = 0;
+    let g = 0;
+    let b = 0;
+    if(typeof tempColor == "string") {
+      r = parseInt(tempColor.substring(0, 2), 16);
+      g = parseInt(tempColor.substring(2, 4), 16);
+      b = parseInt(tempColor.substring(4, 6), 16);
     } else {
-      setWhite(false);
+      r = tempColor.r;
+      g= tempColor.g;
+      b = tempColor.b;
+    }
+
+    if (Math.max(r ,g ,b  ) < 0.5) {
+      return (true);
+    } else {
+      return (false);
     }
   };
   /**
@@ -67,7 +76,7 @@ const ColorField = ({ object }) => {
   useEffect(() => {
     setCurrentIndex(objectData.colorIndex);
     setCurrentColor(colorList[objectData.colorIndex - 1]);
-    testWhite();
+    setWhite(testWhite(object.material.color));
   }, [object]);
 
   return (
@@ -88,7 +97,9 @@ const ColorField = ({ object }) => {
           return (
             <option
               key={key}
-              style={{ backgroundColor: value }}
+              style={{ backgroundColor: value,
+                color: testWhite(value.replace(/^#/, '')) ? "#FFFFFF" : "#000000"
+              }}
               value={key + 1}
             >
               Color {key + 1}
