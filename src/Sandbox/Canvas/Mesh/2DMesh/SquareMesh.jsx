@@ -10,11 +10,11 @@ const SquareMesh = forwardRef(({ id, ...props }, ref) => {
   const attributeList = ["dim"];
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const CONV_RATE = useStore((state) => state.CONV_RATE);
-  const approxX = Math.ceil(CONV_RATE * 2);
-  const approxY = Math.ceil(CONV_RATE * 2);
-  const [xDim, setX] = useState(approxX);
-  const [yDim, setY] = useState(approxY);
+
+  const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
+  const height_convert = useStore((state)=>state.height_convert);
+  const [xDim, setX] = useState(DEF_HEIGHT);
+  const [yDim, setY] = useState(DEF_HEIGHT);
   const [linked, setLinked] = useState(false);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const SquareMesh = forwardRef(({ id, ...props }, ref) => {
       {...props}
     >
       <boxGeometry
-        args={[approxX / CONV_RATE, approxY / CONV_RATE, 1 / CONV_RATE]}
+        args={[height_convert(xDim),height_convert(yDim) , height_convert(1)]}
       />
     </SelectableMesh>
   );

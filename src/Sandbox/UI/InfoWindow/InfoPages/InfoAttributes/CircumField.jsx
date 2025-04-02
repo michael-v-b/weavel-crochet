@@ -59,6 +59,8 @@ const CircumferenceField = ({ object }) => {
 
     object.userData.meshData.setCircum(roundedCircum);
     const newRadius = output / CONV_RATE;
+
+    console.log("in game radius " + newRadius);
     return newRadius;
   };
 
@@ -73,6 +75,7 @@ const CircumferenceField = ({ object }) => {
    * Set focused stated to false and updates the radius in the scene.
    */
   const handleBlur = () => {
+
     setRadius(findRadius());
 
     //update project file

@@ -8,11 +8,12 @@ import useStore from "../../../DevTools/store";
 const BoxMesh = forwardRef(({ id, ...props }, ref) => {
   BoxMesh.displayName = "Box Mesh";
   const attributeList = ["dim"];
-  const CONV_RATE = useStore((state) => state.CONV_RATE);
-  const approx = Math.ceil(CONV_RATE * 2);
-  const [xDim, setX] = useState(approx);
-  const [yDim, setY] = useState(approx);
-  const [zDim, setZ] = useState(approx);
+  const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
+  const height_convert = useStore((state)=>state.height_convert);
+  const [xDim, setX] = useState(DEF_HEIGHT);
+  const [yDim, setY] = useState(DEF_HEIGHT);
+  const [zDim, setZ] = useState(DEF_HEIGHT);
+
   const [linked, setLinked] = useState(false);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
@@ -42,7 +43,7 @@ const BoxMesh = forwardRef(({ id, ...props }, ref) => {
       {...props}
     >
       <boxGeometry
-        args={[xDim / CONV_RATE, yDim / CONV_RATE, zDim / CONV_RATE, 2]}
+        args={[height_convert(xDim), height_convert(yDim), height_convert(zDim), 2]}
       />
     </SelectableMesh>
   );

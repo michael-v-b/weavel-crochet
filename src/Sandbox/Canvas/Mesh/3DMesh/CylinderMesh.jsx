@@ -12,10 +12,12 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
   const attributeList = ["circum", "height", "open"];
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const CONV_RATE = useStore((state) => state.CONV_RATE);
+
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
-  const approx = Math.ceil(CONV_RATE * 2);
-  const [height, setHeight] = useState(approx);
+  const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
+  const height_convert = useStore((state)=>state.height_convert);
+
+  const [height,setHeight] = useState(DEF_HEIGHT);
   const [circum, setCircum] = useState(DEF_CIRCUM);
   const [radius, setRadius] = useState(1);
   const [open, setOpen] = useState(true);
@@ -49,7 +51,7 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
       {...props}
     >
       <cylinderGeometry
-        args={[radius, radius, height / CONV_RATE, 10, 10, open]}
+        args={[radius, radius, height_convert(height), 10, 10, open]}
       />
     </SelectableMesh>
   );

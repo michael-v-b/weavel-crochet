@@ -37,7 +37,6 @@ const ProjectReader = forwardRef(({ meshSpawnerRef }, ref) => {
   const setUndoList = useStore((state) => state.setUndoList);
   const setRedoList = useStore((state) => state.setRedoList);
   const setMeshLoading = useStore((state) => state.setMeshLoading);
-  const CONV_RATE = useStore((state) => state.CONV_RATE);
   const authData = useGlobalStore((state) => state.authData);
   const auth = useGlobalStore((state)=>state.auth);
 
@@ -172,7 +171,7 @@ const ProjectReader = forwardRef(({ meshSpawnerRef }, ref) => {
     if (attributes.includes("circum")) {
       meshData.setCircum(saveData.circum);
       const output = saveData.circum / (2 * Math.PI);
-      meshData.setRadius(output / CONV_RATE);
+      meshData.setRadius(circum_radius_convert(saveData.circum));
     }
 
     if (attributes.includes("dim")) {

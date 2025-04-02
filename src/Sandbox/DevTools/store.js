@@ -3,10 +3,15 @@ import { create } from "zustand";
 //used for state management
 const useStore = create((set) => ({
   OBJECT_LIMIT: 25,
-  DEF_CIRCUM: 36,
-  get CONV_RATE() {
-    return this.DEF_CIRCUM / (2 * Math.PI);
-  },
+  DEF_CIRCUM: 30,
+  DEF_HEIGHT: this.DEF_CIRCUM/(Math.PI),
+
+  //CONVERTS convert real values to in game values.
+  //x(1/36) + 1/6
+  circum_radius_convert: (x) => {x/36 + (1/6)},
+  height_convert: (x) => {x/(this.DEF_CIRCUM/(2*Math.PI))},
+
+
 
   projectName: "",
   setProjectName: (newName) => set({ projectName: newName }),

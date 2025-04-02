@@ -17,7 +17,7 @@ import useStore from "./DevTools/store";
 import Exporter from "./Export/Exporter";
 
 import { useRef, useEffect} from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import useGlobalStore from "../globalStore";
 import AuthTester from "../AuthTester";
 

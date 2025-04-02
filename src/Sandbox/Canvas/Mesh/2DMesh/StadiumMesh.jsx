@@ -4,18 +4,22 @@ import { BufferGeometry, BufferAttribute } from "three";
 import useStore from "../../../DevTools/store";
 
 const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
-  const CONV_RATE = useStore((state) => state.CONV_RATE);
+  StadiumMesh.displayName = "StadiumMesh";
+
+ 
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
+
+  const height_convert = useStore((state)=>state.height_convert);
+  const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
   const segments = 20;
   const attributeList = ["height"];
   const half = (segments - 2) / 2;
-  const approx = Math.ceil(CONV_RATE * 2);
-  const [height, setHeight] = useState(approx);
+  const [height, setHeight] = useState(DEF_HEIGHT);
   const FRONT_OFFSET = segments + 2;
-  const DEPTH_OFFSET = 1 / (2 * CONV_RATE);
+  const DEPTH_OFFSET = 1 / (height_convert(1));
 
-  geometry = useMemo(() => {
+  const geometry = useMemo(() => {
     const geo = new BufferGeometry();
 
     const vertices = [];
@@ -31,7 +35,7 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
       const IS_FRONT = FRONT_OFFSET * i;
 
       vertices.push(
-        ...[0, height / (CONV_RATE * 2), z, 0, -height / (CONV_RATE * 2), z]
+        ...[0, height / height_convert(DEF_HEIGHT), z, 0, -height / height_convert(DEF_HEIGHT), z]
       );
 
       for (let j = 0; j < 2; j++) {
@@ -41,8 +45,8 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
           const x = Math.cos(theta);
           const y =
             j == 0
-              ? Math.sin(theta) + height / (CONV_RATE * 2)
-              : Math.sin(theta) - height / (CONV_RATE * 2);
+              ? Math.sin(theta) + height / (height_convert(DEF_HEIGHT) * 2)
+              : Math.sin(theta) - height / (height_convert(DEF_HEIGHT) * 2);
 
           vertices.push(x, y, z);
 
@@ -76,10 +80,10 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
     };
     //connect walls
     for (let i = 0; i < segments + 1; i++) {
-      a = inRange(i, segments, 2);
-      b = inRange(i + 1, segments, 2);
-      c = inRange(i, segments, FRONT_OFFSET + 2);
-      d = inRange(i + 1, segments, FRONT_OFFSET + 2);
+      const a = inRange(i, segments, 2);
+      const b = inRange(i + 1, segments, 2);
+      const c = inRange(i, segments, FRONT_OFFSET + 2);
+      const d = inRange(i + 1, segments, FRONT_OFFSET + 2);
       indices.push(c, b, a, d, b, c);
     }
 

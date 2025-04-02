@@ -7,16 +7,18 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
   SiloMesh.displayName = "Silo Mesh";
   
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
-  const CONV_RATE = useStore((state) => state.CONV_RATE);
+  const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
+  const circum_radius_convert = useStore((state)=>state.circum_convert);
+  const height_convert = useStore((state)=>state.height_convert);
+
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
 
   const attributeList = ["circum", "height"];
   const segments = 20;
-  const approx = Math.ceil(CONV_RATE * 4);
-  const [height, setHeight] = useState(approx);
+  const [height, setHeight] = useState(DEF_HEIGHT);
   const [circum, setCircum] = useState(DEF_CIRCUM);
-  const [radius, setRadius] = useState(circum / (2 * Math.PI * CONV_RATE));
+  const [radius, setRadius] = useState(circum_radius_convert(DEF_CIRCUM));
 
   const inRange = (a, length, bottom) => {
     return (a % length) + bottom;
@@ -35,7 +37,7 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
         ((i / segments) * Math.PI) / 2
       );
       const RING_HEIGHT =
-        i != segments ? height / (CONV_RATE * 4) : -height / (CONV_RATE * 2);
+        i != segments ? height_convert(height) : -height_convert(height);
 
       //creates full horizontal circle
       for (let j = 0; j < segments + 1; j++) {

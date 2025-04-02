@@ -12,12 +12,13 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
 
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const CONV_RATE = useStore((state) => state.CONV_RATE);
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
-  const approx = Math.ceil(CONV_RATE * 2);
+  const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
+  const height_convert = useStore((state)=>state.height_convert);
+
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
-  const [height, setHeight] = useState(approx);
+  const [height, setHeight] = useState(DEF_HEIGHT);
   const [open, setOpen] = useState(true);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
       materialProps={{ side: open ? DoubleSide : FrontSide }}
       {...props}
     >
-      <coneGeometry args={[radius, height / CONV_RATE, 10, 10, open]} />
+      <coneGeometry args={[radius, height_convert(height), 10, 10, open]} />
     </SelectableMesh>
   );
 });

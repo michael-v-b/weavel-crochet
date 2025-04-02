@@ -4,13 +4,15 @@ import useStore from "../../../DevTools/store";
 
 const ChainMesh = forwardRef(({ id, ...props }, ref) => {
   ChainMesh.displayName = "Chain Mesh";
-  const CONV_RATE = useStore((state) => state.CONV_RATE);
+  const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
+  const height_convert = useStore((state) => state.height_convert);
+  const circum_radius_convert = useStore((state)=>state.circum_radius_convert);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
+  
   const attributeList = ["height"];
-  const lineCircum = 1 / (CONV_RATE * 2);
-  const approx = Math.ceil(CONV_RATE * 2);
-  const [height, setHeight] = useState(approx);
+  const line = circum_radius_convert(1);
+  const [height, setHeight] = useState(DEF_HEIGHT);
 
   useEffect(() => {
     const newMesh = projectFile.meshes[id];
@@ -27,7 +29,7 @@ const ChainMesh = forwardRef(({ id, ...props }, ref) => {
       meshData={{ height, setHeight, attributeList }}
       {...props}
     >
-      <cylinderGeometry args={[lineCircum, lineCircum, height / CONV_RATE]} />
+      <cylinderGeometry args={[line, line, height_convert(height)]} />
     </SelectableMesh>
   );
 });
