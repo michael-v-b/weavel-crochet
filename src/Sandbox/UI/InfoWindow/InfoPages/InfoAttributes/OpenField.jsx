@@ -1,12 +1,18 @@
 import "../InfoPages.css";
-import React, { useState } from "react";
+import { useState,useEffect } from "react";
 import useStore from "../../../../DevTools/store";
 
 const OpenField = ({ object }) => {
-  const objectData = object.userData.meshData;
+  const [objectData,setObjectData] = useState(object.userData.meshData);
   const [isOpen, setOpen] = useState(objectData.open);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
+
+  useEffect(()=>{
+    setObjectData(object.userData.meshData);
+    setOpen(object.userData.meshData.open);
+
+  },[object]);
 
   const handleChange = (event) => {
     const checked = event.target.checked;

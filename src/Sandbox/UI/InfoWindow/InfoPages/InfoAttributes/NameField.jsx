@@ -1,5 +1,5 @@
 import "../InfoPages.css";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import useStore from "../../../../DevTools/store";
 
 /**
@@ -15,6 +15,10 @@ const NameField = ({ object }) => {
   const setUndoList = useStore((state) => state.setUndoList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
+
+  useEffect(()=>{
+    setName(object.name);
+  },[object]);
 
   /**
    * Sets internal name property to value in inputField.

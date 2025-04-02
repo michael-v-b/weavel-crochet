@@ -17,7 +17,9 @@ const RotationField = ({ object }) => {
   const setProjectFile = useStore((state) => state.setProjectFile);
   const currentRotation = useStore((state)=>state.currentRotation);
   const setCurrentRotation = useStore((state)=>state.setCurrentRotation);
-
+  useEffect(()=>{
+    setNewRotation(object.rotation.toArray());
+  },[object])
   const handleChange = (event, axis) => {
     const newValue = event.target.value;
 

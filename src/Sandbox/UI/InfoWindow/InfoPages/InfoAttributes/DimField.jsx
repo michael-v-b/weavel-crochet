@@ -1,5 +1,5 @@
 import "../InfoPages.css";
-import React, { useState } from "react";
+import  { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import useStore from "../../../../DevTools/store";
 
@@ -23,6 +23,12 @@ const DimField = ({ object, dimensions }) => {
   const [yDim, setY] = useState(objectData.yDim);
   const [zDim, setZ] = useState(dimensions == 3 ? objectData.zDim : 0);
   const [isLinked, setLinked] = useState(objectData.linked);
+
+  useEffect(()=>{
+    setX(objectData.xDim);
+    setY(objectData.yDim);
+    setZ(dimensions==3 ? objectData.zDim : 0);
+  },[object]);
 
   /**
    * Updates the value of the input field and the appropriate axis position when input field is changed

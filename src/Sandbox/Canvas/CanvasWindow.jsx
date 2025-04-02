@@ -7,7 +7,7 @@ import SelectionManager from "./Managers/SelectionManager";
 import ToolManager from "./Managers/ToolManager";
 import Deleter from "./Managers/Deleter";
 import History from "../DevTools/History";
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import useStore from "../DevTools/store";
 
 /**
@@ -31,6 +31,8 @@ const CanvasWindow = forwardRef(
 
     CanvasWindow.displayName = "Canvas Window";
     const mode = useStore((state) => state.mode);
+    const isFocused = useStore((state)=>state.isFocused);
+    const [pendingPointerEvent,setPendingPointerEvent] = useState(null);
 
     const raycasterRef = useRef(null);
     const canvasRef = useRef(null);
@@ -43,6 +45,8 @@ const CanvasWindow = forwardRef(
      * Disabled during Camera mode.
      *@param {Event} event - used for pointer position in raycaster.
      */
+
+  
     const handleRay = (event) => {
       if (
         mode != "camera" &&
@@ -55,6 +59,28 @@ const CanvasWindow = forwardRef(
         toolManagerRef.current.handleRay(rayMeshes[0], event);
       }
     };
+
+
+    /**
+     * initializes pointer event if focused, triggers handleRay when not.
+     * @param {Event} event - The pointer event with onPointerDown in Canvas
+     */
+    const handleClick = (event) => {
+      if(isFocused) {
+        setPendingPointerEvent(event);
+      } else {
+        handleRay(event);
+      }
+    }
+
+    //use effect only triggers handle ray after isFocused is set to false
+    useEffect(()=>{
+      if(pendingPointerEvent && !isFocused) {
+        handleRay(pendingPointerEvent);
+        setPendingPointerEvent(null);
+      }
+
+    },[pendingPointerEvent, isFocused]);
 
     /**
      * Spawns a mesh in the canvas.
@@ -75,7 +101,7 @@ const CanvasWindow = forwardRef(
     return (
       <Canvas
         ref={canvasRef}
-        onPointerDown={handleRay}
+        onPointerDown={handleClick}
         shadows={true}
         style={{
           height: "90%",

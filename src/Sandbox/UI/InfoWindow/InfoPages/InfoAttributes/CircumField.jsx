@@ -1,5 +1,5 @@
 import "../InfoPages.css";
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import useStore from "../../../../DevTools/store";
 
 /**
@@ -18,6 +18,10 @@ const CircumferenceField = ({ object }) => {
   const setProjectFile = useStore((state) => state.setProjectFile);
   const CONV_RATE = useStore((state) => state.CONV_RATE);
   const setRadius = object.userData.meshData.setRadius;
+
+  useEffect(()=>{
+    setCircum(object.userData.meshData.circum);
+  },[object]);
 
   /**
    * When input field is changed, update the circum accordingly

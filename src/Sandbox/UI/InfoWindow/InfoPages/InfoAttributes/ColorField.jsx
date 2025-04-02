@@ -44,15 +44,13 @@ const ColorField = ({ object }) => {
    * the field's color to white.
    */
   const testWhite = (tempColor) => {
-
-
     let r = 0;
     let g = 0;
     let b = 0;
     if(typeof tempColor == "string") {
-      r = parseInt(tempColor.substring(0, 2), 16);
-      g = parseInt(tempColor.substring(2, 4), 16);
-      b = parseInt(tempColor.substring(4, 6), 16);
+      r = parseFloat(tempColor.substring(0, 2), 16)/255;
+      g = parseFloat(tempColor.substring(2, 4), 16)/255;
+      b = parseFloat(tempColor.substring(4, 6), 16)/255;
     } else {
       r = tempColor.r;
       g= tempColor.g;

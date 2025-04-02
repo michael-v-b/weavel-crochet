@@ -16,11 +16,10 @@ import useStore from "./DevTools/store";
 
 import Exporter from "./Export/Exporter";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect} from "react";
 import { useNavigate, useLocation } from "react-router";
 import useGlobalStore from "../globalStore";
 import AuthTester from "../AuthTester";
-import { motion } from "framer-motion";
 
 import supabase from "../supabase";
 
@@ -44,7 +43,7 @@ const Sandbox = () => {
   const setNameLoading = useStore((state) => state.setNameLoading);
   const nameLoading = useStore((state) => state.nameLoading);
   const meshLoading = useStore((state) => state.meshLoading);
-  const navigate = useNavigate();
+
   const location = useLocation();
   /**
    *spawns a new mesh into the scene.
@@ -60,7 +59,7 @@ const Sandbox = () => {
       type: "application/json",
     });
 
-    const { data, error } = await supabase.storage
+    const { data , error } = await supabase.storage
       .from("Project Files")
       .upload(path, jsonBlob, { upsert: true });
   };

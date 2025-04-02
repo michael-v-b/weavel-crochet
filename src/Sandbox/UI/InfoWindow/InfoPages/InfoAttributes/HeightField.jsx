@@ -1,5 +1,5 @@
 import "../InfoPages.css";
-import React, { useState } from "react";
+import  {useEffect, useState } from "react";
 import useStore from "../../../../DevTools/store";
 
 /**
@@ -9,7 +9,7 @@ import useStore from "../../../../DevTools/store";
  * @returns {Component} - div with an input field that represents the object's height.
  */
 const HeightField = ({ heightName = "Height", object, maxHeight }) => {
-  const objectData = object.userData.meshData;
+  const [objectData,setObjectData] = useState(object.userData.meshData);
   const [height, setHeight] = useState(objectData.height);
   const [action, setAction] = useState(["height"]);
   const setFocused = useStore((state) => state.setFocused);
@@ -18,6 +18,13 @@ const HeightField = ({ heightName = "Height", object, maxHeight }) => {
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
   const CONV_RATE = useStore((state) => state.CONV_RATE);
+
+  useEffect(()=>{
+    console.log("height says that " + object.name + "is selected");
+    
+    setObjectData(object.userData.meshData);
+    setHeight(object.userData.meshData.height);
+  },[object]);
 
   /**
    *updates the internal height when input field is edited.
