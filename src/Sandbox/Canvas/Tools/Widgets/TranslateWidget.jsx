@@ -12,7 +12,7 @@ import useStore from  "../../../DevTools/store";
 const TranslateWidget = forwardRef(({ ...props }, ref) => {
   TranslateWidget.displayName = "Translate Widget";
   const lineSize = 0.2;
-  const [isVisible,setVisible] = useState(true);
+  const [key,setKey] = useState(-1);
   const selectedMeshes = useStore((state)=>state.selectedMeshes);
   const { camera } = useThree();
 
@@ -28,21 +28,15 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
     ref.current.scale.set(scale, scale, scale);
   });
 
-  //initiates flicker when selectedMeshes changes
+  //rerenders widget on selection
   useEffect(()=>{
-    setVisible(false);
+    setKey(key*-1);
   },[selectedMeshes])
 
-  //flickers so that it will always be visible above other objects when selected
-  useEffect(()=>{
-    if(!isVisible) {
-      setVisible(true);
-    }
-  },[isVisible]);
 
   return (
     <>
-      {isVisible && <mesh ref={ref} {...props} layer={3}>
+     <mesh ref={ref}  key = {key} {...props} layer={3}>
         <IBox
           dim={0.5}
           meshProps={{
@@ -80,7 +74,7 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
           }}
           materialProps={{ depthTest: false, color: "#0000FF" }}
         />
-      </mesh>}
+      </mesh>
     </>
   );
 });

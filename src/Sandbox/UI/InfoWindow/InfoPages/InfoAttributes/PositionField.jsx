@@ -1,10 +1,7 @@
 import "../InfoPages.css";
 import  {
-  forwardRef,
-  useImperativeHandle,
   useState,
   useEffect,
-  useRef,
 } from "react";
 import { Vector3 } from "three";
 import useStore from "../../../../DevTools/store";
@@ -15,14 +12,13 @@ import useStore from "../../../../DevTools/store";
  
  * @returns {Component} - div with 3 input fields that represent the object's x y and z coordinates.
  */
-const PositionField = ({ object, ...props }) => {
+const PositionField = ({ object }) => {
   const setFocused = useStore((state) => state.setFocused);
   const avgPosition = useStore((state) => state.avgPosition);
   const updateAvgPosition = useStore((state) => state.updateAvgPosition);
-  const setAvgPosition = useStore((state) => state.setAvgPosition);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const [newPosition, setPosition] = useState([...avgPosition]);
+  const [newPosition, setNewPosition] = useState([...avgPosition]);
 
   /**
    * updates value in position state, only happens when input field is changed.
@@ -36,7 +32,7 @@ const PositionField = ({ object, ...props }) => {
       const tempPosition = [...avgPosition];
       tempPosition[axis] = newValue;
 
-      setPosition(tempPosition);
+      setNewPosition(tempPosition);
     }
   };
 
@@ -57,12 +53,15 @@ const PositionField = ({ object, ...props }) => {
         .toFixed(2)
         .replace(/[.,]00$/, "");
       if (isNaN(positionNum[i])) {
+        console.log("number should be set to 0");
         positionNum[i] = 0;
+      } else {
+        console.log("" + positionNum[i] + " is not NaN");
       }
     }
     //recently changed from parsing float, make sure it works
     object.position.copy(new Vector3().fromArray(positionNum));
-    setPosition(positionNum);
+    setNewPosition(positionNum);
     updateAvgPosition();
     setFocused(false);
 
@@ -77,7 +76,7 @@ const PositionField = ({ object, ...props }) => {
         .toFixed(2)
         .replace(/[.,]00$/, "");
     }
-    setPosition([...newPosition]);
+    setNewPosition([...newPosition]);
   }, [avgPosition]);
 
   return (

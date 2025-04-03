@@ -1,6 +1,6 @@
 import "../InfoPages.css";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Euler } from "three";
 import useStore from "../../../../DevTools/store";
 
