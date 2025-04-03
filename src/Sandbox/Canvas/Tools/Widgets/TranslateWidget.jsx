@@ -1,7 +1,8 @@
-import { useFrame, useThree } from "@react-three/fiber";
-import  {forwardRef } from "react";
+import { useFrame, useThree} from "@react-three/fiber";
+import  {forwardRef,useState,useEffect} from "react";
 import IBox from "../../Mesh/InteractiveMeshes/IBox.jsx";
 import ILine from "../../Mesh/InteractiveMeshes/ILine.jsx";
+import useStore from  "../../../DevTools/store";
 
 /**
  *@typedef {TranslateWidget} - The visual element of the Rotater
@@ -11,6 +12,8 @@ import ILine from "../../Mesh/InteractiveMeshes/ILine.jsx";
 const TranslateWidget = forwardRef(({ ...props }, ref) => {
   TranslateWidget.displayName = "Translate Widget";
   const lineSize = 0.2;
+  const [isVisible,setVisible] = useState(true);
+  const selectedMeshes = useStore((state)=>state.selectedMeshes);
   const { camera } = useThree();
 
   /**
@@ -25,9 +28,21 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
     ref.current.scale.set(scale, scale, scale);
   });
 
+  //initiates flicker when selectedMeshes changes
+  useEffect(()=>{
+    setVisible(false);
+  },[selectedMeshes])
+
+  //flickers so that it will always be visible above other objects when selected
+  useEffect(()=>{
+    if(!isVisible) {
+      setVisible(true);
+    }
+  },[isVisible]);
+
   return (
     <>
-      <mesh ref={ref} {...props} layer={3}>
+      {isVisible && <mesh ref={ref} {...props} layer={3}>
         <IBox
           dim={0.5}
           meshProps={{
@@ -65,7 +80,7 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
           }}
           materialProps={{ depthTest: false, color: "#0000FF" }}
         />
-      </mesh>
+      </mesh>}
     </>
   );
 });

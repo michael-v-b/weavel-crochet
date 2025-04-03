@@ -1,6 +1,7 @@
 import IRing from "../../Mesh/InteractiveMeshes/IRing";
-import { forwardRef, useRef, useImperativeHandle } from "react";
+import { forwardRef, useRef, useImperativeHandle, useEffect,useState} from "react";
 import { useFrame, useThree } from "@react-three/fiber";
+import useStore from "../../../DevTools/store";
 
 /**
  *@typedef {RotateWidget} - The visual element of the Rotater
@@ -9,6 +10,8 @@ import { useFrame, useThree } from "@react-three/fiber";
  */
 const RotateWidget = forwardRef(({ ...props }, ref) => {
   RotateWidget.displayName = "Rotate Widget";
+  const selectedMeshes = useStore((state)=>state.selectedMeshes);
+  const [isVisible,setVisible] = useState(true);
   const { camera } = useThree();
   const widgetRef = useRef(null);
   const lineWidth = 0.05;
@@ -25,10 +28,21 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
     widgetRef.current.scale.set(scale, scale, scale);
   });
 
+  //initiate blink to rerender widget so it appears on top of newly created objects
+  useEffect(()=>{
+    setVisible(false);
+  },[selectedMeshes])
+  //blink
+  useEffect(()=>{
+    if(!isVisible) {
+      setVisible(true)
+    }
+  },[isVisible])
+
   useImperativeHandle(ref, () => ({ widgetRef }));
   return (
     <>
-      <mesh ref={widgetRef} {...props}>
+      {isVisible && <mesh ref={widgetRef} {...props}>
         <IRing
           lineWidth={lineWidth}
           meshProps={{
@@ -57,7 +71,7 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
           }}
           materialProps={{ color: "#00FF00", depthTest: false }}
         />
-      </mesh>
+      </mesh>}
     </>
   );
 });
