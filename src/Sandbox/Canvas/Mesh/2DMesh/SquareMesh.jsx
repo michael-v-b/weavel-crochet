@@ -33,7 +33,7 @@ const SquareMesh = forwardRef(({ id, ...props }, ref) => {
       {...props}
     >
       <boxGeometry
-        args={[height_convert(xDim),height_convert(yDim) , height_convert(1)]}
+        args={[height_convert(xDim),height_convert(yDim) , 0.125]}
       />
     </SelectableMesh>
   );

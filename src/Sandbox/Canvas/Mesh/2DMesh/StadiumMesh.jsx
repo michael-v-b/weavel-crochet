@@ -17,7 +17,7 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
   const half = (segments - 2) / 2;
   const [height, setHeight] = useState(DEF_HEIGHT);
   const FRONT_OFFSET = segments + 2;
-  const DEPTH_OFFSET = 1 / (height_convert(1));
+  const DEPTH_OFFSET = 0.125;
 
   const geometry = useMemo(() => {
     const geo = new BufferGeometry();
@@ -35,7 +35,7 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
       const IS_FRONT = FRONT_OFFSET * i;
 
       vertices.push(
-        ...[0, height / height_convert(DEF_HEIGHT), z, 0, -height / height_convert(DEF_HEIGHT), z]
+        ...[0, height_convert(DEF_HEIGHT), z, 0, -height_convert(DEF_HEIGHT), z]
       );
 
       for (let j = 0; j < 2; j++) {

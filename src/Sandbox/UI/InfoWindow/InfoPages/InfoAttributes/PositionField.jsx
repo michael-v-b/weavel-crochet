@@ -51,7 +51,7 @@ const PositionField = ({ object, ...props }) => {
    *Updates the objects position in the Canvas and sets the focused state to false.
    */
   const handleBlur = () => {
-    positionNum = [0, 1, 0];
+    const positionNum = [0, 1, 0];
     for (let i = 0; i < positionNum.length; i++) {
       positionNum[i] = parseFloat(newPosition[i])
         .toFixed(2)
