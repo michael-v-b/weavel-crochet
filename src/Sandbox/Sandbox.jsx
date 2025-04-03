@@ -72,7 +72,11 @@ const Sandbox = () => {
 
   //updates file when change occurs but only if projectId is correct.
   useEffect(() => {
-  
+    
+   for (let key in projectFile.meshes) {
+    const object = projectFile.meshes[key];
+    console.log(object.name + " circum is " + object.circum);
+   }
     const currentURL = location.pathname;
     const idIndex = currentURL.indexOf("sandbox/");
     const tempId = currentURL.substring(idIndex + "sandbox/".length);

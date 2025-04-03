@@ -8,16 +8,19 @@ const ChainMesh = forwardRef(({ id, ...props }, ref) => {
   const height_convert = useStore((state) => state.height_convert);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
+  const meshLoading = useStore((state)=>state.meshLoading);
   
   const attributeList = ["height"];
   const line = 0.125;
   const [height, setHeight] = useState(DEF_HEIGHT);
 
   useEffect(() => {
-    const newMesh = projectFile.meshes[id];
-    newMesh.attributeList = attributeList;
-    newMesh.height = height;
-    setProjectFile({ ...projectFile });
+    if(meshLoading) {
+      const newMesh = projectFile.meshes[id];
+      newMesh.attributeList = attributeList;
+      newMesh.height = height;
+      setProjectFile({ ...projectFile });
+    }
   }, []);
 
   return (

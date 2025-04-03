@@ -8,9 +8,9 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
   
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
   const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
-  const DEF_RADIUS = Math.ceil(DEF_HEIGHT/2);
   const circum_radius_convert = useStore((state)=>state.circum_radius_convert);
   const height_convert = useStore((state)=>state.height_convert);
+  const meshLoading = useStore((state)=>state.meshLoading);
 
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
@@ -81,12 +81,14 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
   }, [height, circum]);
 
   useEffect(() => {
-    const newMesh = projectFile.meshes[id];
-    newMesh.attributeList = attributeList;
-    newMesh.height = height;
-    newMesh.circum = circum;
-    newMesh.radius = radius;
-    setProjectFile({ ...projectFile });
+    if(!meshLoading) {
+      const newMesh = projectFile.meshes[id];
+      newMesh.attributeList = attributeList;
+      newMesh.height = height;
+      newMesh.circum = circum;
+      newMesh.radius = radius;
+      setProjectFile({ ...projectFile });
+    }
   }, []);
 
   return (

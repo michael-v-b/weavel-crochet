@@ -47,7 +47,6 @@ const CircumferenceField = ({ object }) => {
 
     const newRadius = circum_radius_convert(roundedCircum);
 
-    console.log("value of conversion: " + circum_radius_convert(1));
 
     action.push(object);
     action.push(object.userData.meshData.radius);
@@ -62,7 +61,6 @@ const CircumferenceField = ({ object }) => {
 
     object.userData.meshData.setCircum(roundedCircum);
 
-    console.log("in game radius " + newRadius);
     return newRadius;
   };
 

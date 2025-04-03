@@ -14,17 +14,22 @@ const CapsuleMesh = forwardRef(({ id, ...props }, ref) => {
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
   const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
   const height_convert = useStore((state)=>state.height_convert);
+  const meshLoading = useStore((state)=>state.meshLoading);
 
   const [height, setHeight] = useState(DEF_HEIGHT*2);
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
 
   useEffect(() => {
-    const newMesh = projectFile.meshes[id];
-    newMesh.attributeList = attributeList;
-    newMesh.circum = circum;
-    newMesh.height = height;
-    setProjectFile({ ...projectFile });
+
+    if(!meshLoading) {
+      const newMesh = projectFile.meshes[id];
+      newMesh.attributeList = attributeList;
+      newMesh.circum = circum;
+      newMesh.height = height;
+      setProjectFile({ ...projectFile });
+    }
+    
   }, []);
 
   return (

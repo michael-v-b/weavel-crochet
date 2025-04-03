@@ -12,14 +12,20 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
+  const meshLoading = useStore((state)=>state.meshLoading);
+
+
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
 
   useEffect(() => {
-    const newMesh = projectFile.meshes[id];
-    newMesh.attributeList = attributeList;
-    newMesh.circum = circum;
-    setProjectFile({ ...projectFile });
+    // makes sure circum doesn't reset if loading
+    if (!meshLoading) {
+      const newMesh = projectFile.meshes[id];
+      newMesh.attributeList = attributeList;
+      newMesh.circum = circum;
+      setProjectFile({ ...projectFile });
+    }
   }, []);
 
   return (

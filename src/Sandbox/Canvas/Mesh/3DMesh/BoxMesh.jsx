@@ -10,6 +10,8 @@ const BoxMesh = forwardRef(({ id, ...props }, ref) => {
   const attributeList = ["dim"];
   const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
   const height_convert = useStore((state)=>state.height_convert);
+  const meshLoading = useStore((state)=>state.meshLoading);
+
   const [xDim, setX] = useState(DEF_HEIGHT);
   const [yDim, setY] = useState(DEF_HEIGHT);
   const [zDim, setZ] = useState(DEF_HEIGHT);
@@ -19,10 +21,12 @@ const BoxMesh = forwardRef(({ id, ...props }, ref) => {
   const setProjectFile = useStore((state) => state.setProjectFile);
 
   useEffect(() => {
-    const newMesh = projectFile.meshes[id];
-    newMesh.attributeList = attributeList;
-    newMesh.dim = [xDim, yDim, zDim];
-    setProjectFile({ ...projectFile });
+    if(!meshLoading) {
+      const newMesh = projectFile.meshes[id];
+      newMesh.attributeList = attributeList;
+      newMesh.dim = [xDim, yDim, zDim];
+      setProjectFile({ ...projectFile });
+    }
   }, []);
   return (
     <SelectableMesh

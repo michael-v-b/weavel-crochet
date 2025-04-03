@@ -179,8 +179,8 @@ const ProjectReader = forwardRef(({ meshSpawnerRef }, ref) => {
 
     //circumference
     if (attributes.includes("circum")) {
+      console.log("saveData circum: " + saveData.circum);
       meshData.setCircum(saveData.circum);
-      const output = saveData.circum / (2 * Math.PI);
       meshData.setRadius(circum_radius_convert(saveData.circum));
     }
 

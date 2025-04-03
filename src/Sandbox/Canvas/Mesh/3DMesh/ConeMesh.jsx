@@ -15,6 +15,7 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
   const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
   const height_convert = useStore((state)=>state.height_convert);
+  const meshLoading = useStore((state)=>state.meshLoading);
 
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
@@ -22,12 +23,14 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
   const [open, setOpen] = useState(true);
 
   useEffect(() => {
-    const newMesh = projectFile.meshes[id];
-    newMesh.attributeList = attributeList;
-    newMesh.circum = circum;
-    newMesh.height = height;
-    newMesh.open = open;
-    setProjectFile({ ...projectFile });
+    if(!meshLoading) {
+      const newMesh = projectFile.meshes[id];
+      newMesh.attributeList = attributeList;
+      newMesh.circum = circum;
+      newMesh.height = height;
+      newMesh.open = open;
+      setProjectFile({ ...projectFile });
+    }
   }, []);
 
   return (

@@ -12,6 +12,9 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
 
   const height_convert = useStore((state)=>state.height_convert);
   const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
+
+  const meshLoading = useStore((state)=>state.meshLoading);
+
   const segments = 20;
   const attributeList = ["height"];
   const half = (segments - 2) / 2;
@@ -97,10 +100,12 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
   }, [height]);
 
   useEffect(() => {
-    const newMesh = projectFile.meshes[id];
-    newMesh.attributeList = attributeList;
-    newMesh.height = height;
-    setProjectFile({ ...projectFile });
+    if(!meshLoading) {
+      const newMesh = projectFile.meshes[id];
+      newMesh.attributeList = attributeList;
+      newMesh.height = height;
+      setProjectFile({ ...projectFile });
+    }
   }, []);
 
   return (

@@ -35,8 +35,6 @@ const MeshSpawner = forwardRef(( {...props},ref) => {
   const setMeshList = useStore((state) => state.setMeshList);
   const OBJECT_LIMIT = useStore((state) => state.OBJECT_LIMIT);
   const projectFile = useStore((state) => state.projectFile);
-  const cellList = useStore((state)=>state.cellList);
-  const setCellList = useStore((state)=>state.setCellList);
 
   // list of all shapeComponents and the values of their meshTypes
   // add shape here when creating a new shape
@@ -108,7 +106,7 @@ const MeshSpawner = forwardRef(( {...props},ref) => {
   };
 
   /**
-   * spawns multiple meshes into the scene at once
+   * spawns multiple meshes into the scene at once this is mostly for projectReader
    * @param [{string}] shapes - a list of strings stating the types of each mesh
    * @param {boolean} history - determines whether it will be recorded in the history.
    */
@@ -132,7 +130,7 @@ const MeshSpawner = forwardRef(( {...props},ref) => {
       setAction(["create", []]);
       setUndoList([...undoList]);
     }
-
+    console.log("create meshes");
     setMeshes([...meshes, ...tempMeshes]);
     return meshRefs;
   };
