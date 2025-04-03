@@ -26,19 +26,29 @@ const ProjectReader = forwardRef(({ meshSpawnerRef }, ref) => {
   ProjectReader.displayName = "ProjectReader";
   let readProject = useRef(false);
   let numFinished = 0;
+
+
   const setColorList = useStore((state) => state.setColorList);
   const meshList = useStore((state) => state.meshList);
   const setMeshList = useStore((state) => state.setMeshList);
+
   const setProjectFile = useStore((state) => state.setProjectFile);
   const setProjectId = useStore((state) => state.setProjectId);
 
   const setMode = useStore((state) => state.setMode);
   const setTool = useStore((state) => state.setTool);
+
   const setUndoList = useStore((state) => state.setUndoList);
   const setRedoList = useStore((state) => state.setRedoList);
+
+  const circum_radius_convert = useStore((state)=>state.circum_radius_convert);
+
   const setMeshLoading = useStore((state) => state.setMeshLoading);
+
   const authData = useGlobalStore((state) => state.authData);
   const auth = useGlobalStore((state)=>state.auth);
+
+  
 
   const navigate = useNavigate();
 

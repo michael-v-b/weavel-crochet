@@ -16,7 +16,7 @@ const CircumferenceField = ({ object }) => {
   const setUndoList = useStore((state) => state.setUndoList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const CONV_RATE = useStore((state) => state.CONV_RATE);
+  const circum_radius_convert = useStore((state)=>state.circum_radius_convert);
   const setRadius = object.userData.meshData.setRadius;
 
   useEffect(()=>{
@@ -44,11 +44,14 @@ const CircumferenceField = ({ object }) => {
     const roundedCircum = Math.max(6, 6 * Math.floor(circum / 6));
 
     setCircum(roundedCircum);
-    const output = roundedCircum / (2 * Math.PI);
+
+    const newRadius = circum_radius_convert(roundedCircum);
+
+    console.log("value of conversion: " + circum_radius_convert(1));
 
     action.push(object);
     action.push(object.userData.meshData.radius);
-    action.push(output * CONV_RATE);
+    action.push(newRadius);
     action.push(object.userData.meshData.circum);
     action.push(circum);
 
@@ -58,7 +61,6 @@ const CircumferenceField = ({ object }) => {
     setAction(["circum"]);
 
     object.userData.meshData.setCircum(roundedCircum);
-    const newRadius = output / CONV_RATE;
 
     console.log("in game radius " + newRadius);
     return newRadius;

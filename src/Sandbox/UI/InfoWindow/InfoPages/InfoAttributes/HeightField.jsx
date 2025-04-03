@@ -17,7 +17,6 @@ const HeightField = ({ heightName = "Height", object, maxHeight }) => {
   const setUndoList = useStore((state) => state.setUndoList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const CONV_RATE = useStore((state) => state.CONV_RATE);
 
   useEffect(()=>{
     console.log("height says that " + object.name + "is selected");

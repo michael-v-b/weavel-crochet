@@ -1,15 +1,18 @@
 import { create } from "zustand";
 
+//real default circumference
+const tempCircum = 30;
+
 //used for state management
 const useStore = create((set) => ({
   OBJECT_LIMIT: 25,
-  DEF_CIRCUM: 30,
-  DEF_HEIGHT: this.DEF_CIRCUM/(Math.PI),
+  DEF_CIRCUM: tempCircum,
+  DEF_HEIGHT: Math.ceil(tempCircum/(Math.PI)),
 
   //CONVERTS convert real values to in game values.
   //x(1/36) + 1/6
-  circum_radius_convert: (x) => {x/36 + (1/6)},
-  height_convert: (x) => {x/(this.DEF_CIRCUM/(2*Math.PI))},
+  circum_radius_convert: (x) => {return (x/36 + (1/6))},
+  height_convert: (x) => {return (x/(tempCircum/(2*Math.PI)))},
 
 
 

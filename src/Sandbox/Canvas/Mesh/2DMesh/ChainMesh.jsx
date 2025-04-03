@@ -6,12 +6,11 @@ const ChainMesh = forwardRef(({ id, ...props }, ref) => {
   ChainMesh.displayName = "Chain Mesh";
   const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
   const height_convert = useStore((state) => state.height_convert);
-  const circum_radius_convert = useStore((state)=>state.circum_radius_convert);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
   
   const attributeList = ["height"];
-  const line = circum_radius_convert(1);
+  const line = 0.125;
   const [height, setHeight] = useState(DEF_HEIGHT);
 
   useEffect(() => {

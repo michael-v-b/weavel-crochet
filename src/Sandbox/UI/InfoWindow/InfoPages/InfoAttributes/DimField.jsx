@@ -14,7 +14,6 @@ const DimField = ({ object, dimensions }) => {
   const setUndoList = useStore((state) => state.setUndoList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const CONV_RATE = useStore((state) => state.CONV_RATE);
 
   const objectData = object.userData.meshData;
   const [action, setAction] = useState(["dim"]);
@@ -51,7 +50,7 @@ const DimField = ({ object, dimensions }) => {
     } else if (dimensions == 3 && axis == 2) {
       diff = tempNum - zDim;
     }
-    const oldDims = [xDim, yDim, zDim];
+   // const oldDims = [xDim, yDim, zDim];
     if (isLinked) {
       setX(xDim + diff);
       setY(yDim + diff);

@@ -11,7 +11,6 @@ const CircleMesh = forwardRef(({ id, ...props }, ref) => {
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
-  const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
   const height_convert = useStore((state)=>state.height_convert);
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
@@ -31,7 +30,7 @@ const CircleMesh = forwardRef(({ id, ...props }, ref) => {
       ref={ref}
       {...props}
     >
-      <cylinderGeometry args={[radius, radius, height_convert(DEF_HEIGHT), 20]} />
+      <cylinderGeometry args={[radius, radius, height_convert(1), 20]} />
     </SelectableMesh>
   );
 });
