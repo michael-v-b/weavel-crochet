@@ -28,9 +28,11 @@ const BoxMesh = forwardRef(({ id, ...props }, ref) => {
       setProjectFile({ ...projectFile });
     }
   }, []);
+  
   return (
     <SelectableMesh
       meshType="box"
+      boxDim = {[height_convert(xDim),height_convert(yDim),height_convert(zDim)]}
       meshData={{
         xDim,
         yDim,

@@ -33,6 +33,7 @@ const SquareMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       id={id}
       meshType="square"
+      boxDim = {[height_convert(xDim),height_convert(yDim),0.125]}
       meshData={{ xDim, setX, yDim, setY, linked, setLinked, attributeList }}
       ref={ref}
       {...props}

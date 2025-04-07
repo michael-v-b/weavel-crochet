@@ -35,6 +35,7 @@ const CapsuleMesh = forwardRef(({ id, ...props }, ref) => {
   return (
     <SelectableMesh
       meshType="capsule"
+      boxDim = {[radius*2,height_convert(height),radius*2]}
       meshData={{
         height,
         setHeight,

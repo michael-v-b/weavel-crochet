@@ -27,6 +27,7 @@ const ChainMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       id={id}
       ref={ref}
+      boxDim = {[line*2,height_convert(height),line*2]}
       meshType="chain"
       meshData={{ height, setHeight, attributeList }}
       {...props}

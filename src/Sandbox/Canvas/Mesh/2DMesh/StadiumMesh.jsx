@@ -48,8 +48,8 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
           const x = Math.cos(theta);
           const y =
             j == 0
-              ? Math.sin(theta) + height / (height_convert(DEF_HEIGHT) * 2)
-              : Math.sin(theta) - height / (height_convert(DEF_HEIGHT) * 2);
+              ? Math.sin(theta) + height_convert(DEF_HEIGHT)
+              : Math.sin(theta) - height_convert(DEF_HEIGHT);
 
           vertices.push(x, y, z);
 
@@ -108,10 +108,12 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
     }
   }, []);
 
+  
   return (
     <SelectableMesh
       id={id}
       ref={ref}
+      boxDim = {[1,]}
       meshType="stadium"
       meshData={{ height, setHeight, attributeList }}
       {...props}

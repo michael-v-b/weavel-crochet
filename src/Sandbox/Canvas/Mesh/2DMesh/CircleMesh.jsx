@@ -27,6 +27,7 @@ const CircleMesh = forwardRef(({ id, ...props }, ref) => {
   return (
     <SelectableMesh
       id={id}
+      boxDim = {[radius*2,0.125,radius*2]}
       meshType="circle"
       meshData={{ radius, setRadius, circum, setCircum, attributeList }}
       ref={ref}

@@ -6,6 +6,7 @@ import {
   useRef,
 } from "react";
 import { DoubleSide } from "three";
+import OBB from "./OBB";
 
 /**
  *@typedef {SelectableMesh} - creates a mesh that can be selected or deselected.
@@ -17,7 +18,7 @@ import { DoubleSide } from "three";
  */
 const SelectableMesh = forwardRef(
   (
-    { id, colorList, meshType, meshData, children, hierarchyRef, materialProps, ...props },
+    { id, colorList, meshType, meshData, boxDim, children, hierarchyRef, materialProps, ...props },
     ref
   ) => {
     SelectableMesh.displayName = "Selectable Mesh";
@@ -40,6 +41,8 @@ const SelectableMesh = forwardRef(
 
     //change for draggability
     return (
+      <>
+      
       <mesh
         ref={ref}
         userData={{
@@ -55,6 +58,11 @@ const SelectableMesh = forwardRef(
         {...props}
         layer={2}
       >
+
+        {/**bounding box*/}
+        <OBB boxDim = {boxDim}  />
+    
+      
         {children}
         <meshStandardMaterial
           color={colorList[colorIndex - 1]}
@@ -64,6 +72,7 @@ const SelectableMesh = forwardRef(
         />
         {selected && <Outlines thickness={outlineWeight} color="#ff8800" />}
       </mesh>
+      </>
     );
   }
 );

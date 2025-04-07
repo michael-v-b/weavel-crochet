@@ -41,8 +41,16 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
         ((i / segments) * Math.PI) / 2
       );
       const RING_HEIGHT =
-        i != segments ? (height_convert(height)-radius) : -(height_convert(height)-radius);
-
+        i != segments ? height_convert((height/2))-radius : -((height_convert(height/2)));
+      if(i == 0 ) {
+      console.log("10 in game is " + height_convert(10));
+      console.log("5 in game is " + height_convert(5));
+      console.log("radius is " + radius);
+      console.log("RING_HEIGHT is: " + RING_HEIGHT);
+      console.log("cos phi" + Math.cos(phi))
+      console.log("phi: " + phi);
+      console.log("y: " + (Math.cos(phi)*radius + RING_HEIGHT));
+      }
       //creates full horizontal circle
       for (let j = 0; j < segments + 1; j++) {
         if (j < segments) {
@@ -51,7 +59,6 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
           const x = Math.cos(theta) * tempRadius;
           const z = Math.sin(theta) * tempRadius;
           const y = Math.cos(phi) * radius + RING_HEIGHT;
-
           vertices.push(x, y, z);
         }
 
@@ -95,6 +102,7 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       ref={ref}
       meshType="silo"
+      boxDim = {[radius*2,height_convert(height),radius*2]}
       meshData={{
         height,
         setHeight,

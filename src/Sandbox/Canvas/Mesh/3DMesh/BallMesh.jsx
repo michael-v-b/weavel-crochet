@@ -14,7 +14,6 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
   const meshLoading = useStore((state)=>state.meshLoading);
 
-
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
 
@@ -32,6 +31,7 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       meshType="ball"
       ref={ref}
+      boxDim = {[radius*2,radius*2,radius*2]}
       meshData={{ radius, setRadius, circum, setCircum, attributeList }}
       id={id}
       {...props}
