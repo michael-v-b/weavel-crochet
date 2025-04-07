@@ -113,7 +113,6 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       id={id}
       ref={ref}
-      boxDim = {[1,]}
       meshType="stadium"
       meshData={{ height, setHeight, attributeList }}
       {...props}

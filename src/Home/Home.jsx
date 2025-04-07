@@ -138,7 +138,7 @@ const Home = () => {
               Export your designs into custom crochet patterns.
             </motion.div>
             <motion.div
-              style={{ margin: "30%", position: "absolute" }}
+              style={{ backgroundColor: "red",margin: "5%", position: "absolute" }}
               whileInView={bubbleAnimations}
               className="animation-trigger"
             />

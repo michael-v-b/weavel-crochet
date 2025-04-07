@@ -5,8 +5,10 @@ import {
   useState,
   useRef,
 } from "react";
-import { DoubleSide } from "three";
-import OBB from "./OBB";
+import { DoubleSide,Box3 } from "three";
+import {OBB} from "three/addons/math/OBB.js";
+import OBBDebug from "./OBBDebug";
+
 
 /**
  *@typedef {SelectableMesh} - creates a mesh that can be selected or deselected.
@@ -18,18 +20,35 @@ import OBB from "./OBB";
  */
 const SelectableMesh = forwardRef(
   (
-    { id, colorList, meshType, meshData, boxDim, children, hierarchyRef, materialProps, ...props },
+    { id, colorList, meshType, meshData,  children, hierarchyRef, materialProps, ...props },
     ref
   ) => {
     SelectableMesh.displayName = "Selectable Mesh";
     
     const [selected, setSelected] = useState(false);
     const [outlineWeight, setOutlineWeight] = useState(0);
+    const [boxDim,setBoxDim] = useState([0,0,0]);
     const cellRef = useRef(hierarchyRef);
+    const obbRef = useRef(null);
     const [colorIndex, setColorIndex] = useState(1);
     const idNumber = id;
+    
 
 
+
+    useEffect(()=>{
+      if(!ref.current){
+        return;
+      }
+      
+      const objectBox = new Box3().setFromObject(ref.current);
+      const obb = new OBB().fromBox3(objectBox);
+      console.log("obb");
+      console.dir(obb);
+      const halfSize = obb.halfSize;
+      setBoxDim([halfSize.x*2,halfSize.y*2,halfSize.z*2])
+
+    },[])
 
     /**
      * update outline weight of mesh when selected.
@@ -60,7 +79,7 @@ const SelectableMesh = forwardRef(
       >
 
         {/**bounding box*/}
-        <OBB boxDim = {boxDim}  />
+        <OBBDebug ref = {obbRef} boxDim = {boxDim}  />
     
       
         {children}

@@ -37,7 +37,6 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       meshType="cone"
       id={id}
-      boxDim = {[radius*2,height_convert(height),radius*2]}
       meshData={{
         open,
         setOpen,

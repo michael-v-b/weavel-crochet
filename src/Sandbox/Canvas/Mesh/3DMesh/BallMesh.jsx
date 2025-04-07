@@ -31,7 +31,6 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       meshType="ball"
       ref={ref}
-      boxDim = {[radius*2,radius*2,radius*2]}
       meshData={{ radius, setRadius, circum, setCircum, attributeList }}
       id={id}
       {...props}
