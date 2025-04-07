@@ -47,29 +47,30 @@ const PositionField = ({ object }) => {
    *Updates the objects position in the Canvas and sets the focused state to false.
    */
   const handleBlur = () => {
-    const positionNum = [0, 1, 0];
-    for (let i = 0; i < positionNum.length; i++) {
-      positionNum[i] = parseFloat(newPosition[i])
+    const positionStrings = [0, 1, 0];
+    const positionNums = [0,1,0]
+    for (let i = 0; i < positionStrings.length; i++) {
+      positionStrings[i] = parseFloat(newPosition[i])
         .toFixed(2)
         .replace(/[.,]00$/, "");
-      if (isNaN(positionNum[i])) {
-        console.log("number should be set to 0");
-        positionNum[i] = 0;
-      } else {
-        console.log("" + positionNum[i] + " is not NaN");
+      positionNums[i] = parseFloat(positionStrings[i]);
+      if (isNaN(positionStrings[i])) {
+        positionStrings[i] = 0;
       }
     }
+
     //recently changed from parsing float, make sure it works
-    object.position.copy(new Vector3().fromArray(positionNum));
-    setNewPosition(positionNum);
+    object.position.copy(new Vector3().fromArray(positionNums));
+    setNewPosition(positionStrings);
     updateAvgPosition();
     setFocused(false);
 
     const newMesh = projectFile.meshes[object.userData.idNumber];
-    newMesh.position = positionNum;
+    newMesh.position = positionNums;
     setProjectFile({ ...projectFile });
   };
 
+  //updates on widget move
   useEffect(() => {
     for (let i = 0; i < newPosition.length; i++) {
       newPosition[i] = parseFloat(avgPosition[i])
