@@ -6,6 +6,7 @@ import RayCaster from "./Managers/RayCaster";
 import SelectionManager from "./Managers/SelectionManager";
 import ToolManager from "./Managers/ToolManager";
 import Deleter from "./Managers/Deleter";
+import IntersectionManager from "./Managers/IntersectionManager";
 import History from "../DevTools/History";
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import useStore from "../DevTools/store";
@@ -111,6 +112,7 @@ const CanvasWindow = forwardRef(
           borderBottomLeftRadius: "25px",
         }}
       >
+        <IntersectionManager/>
         <History
           ref={historyRef}
           meshSpawnerRef={meshSpawnerRef}

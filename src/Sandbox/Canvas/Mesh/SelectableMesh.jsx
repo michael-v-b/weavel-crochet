@@ -8,6 +8,8 @@ import {
 import { DoubleSide,Box3 } from "three";
 import {OBB} from "three/addons/math/OBB.js";
 import OBBDebug from "./OBBDebug";
+import useStore from "../../DevTools/store";
+import {Vector3} from "three";
 
 
 /**
@@ -20,20 +22,20 @@ import OBBDebug from "./OBBDebug";
  */
 const SelectableMesh = forwardRef(
   (
-    { id, colorList, meshType, meshData,  children, hierarchyRef, materialProps, ...props },
+    { id, colorList,  boxDim, meshType, meshData,  children, hierarchyRef, materialProps, ...props },
     ref
   ) => {
     SelectableMesh.displayName = "Selectable Mesh";
     
+    const keysPressed = useStore((state)=>state.keysPressed);
+
     const [selected, setSelected] = useState(false);
     const [outlineWeight, setOutlineWeight] = useState(0);
-    const [boxDim,setBoxDim] = useState([0,0,0]);
     const cellRef = useRef(hierarchyRef);
     const obbRef = useRef(null);
     const [colorIndex, setColorIndex] = useState(1);
     const idNumber = id;
-    
-
+  
 
 
     useEffect(()=>{
@@ -41,12 +43,12 @@ const SelectableMesh = forwardRef(
         return;
       }
       
-      const objectBox = new Box3().setFromObject(ref.current);
-      const obb = new OBB().fromBox3(objectBox);
-      console.log("obb");
-      console.dir(obb);
-      const halfSize = obb.halfSize;
-      setBoxDim([halfSize.x*2,halfSize.y*2,halfSize.z*2])
+      console.log("boxDim: " + boxDim);
+      console.dir(boxDim);
+      const obb = new OBB(ref.current.position,new Vector3().fromArray(boxDim));
+      obbRef.current = obb;
+      console.log("obbRef");
+      console.dir(obbRef);
 
     },[])
 
@@ -61,7 +63,7 @@ const SelectableMesh = forwardRef(
     //change for draggability
     return (
       <>
-      
+      <OBBDebug obbRef = {obbRef} boxDim = {boxDim}  />
       <mesh
         ref={ref}
         userData={{
@@ -71,6 +73,7 @@ const SelectableMesh = forwardRef(
           colorIndex,
           setColorIndex,
           cellRef,
+          obbRef,
           meshType: meshType,
           meshData,
         }}
@@ -79,7 +82,7 @@ const SelectableMesh = forwardRef(
       >
 
         {/**bounding box*/}
-        <OBBDebug ref = {obbRef} boxDim = {boxDim}  />
+        
     
       
         {children}
