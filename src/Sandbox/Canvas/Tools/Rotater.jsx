@@ -6,16 +6,15 @@ import {
   useState,
   useRef,
 } from "react";
-import { Vector3, Quaternion } from "three";
+import { Vector3, Quaternion,Matrix3,Matrix4 } from "three";
 import { useThree} from "@react-three/fiber";
 import useStore from "../../DevTools/store";
 
 /**
  *@typedef {Rotater} - Tool that rotates all selected objects when clicked on by mouse.
- *@property {Raycaster} raycaster - raycaster object used to handle mouse position.
  *@returns {RotateWidget}
  */
-const Rotater = forwardRef((_ , ref) => {
+const Rotater = forwardRef(({intersectionManagerRef}, ref) => {
   Rotater.displayName = "Rotater";
   const selectedList = useStore((state) => state.selectedMeshes);
   const avgPosition = useStore((state) => state.avgPosition);
@@ -85,7 +84,15 @@ const Rotater = forwardRef((_ , ref) => {
    */
   const rotateOne = (object, angle, tempAxisVector) => {
     const quaternion = new Quaternion().setFromAxisAngle(tempAxisVector, angle);
+
+
+
+    //change object's angle
     object.quaternion.premultiply(quaternion);
+    const tempMatrix4 = new Matrix4().makeRotationFromQuaternion(object.quaternion);
+    const rotationMatrix3 = new Matrix3().setFromMatrix4(tempMatrix4);
+
+    object.userData.obbRef.current.rotation = rotationMatrix3;
     setCurrentRotation(object.rotation.toArray())
   };
 

@@ -36,20 +36,20 @@ const SelectableMesh = forwardRef(
 
     const [obbDebugColor, setOBBDebugColor] = useState("green");
 
-
-  
-
     /**
-     * Initializes ObbRef
+     * Initializes ObbRef/changes when boxDim changes
      */
     useEffect(()=>{
       if(!ref.current){
         return;
       }
-      console.log("boxDim: " + boxDim);
-      const obb = new OBB(ref.current.position,new Vector3().fromArray(boxDim));
-      obbRef.current = obb;
-    },[])
+      if(!obbRef.current) {
+        const obb = new OBB(ref.current.position,new Vector3().fromArray(boxDim));
+        obbRef.current = obb;
+      } else {
+        obbRef.current.halfSize = new Vector3().fromArray(boxDim);
+      }
+    },[boxDim])
 
     /**
      * update outline weight of mesh when selected.
@@ -62,7 +62,7 @@ const SelectableMesh = forwardRef(
     //change for draggability
     return (
       <>
-      <OBBDebug obbRef = {obbRef} obbDebugColor = {obbDebugColor}  boxDim = {boxDim}  />
+      <OBBDebug obbRef = {obbRef} obbDebugColor = {obbDebugColor}  />
       <mesh
         ref={ref}
         userData={{
