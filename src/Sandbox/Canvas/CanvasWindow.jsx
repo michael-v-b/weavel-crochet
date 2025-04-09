@@ -38,6 +38,7 @@ const CanvasWindow = forwardRef(
     const raycasterRef = useRef(null);
     const canvasRef = useRef(null);
     const toolManagerRef = useRef(null);
+    const intersectionManagerRef = useRef(null);
     const deleterRef = useRef(null);
     const rotaterRef = useRef(null);
 
@@ -112,7 +113,7 @@ const CanvasWindow = forwardRef(
           borderBottomLeftRadius: "25px",
         }}
       >
-        <IntersectionManager/>
+        <IntersectionManager ref = {intersectionManagerRef} />
         <History
           ref={historyRef}
           meshSpawnerRef={meshSpawnerRef}
@@ -134,6 +135,7 @@ const CanvasWindow = forwardRef(
 
         <ToolManager
           ref={toolManagerRef}
+          intersectionManagerRef = {intersectionManagerRef}
           rotaterRef={rotaterRef}
           raycaster={raycasterRef}
         />

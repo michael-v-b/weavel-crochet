@@ -38,6 +38,7 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       id={id}
       meshType="cylinder"
+      boxDim = {[radius,height_convert(height/2),radius]}
       meshData={{
         open,
         setOpen,

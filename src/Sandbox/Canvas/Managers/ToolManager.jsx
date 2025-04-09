@@ -8,10 +8,11 @@ import useStore from "../../DevTools/store";
  * which tool should be active and where it shoudl be located.
  *@property {Raycaster} raycaster - raycaster object, mainly to be passed donw to other tools.
  * @property {RotaterRef} rotaterRef - reference to the rotater object.
+ * @property {IntersectionManagerRef} intersectionManagerRef - reference to the intersection Manager
  * @returns {Component} - lists all of the tools and activates them based on the tool property.
  */
 
-const ToolManager = forwardRef(({ raycaster, rotaterRef}, ref) => {
+const ToolManager = forwardRef(({ raycaster, rotaterRef,intersectionManagerRef}, ref) => {
   ToolManager.displayName = "Tool Manager";
   const tool = useStore((state) => state.tool);
   const selectedList = useStore((state) => state.selectedMeshes);
@@ -56,7 +57,7 @@ const ToolManager = forwardRef(({ raycaster, rotaterRef}, ref) => {
   return (
     <>
       <mesh>
-        <Translater ref={translaterRef} raycaster={raycaster} />
+        <Translater ref={translaterRef} intersectionManagerRef = {intersectionManagerRef} raycaster={raycaster} />
 
         <Rotater ref={rotaterRef} raycaster={raycaster} />
       </mesh>

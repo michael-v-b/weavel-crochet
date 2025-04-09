@@ -32,6 +32,7 @@ const BoxMesh = forwardRef(({ id, ...props }, ref) => {
   return (
     <SelectableMesh
       meshType="box"
+      boxDim = {[height_convert(xDim/2),height_convert(yDim/2),height_convert(zDim/2)]}
       meshData={{
         xDim,
         yDim,

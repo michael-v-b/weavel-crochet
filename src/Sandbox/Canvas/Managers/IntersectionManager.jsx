@@ -16,28 +16,34 @@ const IntersectionManager = forwardRef((_,ref) => {
     
   
 
-    const testIntersection =() => {
-       
-        selectedMeshes.forEach((selectedMesh) => {
+    
+    
+    const testIntersectionDrag =() => {
+        for(let i = 0; i < selectedMeshes.length;i++) {
+            const selectedMesh = selectedMeshes[i];
             
             const obbA = selectedMesh.userData.obbRef.current;
             const aData = selectedMesh.userData;
-            nonSelectedMeshes.forEach((nonSelectedMesh) => {
+
+            for(let j = 0 ;j < nonSelectedMeshes.length; j++) {
+                const nonSelectedMesh = nonSelectedMeshes[j];
                 
                 const bData = nonSelectedMesh.userData;
                 const obbB = bData.obbRef.current;
                 if(obbA.intersectsOBB(obbB)) {
-                    console.log(selectedMesh.name + " and " + nonSelectedMesh.name + " intersect");
+                    console.log("intersects and returns true");
                     aData.setOBBDebugColor('red');
                     bData.setOBBDebugColor('red');
+                    return true;
                 
                 } else {
-                    console.log(selectedMesh.name + " and " + nonSelectedMesh.name + " don't intersect");
                     aData.setOBBDebugColor('green');
                     bData.setOBBDebugColor('green');
                 }
-            });
-        })
+            };
+        };
+        console.log("returns false");
+        return false;
     }
 
 
@@ -53,13 +59,13 @@ const IntersectionManager = forwardRef((_,ref) => {
 
     },[selectedMeshes,meshList]);
 
-    useFrame(()=>{
+   /*useFrame(()=>{
         if(isDragging) {
-            testIntersection();
+            testIntersectionDrag();
         }
-    })
+    })*/
 
-    useImperativeHandle(ref,()=>(testIntersection));
+    useImperativeHandle(ref,()=>({testIntersectionDrag}));
 
 
 

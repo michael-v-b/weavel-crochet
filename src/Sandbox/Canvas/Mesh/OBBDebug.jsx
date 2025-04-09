@@ -5,20 +5,24 @@ const OBBDebug = forwardRef(({obbRef,obbDebugColor},ref) => {
     
     OBBDebug.displayName = "OBB Debug";
     const [debugPos, setDebugPos] = useState([0,1,0]);
+    const [args,setArgs] = useState([2,2,2]);
     const debug = true;
 
     useFrame(()=>{
         if(obbRef.current) {
             setDebugPos(obbRef.current.center.toArray());
+            const tempArgs = obbRef.current.halfSize.toArray()
+            setArgs([tempArgs[0]*2,tempArgs[1]*2,tempArgs[2]*2])
         }
     });
 
 
 
-    return <mesh ref = {ref} position = {debugPos}>
-        <boxGeometry args = {[2,2,2]}/>
-        <meshBasicMaterial color = {obbDebugColor} wireframe = {debug}/>
-    </mesh>
+    return <>
+        {debug && <mesh ref = {ref} position = {debugPos}>
+            <boxGeometry args = {args}/>
+            <meshBasicMaterial color = {obbDebugColor} wireframe = {true} />
+        </mesh>}</>
 
 });
 

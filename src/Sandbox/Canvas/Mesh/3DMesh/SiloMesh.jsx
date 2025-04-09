@@ -94,6 +94,7 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       ref={ref}
       meshType="silo"
+      boxDim = {[radius,height_convert(height/2),radius]}
       meshData={{
         height,
         setHeight,

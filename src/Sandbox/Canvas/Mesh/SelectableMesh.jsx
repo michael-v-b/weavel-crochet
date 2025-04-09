@@ -46,6 +46,7 @@ const SelectableMesh = forwardRef(
       if(!ref.current){
         return;
       }
+      console.log("boxDim: " + boxDim);
       const obb = new OBB(ref.current.position,new Vector3().fromArray(boxDim));
       obbRef.current = obb;
     },[])

@@ -12,15 +12,10 @@ import useStore from "../../DevTools/store";
 
 /**
  *@typedef {Translater} - Tool used for translating objects.
- *@property {function} updatePosition - updates the position in the App and
- *ToolManager after interaction.
- *@property {GetPositionCallback} - gets current translater's position
  *@property {Raycaster} raycaster - raycaster object, used mainly for intersectPlane function.
- *@property {[Mesh]} selectedList - list of all selected meshes.
- *@property {[x: {Number}, y: {Number}, z: {Number}]} - length 3 vector that represents object's coordinates,
- *is passed onto Translate Widget
+ *@property {IntersectionManagerRef} intersectionManagerRef - reference to the intersectionManager.
  */
-const Translater = forwardRef(({ raycaster, ...props }, ref) => {
+const Translater = forwardRef(({ raycaster,intersectionManagerRef, ...props }, ref) => {
   Translater.displayName = "Translater";
   const meshRef = useRef(null);
   let selectedPositionMapRef = useRef(null);
@@ -102,6 +97,21 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
     setDragging(true);
   };
 
+  const testSelectedIntersection = (displacement) => {
+    let output = false;
+    for(let i = 0; i < selectedList.length;i++) {
+      const obb = selectedList[i].userData.obbRef.current;
+      obb.center = selectedPositionMapRef.current.get(selectedList[i]).clone().add(displacement);
+    }
+    if(intersectionManagerRef.current.testIntersectionDrag()) {
+      output = true;
+    }
+    for(let i = 0; i < selectedList.length; i ++) {
+      const obb = selectedList[i].userData.obbRef.current;
+      obb.center = selectedList[i].position;
+    }
+    return output;
+  }
   /**
     *updates the position of multiple selected objects based on widget displacement.
     *@param {THREE.Vector3()} displacement - amount the widget's new position differs 
@@ -109,7 +119,6 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
     Used to add update all meshes based on that displacement
     */
   const updateSelectedObjects = (displacement) => {
-    tempDisplacement = displacement.toArray();
     for (let i = 0; i < selectedList.length; i++) {
       selectedList[i].position.copy(
         selectedPositionMapRef.current
@@ -118,6 +127,7 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
           .add(displacement)
       );
     }
+    tempDisplacement = displacement.toArray();
   };
 
 
@@ -153,10 +163,18 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
       );
     }
 
-    object.position.copy(newPosition);
-    updatePosition();
+    //test whether object intersects before moving
+
+    
     const displacement = newPosition.clone().sub(initialPosition);
-    updateSelectedObjects(displacement);
+
+    if (!testSelectedIntersection(displacement)) {
+      updateSelectedObjects(displacement);
+      
+      object.position.copy(newPosition);
+      updatePosition();
+    }
+    
   };
   /**
    * sets isDragging to false.
