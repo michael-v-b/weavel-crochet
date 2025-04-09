@@ -5,10 +5,9 @@ import {
   useState,
   useRef,
 } from "react";
-import { DoubleSide,Box3 } from "three";
+import { DoubleSide} from "three";
 import {OBB} from "three/addons/math/OBB.js";
 import OBBDebug from "./OBBDebug";
-import useStore from "../../DevTools/store";
 import {Vector3} from "three";
 
 
@@ -35,6 +34,8 @@ const SelectableMesh = forwardRef(
     const [colorIndex, setColorIndex] = useState(1);
     const idNumber = id;
 
+    const [obbDebugColor, setOBBDebugColor] = useState("green");
+
 
   
 
@@ -60,7 +61,7 @@ const SelectableMesh = forwardRef(
     //change for draggability
     return (
       <>
-      <OBBDebug obbRef = {obbRef} boxDim = {boxDim}  />
+      <OBBDebug obbRef = {obbRef} obbDebugColor = {obbDebugColor}  boxDim = {boxDim}  />
       <mesh
         ref={ref}
         userData={{
@@ -69,6 +70,7 @@ const SelectableMesh = forwardRef(
           setSelected,
           colorIndex,
           setColorIndex,
+          setOBBDebugColor,
           cellRef,
           obbRef,
           meshType: meshType,

@@ -25,7 +25,7 @@ import useStore from "../../DevTools/store";
  * @property {[string]} colorList - a list of colors available in project
  * @returns {Node} - a list of corresponding mesh components according to the meshes list.
  */
-const MeshSpawner = forwardRef(( {...props},ref) => {
+const MeshSpawner = forwardRef(( _,ref) => {
   MeshSpawner.displayName = "MeshSpawner";
   const [meshes, setMeshes] = useState([]); //used to rerender list once completed
   const [action, setAction] = useState([["create"], []]);
@@ -130,7 +130,6 @@ const MeshSpawner = forwardRef(( {...props},ref) => {
       setAction(["create", []]);
       setUndoList([...undoList]);
     }
-    console.log("create meshes");
     setMeshes([...meshes, ...tempMeshes]);
     return meshRefs;
   };

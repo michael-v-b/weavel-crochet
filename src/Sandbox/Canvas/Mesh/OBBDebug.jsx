@@ -1,7 +1,8 @@
 import {forwardRef,useState} from 'react';
 import {useFrame} from "@react-three/fiber";
 
-const OBBDebug = forwardRef(({obbRef},ref) => {
+const OBBDebug = forwardRef(({obbRef,obbDebugColor},ref) => {
+    
     OBBDebug.displayName = "OBB Debug";
     const [debugPos, setDebugPos] = useState([0,1,0]);
     const debug = true;
@@ -16,7 +17,7 @@ const OBBDebug = forwardRef(({obbRef},ref) => {
 
     return <mesh ref = {ref} position = {debugPos}>
         <boxGeometry args = {[2,2,2]}/>
-        <meshBasicMaterial color = "green" wireframe = {debug}/>
+        <meshBasicMaterial color = {obbDebugColor} wireframe = {debug}/>
     </mesh>
 
 });

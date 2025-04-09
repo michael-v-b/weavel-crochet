@@ -27,7 +27,7 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
   let tempDisplacement = [0, 0, 0];
   const { camera, gl } = useThree();
   const [axisLock, setAxisLock] = useState("none");
-  const [isDragging, setDragging] = useState(false);
+  //const [isDragging, setDragging] = useState(false);
   const [initialPosition, setInitialPosition] = useState(new Vector3());
   const [plane, setPlane] = useState(new Vector3());
   const [offset, setOffset] = useState(new Vector3());
@@ -42,6 +42,8 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
   const tool = useStore((state) => state.tool);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
+  const isDragging = useStore((state)=>state.isDragging);
+  const setDragging = useStore((state)=>state.setDragging);
 
   /**
    * makes selected axis when new ray is cast.
@@ -181,7 +183,7 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
    * updates event listeners depending on whether the object is being dragged.
    */
   useEffect(() => {
-    if (isDragging) {
+    if (isDragging && tool == "translate") {
       gl.domElement.addEventListener("pointermove", handleDrag);
       gl.domElement.addEventListener("pointerup", handleDrop);
     }

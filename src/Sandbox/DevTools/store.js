@@ -5,12 +5,14 @@ const tempCircum = 30;
 
 //used for state management
 const useStore = create((set) => ({
+  //constants
   OBJECT_LIMIT: 25,
   DEF_CIRCUM: tempCircum,
   DEF_HEIGHT: Math.ceil(tempCircum/(Math.PI)),
 
   //CONVERTS convert real values to in game values.
   //x(1/36) + 1/6
+  //export
   circum_radius_convert: (x) => {return (x/36 + (1/6))},
   height_convert: (x) => {return (x/(tempCircum/(2*Math.PI)))},
 
@@ -23,6 +25,7 @@ const useStore = create((set) => ({
   meshLoading: true,
   setMeshLoading: (newMeshLoading) => set({ meshLoading: newMeshLoading }),
 
+  //project file
   projectFile: null,
   setProjectFile: (newProjectFile) => set({ projectFile: newProjectFile }),
 
@@ -34,6 +37,10 @@ const useStore = create((set) => ({
 
   tool: "none",
   setTool: (newTool) => set({ tool: newTool }),
+
+  isDragging: false,
+  setDragging: (newDragging) => set({isDragging: newDragging}),
+  
   isFocused: false,
   setFocused: (newFocused) => set({ isFocused: newFocused }),
 
@@ -44,6 +51,7 @@ const useStore = create((set) => ({
         typeof newKeys === "function" ? newKeys(state.keysPressed) : newKeys,
     })),
 
+  //meshes
   selectedMeshes: [],
   setSelectedMeshes: (newSelectedList) =>
     set({ selectedMeshes: newSelectedList }),
@@ -52,6 +60,7 @@ const useStore = create((set) => ({
   setMeshList: (newMeshList) => set({ meshList: newMeshList }),
 
 
+  //tranasformations
   colorList: ["#ff0000"],
   setColorList: (newColorList) => set({ colorList: newColorList }),
 
@@ -93,6 +102,7 @@ const useStore = create((set) => ({
       };
     }),
 
+    //history
   undoList: [],
   setUndoList: (newUndo) => set({ undoList: newUndo, redoList: [] }),
   resetUndoList: (newUndo) => set({ undoList: newUndo }),

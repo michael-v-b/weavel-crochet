@@ -2,8 +2,6 @@ import ToolButton from "../Buttons/ToolButton";
 import {
   useRef,
   useEffect,
-  forwardRef,
-  useImperativeHandle,
 } from "react";
 import useStore from "../../DevTools/store";
 
@@ -18,7 +16,6 @@ import useStore from "../../DevTools/store";
 const TransformWindow = () => {
   const translateButton = useRef(null);
   const rotateButton = useRef(null);
-  const scaleButton = useRef(null);
   const toolButtonList = [translateButton, rotateButton];
   const toolKey = ["translate", "rotate"];
 

@@ -25,6 +25,8 @@ const Rotater = forwardRef((_ , ref) => {
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
   const setCurrentRotation = useStore((state)=>state.setCurrentRotation);
+  const isDragging = useStore((state)=>state.isDragging);
+  const setDragging = useStore((state)=>state.setDragging)
 
 
   let totalAngle = 0;
@@ -35,13 +37,15 @@ const Rotater = forwardRef((_ , ref) => {
   const [vertAxis, setVertAxis] = useState("x");
   const [sensitivity, setSensitivity] = useState(1);
   const [axisVector, setAxisVector] = useState(new Vector3(0, 0, 0));
-  const [isDragging,setDragging] = useState(false);
+  //const [isDragging,setDragging] = useState(false);
 
   const prevMouse = useRef({ x: 0, y: 0 });
   const [widgetPosition, setWidgetPosition] = useState(
     new Vector3(avgPosition[0], avgPosition[1], avgPosition[2])
   );
   const groupDampening = 1.5;
+
+  
 
   /**
    *sets the axis based on which part of widget is selected.
@@ -198,7 +202,7 @@ const Rotater = forwardRef((_ , ref) => {
    *isDragging is changed.
    */
   useEffect(() => {
-    if (isDragging) {
+    if (isDragging && tool == "rotate") {
       gl.domElement.addEventListener("pointermove", handleDrag);
       gl.domElement.addEventListener("pointerup", handleDrop);
     }
@@ -206,7 +210,7 @@ const Rotater = forwardRef((_ , ref) => {
       gl.domElement.removeEventListener("pointermove", handleDrag);
       gl.domElement.removeEventListener("pointerup", handleDrop);
     };
-  }, [isDragging]);
+  }, [isDragging,tool]);
 
   useImperativeHandle(ref, () => ({
     handleRay,
