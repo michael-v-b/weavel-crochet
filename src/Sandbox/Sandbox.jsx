@@ -64,6 +64,7 @@ const Sandbox = () => {
       .upload(path, jsonBlob, { upsert: true });
   };
 
+  //affects loading window
   useEffect(() => {
     setNameLoading(true);
     setMeshLoading(true);
@@ -72,7 +73,6 @@ const Sandbox = () => {
 
   //updates file when change occurs but only if projectId is correct.
   useEffect(() => {
-
     const currentURL = location.pathname;
     const idIndex = currentURL.indexOf("sandbox/");
     const tempId = currentURL.substring(idIndex + "sandbox/".length);

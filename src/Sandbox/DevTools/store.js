@@ -14,8 +14,6 @@ const useStore = create((set) => ({
   circum_radius_convert: (x) => {return (x/36 + (1/6))},
   height_convert: (x) => {return (x/(tempCircum/(2*Math.PI)))},
 
-  draggingNum: 1,
-  setDraggingNum: (newDragging) =>set({draggingNum:newDragging}),
 
   projectName: "",
   setProjectName: (newName) => set({ projectName: newName }),
@@ -36,7 +34,6 @@ const useStore = create((set) => ({
 
   tool: "none",
   setTool: (newTool) => set({ tool: newTool }),
-
   isFocused: false,
   setFocused: (newFocused) => set({ isFocused: newFocused }),
 

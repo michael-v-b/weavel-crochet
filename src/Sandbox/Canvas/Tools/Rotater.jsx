@@ -15,7 +15,7 @@ import useStore from "../../DevTools/store";
  *@property {Raycaster} raycaster - raycaster object used to handle mouse position.
  *@returns {RotateWidget}
  */
-const Rotater = forwardRef(({ _ }, ref) => {
+const Rotater = forwardRef((_ , ref) => {
   Rotater.displayName = "Rotater";
   const selectedList = useStore((state) => state.selectedMeshes);
   const avgPosition = useStore((state) => state.avgPosition);
@@ -31,12 +31,11 @@ const Rotater = forwardRef(({ _ }, ref) => {
   const { camera, gl } = useThree();
   const [action, setAction] = useState(["rotate"]);
 
-  const [isDragging, setDragging] = useState(false);
-
   const [rotationAxis, setAxis] = useState("x");
   const [vertAxis, setVertAxis] = useState("x");
   const [sensitivity, setSensitivity] = useState(1);
   const [axisVector, setAxisVector] = useState(new Vector3(0, 0, 0));
+  const [isDragging,setDragging] = useState(false);
 
   const prevMouse = useRef({ x: 0, y: 0 });
   const [widgetPosition, setWidgetPosition] = useState(

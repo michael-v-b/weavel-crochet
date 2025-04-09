@@ -10,7 +10,7 @@ import useStore from "../../../DevTools/store";
  */
 const RotateWidget = forwardRef(({ ...props }, ref) => {
   RotateWidget.displayName = "Rotate Widget";
-  const selectedMeshes = useStore((state)=>state.selectedMeshes);
+  const meshList = useStore((state)=>state.meshList);
   const [key,setKey] = useState(1);
   const { camera } = useThree();
   const widgetRef = useRef(null);
@@ -31,7 +31,7 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
   //rerender widget on changed selection
   useEffect(()=>{
     setKey(key*-1);
-  },[selectedMeshes]);
+  },[meshList]);
 
   useImperativeHandle(ref, () => ({ widgetRef }));
   return (

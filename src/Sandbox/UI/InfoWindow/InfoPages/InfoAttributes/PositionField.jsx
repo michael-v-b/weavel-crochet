@@ -80,6 +80,7 @@ const PositionField = ({ object }) => {
     setNewPosition([...newPosition]);
   }, [avgPosition]);
 
+
   return (
     <>
       <div className=" attribute attribute-name"> Position: </div>

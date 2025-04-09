@@ -42,15 +42,7 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
       );
       const RING_HEIGHT =
         i != segments ? height_convert((height/2))-radius : -((height_convert(height/2)));
-      if(i == 0 ) {
-      console.log("10 in game is " + height_convert(10));
-      console.log("5 in game is " + height_convert(5));
-      console.log("radius is " + radius);
-      console.log("RING_HEIGHT is: " + RING_HEIGHT);
-      console.log("cos phi" + Math.cos(phi))
-      console.log("phi: " + phi);
-      console.log("y: " + (Math.cos(phi)*radius + RING_HEIGHT));
-      }
+
       //creates full horizontal circle
       for (let j = 0; j < segments + 1; j++) {
         if (j < segments) {

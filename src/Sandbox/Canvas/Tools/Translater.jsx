@@ -1,5 +1,5 @@
 import TranslateWidget from "./Widgets/TranslateWidget";
-import React, {
+import {
   forwardRef,
   useEffect,
   useImperativeHandle,
@@ -25,7 +25,7 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
   const meshRef = useRef(null);
   let selectedPositionMapRef = useRef(null);
   let tempDisplacement = [0, 0, 0];
-  const { camera, scene, gl } = useThree();
+  const { camera, gl } = useThree();
   const [axisLock, setAxisLock] = useState("none");
   const [isDragging, setDragging] = useState(false);
   const [initialPosition, setInitialPosition] = useState(new Vector3());
@@ -117,6 +117,8 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
       );
     }
   };
+
+
 
   /**
    *changes the object's position based on mouse position while object is being dragged.

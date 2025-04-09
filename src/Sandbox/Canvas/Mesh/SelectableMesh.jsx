@@ -27,7 +27,6 @@ const SelectableMesh = forwardRef(
   ) => {
     SelectableMesh.displayName = "Selectable Mesh";
     
-    const keysPressed = useStore((state)=>state.keysPressed);
 
     const [selected, setSelected] = useState(false);
     const [outlineWeight, setOutlineWeight] = useState(0);
@@ -35,21 +34,19 @@ const SelectableMesh = forwardRef(
     const obbRef = useRef(null);
     const [colorIndex, setColorIndex] = useState(1);
     const idNumber = id;
+
+
   
 
-
+    /**
+     * Initializes ObbRef
+     */
     useEffect(()=>{
       if(!ref.current){
         return;
       }
-      
-      console.log("boxDim: " + boxDim);
-      console.dir(boxDim);
       const obb = new OBB(ref.current.position,new Vector3().fromArray(boxDim));
       obbRef.current = obb;
-      console.log("obbRef");
-      console.dir(obbRef);
-
     },[])
 
     /**

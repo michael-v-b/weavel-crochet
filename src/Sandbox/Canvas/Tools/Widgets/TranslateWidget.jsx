@@ -13,7 +13,7 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
   TranslateWidget.displayName = "Translate Widget";
   const lineSize = 0.2;
   const [key,setKey] = useState(-1);
-  const selectedMeshes = useStore((state)=>state.selectedMeshes);
+  const meshList = useStore((state)=>state.meshList);
   const { camera } = useThree();
 
   /**
@@ -31,7 +31,7 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
   //rerenders widget on selection
   useEffect(()=>{
     setKey(key*-1);
-  },[selectedMeshes])
+  },[meshList])
 
 
   return (
