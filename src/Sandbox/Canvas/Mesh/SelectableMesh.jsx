@@ -5,9 +5,10 @@ import {
   useState,
   useRef,
 } from "react";
-import { DoubleSide,Box3,Vector3} from "three";
+import { DoubleSide, BufferGeometry, Box3,Vector3} from "three";
 import {useFrame} from "@react-three/fiber";
 import BVH from "./BVH";
+import {computeBoundsTree} from "three-mesh-bvh";
 
 
 /**
@@ -36,6 +37,18 @@ const SelectableMesh = forwardRef(
     
     const idNumber = id;
 
+    BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
+
+    useFrame(()=>{
+
+      if(ref.current) {
+        const geo = ref.current.geometry;
+        geo.computeBoundsTree()
+      }
+      
+
+    })
+
 
     /**
      * update outline weight of mesh when selected.
@@ -48,7 +61,7 @@ const SelectableMesh = forwardRef(
     //change for draggability
     return (
       <>
-      <BVH ref = {bvhRef} meshRef = {ref}/>
+      {/*<BVH ref = {bvhRef} meshRef = {ref}/>*/}
       <mesh
         ref={ref}
         userData={{

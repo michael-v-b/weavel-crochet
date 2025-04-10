@@ -57,13 +57,11 @@ const RayCaster = forwardRef((_, ref) => {
     // objects in layer 2 are meshes.
     // objects in layer 3 are widgets.
     if (intersections.length > 0) {
-      console.dir(intersections);
       //for each mesh intersected add it to meshList or widgetList depending on layer
       intersections.map((intersection, index) => {
         const object = intersection.object;
         
         if (object.layer == 2 && !meshList.includes(object)) {
-          console.log("object: " + object.name + " found");
           meshList.push(object);
         } else if (object.layer == 3 && !widgetList.includes(object)) {
           widgetList.push(object);

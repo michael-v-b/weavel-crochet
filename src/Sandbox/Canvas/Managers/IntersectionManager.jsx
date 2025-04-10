@@ -16,21 +16,22 @@ const IntersectionManager = forwardRef((_,ref) => {
     
   
     
+  
     const testIntersections = () => {
         for(let i = 0; i< selectedMeshes.length;i++) {
             const selectedMesh = selectedMeshes[i];
-            const aData = selectedMesh.userData;
-
             for(let j = 0; j < nonSelectedMeshes.length; j++) {
                 const nonSelectedMesh = nonSelectedMeshes[j];
-                const bData = nonSelectedMesh.userData;
-                if ( aData.bvhRef.current.testIntersection(bData.bvhRef.current)) {
-                    console.log("intersects");
-                    return;
+                const bTree = nonSelectedMesh.geometry.boundsTree;
+                const intersects  = bTree.intersectsGeometry( selectedMesh.geometry,selectedMesh.matrixWorld);
+                if(intersects) {
+                    return true;
                 }
             }
         }
+        return false;
     }
+
     
     useFrame(()=>{
         testIntersections();
