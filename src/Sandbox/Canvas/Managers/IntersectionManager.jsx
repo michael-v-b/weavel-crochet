@@ -15,36 +15,27 @@ const IntersectionManager = forwardRef((_,ref) => {
     const [nonSelectedMeshes,setNonSelected] = useState(meshList);
     
   
-
     
-    
-    const testIntersectionDrag =() => {
-        for(let i = 0; i < selectedMeshes.length;i++) {
+    const testIntersections = () => {
+        for(let i = 0; i< selectedMeshes.length;i++) {
             const selectedMesh = selectedMeshes[i];
-            
-            const obbA = selectedMesh.userData.obbRef.current;
             const aData = selectedMesh.userData;
 
-            for(let j = 0 ;j < nonSelectedMeshes.length; j++) {
+            for(let j = 0; j < nonSelectedMeshes.length; j++) {
                 const nonSelectedMesh = nonSelectedMeshes[j];
-                
                 const bData = nonSelectedMesh.userData;
-                const obbB = bData.obbRef.current;
-                if(obbA.intersectsOBB(obbB)) {
-                    console.log("intersects and returns true");
-                    aData.setOBBDebugColor('red');
-                    bData.setOBBDebugColor('red');
-                    return true;
-                
-                } else {
-                    aData.setOBBDebugColor('green');
-                    bData.setOBBDebugColor('green');
+                if ( aData.bvhRef.current.testIntersection(bData.bvhRef.current)) {
+                    console.log("intersects");
+                    return;
                 }
-            };
-        };
-        console.log("returns false");
-        return false;
+            }
+        }
     }
+    
+    useFrame(()=>{
+        testIntersections();
+    })
+
 
 
     //sets all non selected objects when selected meshes changes
@@ -65,7 +56,7 @@ const IntersectionManager = forwardRef((_,ref) => {
         }
     })*/
 
-    useImperativeHandle(ref,()=>({testIntersectionDrag}));
+    useImperativeHandle(ref,()=>({}));
 
 
 

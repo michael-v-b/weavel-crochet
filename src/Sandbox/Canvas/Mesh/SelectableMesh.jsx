@@ -5,10 +5,9 @@ import {
   useState,
   useRef,
 } from "react";
-import { DoubleSide} from "three";
-import {OBB} from "three/addons/math/OBB.js";
-import OBBDebug from "./OBBDebug";
-import {Vector3} from "three";
+import { DoubleSide,Box3,Vector3} from "three";
+import {useFrame} from "@react-three/fiber";
+import BVH from "./BVH";
 
 
 /**
@@ -21,7 +20,7 @@ import {Vector3} from "three";
  */
 const SelectableMesh = forwardRef(
   (
-    { id, colorList,  boxDim, meshType, meshData,  children, hierarchyRef, materialProps, ...props },
+    { id, colorList,  meshType, meshData,  children, hierarchyRef, materialProps, ...props },
     ref
   ) => {
     SelectableMesh.displayName = "Selectable Mesh";
@@ -29,27 +28,14 @@ const SelectableMesh = forwardRef(
 
     const [selected, setSelected] = useState(false);
     const [outlineWeight, setOutlineWeight] = useState(0);
-    const cellRef = useRef(hierarchyRef);
-    const obbRef = useRef(null);
+
     const [colorIndex, setColorIndex] = useState(1);
+    const bvhRef = useRef(null);
+    const cellRef = useRef(hierarchyRef);
+ 
+    
     const idNumber = id;
 
-    const [obbDebugColor, setOBBDebugColor] = useState("green");
-
-    /**
-     * Initializes ObbRef/changes when boxDim changes
-     */
-    useEffect(()=>{
-      if(!ref.current){
-        return;
-      }
-      if(!obbRef.current) {
-        const obb = new OBB(ref.current.position,new Vector3().fromArray(boxDim));
-        obbRef.current = obb;
-      } else {
-        obbRef.current.halfSize = new Vector3().fromArray(boxDim);
-      }
-    },[boxDim])
 
     /**
      * update outline weight of mesh when selected.
@@ -58,11 +44,11 @@ const SelectableMesh = forwardRef(
     useEffect(() => {
       setOutlineWeight(selected ? 5 : 0);
     }, [selected]);
-
+  
     //change for draggability
     return (
       <>
-      <OBBDebug obbRef = {obbRef} obbDebugColor = {obbDebugColor}  />
+      <BVH ref = {bvhRef} meshRef = {ref}/>
       <mesh
         ref={ref}
         userData={{
@@ -71,21 +57,16 @@ const SelectableMesh = forwardRef(
           setSelected,
           colorIndex,
           setColorIndex,
-          setOBBDebugColor,
           cellRef,
-          obbRef,
           meshType: meshType,
           meshData,
+          bvhRef,
         }}
         {...props}
         layer={2}
       >
-
-        {/**bounding box*/}
-        
-    
-      
         {children}
+       
         <meshStandardMaterial
           color={colorList[colorIndex - 1]}
           roughness={1}

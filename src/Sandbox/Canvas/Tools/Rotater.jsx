@@ -89,10 +89,6 @@ const Rotater = forwardRef(({intersectionManagerRef}, ref) => {
 
     //change object's angle
     object.quaternion.premultiply(quaternion);
-    const tempMatrix4 = new Matrix4().makeRotationFromQuaternion(object.quaternion);
-    const rotationMatrix3 = new Matrix3().setFromMatrix4(tempMatrix4);
-
-    object.userData.obbRef.current.rotation = rotationMatrix3;
     setCurrentRotation(object.rotation.toArray())
   };
 

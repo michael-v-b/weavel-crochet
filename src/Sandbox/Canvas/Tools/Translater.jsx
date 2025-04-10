@@ -97,21 +97,7 @@ const Translater = forwardRef(({ raycaster,intersectionManagerRef, ...props }, r
     setDragging(true);
   };
 
-  const testSelectedIntersection = (displacement) => {
-    let output = false;
-    for(let i = 0; i < selectedList.length;i++) {
-      const obb = selectedList[i].userData.obbRef.current;
-      obb.center = selectedPositionMapRef.current.get(selectedList[i]).clone().add(displacement);
-    }
-    if(intersectionManagerRef.current.testIntersectionDrag()) {
-      output = true;
-    }
-    for(let i = 0; i < selectedList.length; i ++) {
-      const obb = selectedList[i].userData.obbRef.current;
-      obb.center = selectedList[i].position;
-    }
-    return output;
-  }
+ 
   /**
     *updates the position of multiple selected objects based on widget displacement.
     *@param {THREE.Vector3()} displacement - amount the widget's new position differs 
@@ -168,12 +154,12 @@ const Translater = forwardRef(({ raycaster,intersectionManagerRef, ...props }, r
     
     const displacement = newPosition.clone().sub(initialPosition);
 
-    if (!testSelectedIntersection(displacement)) {
-      updateSelectedObjects(displacement);
+  
+    updateSelectedObjects(displacement);
       
-      object.position.copy(newPosition);
-      updatePosition();
-    }
+    object.position.copy(newPosition);
+    updatePosition();
+    
     
   };
   /**
