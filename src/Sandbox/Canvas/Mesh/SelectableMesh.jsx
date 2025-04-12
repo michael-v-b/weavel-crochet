@@ -1,15 +1,9 @@
 import { Outlines } from "@react-three/drei";
-import {
-  forwardRef,
-  useEffect,
-  useState,
-  useRef,
-} from "react";
-import { DoubleSide, BufferGeometry, Box3,Vector3} from "three";
-import {useFrame} from "@react-three/fiber";
+import { forwardRef, useEffect, useState, useRef } from "react";
+import { DoubleSide, BufferGeometry, Box3, Vector3 } from "three";
+import { useFrame } from "@react-three/fiber";
 import BVH from "./BVH";
-import {computeBoundsTree} from "three-mesh-bvh";
-
+import { computeBoundsTree } from "three-mesh-bvh";
 
 /**
  *@typedef {SelectableMesh} - creates a mesh that can be selected or deselected.
@@ -21,11 +15,19 @@ import {computeBoundsTree} from "three-mesh-bvh";
  */
 const SelectableMesh = forwardRef(
   (
-    { id, colorList,  meshType, meshData,  children, hierarchyRef, materialProps, ...props },
+    {
+      id,
+      colorList,
+      meshType,
+      meshData,
+      children,
+      hierarchyRef,
+      materialProps,
+      ...props
+    },
     ref
   ) => {
     SelectableMesh.displayName = "Selectable Mesh";
-    
 
     const [selected, setSelected] = useState(false);
     const [outlineWeight, setOutlineWeight] = useState(0);
@@ -33,22 +35,17 @@ const SelectableMesh = forwardRef(
     const [colorIndex, setColorIndex] = useState(1);
     const bvhRef = useRef(null);
     const cellRef = useRef(hierarchyRef);
- 
-    
+
     const idNumber = id;
 
     BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
 
-    useFrame(()=>{
-
-      if(ref.current) {
+    useFrame(() => {
+      if (ref.current) {
         const geo = ref.current.geometry;
-        geo.computeBoundsTree()
+        geo.computeBoundsTree(geo);
       }
-      
-
-    })
-
+    });
 
     /**
      * update outline weight of mesh when selected.
@@ -57,37 +54,37 @@ const SelectableMesh = forwardRef(
     useEffect(() => {
       setOutlineWeight(selected ? 5 : 0);
     }, [selected]);
-  
+
     //change for draggability
     return (
       <>
-      {/*<BVH ref = {bvhRef} meshRef = {ref}/>*/}
-      <mesh
-        ref={ref}
-        userData={{
-          idNumber,
-          selected,
-          setSelected,
-          colorIndex,
-          setColorIndex,
-          cellRef,
-          meshType: meshType,
-          meshData,
-          bvhRef,
-        }}
-        {...props}
-        layer={2}
-      >
-        {children}
-       
-        <meshStandardMaterial
-          color={colorList[colorIndex - 1]}
-          roughness={1}
-          {...materialProps}
-          side={DoubleSide}
-        />
-        {selected && <Outlines thickness={outlineWeight} color="#ff8800" />}
-      </mesh>
+        {/*<BVH ref = {bvhRef} meshRef = {ref}/>*/}
+        <mesh
+          ref={ref}
+          userData={{
+            idNumber,
+            selected,
+            setSelected,
+            colorIndex,
+            setColorIndex,
+            cellRef,
+            meshType: meshType,
+            meshData,
+            bvhRef,
+          }}
+          {...props}
+          layer={2}
+        >
+          {children}
+
+          <meshStandardMaterial
+            color={colorList[colorIndex - 1]}
+            roughness={1}
+            {...materialProps}
+            side={DoubleSide}
+          />
+          {selected && <Outlines thickness={outlineWeight} color="#ff8800" />}
+        </mesh>
       </>
     );
   }
