@@ -2,7 +2,7 @@ import { Outlines } from "@react-three/drei";
 import { forwardRef, useEffect, useState, useRef } from "react";
 import { DoubleSide, BufferGeometry, Box3, Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
-import BVH from "./BVH";
+import VisualMesh from "./VisualMesh";
 import { computeBoundsTree } from "three-mesh-bvh";
 
 /**
@@ -17,6 +17,7 @@ const SelectableMesh = forwardRef(
   (
     {
       id,
+      updateList,
       colorList,
       meshType,
       meshData,
@@ -34,9 +35,11 @@ const SelectableMesh = forwardRef(
 
     const [colorIndex, setColorIndex] = useState(1);
     const bvhRef = useRef(null);
+    const hitboxRef = useRef(null)
     const cellRef = useRef(hierarchyRef);
 
     const idNumber = id;
+
 
     BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
 
@@ -55,10 +58,13 @@ const SelectableMesh = forwardRef(
       setOutlineWeight(selected ? 5 : 0);
     }, [selected]);
 
+
+
     //change for draggability
     return (
       <>
         {/*<BVH ref = {bvhRef} meshRef = {ref}/>*/}
+        <VisualMesh hitboxRef = {ref}/>
         <mesh
           ref={ref}
           userData={{
@@ -79,6 +85,7 @@ const SelectableMesh = forwardRef(
 
           <meshStandardMaterial
             color={colorList[colorIndex - 1]}
+            wireframe = {true}
             roughness={1}
             {...materialProps}
             side={DoubleSide}

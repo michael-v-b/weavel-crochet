@@ -38,7 +38,7 @@ const IntersectionManager = forwardRef((_, ref) => {
   };
 
   useFrame(() => {
-    testIntersections();
+    //testIntersections();
   });
 
   //sets all non selected objects when selected meshes changes

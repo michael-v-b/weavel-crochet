@@ -23,6 +23,8 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
   const [radius, setRadius] = useState(1);
   const [open, setOpen] = useState(true);
 
+  const updateList = [open,radius,height];
+
   useEffect(() => {
     if(!meshLoading){
       const newMesh = projectFile.meshes[id];
@@ -38,6 +40,7 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       id={id}
       meshType="cylinder"
+      updateList = {updateList}
       boxDim = {[radius,height_convert(height/2),radius]}
       meshData={{
         open,

@@ -1,4 +1,4 @@
-import { useState, forwardRef, useEffect } from "react";
+import { useState, forwardRef, useEffect,useRef } from "react";
 import SelectableMesh from "../SelectableMesh";
 import useStore from "../../../DevTools/store";
 
@@ -16,6 +16,9 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
 
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
+  const updateList = [radius];
+
+  const ballGeoRef = useRef(null);
 
   useEffect(() => {
     // makes sure circum doesn't reset if loading
@@ -27,17 +30,25 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
     }
   }, []);
 
+
+
+
+
   return (
+    <>
+    
     <SelectableMesh
       meshType="ball"
       boxDim = {[radius,radius,radius]}
       ref={ref}
+      updateList = {updateList}
       meshData={{ radius, setRadius, circum, setCircum, attributeList }}
       id={id}
       {...props}
     >
-      <sphereGeometry args={[radius, 10, 10]} />
+      <sphereGeometry ref = {ballGeoRef} args={[radius, 10, 10]} />
     </SelectableMesh>
+    </>
   );
 });
 
