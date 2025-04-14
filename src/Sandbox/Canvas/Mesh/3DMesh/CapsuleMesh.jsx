@@ -20,6 +20,8 @@ const CapsuleMesh = forwardRef(({ id, ...props }, ref) => {
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
 
+  const dependencyList = [height,radius];
+
   useEffect(() => {
 
     if(!meshLoading) {
@@ -35,6 +37,7 @@ const CapsuleMesh = forwardRef(({ id, ...props }, ref) => {
   return (
     <SelectableMesh
       meshType="capsule"
+      dependencyList=  {dependencyList}
       boxDim = {[radius,height_convert(height/2),radius]}
       meshData={{
         height,

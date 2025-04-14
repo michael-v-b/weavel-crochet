@@ -14,6 +14,8 @@ const ChainMesh = forwardRef(({ id, ...props }, ref) => {
   const line = 0.125;
   const [height, setHeight] = useState(DEF_HEIGHT);
 
+  const dependencyList = [height];
+
   useEffect(() => {
     if(meshLoading) {
       const newMesh = projectFile.meshes[id];
@@ -27,6 +29,7 @@ const ChainMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       id={id}
       ref={ref}
+      dependencyList = {dependencyList}
       boxDim= {[line,height_convert(height/2),line]}
       meshType="chain"
       meshData={{ height, setHeight, attributeList }}

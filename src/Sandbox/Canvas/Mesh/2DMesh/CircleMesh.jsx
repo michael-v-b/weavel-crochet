@@ -15,6 +15,8 @@ const CircleMesh = forwardRef(({ id, ...props }, ref) => {
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
 
+  const dependencyList = [radius];
+
   useEffect(() => {
     if(!meshLoading) {
       const newMesh = projectFile.meshes[id];
@@ -27,6 +29,7 @@ const CircleMesh = forwardRef(({ id, ...props }, ref) => {
   return (
     <SelectableMesh
       id={id}
+      dependencyList = {dependencyList}
       meshType="circle"
       boxDim = {[radius,0.125/2,radius]}
       meshData={{ radius, setRadius, circum, setCircum, attributeList }}

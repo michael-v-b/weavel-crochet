@@ -22,6 +22,8 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
   const [circum, setCircum] = useState(DEF_CIRCUM);
   const [radius, setRadius] = useState(circum_radius_convert(DEF_CIRCUM));
 
+  const dependencyList = [radius,height];
+
 
 
   const inRange = (a, length, bottom) => {
@@ -94,6 +96,7 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       ref={ref}
       meshType="silo"
+      dependencyList = {dependencyList}
       boxDim = {[radius,height_convert(height/2),radius]}
       meshData={{
         height,

@@ -8,6 +8,7 @@ import useStore from "../../../DevTools/store";
 const BoxMesh = forwardRef(({ id, ...props }, ref) => {
   BoxMesh.displayName = "Box Mesh";
   const attributeList = ["dim"];
+  
   const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
   const height_convert = useStore((state)=>state.height_convert);
   const meshLoading = useStore((state)=>state.meshLoading);
@@ -17,6 +18,9 @@ const BoxMesh = forwardRef(({ id, ...props }, ref) => {
   const [zDim, setZ] = useState(DEF_HEIGHT);
 
   const [linked, setLinked] = useState(false);
+
+  const dependencyList = [xDim,yDim,zDim];
+
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
 
@@ -33,6 +37,7 @@ const BoxMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       meshType="box"
       boxDim = {[height_convert(xDim/2),height_convert(yDim/2),height_convert(zDim/2)]}
+      dependencyList = {dependencyList}
       meshData={{
         xDim,
         yDim,

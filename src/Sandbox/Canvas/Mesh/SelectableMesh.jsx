@@ -17,7 +17,7 @@ const SelectableMesh = forwardRef(
   (
     {
       id,
-      updateList,
+      dependencyList,
       colorList,
       meshType,
       meshData,
@@ -35,7 +35,6 @@ const SelectableMesh = forwardRef(
 
     const [colorIndex, setColorIndex] = useState(1);
     const bvhRef = useRef(null);
-    const hitboxRef = useRef(null)
     const cellRef = useRef(hierarchyRef);
 
     const idNumber = id;
@@ -64,7 +63,7 @@ const SelectableMesh = forwardRef(
     return (
       <>
         {/*<BVH ref = {bvhRef} meshRef = {ref}/>*/}
-        <VisualMesh hitboxRef = {ref}/>
+        <VisualMesh hitboxRef = {ref} dependencyList = {dependencyList} colorIndex = {colorIndex}/>
         <mesh
           ref={ref}
           userData={{
@@ -83,12 +82,8 @@ const SelectableMesh = forwardRef(
         >
           {children}
 
-          <meshStandardMaterial
-            color={colorList[colorIndex - 1]}
-            wireframe = {true}
-            roughness={1}
-            {...materialProps}
-            side={DoubleSide}
+          <meshBasicMaterial
+            visible = {false}
           />
           {selected && <Outlines thickness={outlineWeight} color="#ff8800" />}
         </mesh>

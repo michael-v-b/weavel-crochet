@@ -21,6 +21,7 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
   const [circum, setCircum] = useState(DEF_CIRCUM);
   const [height, setHeight] = useState(DEF_HEIGHT);
   const [open, setOpen] = useState(true);
+  const dependencyList = [open,height,radius];
 
   useEffect(() => {
     if(!meshLoading) {
@@ -37,6 +38,7 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       meshType="cone"
       id={id}
+      dependencyList = {dependencyList}
       boxDim = {[radius,height_convert(height/2),radius]}
       meshData={{
         open,

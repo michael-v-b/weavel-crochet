@@ -23,7 +23,7 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
   const [radius, setRadius] = useState(1);
   const [open, setOpen] = useState(true);
 
-  const updateList = [open,radius,height];
+  const dependencyList = [open,radius,height];
 
   useEffect(() => {
     if(!meshLoading){
@@ -40,7 +40,7 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       id={id}
       meshType="cylinder"
-      updateList = {updateList}
+      dependencyList = {dependencyList}
       boxDim = {[radius,height_convert(height/2),radius]}
       meshData={{
         open,

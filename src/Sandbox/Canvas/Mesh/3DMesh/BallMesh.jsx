@@ -16,7 +16,7 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
 
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
-  const updateList = [radius];
+  const dependencyList = [radius];
 
   const ballGeoRef = useRef(null);
 
@@ -41,7 +41,7 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
       meshType="ball"
       boxDim = {[radius,radius,radius]}
       ref={ref}
-      updateList = {updateList}
+      dependencyList = {dependencyList}
       meshData={{ radius, setRadius, circum, setCircum, attributeList }}
       id={id}
       {...props}

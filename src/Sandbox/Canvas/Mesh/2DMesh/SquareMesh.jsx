@@ -19,6 +19,7 @@ const SquareMesh = forwardRef(({ id, ...props }, ref) => {
   const [xDim, setX] = useState(DEF_HEIGHT);
   const [yDim, setY] = useState(DEF_HEIGHT);
   const [linked, setLinked] = useState(false);
+  const dependencyList = [xDim,yDim];
 
   useEffect(() => {
     if(meshLoading) {
@@ -32,6 +33,7 @@ const SquareMesh = forwardRef(({ id, ...props }, ref) => {
   return (
     <SelectableMesh
       id={id}
+      dependencyList = {dependencyList}
       meshType="square"
       boxDim = {[height_convert(xDim/2),height_convert(yDim/2),0.125/2]}
       meshData={{ xDim, setX, yDim, setY, linked, setLinked, attributeList }}

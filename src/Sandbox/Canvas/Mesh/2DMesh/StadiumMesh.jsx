@@ -19,6 +19,8 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
   const attributeList = ["height"];
   const half = (segments - 2) / 2;
   const [height, setHeight] = useState(DEF_HEIGHT);
+
+  const dependencyList = [height];
   const FRONT_OFFSET = segments + 2;
   const DEPTH_OFFSET = 0.125;
 
@@ -113,6 +115,7 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
     <SelectableMesh
       id={id}
       ref={ref}
+      dependencyList = {dependencyList}
       boxDim = {[1,height_convert((height+2)/2),DEPTH_OFFSET/2]}
       meshType="stadium"
       meshData={{ height, setHeight, attributeList }}
