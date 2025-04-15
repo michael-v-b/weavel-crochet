@@ -2,7 +2,7 @@ import { Outlines } from "@react-three/drei";
 import { forwardRef, useEffect, useState, useRef } from "react";
 import { DoubleSide, BufferGeometry, Box3, Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
-import VisualMesh from "./VisualMesh";
+import MeshVisuals from "./MeshVisuals";
 import { computeBoundsTree } from "three-mesh-bvh";
 
 /**
@@ -11,7 +11,7 @@ import { computeBoundsTree } from "three-mesh-bvh";
  *@property {Set} meshData - custom data assigned by each different mesh type.
  *@property {Component} children - used to add child components of the different mesh types.
  *@property {string} color - color of the object.
- * @returns {Component} - SelectableMesh component.
+ * @returns {Component} - SelectableMesh component, this acts as hitbox, visual component is in VisualMesh.
  */
 const SelectableMesh = forwardRef(
   (
@@ -23,6 +23,7 @@ const SelectableMesh = forwardRef(
       meshData,
       children,
       hierarchyRef,
+      intersectionManagerRef,
       materialProps,
       ...props
     },
@@ -35,6 +36,7 @@ const SelectableMesh = forwardRef(
 
     const [colorIndex, setColorIndex] = useState(1);
     const bvhRef = useRef(null);
+    const visualRef = useRef(null);
     const cellRef = useRef(hierarchyRef);
 
     const idNumber = id;
@@ -63,10 +65,11 @@ const SelectableMesh = forwardRef(
     return (
       <>
         {/*<BVH ref = {bvhRef} meshRef = {ref}/>*/}
-        <VisualMesh hitboxRef = {ref} dependencyList = {dependencyList} colorIndex = {colorIndex}/>
+        <MeshVisuals ref = {visualRef} hitboxRef = {ref} dependencyList = {dependencyList} colorIndex = {colorIndex}/>
         <mesh
           ref={ref}
           userData={{
+            visualRef,
             idNumber,
             selected,
             setSelected,

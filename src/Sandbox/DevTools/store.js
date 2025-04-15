@@ -40,6 +40,9 @@ const useStore = create((set) => ({
 
   isDragging: false,
   setDragging: (newDragging) => set({isDragging: newDragging}),
+
+  isIntersecting: false,
+  setIntersecting: (newIntersecting) => set({isIntersecting:newIntersecting}),
   
   isFocused: false,
   setFocused: (newFocused) => set({ isFocused: newFocused }),

@@ -1,23 +1,23 @@
 
 
-import {useRef,useEffect,useState} from "react";
+import {useRef,useEffect,useState,forwardRef} from "react";
 import {useFrame} from "@react-three/fiber";
 import useStore from "../../DevTools/store";
 import {DoubleSide} from "three";
 
-const VisualMesh = ({hitboxRef,dependencyList,colorIndex}) => {
+const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
+    MeshVisuals.displayName = "Mesh Visuals";
     const colorList = useStore((state)=>state.colorList);
+    const isIntersecting = useStore((state)=>state.isIntersecting);
+    const selectedList = useStore((state)=>state.selectedList);
+    const meshList = useStore((state)=>state.meshList);
     const [geo,setGeo] = useState();
-    const ref = useRef(null);
 
 
     const rerender = () => {
         setGeo(hitboxRef.current.geometry);
     }
 
-    useEffect(()=>{
-        console.log("geo");
-    },[geo]);
 
     useEffect(()=>{
         rerender();
@@ -29,11 +29,8 @@ const VisualMesh = ({hitboxRef,dependencyList,colorIndex}) => {
         }
     },[ref.current]);
 
-    useEffect(()=>{
-        console.log("ref");
-        console.dir(ref);
-    },[]);
 
+ 
     useFrame(()=>{
         if(ref?.current && hitboxRef?.current) {
             
@@ -41,15 +38,14 @@ const VisualMesh = ({hitboxRef,dependencyList,colorIndex}) => {
             const hitbox = hitboxRef.current;
 
             //standard syncs
-            if(!visualMesh.position.equals(hitbox.position)) {
-                console.log("position updated");
-                visualMesh.position.copy(hitbox.position);
+            if(!isIntersecting) {
+                if(!visualMesh.position.equals(hitbox.position)) {
+                    visualMesh.position.copy(hitbox.position);
+                }
+                if(!visualMesh.rotation.equals(hitbox.rotation)) {
+                    visualMesh.rotation.copy(hitbox.rotation);
+                }
             }
-            if(!visualMesh.rotation.equals(hitbox.rotation)) {
-                visualMesh.rotation.copy(hitbox.rotation);
-            }
-
-            //specific mesh syncs
 
         }
     });
@@ -60,6 +56,6 @@ const VisualMesh = ({hitboxRef,dependencyList,colorIndex}) => {
         <meshStandardMaterial roughness = {1} color = {colorList[colorIndex-1]} side = {DoubleSide}/>
         </mesh>
 
-}
+});
 
-export default VisualMesh;
+export default MeshVisuals;

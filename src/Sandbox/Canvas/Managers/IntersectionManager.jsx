@@ -9,6 +9,7 @@ const IntersectionManager = forwardRef((_, ref) => {
   const selectedMeshes = useStore((state) => state.selectedMeshes);
   const avgPosition = useStore((state) => state.avgPosition);
   const isDragging = useStore((state) => state.isDragging);
+  const setIntersecting = useStore((state)=>state.setIntersecting);
 
   const [nonSelectedMeshes, setNonSelected] = useState(meshList);
 
@@ -29,16 +30,17 @@ const IntersectionManager = forwardRef((_, ref) => {
           matrix
         );
         if (intersects) {
-          console.log("intersects");
+          setIntersecting(true);
           return true;
         }
       }
     }
+    setIntersecting(false);
     return false;
   };
 
   useFrame(() => {
-    //testIntersections();
+    testIntersections();
   });
 
   //sets all non selected objects when selected meshes changes

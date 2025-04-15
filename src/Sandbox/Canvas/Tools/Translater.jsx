@@ -15,7 +15,7 @@ import useStore from "../../DevTools/store";
  *@property {Raycaster} raycaster - raycaster object, used mainly for intersectPlane function.
  *@property {IntersectionManagerRef} intersectionManagerRef - reference to the intersectionManager.
  */
-const Translater = forwardRef(({ raycaster,intersectionManagerRef, ...props }, ref) => {
+const Translater = forwardRef(({ raycaster, ...props }, ref) => {
   Translater.displayName = "Translater";
   const meshRef = useRef(null);
   let selectedPositionMapRef = useRef(null);

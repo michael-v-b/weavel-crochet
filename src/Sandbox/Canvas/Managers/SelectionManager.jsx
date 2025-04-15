@@ -26,9 +26,19 @@ const SelectionManager = forwardRef(( _,ref) => {
    */
   const clearSelectedList = () => {
     for (let i = 0; i < selectedList.length; i++) {
-      selectedList[i].userData.setSelected(false);
+      console.log("selectedList["+i+"]");
+      console.dir(selectedList[i]);
+      const selectedMesh = selectedList[i];
+      const selectedData = selectedMesh.userData;
+      const selectedVisual = selectedData.visualRef.current;
 
-      selectedList[i].userData.cellRef.current.setPressed(false);
+      //align visual with hitbox
+      selectedMesh.position.copy(selectedVisual.position);
+      selectedMesh.rotation.copy(selectedVisual.rotation);
+
+      //deselect
+      selectedData.setSelected(false);
+      selectedData.cellRef.current.setPressed(false);
     }
     tempSelectedList = [];
     setSelectedMeshes(tempSelectedList);
