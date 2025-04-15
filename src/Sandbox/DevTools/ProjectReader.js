@@ -22,7 +22,7 @@ import { useNavigate} from "react-router";
  * ID
  */
 
-const ProjectReader = forwardRef(({ meshSpawnerRef }, ref) => {
+const ProjectReader = forwardRef(({ meshSpawnerRef, cameraTrackerRef }, ref) => {
   ProjectReader.displayName = "ProjectReader";
   let readProject = useRef(false);
   let numFinished = 0;
@@ -105,6 +105,10 @@ const ProjectReader = forwardRef(({ meshSpawnerRef }, ref) => {
     setProjectId(tempId);
     setProjectFile(project);
     setColorList(project.colorList);
+    if(cameraTrackerRef?.current) {
+      cameraTrackerRef.current.setCameraPosition(project.cameraPosition);
+      cameraTrackerRef.current.setCameraRotation(project.cameraRotation);
+    }
 
     //runs infinite loop until meshSpawner.current is
     const checkCurrent = () => {

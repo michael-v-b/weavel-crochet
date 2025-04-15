@@ -1,8 +1,5 @@
-import React, {
+import  {
   useEffect,
-  useState,
-  forwardRef,
-  useImperativeHandle,
 } from "react";
 
 import useStore from "./store";
@@ -10,9 +7,7 @@ import useStore from "./store";
 /**
  *@typedef {Object} KeyTracker - keeps track of which keys are pressed throughout entire project
  */
-const KeyTracker = forwardRef(({ ...props }, ref) => {
-  KeyTracker.displayName = "KeyTracker";
-  const keysPressed = useStore((state) => state.keysPressed);
+const KeyTracker = () => {
   const setKeysPressed = useStore((state) => state.setKeysPressed);
 
   /**
@@ -56,6 +51,6 @@ const KeyTracker = forwardRef(({ ...props }, ref) => {
       window.removeEventListener("keyup", handleKeyUp);
     };
   },[]);
-});
+};
 
 export default KeyTracker;

@@ -16,7 +16,6 @@ const useStore = create((set) => ({
   circum_radius_convert: (x) => {return (x/36 + (1/6))},
   height_convert: (x) => {return (x/(tempCircum/(2*Math.PI)))},
 
-
   projectName: "",
   setProjectName: (newName) => set({ projectName: newName }),
   nameLoading: true,
@@ -61,7 +60,6 @@ const useStore = create((set) => ({
 
   meshList: [],
   setMeshList: (newMeshList) => set({ meshList: newMeshList }),
-
 
   //tranasformations
   colorList: ["#ff0000"],

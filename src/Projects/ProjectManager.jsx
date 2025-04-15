@@ -50,6 +50,9 @@ const ProjectManager = forwardRef((_, ref) => {
     const jsonData = {
       colorList: ["#ff0000"],
       meshes: {},
+      cameraPosition: [0,0,5],
+      cameraRotation: [0,0,0],
+      
     };
 
     const jsonBlob = new Blob([JSON.stringify(jsonData)], {

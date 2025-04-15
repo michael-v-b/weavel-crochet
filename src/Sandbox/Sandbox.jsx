@@ -34,6 +34,7 @@ const Sandbox = () => {
   const hierarchyRef = useRef(null);
   const exporterRef = useRef(null);
   const historyRef = useRef(null);
+  const cameraTrackerRef = useRef(null);
   const projectReaderRef = useRef(null);
   const auth = useGlobalStore((state) => state.auth);
   const authData = useGlobalStore((state) => state.authData);
@@ -73,6 +74,13 @@ const Sandbox = () => {
 
   //updates file when change occurs but only if projectId is correct.
   useEffect(() => {
+
+    //update camera first prevents having to do this every frame
+    if(cameraTrackerRef?.current) {
+      projectFile.cameraPosition = cameraTrackerRef.current.getCameraPosition();
+      projectFile.cameraRotation = cameraTrackerRef.current.getCameraRotation();
+    }
+
     const currentURL = location.pathname;
     const idIndex = currentURL.indexOf("sandbox/");
     const tempId = currentURL.substring(idIndex + "sandbox/".length);
@@ -86,7 +94,7 @@ const Sandbox = () => {
       <div className="webpage">
         <LoadScreen visible={meshLoading || nameLoading} />
 
-        <ProjectReader ref={projectReaderRef} meshSpawnerRef={meshSpawnerRef} />
+        <ProjectReader ref={projectReaderRef} cameraTrackerRef = {cameraTrackerRef} meshSpawnerRef={meshSpawnerRef} />
         <Banner />
         <AuthTester reroute = {"/"} />
         <NameTag />
@@ -106,6 +114,7 @@ const Sandbox = () => {
               historyRef={historyRef}
               selectionManagerRef={selectionManagerRef}
               meshSpawnerRef={meshSpawnerRef}
+              cameraTrackerRef = {cameraTrackerRef}
             />
           </div>
           <div className="right-window">

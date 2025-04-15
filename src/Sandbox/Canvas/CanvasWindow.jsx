@@ -1,5 +1,6 @@
 import { Canvas } from "@react-three/fiber";
-import { CameraControls } from "@react-three/drei";
+import { CameraControls} from "@react-three/drei";
+import CameraTracker from "./Managers/CameraTracker";
 
 import MeshSpawner from "./Managers/MeshSpawner";
 import RayCaster from "./Managers/RayCaster";
@@ -25,11 +26,13 @@ const CanvasWindow = forwardRef(
       historyRef,
       selectionManagerRef,
       meshSpawnerRef,
+      cameraTrackerRef,
       children,
     },
     ref
   ) => {
 
+    
     CanvasWindow.displayName = "Canvas Window";
     const mode = useStore((state) => state.mode);
     const isFocused = useStore((state)=>state.isFocused);
@@ -42,13 +45,13 @@ const CanvasWindow = forwardRef(
     const deleterRef = useRef(null);
     const rotaterRef = useRef(null);
 
+   
+
     /**
      * when mouseDown cast ray with raycaster and update selections.
      * Disabled during Camera mode.
      *@param {Event} event - used for pointer position in raycaster.
      */
-
-  
     const handleRay = (event) => {
       if (
         mode != "camera" &&
@@ -150,6 +153,8 @@ const CanvasWindow = forwardRef(
           meshSpawnerRef={meshSpawnerRef}
         />
         {children}
+
+        <CameraTracker ref = {cameraTrackerRef}/>
         {mode == "camera" && <CameraControls />}
       </Canvas>
     );
