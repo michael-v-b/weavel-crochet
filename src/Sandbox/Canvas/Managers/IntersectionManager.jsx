@@ -7,8 +7,6 @@ const IntersectionManager = forwardRef((_, ref) => {
   IntersectionManager.displayName = "IntersectionManager";
   const meshList = useStore((state) => state.meshList);
   const selectedMeshes = useStore((state) => state.selectedMeshes);
-  const avgPosition = useStore((state) => state.avgPosition);
-  const isDragging = useStore((state) => state.isDragging);
   const setIntersecting = useStore((state)=>state.setIntersecting);
 
   const [nonSelectedMeshes, setNonSelected] = useState(meshList);

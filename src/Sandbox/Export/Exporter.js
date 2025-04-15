@@ -7,7 +7,7 @@ import ConePattern from "./ConePattern";
 import CapsulePattern from "./CapsulePattern";
 import ChainPattern from "./ChainPattern";
 import SiloPattern from "./SiloPattern";
-import React, { forwardRef, useImperativeHandle } from "react";
+import { forwardRef, useImperativeHandle } from "react";
 import { jsPDF } from "jspdf";
 import useStore from "../DevTools/store";
 import banner from "../../assets/banner.png";
@@ -21,7 +21,7 @@ import banner from "../../assets/banner.png";
  * - silo
  * - chain
  */
-const Exporter = forwardRef(({ ...props }, ref) => {
+const Exporter = forwardRef((_, ref) => {
   Exporter.displayName = "Exporter";
   const colorList = useStore((state) => state.colorList);
   const meshList = useStore((state) => state.meshList);
@@ -181,7 +181,7 @@ const Exporter = forwardRef(({ ...props }, ref) => {
 
     //doc.text("Sew all pieces together",row);
 
-    doc.save("weavel-project");
+    doc.save(projectName + " pattern");
   };
 
   useImperativeHandle(ref, () => ({ exportPDF }));

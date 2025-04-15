@@ -42,7 +42,7 @@ const Rotater = forwardRef(({intersectionManagerRef}, ref) => {
   const [widgetPosition, setWidgetPosition] = useState(
     new Vector3(avgPosition[0], avgPosition[1], avgPosition[2])
   );
-  const groupDampening = 1.5;
+  const groupDampening = 1;
 
   
 

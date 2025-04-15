@@ -37,11 +37,13 @@ const RotationField = ({ object }) => {
   const handleBlur = () => {
     const tempRotation = [0, 0, 0];
     for (let i = 0; i < tempRotation.length; i++) {
-      tempRotation[i] = parseFloat(newRotation[i])
+      const degree = parseFloat(newRotation[i])
         .toFixed(2)
         .replace(/[.,]00$/, "");
-      if (isNaN(tempRotation[i])) {
+      if (isNaN(degree)) {
         tempRotation[i] = 0;
+      } else {
+        tempRotation[i] = (degree/360) * 2* Math.PI
       }
     }
     
@@ -62,12 +64,17 @@ const RotationField = ({ object }) => {
     if (!isFocused) {
       const tempRotation = object.rotation.toArray();
       for (let i = 0; i < tempRotation.length; i++) {
-        tempRotation[i] = parseFloat(tempRotation[i])
+        
+        const radian = parseFloat(tempRotation[i])
           .toFixed(2)
           .replace(/[.,]00$/, "");
-        if (isNaN(tempRotation[i])) {
+
+        if (isNaN(radian)) {
           tempRotation[i] = 0;
+        } else {
+          tempRotation[i] = (radian/(2*Math.PI))*360
         }
+        
       }
       setNewRotation(tempRotation);
     }

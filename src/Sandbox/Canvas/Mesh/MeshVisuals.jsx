@@ -9,8 +9,6 @@ const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
     MeshVisuals.displayName = "Mesh Visuals";
     const colorList = useStore((state)=>state.colorList);
     const isIntersecting = useStore((state)=>state.isIntersecting);
-    const selectedList = useStore((state)=>state.selectedList);
-    const meshList = useStore((state)=>state.meshList);
     const [geo,setGeo] = useState();
 
 
