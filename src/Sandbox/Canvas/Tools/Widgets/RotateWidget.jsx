@@ -1,4 +1,5 @@
 import IRing from "../../Mesh/InteractiveMeshes/IRing";
+import IBall from "../../Mesh/InteractiveMeshes/IBall";
 import { forwardRef, useRef, useImperativeHandle, useEffect,useState} from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import useStore from "../../../DevTools/store";
@@ -13,6 +14,9 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
   const meshList = useStore((state)=>state.meshList);
   const [key,setKey] = useState(1);
   const { camera } = useThree();
+  const [xPos,setXPos] = useState([0,0,2]);
+  const [yPos,setYPos] = useState([2,0,0]);
+  const [zPos,setZPos] = useState([0,2,0]);
   const widgetRef = useRef(null);
   const lineWidth = 0.05;
 
@@ -33,10 +37,15 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
     setKey(key*-1);
   },[meshList]);
 
-  useImperativeHandle(ref, () => ({ widgetRef }));
+
+
+  useImperativeHandle(ref, () => ({ widgetRef,setXPos,setYPos,setZPos }));
   return (
     <>
       <mesh ref={widgetRef} key = {key} {...props}>
+        {
+          //X RING
+        }
         <IRing
           lineWidth={lineWidth}
           meshProps={{
@@ -51,11 +60,28 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
             opacity: 0,
           }}
         />
+        <IBall 
+      
+        dim ={0.33}
+        meshProps ={{position: xPos,userData: {axis:"x"},layer: 3}}
+        materialProps = {{depthTest:false,color:"#FF0000"}}/>
+
+        {
+          //Z AXIS
+        }
+
         <IRing
           lineWidth={lineWidth}
           meshProps={{ layer: 3, userData: { axis: "z" } }}
           materialProps={{ color: "#0000FF", depthTest: false }}
         />
+        <IBall dim = {0.33} meshProps = {{position: zPos, layer:3,userData:{axis:"z"}}} materialProps = {{color:"#0000FF",depthTest:false}}/>
+
+        {
+          //Y AXIS
+        }
+
+        <IBall dim = {0.33} meshProps = {{position: yPos, layer:3, userData: {axis:"y"}}} materialProps = {{color:"#00FF00",depthTest:false}}/>
         <IRing
           lineWidth={lineWidth}
           meshProps={{
