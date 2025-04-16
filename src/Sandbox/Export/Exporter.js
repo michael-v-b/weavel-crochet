@@ -79,6 +79,24 @@ const Exporter = forwardRef((_, ref) => {
     }
   };
 
+  const addStitchKey = (doc) => {
+    const stitch_key_text = [
+      "-sc: single crochet",
+      "-ch: chain",
+      "-inc: increase",
+      "-dec: decrease",
+    ];
+    doc.text("Stitch Key: ", 10, row);
+    for (let i = 0; i < stitch_key_text.length; i++) {
+      addRow(10, doc);
+      doc.text(
+        stitch_key_text[i],
+        10,
+        row
+      );
+    }
+  }
+
   /**
    *Adds a banner to the top of the page.
    *@param {Document} doc - the document whose banner is being added
@@ -139,7 +157,18 @@ const Exporter = forwardRef((_, ref) => {
 
     addColorKey(doc);
 
-    addRow(20, doc);
+    addRow(10,doc);
+    
+    doc.setDrawColor(120, 165, 206);
+    doc.line(10, row, pageWidth - 10, row);
+
+    addRow(10,doc);
+
+    addStitchKey(doc);
+    
+    
+    addRow(10, doc);
+
     //iterate through every mesh and its mesh pattern to the list.
     for (let i = 0; i < meshList.length; i++) {
       let stringList = [];

@@ -22,7 +22,7 @@ const SquarePattern = (input) => {
   const intro = "Round 1: chain " + (x + 1) + ". (" + x + ")";
   output.push(intro);
 
-  const body = "Round 2-" + y + " sc " + x + " chain 1, turn over. (" + x + ")";
+  const body = "Round 2-" + (y+1) + " sc " + x + " chain 1, turn over. (" + x + ")";
   output.push(body);
 
   if (fasten) {
