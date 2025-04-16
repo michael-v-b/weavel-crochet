@@ -151,6 +151,31 @@ const Exporter = forwardRef((_, ref) => {
     doc.text(projectName, 20, row);
 
     addRow(20, doc);
+
+    
+    doc.setFontSize(14);
+    
+    doc.setFont("Helvetica", "bold");
+
+    doc.text("Thank you for using the Weavel Pattern Generator to create your custom ",10,row);
+    addRow(10,doc);
+    doc.text("crochet pattern! Simply follow the instructions below to create each piece, then",10,row);
+    addRow(10,doc);
+    doc.text("sew all the pieces together as you had them in your project. ",10,row);
+    addRow(10,doc);
+    doc.text("If you have any questions, please refer to the color and stitch keys below.",10,row);
+    addRow(10,doc);
+    doc.text("If you don't know how to perform any of these stitches, you can check the",10,row);
+    addRow(10,doc);
+    doc.text("'How to Crochet' page on the website",10,row);
+
+    addRow(10,doc);
+
+    doc.setDrawColor(120, 165, 206);
+    doc.line(10, row, pageWidth - 10, row);
+
+    addRow(10,doc);
+
     doc.setFontSize(16);
     doc.setTextColor(0, 0, 0);
     doc.setFont("Helvetica", "normal");
