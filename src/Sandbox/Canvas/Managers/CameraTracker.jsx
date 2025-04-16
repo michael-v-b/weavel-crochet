@@ -1,6 +1,6 @@
 import {useThree} from "@react-three/fiber";
 import {forwardRef,useImperativeHandle} from 'react';
-import {Vector3,Euler} from 'react';
+import {Vector3,Euler} from 'three';
 
 const CameraTracker = forwardRef((_,ref) => {
     CameraTracker.displayName = "CameraTracker";
@@ -9,11 +9,11 @@ const CameraTracker = forwardRef((_,ref) => {
     const setCameraPosition = (posArray) => {
         console.log("camera");
         console.dir(camera);
-        camera.position = new Vector3.fromArray(posArray);
+        camera.position.copy(new Vector3().fromArray(posArray));
     }
 
     const setCameraRotation =(rotArray) => {
-        camera.rotation = new Euler().fromArray(rotArray);
+        camera.rotation.copy(new Euler().fromArray(rotArray));
 
     }
     const getCameraPosition = () => {
