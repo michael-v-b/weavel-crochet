@@ -184,7 +184,6 @@ const Rotater = forwardRef(({raycaster}, ref) => {
     let newAngle = Math.atan(relativePosition[valueTwo]/relativePosition[valueOne]);
     newAngle = relativePosition[valueOne] < 0 ? angle+Math.PI : angle;
 
-    const
 
     const sideY = 2*Math.sin(newAngle);
     const sideX = 2*Math.cos(newAngle);
