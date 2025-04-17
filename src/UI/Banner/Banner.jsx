@@ -46,7 +46,7 @@ const Banner = () => {
             <motion.div
               className="banner-login"
               whileHover={{ scale: 1.1, backgroundColor: "#e6fbff" }}
-              whileTap={{ scale: 0.1 }}
+              whileTap={{ scale: 1 }}
               onClick={handleRegisterClick}
             >
               Sign Up{" "}
@@ -54,7 +54,7 @@ const Banner = () => {
             <motion.div
               className="banner-login"
               whileHover={{ scale: 1.1, backgroundColor: "#e6fbff" }}
-              whileTap={{ scale: 0.1 }}
+              whileTap={{ scale: 1 }}
               onClick={handleLoginClick}
             >
               Log In{" "}

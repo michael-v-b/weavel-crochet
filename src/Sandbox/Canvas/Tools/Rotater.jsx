@@ -27,9 +27,6 @@ const Rotater = forwardRef(({raycaster}, ref) => {
   const isDragging = useStore((state)=>state.isDragging);
   const setDragging = useStore((state)=>state.setDragging)
 
-  const widgetRef = useRef(null);
-
-
   let totalAngle = 0;
   const { camera, gl } = useThree();
   const [action, setAction] = useState(["rotate"]);
@@ -42,6 +39,8 @@ const Rotater = forwardRef(({raycaster}, ref) => {
 
   const prevMouse = useRef({ x: 0, y: 0 });
   const prevAngle = useRef(0);
+  const widgetRef = useRef(null);
+
   const [widgetPosition, setWidgetPosition] = useState(
     new Vector3(avgPosition[0], avgPosition[1], avgPosition[2])
   );
@@ -201,12 +200,17 @@ const Rotater = forwardRef(({raycaster}, ref) => {
       widgetRef.current.setZPos(tempPos);
 
     }
+
+    const angleDiff = newAngle - prevAngle.current;
+
+    prevAngle.current = newAngle;
+
     
 
 
     rotateGroup(
       selectedList,
-      newAngle * groupDampening,
+      angleDiff,
       rotationAxis,
       axisVector,
       widgetPosition
