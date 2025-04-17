@@ -40,6 +40,7 @@ const ModeButton = forwardRef(function ModeButton(
     borderRadius: "5px",
     borderColor: "#FBBA17",
     borderStyle: "solid",
+    fontSize:"1.7vh",
   };
   return (
     <MotionButton

@@ -23,7 +23,7 @@ const ColorButton = ({
   const [swatchColor, setColor] = useState(colorList[id - 1]);
   const colorCard = {
     backgroundColor: swatchColor ? swatchColor : "#FF0000",
-    height: "20px",
+    height: "2.5vh",
     width: "100%",
     marginBottom: "2%",
     borderRadius: "3px",

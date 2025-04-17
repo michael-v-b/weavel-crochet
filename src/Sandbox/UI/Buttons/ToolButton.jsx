@@ -33,6 +33,7 @@ const ToolButton = forwardRef(function ToolButton({ children, ...props }, ref) {
     borderRadius: "5px",
     borderColor: "#6fbeff",
     borderStyle: "solid",
+    fontSize:"2vh",
   };
   return (
     <MotionButton

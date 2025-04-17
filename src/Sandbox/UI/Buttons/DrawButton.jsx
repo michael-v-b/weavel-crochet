@@ -1,10 +1,5 @@
 import MotionButton from "./MotionButton";
 import "./buttons.css";
-import React, {
-  useState,
-  forwardRef,
-  useImperativeHandle,
-} from "react";
 
 /**
  * @typedef {DrawButton} - button type for adding shapes to scene

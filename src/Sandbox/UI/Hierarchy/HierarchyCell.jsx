@@ -67,6 +67,8 @@ const HierarchyCell = forwardRef(
 
           marginBottom: "3px",
           paddingLeft: "10px",
+
+          fontSize:"2.3vh",
           
         }}
         whileHover={{

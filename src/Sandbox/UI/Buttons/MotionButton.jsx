@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
-import React, { useState, forwardRef, useImperativeHandle } from "react";
 
 /**
  * @typedef {MotionButton} - a button that will grow and shrink when the mouse hovers over it.
  * @property {Component} children - allows for components with parent-child relationships.
  */
-const MotionButton = forwardRef(
-  ({ hasBorder = true, borderColor, children, ...props }, ref) => {
+const MotionButton = 
+  ({ hasBorder = true, borderColor, children, ...props }) => {
+
+    MotionButton.displayName = "Motion Button";
     return (
       <motion.button
         className="motion-button"
@@ -25,6 +26,5 @@ const MotionButton = forwardRef(
         {children}
       </motion.button>
     );
-  }
-);
+  };
 export default MotionButton;
