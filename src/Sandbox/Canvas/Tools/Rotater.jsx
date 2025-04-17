@@ -6,7 +6,7 @@ import {
   useState,
   useRef,
 } from "react";
-import { Vector3, Quaternion,Matrix3,Matrix4 } from "three";
+import { Vector3, Quaternion,Plane} from "three";
 import { useThree} from "@react-three/fiber";
 import useStore from "../../DevTools/store";
 
@@ -14,7 +14,7 @@ import useStore from "../../DevTools/store";
  *@typedef {Rotater} - Tool that rotates all selected objects when clicked on by mouse.
  *@returns {RotateWidget}
  */
-const Rotater = forwardRef(({intersectionManagerRef}, ref) => {
+const Rotater = forwardRef(({raycaster}, ref) => {
   Rotater.displayName = "Rotater";
   const selectedList = useStore((state) => state.selectedMeshes);
   const avgPosition = useStore((state) => state.avgPosition);
@@ -26,6 +26,8 @@ const Rotater = forwardRef(({intersectionManagerRef}, ref) => {
   const setCurrentRotation = useStore((state)=>state.setCurrentRotation);
   const isDragging = useStore((state)=>state.isDragging);
   const setDragging = useStore((state)=>state.setDragging)
+
+  const widgetRef = useRef(null);
 
 
   let totalAngle = 0;
@@ -39,6 +41,7 @@ const Rotater = forwardRef(({intersectionManagerRef}, ref) => {
   //const [isDragging,setDragging] = useState(false);
 
   const prevMouse = useRef({ x: 0, y: 0 });
+  const prevAngle = useRef(0);
   const [widgetPosition, setWidgetPosition] = useState(
     new Vector3(avgPosition[0], avgPosition[1], avgPosition[2])
   );
@@ -52,6 +55,7 @@ const Rotater = forwardRef(({intersectionManagerRef}, ref) => {
    *@param {[Meshes]} meshList - a list of all widget meshes intersecting with ray.
    */
   const handleRay = (meshList) => {
+
     const ringValue = Math.round(Math.abs(Math.cos(camera.rotation.z)));
     const tempAxis = meshList[0].userData.axis;
     if (ringValue == 1) {
@@ -152,7 +156,7 @@ const Rotater = forwardRef(({intersectionManagerRef}, ref) => {
    *@param (Event) event - used for mouse location.
    */
   const handleDrag = (event) => {
-    //get difference in mouse x and y
+    /*//get difference in mouse x and y
     const deltaX = event.clientX - prevMouse.current.x;
     const deltaY = event.clientY - prevMouse.current.y;
 
@@ -162,12 +166,48 @@ const Rotater = forwardRef(({intersectionManagerRef}, ref) => {
     //set angle based on mouse movement
     const angle =
       rotationAxis == vertAxis ? deltaY * sensitivity : deltaX * sensitivity;
-    totalAngle += angle * 1.5;
+    totalAngle += angle * 1.5;*/
+
+    const tempPlanePosition = new Vector3().fromArray(avgPosition);
+    const rotatePlane = new Plane(axisVector,-tempPlanePosition.dot(axisVector));
+    const mousePosition = raycaster.current.castRayPlane(rotatePlane,event);
+    const relativePosition = mousePosition.sub(tempPlanePosition).toArray();
+
+  
+
+    //get automatic x and y
+    const axisIndex = rotationAxis.charCodeAt(0) - "x".charCodeAt(0);
+    const valueOne = (axisIndex + 1) % 3;
+    const valueTwo = (axisIndex + 2) % 3;
+
+    //set angle based on automatic x and y
+    let newAngle = Math.atan(relativePosition[valueTwo]/relativePosition[valueOne]);
+    newAngle = relativePosition[valueOne] < 0 ? angle+Math.PI : angle;
+
+    const
+
+    const sideY = 2*Math.sin(newAngle);
+    const sideX = 2*Math.cos(newAngle);
+
+    //used for bal placement
+    const tempPos = [0,0,0];
+    tempPos[valueOne] = sideX;
+    tempPos[valueTwo] = sideY;
+
+    if(rotationAxis == 'x') {
+      widgetRef.current.setXPos(tempPos);
+    } else if (rotationAxis == 'y') {
+      widgetRef.current.setYPos(tempPos);
+    } else if (rotationAxis == 'z') {
+      widgetRef.current.setZPos(tempPos);
+
+    }
+    
 
 
     rotateGroup(
       selectedList,
-      angle * groupDampening,
+      newAngle * groupDampening,
       rotationAxis,
       axisVector,
       widgetPosition
@@ -222,7 +262,7 @@ const Rotater = forwardRef(({intersectionManagerRef}, ref) => {
   return (
     <>
       {selectedList.length > 0 && tool == "rotate" && (
-        <RotateWidget position={avgPosition} />
+        <RotateWidget ref = {widgetRef} position={avgPosition} />
       )}
     </>
   );
