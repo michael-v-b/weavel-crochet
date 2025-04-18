@@ -57,11 +57,20 @@ const ConePattern = (object) => {
 
     stitchCount -= order[i];
 
-    const extraScString =
-      rowRemain == 0
-        ? ". (" + stitchCount + ")\n"
-        : ", " + rowRemain + " sc. (" + stitchCount + ")\n";
-    output.push(roundString + scString + dcString + extraScString);
+    const extraScString = rowRemain == 0 ? "" : ", " + rowRemain + " sc";
+
+    const transition = !objectData.open && i == 0 ? " in back loops." : "";
+
+    output.push(
+      roundString +
+        scString +
+        dcString +
+        extraScString +
+        transition +
+        ". (" +
+        stitchCount +
+        ")\n"
+    );
   }
   output.push("Fasten off.\n");
   return output;

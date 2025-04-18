@@ -8,7 +8,7 @@
   border-color: #6fbeff;
   border-style: solid;
   border-radius: 5px;
-  font-size:2vh;
+  font-size: 2vh;
 }
 
 .color-button-container-style {
@@ -33,7 +33,7 @@
 
   border-radius: 5px;
   border-width: 0px;
-  font-size:1.7vh;
+  font-size: 2vh;
 }
 .color-picker-container {
   position: absolute;
@@ -42,5 +42,5 @@
   overflow: visible;
 }
 .motion-button {
-  user-select:none;
+  user-select: none;
 }

@@ -1,9 +1,5 @@
 import MotionButton from "./MotionButton";
-import React, {
-  useState,
-  forwardRef,
-  useImperativeHandle,
-} from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 /**
  * @typedef {ModeButton} - button sketch type for changing mode to scene.
  * @property {boolean} canPress - will not change background if pressed if set to false.
@@ -40,7 +36,7 @@ const ModeButton = forwardRef(function ModeButton(
     borderRadius: "5px",
     borderColor: "#FBBA17",
     borderStyle: "solid",
-    fontSize:"1.7vh",
+    fontSize: "2vh",
   };
   return (
     <MotionButton

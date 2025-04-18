@@ -1,9 +1,4 @@
-import {
-  useState,
-  useImperativeHandle,
-  forwardRef,
-  useEffect,
-} from "react";
+import { useState, useImperativeHandle, forwardRef, useEffect } from "react";
 import "./Hierarchy.css";
 import { motion } from "framer-motion";
 import { setWireframeOverride } from "@react-three/drei/materials/WireframeMaterial";
@@ -28,7 +23,6 @@ const HierarchyCell = forwardRef(
     const handleClick = () => {
       updateCells(id);
       setSelection(!isPressed);
-      
     };
 
     const setSelection = (selection) => {
@@ -51,10 +45,9 @@ const HierarchyCell = forwardRef(
     return (
       <motion.div
         style={{
-          
-          display:"flex",
-          alignItems:"center",
-          
+          display: "flex",
+          alignItems: "center",
+
           userSelect: "none",
           overflow: "hidden",
           textWrap: "nowrap",
@@ -68,8 +61,7 @@ const HierarchyCell = forwardRef(
           marginBottom: "3px",
           paddingLeft: "10px",
 
-          fontSize:"2.3vh",
-          
+          fontSize: "2.5vh",
         }}
         whileHover={{
           scale: 1.05,

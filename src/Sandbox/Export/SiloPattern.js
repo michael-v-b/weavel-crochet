@@ -15,7 +15,7 @@ const SiloPattern = (input) => {
 
   output.push(
     "Round " +
-      roundNum +
+      (roundNum + 1) +
       "-" +
       height +
       ": sc x " +
