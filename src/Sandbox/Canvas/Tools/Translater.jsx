@@ -37,8 +37,8 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
   const tool = useStore((state) => state.tool);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const isDragging = useStore((state)=>state.isDragging);
-  const setDragging = useStore((state)=>state.setDragging);
+  const isDragging = useStore((state) => state.isDragging);
+  const setDragging = useStore((state) => state.setDragging);
 
   /**
    * makes selected axis when new ray is cast.
@@ -97,7 +97,6 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
     setDragging(true);
   };
 
- 
   /**
     *updates the position of multiple selected objects based on widget displacement.
     *@param {THREE.Vector3()} displacement - amount the widget's new position differs 
@@ -115,8 +114,6 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
     }
     tempDisplacement = displacement.toArray();
   };
-
-
 
   /**
    *changes the object's position based on mouse position while object is being dragged.
@@ -151,16 +148,12 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
 
     //test whether object intersects before moving
 
-    
     const displacement = newPosition.clone().sub(initialPosition);
 
-  
     updateSelectedObjects(displacement);
-      
+
     object.position.copy(newPosition);
     updatePosition();
-    
-    
   };
   /**
    * sets isDragging to false.

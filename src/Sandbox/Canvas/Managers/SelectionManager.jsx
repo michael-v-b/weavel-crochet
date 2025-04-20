@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle} from "react";
+import { forwardRef, useImperativeHandle } from "react";
 
 import useStore from "../../DevTools/store";
 
@@ -6,7 +6,7 @@ import useStore from "../../DevTools/store";
  *@typedef {SelectionManager} manages which objects are selected and updates them on canvas, hierarchy and InfoWindow
  *disables SelectionManager when in camera mode.
  */
-const SelectionManager = forwardRef(( _,ref) => {
+const SelectionManager = forwardRef((_, ref) => {
   SelectionManager.displayName = "SelectionManager";
 
   let widgetList = [];
@@ -18,7 +18,6 @@ const SelectionManager = forwardRef(( _,ref) => {
   const selectedList = useStore((state) => state.selectedMeshes);
   const setSelectedList = useStore((state) => state.setSelectedMeshes);
 
-
   let tempSelectedList = selectedList; //templist so updates can happen immediately, before state is changed
 
   /**
@@ -26,8 +25,6 @@ const SelectionManager = forwardRef(( _,ref) => {
    */
   const clearSelectedList = () => {
     for (let i = 0; i < selectedList.length; i++) {
-      console.log("selectedList["+i+"]");
-      console.dir(selectedList[i]);
       const selectedMesh = selectedList[i];
       const selectedData = selectedMesh.userData;
       const selectedVisual = selectedData.visualRef.current;
@@ -66,7 +63,7 @@ const SelectionManager = forwardRef(( _,ref) => {
       ];
     }
 
-   object.userData.cellRef.current.setPressed(selected);
+    object.userData.cellRef.current.setPressed(selected);
     setSelectedList(tempSelectedList);
   };
 

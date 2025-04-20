@@ -45,14 +45,11 @@ const Register = () => {
    *@param {data} data - The user's data from the supabase.auth table.
    */
   const createProfile = async (data) => {
-    console.dir(data);
     const { error } = await supabase.from("Profiles").insert({
       email: email,
       user_id: data.user.id,
       created_at: data.user.created_at,
     });
-
-    console.log(error);
   };
 
   /**

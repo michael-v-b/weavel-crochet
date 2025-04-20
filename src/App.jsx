@@ -9,21 +9,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
  *@returns {Component} main page of project, contains all of the windows.
  */
 
- //THIS IS A TEST TO SEE IF I CAN EDIT THIS USING THE TEMP VSCODE
+//THIS IS A TEST TO SEE IF I CAN EDIT THIS USING THE TEMP VSCODE
 
 export default function App() {
-  const handleSandboxLeave = () => {
-    console.log("this triggers on leave");
-  };
   return (
     <BrowserRouter>
       <Routes>
         <Route path="" element={<Home />} />
-        <Route
-          path="/sandbox/:info"
-          onLeave={handleSandboxLeave}
-          element={<Sandbox />}
-        />
+        <Route path="/sandbox/:info" element={<Sandbox />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/projects" element={<Projects />} />

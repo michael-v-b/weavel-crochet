@@ -78,7 +78,7 @@ const HierarchyCell = forwardRef(
         onClick={handleClick}
         {...props}
       >
-        {cellName}
+        {objectRef.name}
       </motion.div>
     );
   }

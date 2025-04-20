@@ -16,9 +16,9 @@ const NameField = ({ object }) => {
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
 
-  useEffect(()=>{
+  useEffect(() => {
     setName(object.name);
-  },[object]);
+  }, [object]);
 
   /**
    * Sets internal name property to value in inputField.
@@ -47,15 +47,11 @@ const NameField = ({ object }) => {
     setUndoList(...[undoList]);
     setAction(["name"]);
 
-
     //actually change name
-    console.log("object");
-    console.dir(object);
     object.userData.cellRef.current.setName(name);
     object.name = name;
 
     //update project file
-    console.log("update project file");
     const newMesh = projectFile.meshes[object.userData.idNumber];
     newMesh.name = name;
     setProjectFile({ ...projectFile });
