@@ -1,6 +1,6 @@
 import "../../styles.css";
 import "./ColorWindow.css";
-import ColorButton from "../Buttons/ColorButton";
+import ColorButton from "../Buttons/ColorButton/ColorButton";
 import MotionButton from "../Buttons/MotionButton";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";

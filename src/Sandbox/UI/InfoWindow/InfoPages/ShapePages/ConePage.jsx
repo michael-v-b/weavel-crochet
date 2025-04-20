@@ -17,7 +17,6 @@ const ConePage = ({ object, getFocused }) => {
    * updates the circumference state in order to change the max height.
    */
   const handleCircum = (newCircum) => {
-    console.log("handleCircum: " + newCircum);
     setCurrentCircum(newCircum);
   };
   return (
