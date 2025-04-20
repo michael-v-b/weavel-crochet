@@ -1,5 +1,5 @@
 import "../InfoPages.css";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import useStore from "../../../../DevTools/store";
 
 /**
@@ -8,7 +8,7 @@ import useStore from "../../../../DevTools/store";
  * @property {Mesh} object - object whose circumference is being changed
  * @returns {Component} - div that represents the circumference.
  */
-const CircumferenceField = ({ object }) => {
+const CircumferenceField = ({ object, getCircum }) => {
   const [circum, setCircum] = useState(object.userData.meshData.circum);
   const [action, setAction] = useState(["circum"]);
   const setFocused = useStore((state) => state.setFocused);
@@ -16,12 +16,14 @@ const CircumferenceField = ({ object }) => {
   const setUndoList = useStore((state) => state.setUndoList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const circum_radius_convert = useStore((state)=>state.circum_radius_convert);
+  const circum_radius_convert = useStore(
+    (state) => state.circum_radius_convert
+  );
   const setRadius = object.userData.meshData.setRadius;
 
-  useEffect(()=>{
+  useEffect(() => {
     setCircum(object.userData.meshData.circum);
-  },[object]);
+  }, [object]);
 
   /**
    * When input field is changed, update the circum accordingly
@@ -43,10 +45,13 @@ const CircumferenceField = ({ object }) => {
   const findRadius = () => {
     const roundedCircum = Math.max(6, 6 * Math.floor(circum / 6));
 
+    if (getCircum) {
+      getCircum(roundedCircum);
+    }
+
     setCircum(roundedCircum);
 
     const newRadius = circum_radius_convert(roundedCircum);
-
 
     action.push(object);
     action.push(object.userData.meshData.radius);
@@ -58,6 +63,12 @@ const CircumferenceField = ({ object }) => {
 
     setUndoList([...undoList]);
     setAction(["circum"]);
+
+    //update project file
+    const newMesh = projectFile.meshes[object.userData.idNumber];
+    newMesh.circum = roundedCircum;
+
+    setProjectFile({ ...projectFile });
 
     object.userData.meshData.setCircum(roundedCircum);
 
@@ -75,13 +86,8 @@ const CircumferenceField = ({ object }) => {
    * Set focused stated to false and updates the radius in the scene.
    */
   const handleBlur = () => {
-
     setRadius(findRadius());
-
-    //update project file
-    const newMesh = projectFile.meshes[object.userData.idNumber];
-    newMesh.circum = circum;
-    setProjectFile({ ...projectFile });
+    //updateCircum for cone
 
     setFocused(false);
   };

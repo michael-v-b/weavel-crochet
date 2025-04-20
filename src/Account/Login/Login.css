@@ -21,8 +21,8 @@
   flex-direction: column;
   align-items: center;
 
-  height: 400px;
-  width: 350px; /*hard coded might need to redo*/
+  height: 80vh;
+  width: 60vh; /*hard coded might need to redo*/
 
   background-color: rgb(255, 255, 255);
 
@@ -35,7 +35,7 @@
 /*Text on top of window*/
 .login-request {
   font-family: "Pacifico", "cursive";
-  font-size: 35px;
+  font-size: 6vh;
   color: rgb(255, 219, 18);
   user-select: none;
   text-decoration: underline;
@@ -47,6 +47,7 @@
   border-style: solid;
   border-color: rgb(162, 162, 162);
   margin-bottom: 10%;
+  width: 40vh;
 }
 
 /*Text above input fields*/
@@ -55,7 +56,7 @@
   text-align: center;
   width: 200%;
   font-family: "Nunito", sans-serif;
-  font-size: 25px;
+  font-size: 4vh;
   font-weight: 800;
   color: rgb(113, 215, 233);
   margin-top: 10%;

@@ -5,10 +5,10 @@ import useStore from "../../../../DevTools/store";
 /**
  * @typedef {HeightField} - A field used to edit an object's height.
  * @property {Object} object - object whose height is being edited.
- * @property {Number} maxHeight - The maximum number that the object can have.
+ * @property {Number} cone - is true if object is a cone.
  * @returns {Component} - div with an input field that represents the object's height.
  */
-const HeightField = ({ heightName = "Height", object, maxHeight }) => {
+const HeightField = ({ heightName = "Height", object, currentCircum }) => {
   const [objectData, setObjectData] = useState(object.userData.meshData);
   const [height, setHeight] = useState(objectData.height);
   const [action, setAction] = useState(["height"]);
@@ -17,6 +17,7 @@ const HeightField = ({ heightName = "Height", object, maxHeight }) => {
   const setUndoList = useStore((state) => state.setUndoList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
+  const HEIGHT_PAD = 2;
 
   useEffect(() => {
     setObjectData(object.userData.meshData);
@@ -45,6 +46,18 @@ const HeightField = ({ heightName = "Height", object, maxHeight }) => {
   };
 
   /**
+   * Set height once circum changes
+   */
+
+  useEffect(() => {
+    if (!currentCircum) {
+      return;
+    }
+    let temp = Math.min(currentCircum - HEIGHT_PAD, height);
+    setHeight(temp);
+  }, [currentCircum]);
+
+  /**
    * Updates the object's height when input field is no longer selected and sets focused state to false.
    */
   const handleBlur = () => {
@@ -55,8 +68,8 @@ const HeightField = ({ heightName = "Height", object, maxHeight }) => {
     action.push(temp);
     undoList.push(action);
 
-    if (maxHeight) {
-      temp = Math.min(maxHeight, height);
+    if (currentCircum) {
+      temp = Math.min(currentCircum - HEIGHT_PAD, height);
     }
     temp = Math.max(2, temp);
     objectData.setHeight(temp);

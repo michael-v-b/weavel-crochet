@@ -13,18 +13,19 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
-  const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
-  const height_convert = useStore((state)=>state.height_convert);
-  const meshLoading = useStore((state)=>state.meshLoading);
+  const DEF_HEIGHT = useStore((state) => state.DEF_HEIGHT);
+  const height_convert = useStore((state) => state.height_convert);
+  const meshLoading = useStore((state) => state.meshLoading);
+  const HEIGHT_PAD = 2;
 
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
   const [height, setHeight] = useState(DEF_HEIGHT);
   const [open, setOpen] = useState(true);
-  const dependencyList = [open,height,radius];
+  const dependencyList = [open, height, radius];
 
   useEffect(() => {
-    if(!meshLoading) {
+    if (!meshLoading) {
       const newMesh = projectFile.meshes[id];
       newMesh.attributeList = attributeList;
       newMesh.circum = circum;
@@ -34,12 +35,16 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
     }
   }, []);
 
+  useEffect(() => {
+    setHeight(Math.min(height, circum - HEIGHT_PAD));
+  }, [circum]);
+
   return (
     <SelectableMesh
       meshType="cone"
       id={id}
-      dependencyList = {dependencyList}
-      boxDim = {[radius,height_convert(height/2),radius]}
+      dependencyList={dependencyList}
+      boxDim={[radius, height_convert(height / 2), radius]}
       meshData={{
         open,
         setOpen,

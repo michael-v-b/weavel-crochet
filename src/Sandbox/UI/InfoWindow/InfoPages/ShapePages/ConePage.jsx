@@ -17,9 +17,9 @@ const ConePage = ({ object, getFocused }) => {
    * updates the circumference state in order to change the max height.
    */
   const handleCircum = (newCircum) => {
+    console.log("handleCircum: " + newCircum);
     setCurrentCircum(newCircum);
   };
-  const HEIGHT_PAD = 2;
   return (
     <>
       <CircumField
@@ -30,7 +30,7 @@ const ConePage = ({ object, getFocused }) => {
       <HeightField
         object={object}
         getFocused={getFocused}
-        maxHeight={currentCircum - HEIGHT_PAD}
+        currentCircum={currentCircum}
       />
       <OpenField object={object} />
     </>

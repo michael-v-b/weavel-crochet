@@ -12,8 +12,8 @@
   justify-content: space-between;
   align-items: center;
 
-  height: 400px; /*hard- coded, may need to change*/
-  width: 350px;
+  height: 80vh; /*hard- coded, may need to change*/
+  width: 60vh;
 
   background-color: rgb(255, 255, 255);
 
@@ -26,7 +26,7 @@
 /*Title at the top of the window*/
 .register-request {
   font-family: "Pacifico", "cursive";
-  font-size: 30px;
+  font-size: 5vh;
   color: rgb(255, 219, 18);
   user-select: none;
   text-decoration: underline;
@@ -47,6 +47,7 @@
   border-style: solid;
   border-color: rgb(162, 162, 162);
   margin-bottom: 5%;
+  width: 40vh;
 }
 
 /*The text above the input fields*/
