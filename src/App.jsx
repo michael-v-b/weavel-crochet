@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
  *@returns {Component} main page of project, contains all of the windows.
  */
 
-//THIS IS A TEST TO SEE IF I CAN EDIT THIS USING THE TEMP VSCODE
+//THIS IS YET ANOTHER TEST TO SEE IF IT WILL UPDATE IN GITHUB
 
 export default function App() {
   return (
