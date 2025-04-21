@@ -1,7 +1,8 @@
 /*Billy Weevil*/
 .register-logo {
-  height: 20%;
-  margin-bottom: 3%;
+  margin-top:3vh;
+  height: 20vh;
+  margin-bottom:3vh;
   border-radius: 100px;
 }
 
@@ -12,7 +13,7 @@
   justify-content: space-between;
   align-items: center;
 
-  height: 80vh; /*hard- coded, may need to change*/
+  height: 70vh; /*hard- coded, may need to change*/
   width: 60vh;
 
   background-color: rgb(255, 255, 255);
@@ -21,6 +22,7 @@
   border-width: 5px;
   border-style: solid;
   border-radius: 25px;
+  margin-bottom:3vh;
 }
 
 /*Title at the top of the window*/
@@ -31,13 +33,13 @@
   user-select: none;
   text-decoration: underline;
   text-align: center;
-  margin-bottom: 3%;
+  margin-bottom: 3vh;
 }
 
 /*Centers inputs in registration screen*/
 .register-inputs {
-  height: 70%;
-  width: 50%;
+  height: 70vh;
+  width: 50vh;
   margin-bottom: 10%;
 }
 
@@ -46,7 +48,7 @@
   border-radius: 15px;
   border-style: solid;
   border-color: rgb(162, 162, 162);
-  margin-bottom: 5%;
+  margin-bottom: 2vh;
   width: 40vh;
 }
 
@@ -54,7 +56,7 @@
 .register-field-name {
   user-select: none;
   font-family: "Nunito", sans-serif;
-  font-size: 20px;
+  font-size: 3.5vh;
   font-weight: 800;
   width: 300%;
   color: rgb(113, 215, 233);
@@ -69,11 +71,14 @@
 
   user-select: none;
 
-  border-radius: 5px;
-  padding: 3%;
-  margin: 5%;
-  background-color: rgb(109, 243, 255);
+  height:3vh;
+  width:30vh;
 
+  border-radius: 5px;
+  padding: 1vh;
+  margin: 3vh;
+  background-color: rgb(109, 243, 255);
+  font-size: 3vh;
   color: white;
   font-family: "Nunito", sans-serif;
   font-weight: 800;
@@ -84,12 +89,14 @@
   color: red;
   text-align: center;
   width: 200%;
+  font-size:2.5vh;
 }
 
 /*I already have an account...*/
 .login {
   font-family: "Nunito", sans-serif;
   text-align: center;
+  font-size:2.5vh;
   font-weight: 500;
   text-decoration: underline dotted;
   color: rgb(137, 137, 137);

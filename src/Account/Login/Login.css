@@ -1,5 +1,5 @@
 .web-container {
-  height: 97vh;
+  height: 100vh;
   width: 99vw;
   background-color: #bfedf5;
 }
@@ -7,12 +7,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .login-logo {
-  height: 20%;
-  margin-bottom: 3%;
+  height: 20vh;
+  margin-top:3vh;
+  margin-bottom: 3vh;
   border-radius: 100px;
 }
 /*Continer for login window*/
@@ -21,7 +21,7 @@
   flex-direction: column;
   align-items: center;
 
-  height: 80vh;
+  height: 70vh;
   width: 60vh; /*hard coded might need to redo*/
 
   background-color: rgb(255, 255, 255);
@@ -30,6 +30,8 @@
   border-width: 5px;
   border-style: solid;
   border-radius: 25px;
+
+  margin-bottom:5vh;
 }
 
 /*Text on top of window*/
@@ -39,14 +41,14 @@
   color: rgb(255, 219, 18);
   user-select: none;
   text-decoration: underline;
-  margin-bottom: 10%;
+  margin-bottom: 4vh;
 }
 /*Input fields*/
 .login-field {
   border-radius: 15px;
   border-style: solid;
   border-color: rgb(162, 162, 162);
-  margin-bottom: 10%;
+  margin-bottom: 4vh;
   width: 40vh;
 }
 
@@ -59,7 +61,6 @@
   font-size: 4vh;
   font-weight: 800;
   color: rgb(113, 215, 233);
-  margin-top: 10%;
 }
 
 /*Only shows up when error is made*/
@@ -67,37 +68,44 @@
   color: red;
   text-align: center;
   width: 200%;
-  margin-bottom: 10%;
+  margin-bottom: 4vh;
+  font-size:2.5vh;
 }
 
 /*Location formatting for log in button*/
 .login-button-container {
   display: flex;
   flex-direction: row-reverse;
-  width: 100%;
-  margin-bottom: 10%;
+  width: 50vh;
+  padding-right:12vh;
 }
 
 .login-button {
+  display:flex;
+  justify-content:center;
+  align-items:center;
   user-select: none;
-  height: 100%;
-  width: 35%;
+
+  height: 6vh;
+  width: 12vh;
 
   font-family: "Nunito", sans-serif;
   font-weight: 800;
-  font-size: 19px;
+  font-size: 3vh;
+
   text-align: center;
   background-color: rgb(109, 243, 255);
   color: white;
   border-radius: 5px;
-  padding: 2%;
 }
 
 /*"I don't have an account"*/
 .register {
+  margin-top:5vh;
   font-family: "Nunito", sans-serif;
   text-align: center;
   font-weight: 500;
   text-decoration: underline dotted;
   color: rgb(137, 137, 137);
+  font-size: 2.5vh;
 }
