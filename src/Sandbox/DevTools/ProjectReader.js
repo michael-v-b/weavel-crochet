@@ -95,6 +95,7 @@ const ProjectReader = forwardRef(
       if (!project) {
         return;
       }
+
       setProjectId(tempId);
       setProjectFile(project);
       setColorList(project.colorList);

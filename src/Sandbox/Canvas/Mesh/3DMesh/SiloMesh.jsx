@@ -97,7 +97,6 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
       ref={ref}
       meshType="silo"
       dependencyList = {dependencyList}
-      boxDim = {[radius,height_convert(height/2),radius]}
       meshData={{
         height,
         setHeight,

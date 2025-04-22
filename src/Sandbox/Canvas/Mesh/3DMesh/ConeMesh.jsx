@@ -44,7 +44,6 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
       meshType="cone"
       id={id}
       dependencyList={dependencyList}
-      boxDim={[radius, height_convert(height / 2), radius]}
       meshData={{
         open,
         setOpen,

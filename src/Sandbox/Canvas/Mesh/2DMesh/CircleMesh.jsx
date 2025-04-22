@@ -31,7 +31,6 @@ const CircleMesh = forwardRef(({ id, ...props }, ref) => {
       id={id}
       dependencyList = {dependencyList}
       meshType="circle"
-      boxDim = {[radius,0.125/2,radius]}
       meshData={{ radius, setRadius, circum, setCircum, attributeList }}
       ref={ref}
       {...props}

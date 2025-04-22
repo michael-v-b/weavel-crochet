@@ -31,7 +31,6 @@ const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
  
     useFrame(()=>{
         if(ref?.current && hitboxRef?.current) {
-            
             const visualMesh = ref.current;
             const hitbox = hitboxRef.current;
 

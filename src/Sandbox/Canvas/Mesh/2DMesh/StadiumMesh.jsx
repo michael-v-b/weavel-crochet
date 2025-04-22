@@ -116,7 +116,6 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
       id={id}
       ref={ref}
       dependencyList = {dependencyList}
-      boxDim = {[1,height_convert((height+2)/2),DEPTH_OFFSET/2]}
       meshType="stadium"
       meshData={{ height, setHeight, attributeList }}
       {...props}

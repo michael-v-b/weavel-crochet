@@ -30,7 +30,6 @@ const ChainMesh = forwardRef(({ id, ...props }, ref) => {
       id={id}
       ref={ref}
       dependencyList = {dependencyList}
-      boxDim= {[line,height_convert(height/2),line]}
       meshType="chain"
       meshData={{ height, setHeight, attributeList }}
       {...props}

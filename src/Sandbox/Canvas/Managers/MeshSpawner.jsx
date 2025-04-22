@@ -124,12 +124,15 @@ const MeshSpawner = forwardRef(( _,ref) => {
       }
     }
 
+
+
     //determines whether action is saved by undo button.
     if (update) {
       undoList.push([...action]);
       setAction(["create", []]);
       setUndoList([...undoList]);
     }
+
     setMeshes([...meshes, ...tempMeshes]);
     return meshRefs;
   };

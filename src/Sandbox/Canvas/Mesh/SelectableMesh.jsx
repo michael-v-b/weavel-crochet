@@ -64,8 +64,8 @@ const SelectableMesh = forwardRef(
     //change for draggability
     return (
       <>
-        {/*<BVH ref = {bvhRef} meshRef = {ref}/>*/}
         <MeshVisuals ref = {visualRef} hitboxRef = {ref} dependencyList = {dependencyList} colorIndex = {colorIndex}/>
+       
         <mesh
           ref={ref}
           userData={{

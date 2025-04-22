@@ -1,4 +1,4 @@
-import { forwardRef, useState, useEffect } from "react";
+import { forwardRef, useState, useEffect,useRef } from "react";
 import SelectableMesh from "../SelectableMesh";
 import { DoubleSide, FrontSide } from "three";
 import useStore from "../../../DevTools/store";
@@ -23,7 +23,10 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
   const [radius, setRadius] = useState(1);
   const [open, setOpen] = useState(true);
 
+  const geoRef = useRef(null);
+
   const dependencyList = [open,radius,height];
+
 
   useEffect(() => {
     if(!meshLoading){
@@ -32,16 +35,18 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
       newMesh.circum = circum;
       newMesh.radius = radius;
       newMesh.open = open;
+      newMesh.height = height;
       setProjectFile({ ...projectFile });
     }
   }, []);
+
+ 
 
   return (
     <SelectableMesh
       id={id}
       meshType="cylinder"
       dependencyList = {dependencyList}
-      boxDim = {[radius,height_convert(height/2),radius]}
       meshData={{
         open,
         setOpen,
@@ -57,8 +62,8 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
       ref={ref}
       {...props}
     >
-      <cylinderGeometry
-        args={[radius, radius, height_convert(height), 10, 10, open]}
+      <cylinderGeometry 
+        args = {[radius,radius,height_convert(height),10,10,open]}
       />
     </SelectableMesh>
   );
