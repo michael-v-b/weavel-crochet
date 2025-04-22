@@ -52,9 +52,9 @@ const DimField = ({ object, dimensions }) => {
     }
    // const oldDims = [xDim, yDim, zDim];
     if (isLinked) {
-      setX(xDim + diff);
-      setY(yDim + diff);
-      setZ(zDim + diff);
+      setX(Math.max(1,xDim + diff));
+      setY(Math.max(1,yDim + diff));
+      setZ(Math.max(1,zDim + diff));
       return;
     }
     if (axis == 0) {
