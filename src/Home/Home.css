@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   height: 400vh;
-  width: 98vw;
+  width: var(--webpage-width);
   z-index: 1;
   background-color: rgb(228, 246, 255);
 }
@@ -15,7 +15,7 @@
   justify-content: center;
   background-color: #4daa66;
   height: 75vh;
-  width: 98vw;
+  width: var(--webpage-width);
   position: absolute;
 }
 .hero-text {
@@ -46,7 +46,7 @@
 .bubble-div {
   display: flex;
   margin-top: 100vh;
-  width: 98vw;
+  width: var(--webpage-width);
   height: 80vh;
 }
 .bubble-container {
@@ -116,7 +116,7 @@
 .compare-div {
   display: flex;
   justify-content: space-between;
-  width: 98vw;
+  width: var(--webpage-width);
   height: 70vh;
 }
 .compare-weavel {

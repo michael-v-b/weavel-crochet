@@ -17,9 +17,18 @@ const RotationField = ({ object }) => {
   const setProjectFile = useStore((state) => state.setProjectFile);
   const currentRotation = useStore((state)=>state.currentRotation);
   const setCurrentRotation = useStore((state)=>state.setCurrentRotation);
+
   useEffect(()=>{
-    setNewRotation(object.rotation.toArray());
+    const temp = object.rotation.toArray();
+    for(let i =0; i < temp; i++) {
+      if(!isNaN(temp[i])) {
+        temp[i] = temp.toFixed(2).replace(/[.,]00$/, "");
+      }
+    }
+    setNewRotation(temp);
+    console.log("rotation updated");
   },[object])
+  
   const handleChange = (event, axis) => {
     const newValue = event.target.value;
 
@@ -66,13 +75,14 @@ const RotationField = ({ object }) => {
       for (let i = 0; i < tempRotation.length; i++) {
         
         const radian = parseFloat(tempRotation[i])
-          .toFixed(2)
-          .replace(/[.,]00$/, "");
+   
 
         if (isNaN(radian)) {
           tempRotation[i] = 0;
         } else {
-          tempRotation[i] = (radian/(2*Math.PI))*360
+          const degree = (radian/(2*Math.PI))*360 ;
+          tempRotation[i] = degree.toFixed(2)
+          .replace(/[.,]00$/, "");
         }
         
       }

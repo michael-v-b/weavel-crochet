@@ -14,7 +14,7 @@ const BannerDropdown = () => {
   const [dropdownHeight, setDropdownHeight] = useState("0%");
   const navigate = useNavigate();
   const DROPDOWN_SELECT_COLOR = "#dddddd";
-  const OPTIONS = 3;
+  const OPTIONS = 4;
 
   useEffect(() => {
     if (dropped) {
@@ -70,6 +70,16 @@ const BannerDropdown = () => {
           }}
         >
           Your Projects{" "}
+        </motion.div>
+        <motion.div
+          className="profile-dropdown-option"
+          whileHover={{ backgroundColor: DROPDOWN_SELECT_COLOR }}
+          onClick={() => {
+            navigate("/help");
+            setSelectedMeshes([]);
+          }}
+        >
+          Help
         </motion.div>
         <motion.div
           className="profile-dropdown-option"

@@ -1,0 +1,57 @@
+
+.help-webpage {
+    height:auto;
+    width:var(--webpage-width);;
+    background-color: #abd7f4;
+    display:flex;
+    flex-direction:row;
+}
+.help-toc {
+    background-color:rgb(232, 254, 255);
+    height:100vh;
+    width:20vw;
+}
+.help-text-container {
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+
+    margin:5vh;
+    background-color:rgb(255, 255, 255);
+    width:80vw;
+    border-radius:25px;
+}
+.help-title {
+    font-family:"Pacifico","cursive";
+    color:#4badef;
+    font-size:3vw;
+    text-decoration:underline;
+}
+
+.help-header-container {
+    display:flex;
+    align-items:center;
+    width:100%;
+    height:10vh;
+
+    margin-top:10vh;
+
+    color:#69baef;
+    font-family:"Nunito","sans-serif";
+    font-weight:800;
+
+    font-size:2.5vw;
+    padding-left:11vw;
+}
+
+.help-body {
+    margin-left:10vh;
+    margin-right:10vh;
+    font-family:"Nunito","Sans-serif";
+
+    color:#002c49;
+
+    font-size:1.7vw;
+    font-weight:400;
+}
+
