@@ -31,4 +31,6 @@
 .profile-dropdown-option {
   background-color: #ffffff;
   z-index: 1000;
+  font-size: 2.5vh;
+  text-wrap:nowrap;
 }

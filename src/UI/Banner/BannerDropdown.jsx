@@ -18,7 +18,7 @@ const BannerDropdown = () => {
 
   useEffect(() => {
     if (dropped) {
-      setDropdownHeight(33 * OPTIONS + "%");
+      setDropdownHeight(3 * OPTIONS + "vh");
     } else {
       setDropdownHeight("0%");
     }
