@@ -1,34 +1,46 @@
 
 
 import {useRef} from 'react';
-import Body from "./Body";
-import Header from "./Header";
+import {ToCNode} from './ToCNode';
+
 import "./help.css";
 
-const HelpText = () => {
+const HelpText = ({wordList,getRefTree}) => {
 
-    const testRef = useRef(null);
+  
+    const rootNode = new ToCNode("",null);
 
-    console.log("testing ref location");
-    console.dir(testRef);
+    
+    
     return  <div className = "help-text-container">
-    <div ref = {testRef} className = "help-title">
-        Weavel Help Page
+        <div className = "help-title">
+            Weavel Help Page
+        </div>
+
+        {wordList.map((value,key)=>{
+            const category = value.substring(0,3);
+            const text = value.substring(4);
+            let textClass = "";
+            const divRef = useRef(null);
+
+            if(category == "$c$") {
+                textClass = "help-chapter";
+                rootNode.addChild(new ToCNode(text,divRef));
+            } else if (category == "$s$") {
+                //add section to chapter
+                const childIndex = rootNode.children.length-1;
+                rootNode.children[childIndex].addChild(new ToCNode(text,divRef));
+                
+                textClass = "help-section";
+            } else if (category == "$b$") {
+                textClass = "help-body";
+            }
+            key+=1;
+            return <div ref = {divRef} key = {key} className = {textClass}> {text} </div>
+        })}
+        {getRefTree(rootNode)}
+
     </div>
-
-    <Header>
-        What is Weavel?
-    </Header>
-    <Body>
-        Weavel is a simple, user-friendly, 3D modeling software designed to help crocheters make their own custom amigurumi crochet patterns. 
-        This web-page serves as a guide to help you, step-by-step, throughout the process of creating your own custom design using Weavel.
-        If there is a specific section you are confused about, use the Table of Contents to the left to be taken down to that seciton of the page.
-    </Body>
-
-    <Header>
-        Getting Started
-    </Header>
-</div>
 }
 
 export default HelpText;
