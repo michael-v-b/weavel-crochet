@@ -17,7 +17,6 @@ const ToCChapter = ({chapter}) =>{
     const [isDroppedText,setDroppedText] = useState('[+]');
 
     const handleDropdown = () => {
-        console.log("handle dropdown " + dropdownHeight);
         if (dropdownHeight == 0) {
             setDropdownHeight(NUM_SECTIONS*SECTION_HEIGHT);
             setDroppedText('[-]');
@@ -35,7 +34,7 @@ const ToCChapter = ({chapter}) =>{
                 if(clickedPlus.current) {
                     clickedPlus.current = false;
                 } else {
-                    chapter?.reference?.current.scrollIntoView();
+                    chapter?.reference?.current.scrollIntoView({behavior:'smooth'});
                 }
             }}> 
             {NUM_SECTIONS > 0 && 
@@ -56,12 +55,12 @@ const ToCChapter = ({chapter}) =>{
             {sections.map((section,key) => {
                 const sectionTitle=  section.text;
                 key+=1;
-                return <motion.div 
+                return <motion.div key = {key}
                 className = "toc-dropdown-section"
                 whileHover = {{backgroundColor:'#b8dbed'}}
                 whileTap = {{backgroundColor:'#b0e0e8',scale:1.1}}
                 onTap = {()=>{
-                    section.reference.current.scrollIntoView();
+                    section.reference.current.scrollIntoView({behavior:'smooth'});
                 }}>
                     {sectionTitle}
 

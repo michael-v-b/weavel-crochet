@@ -1,6 +1,6 @@
 
 
-import {useRef} from 'react';
+import {useRef,useEffect} from 'react';
 import {ToCNode} from './ToCNode';
 
 import "./help.css";
@@ -11,7 +11,9 @@ const HelpText = ({wordList,getRefTree}) => {
     const rootNode = new ToCNode("",null);
 
     
-    
+    useEffect(()=>{
+        getRefTree(rootNode);
+    },[])
     return  <div className = "help-text-container">
         <div className = "help-title">
             Weavel Help Page
@@ -30,7 +32,7 @@ const HelpText = ({wordList,getRefTree}) => {
                 //add section to chapter
                 const childIndex = rootNode.children.length-1;
                 rootNode.children[childIndex].addChild(new ToCNode(text,divRef));
-                
+
                 textClass = "help-section";
             } else if (category == "$b$") {
                 textClass = "help-body";
@@ -38,7 +40,6 @@ const HelpText = ({wordList,getRefTree}) => {
             key+=1;
             return <div ref = {divRef} key = {key} className = {textClass}> {text} </div>
         })}
-        {getRefTree(rootNode)}
 
     </div>
 }
