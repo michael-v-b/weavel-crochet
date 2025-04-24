@@ -5,6 +5,10 @@ import {useFrame} from "@react-three/fiber";
 import useStore from "../../DevTools/store";
 import {DoubleSide} from "three";
 
+/**
+ * @typedef {MeshVisuals} - the visual component of the mesh, the main mesh is simply a hitbox.
+ * @returns {Mesh}
+ */
 const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
     MeshVisuals.displayName = "Mesh Visuals";
     const colorList = useStore((state)=>state.colorList);
@@ -12,15 +16,22 @@ const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
     const [geo,setGeo] = useState();
 
 
+    /**
+     * Rerender geometry when it changes.
+     */
     const rerender = () => {
         setGeo(hitboxRef.current.geometry);
     }
 
 
+    /**
+     * Rerender visuals whenever something affects their meshes.
+     */
     useEffect(()=>{
         rerender();
     },[...dependencyList]);
 
+    //run initial rerender
     useEffect(()=>{
         if(ref?.current) {
             rerender();
@@ -28,7 +39,8 @@ const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
     },[ref.current]);
 
 
- 
+    
+    //update visuals every frame.
     useFrame(()=>{
         if(ref?.current && hitboxRef?.current) {
             const visualMesh = ref.current;

@@ -2,6 +2,11 @@ import { forwardRef, useState, useEffect } from "react";
 import SelectableMesh from "../SelectableMesh";
 import useStore from "../../../DevTools/store";
 
+/**
+ * @typdef {ChainMesh} - A cylinder that represents a crochet chain.
+ * @prop {string} id - unique string that is this object's id number.
+ * @returns {SelectableMesh}
+ */
 const ChainMesh = forwardRef(({ id, ...props }, ref) => {
   ChainMesh.displayName = "Chain Mesh";
   const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);

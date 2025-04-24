@@ -8,6 +8,10 @@ import ProjectManager from "./ProjectManager";
 import AuthTester from "../AuthTester";
 import "./Projects.css";
 
+/**
+ * @typedef {Projects} - a page used to display all of the user's projects.
+ * @returns {HTMLElement} - Page used to display all of the user's projects
+ */
 const Projects = () => {
   const auth = useGlobalStore((state) => state.auth);
   const [projectNames, setProjectNames] = useState([]);
@@ -18,6 +22,9 @@ const Projects = () => {
   const projectManagerRef = useRef(null);
   const clickedX = useRef(false);
 
+  /**
+   * Initializes event listeners and project data.
+   */
   useEffect(() => {
       getProjects();
     

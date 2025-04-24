@@ -4,6 +4,12 @@ import {motion} from 'framer-motion';
 import {useState,useRef} from 'react';
 
 
+/**
+ * @typedef {ToCChapter} - Represents a chapter in the help page.
+ * @param {ToCChapter} chapter - the chapter this is based off of.
+ * @returns {HTMLComponent} - Features a chapter element that has a drop down containing the
+ * sections within that chapter.
+ */
 const ToCChapter = ({chapter}) =>{
     const text = chapter?.text;
     const sections = chapter.children;
@@ -16,6 +22,9 @@ const ToCChapter = ({chapter}) =>{
     const [dropdownHeight,setDropdownHeight] = useState(0);
     const [isDroppedText,setDroppedText] = useState('[+]');
 
+    /**
+     * Alternates whether drop down menu opens up on click.
+     */
     const handleDropdown = () => {
         if (dropdownHeight == 0) {
             setDropdownHeight(NUM_SECTIONS*SECTION_HEIGHT);

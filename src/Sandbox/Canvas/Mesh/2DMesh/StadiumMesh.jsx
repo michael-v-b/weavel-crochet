@@ -3,6 +3,11 @@ import { forwardRef, useMemo, useEffect, useState } from "react";
 import { BufferGeometry, BufferAttribute } from "three";
 import useStore from "../../../DevTools/store";
 
+/**
+ * A mesh for a stadium object.
+ * @prop {string} id - a unique string that is this object's id number
+ * @returns {SelectableMesh}
+ */
 const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
   StadiumMesh.displayName = "StadiumMesh";
 

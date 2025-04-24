@@ -6,10 +6,14 @@ import {useState} from 'react';
 import "./help.css";
 
 
-
+/**
+ * @typedef {Help} - The main functional component for the help page.
+ * 
+ * @returns {HTMLFragment} contains the main text area of the help page
+ * as well as the table of contents.
+ */
 const Help = () => {
-    //how I want it to work
-    //3d sets? 
+
     const wordList = [
         `$c$ About Weavel`,
 

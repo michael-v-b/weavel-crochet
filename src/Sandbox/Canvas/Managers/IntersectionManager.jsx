@@ -3,6 +3,9 @@ import { useFrame } from "@react-three/fiber";
 import { Matrix4 } from "three";
 import useStore from "../../DevTools/store";
 
+/**
+ * @typedef {IntersectionManager} - Tracks whether any of the objects are intersecting wit hone another
+ */
 const IntersectionManager = forwardRef((_, ref) => {
   IntersectionManager.displayName = "IntersectionManager";
   const meshList = useStore((state) => state.meshList);
@@ -11,6 +14,10 @@ const IntersectionManager = forwardRef((_, ref) => {
 
   const [nonSelectedMeshes, setNonSelected] = useState(meshList);
 
+  /**
+   * 
+   * @returns {boolean} returns true if any 2 objects are intersection, false if not.
+   */
   const testIntersections = () => {
     for (let i = 0; i < selectedMeshes.length; i++) {
       const selectedMesh = selectedMeshes[i];
@@ -37,6 +44,9 @@ const IntersectionManager = forwardRef((_, ref) => {
     return false;
   };
 
+  /**
+   * test intersections every frame
+   */
   useFrame(() => {
     testIntersections();
   });
@@ -51,12 +61,6 @@ const IntersectionManager = forwardRef((_, ref) => {
     });
     setNonSelected([...tempNonSelect]);
   }, [selectedMeshes, meshList]);
-
-  /*useFrame(()=>{
-        if(isDragging) {
-            testIntersectionDrag();
-        }
-    })*/
 
   useImperativeHandle(ref, () => ({}));
 });

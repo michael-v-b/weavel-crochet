@@ -83,6 +83,7 @@ const Login = () => {
       <div className="login-window ">
         <div className="login-request">Please Log In </div>
         <div className="login-inputs center">
+
           <div className="login-field-name"> Email Address: </div>
           <motion.input
             className="login-field"
@@ -91,6 +92,7 @@ const Login = () => {
             maxLength="30"
             onChange={handleEmailChange}
           />
+
           <div className="login-field-name"> Password: </div>
           <motion.input
             className="login-field"
@@ -99,8 +101,10 @@ const Login = () => {
             maxLength="30"
             onChange={handlePasswordChange}
           />
+
           {/*warning only renders after failed attempt*/}
           <div className="warning-message">{warning} </div>
+
           <div className="login-button-container">
             <motion.div
               className="login-button"
@@ -114,6 +118,7 @@ const Login = () => {
             >
               Log In{" "}
             </motion.div>
+            
           </div>
           <motion.div
             className="register"

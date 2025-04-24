@@ -3,6 +3,10 @@ import SelectableMesh from "../SelectableMesh";
 import useStore from "../../../DevTools/store";
 import { BufferGeometry, BufferAttribute } from "three";
 
+/**
+ * @typedef {SiloMesh} - A 3d mesh that represents a Silo Object.
+ * @returns {SelectableMesh}
+ */
 const SiloMesh = forwardRef(({ id, ...props }, ref) => {
   SiloMesh.displayName = "Silo Mesh";
   

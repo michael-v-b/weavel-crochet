@@ -5,15 +5,12 @@ import useStore from "../../DevTools/store";
 /**
  * @typedef {Deleter} - A class that is in charge of deleting items
  * from the canvas, and hierarchy
- *@property {[MeshReference]} meshList - all meshes currently in the scene.
  *@property {SelectionManagerReference} selectionManagerRef - SelectionManager.
- *@property {[MeshReference]} meshList - all meshes that are currently selected.
- @property {GetMeshesCallback} - gives updated meshes after deletion.
  *@property {MeshSpawnerRef} - allows access to all MeshSpawner public methods.
  */
 
 const Deleter = forwardRef(
-  ({ selectionManagerRef, getMeshes, meshSpawnerRef }, ref) => {
+  ({ selectionManagerRef, meshSpawnerRef }, ref) => {
     Deleter.displayName = "Deleter";
     const { scene } = useThree();
     const [action, setAction] = useState(["delete"]);

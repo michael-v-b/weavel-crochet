@@ -4,6 +4,10 @@ import { motion, useAnimation } from "framer-motion";
 import AuthTester from "../AuthTester";
 
 import "./Home.css";
+
+/**
+ * @returns {HTMLElement} - the home page for Weavel
+ */
 const Home = () => {
   const [bubblePlayed, setBubblePlayed] = useState(false);
   const BUBBLE_SIZE = 30;
@@ -23,6 +27,9 @@ const Home = () => {
     boune: 2,
   };
 
+  /**
+   * plays opening animation.
+   */
   useEffect(() => {
     const sequence = async () => {
       await heroSpace.start({
@@ -37,7 +44,10 @@ const Home = () => {
     };
     sequence();
   }, []);
-
+  
+  /**
+   * plays bubble animations once checkpoint is visible on screen.
+   */
   const bubbleAnimations = async () => {
     screenshot.start({ width: "50%" });
     if (!bubblePlayed) {
@@ -57,6 +67,9 @@ const Home = () => {
     }
   };
 
+  /**
+   * Plays Trial and Error animation.
+   */
   const trialErrorAnimation = async () => {
     realEnter.start({ width: "50vw" });
     fakeEnter.start({ width: "50vw" });

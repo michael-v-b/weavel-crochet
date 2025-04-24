@@ -5,15 +5,27 @@ import {ToCNode} from './ToCNode';
 
 import "./help.css";
 
+/**
+ * @typedef {HelpText} - The text component of the help page.
+ * @param {[String]} wordList - a list of words alongside formatting to be rendered on the
+ * text portion of the help page
+ * @param {CallbackFunction} getRefTree - returns the getRefTree function to the Help.jsx
+ * to be used for the table of contents.
+ *  
+ * @returns 
+ */
 const HelpText = ({wordList,getRefTree}) => {
 
   
     const rootNode = new ToCNode("",null);
 
-    
+    /**
+     * run callback function
+     */
     useEffect(()=>{
         getRefTree(rootNode);
     },[])
+
     return  <div className = "help-text-container">
         <div className = "help-title">
             Weavel Help Page
