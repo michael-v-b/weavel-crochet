@@ -19,7 +19,7 @@ const BallPattern = (input) => {
   }
 
   //first part of ball is just a circle.
-  output = CirclePattern([circum, false]);
+  output = CirclePattern([circum, false, 6]);
 
   //second part of ball,just a large amount of single crochets, more depending on height
   let roundNum = circum / 6 + 1;

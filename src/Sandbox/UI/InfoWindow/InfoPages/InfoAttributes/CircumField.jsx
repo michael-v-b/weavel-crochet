@@ -8,7 +8,7 @@ import useStore from "../../../../DevTools/store";
  * @property {Mesh} object - object whose circumference is being changed
  * @returns {Component} - div that represents the circumference.
  */
-const CircumferenceField = ({ object, getCircum }) => {
+const CircumferenceField = ({ object, getCircum, roundingNum = 6 }) => {
   const [circum, setCircum] = useState(object.userData.meshData.circum);
   const [action, setAction] = useState(["circum"]);
   const setFocused = useStore((state) => state.setFocused);
@@ -43,7 +43,11 @@ const CircumferenceField = ({ object, getCircum }) => {
    * Rounds Circumference.
    */
   const findRadius = () => {
-    const roundedCircum = Math.max(6, 6 * Math.floor(circum / 6));
+    let roundedCircum = Math.max(3,circum);
+
+    if (roundingNum != 0 ) {
+      roundedCircum = Math.max(roundingNum, roundingNum * Math.floor(circum / roundingNum));
+    }
 
     if (getCircum) {
       getCircum(roundedCircum);

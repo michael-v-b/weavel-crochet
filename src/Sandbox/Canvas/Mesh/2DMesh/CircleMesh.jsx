@@ -13,7 +13,7 @@ const CircleMesh = forwardRef(({ id, ...props }, ref) => {
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
   const meshLoading = useStore((state)=>state.meshLoading);
   const [radius, setRadius] = useState(1);
-  const [circum, setCircum] = useState(DEF_CIRCUM);
+  const [circum, setCircum] = useState(DEF_CIRCUM+2);
 
   const dependencyList = [radius];
 

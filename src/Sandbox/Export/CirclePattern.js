@@ -8,29 +8,32 @@ const CirclePattern = (input) => {
   let output = [];
   let circum = -1;
   let fastenOff = true;
-  if (input && input.userData && input.userData.meshData) {
+  let rate = 8;
+  if (input?.userData?.meshData) {
     circum = input.userData.meshData.circum;
   }
 
-  if (typeof input == "object" && input.length == 2) {
+  if (typeof input == "object" && input.length == 3) {
     circum = input[0];
     fastenOff = input[1];
-  }
+    rate = input[2];
+  } 
 
-  const intro = "Round 1: make 6 sc into a magic ring (6)";
+  const intro = "Round 1: make " + rate + " sc into a magic ring (" + rate + ")";
+
   output.push(intro);
-  let stitchCount = 6;
+  let stitchCount = rate;
   let roundNum = 2;
   let first = "";
   //first third of ball
   while (stitchCount < circum) {
-    stitchCount += 6;
+    stitchCount += rate;
     let roundString = "Round " + roundNum + ": (";
     let scCount = "";
     if (roundNum > 2) {
       scCount = roundNum - 2 + " sc, ";
     }
-    first = roundString + scCount + "inc) x6 (" + stitchCount + ").\n";
+    first = roundString + scCount + "inc) x" + rate + " (" + stitchCount + ").\n";
     roundNum += 1;
     output.push(first);
   }

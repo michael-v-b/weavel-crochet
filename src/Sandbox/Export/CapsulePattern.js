@@ -6,6 +6,8 @@ import BallPattern from "./BallPattern";
  */
 const CapsulePattern = (object) => {
   const objectData = object.userData.meshData;
+  console.log("objectData: ");
+  console.dir(objectData);
   //a capsule is basically just a longer ball
   return BallPattern([objectData.circum, objectData.height]);
 };

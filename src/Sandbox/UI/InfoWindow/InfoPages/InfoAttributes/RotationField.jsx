@@ -26,7 +26,6 @@ const RotationField = ({ object }) => {
       }
     }
     setNewRotation(temp);
-    console.log("rotation updated");
   },[object])
   
   const handleChange = (event, axis) => {

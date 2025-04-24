@@ -8,7 +8,7 @@ import useStore from "../../../DevTools/store";
  */
 const ConeMesh = forwardRef(({ id, ...props }, ref) => {
   ConeMesh.displayName = "Cone Mesh";
-  const attributeList = ["circum", "height", "open"];
+  const attributeList = ["circum", "height"];
 
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
@@ -21,8 +21,7 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
   const [height, setHeight] = useState(DEF_HEIGHT);
-  const [open, setOpen] = useState(true);
-  const dependencyList = [open, height, radius];
+  const dependencyList = [height, radius];
 
   useEffect(() => {
     if (!meshLoading) {
@@ -30,7 +29,6 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
       newMesh.attributeList = attributeList;
       newMesh.circum = circum;
       newMesh.height = height;
-      newMesh.open = open;
       setProjectFile({ ...projectFile });
     }
   }, []);
@@ -45,8 +43,6 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
       id={id}
       dependencyList={dependencyList}
       meshData={{
-        open,
-        setOpen,
         radius,
         setRadius,
         circum,
@@ -56,10 +52,10 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
         attributeList,
       }}
       ref={ref}
-      materialProps={{ side: open ? DoubleSide : FrontSide }}
+      materialProps={{ side: DoubleSide }}
       {...props}
     >
-      <coneGeometry args={[radius, height_convert(height), 10, 10, open]} />
+      <coneGeometry args={[radius, height_convert(height), 10, 10, true]} />
     </SelectableMesh>
   );
 });

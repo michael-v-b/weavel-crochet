@@ -9,7 +9,7 @@ import useStore from "../../../DevTools/store";
 const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
   CylinderMesh.displayName = "Cylinder Mesh";
 
-  const attributeList = ["circum", "height", "open"];
+  const attributeList = ["circum", "height"];
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
 
@@ -21,11 +21,10 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
   const [height,setHeight] = useState(DEF_HEIGHT);
   const [circum, setCircum] = useState(DEF_CIRCUM);
   const [radius, setRadius] = useState(1);
-  const [open, setOpen] = useState(true);
 
   const geoRef = useRef(null);
 
-  const dependencyList = [open,radius,height];
+  const dependencyList = [radius,height];
 
 
   useEffect(() => {
@@ -34,7 +33,6 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
       newMesh.attributeList = attributeList;
       newMesh.circum = circum;
       newMesh.radius = radius;
-      newMesh.open = open;
       newMesh.height = height;
       setProjectFile({ ...projectFile });
     }
@@ -48,8 +46,6 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
       meshType="cylinder"
       dependencyList = {dependencyList}
       meshData={{
-        open,
-        setOpen,
         height,
         setHeight,
         circum,
@@ -58,12 +54,12 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
         setRadius,
         attributeList,
       }}
-      materialProps={{ side: open ? DoubleSide : FrontSide }}
+      materialProps={{ side: DoubleSide}}
       ref={ref}
       {...props}
     >
       <cylinderGeometry 
-        args = {[radius,radius,height_convert(height),10,10,open]}
+        args = {[radius,radius,height_convert(height),10,10,true]}
       />
     </SelectableMesh>
   );

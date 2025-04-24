@@ -15,10 +15,7 @@ const ConePattern = (object) => {
 
   let output = [];
 
-  //if cone is open then make it a chain instead.
-  if (!objectData.open) {
-    output = CirclePattern([circum, false]);
-  } else {
+
     output = [
       "Chain " +
         circum +
@@ -27,7 +24,7 @@ const ConePattern = (object) => {
         ")",
     ];
     roundNum = 1;
-  }
+
 
   let stitchCount = circum;
 
@@ -59,7 +56,7 @@ const ConePattern = (object) => {
 
     const extraScString = rowRemain == 0 ? "" : ", " + rowRemain + " sc";
 
-    const transition = !objectData.open && i == 0 ? " in back loops." : "";
+    const transition =  "";
 
     output.push(
       roundString +

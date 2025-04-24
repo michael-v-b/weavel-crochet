@@ -7,14 +7,9 @@ import CirclePattern from "./CirclePattern";
  */
 const CylinderPattern = (object) => {
   const objectData = object.userData.meshData;
-  const open = objectData.open;
   const circum = objectData.circum;
   const height = objectData.height;
   let output = [];
-  if (!open) {
-    output = ["Base: ", "\n"];
-    output = output.concat(CirclePattern([circum, false]));
-  } else {
     output = [
       "Chain " +
         circum +
@@ -22,7 +17,7 @@ const CylinderPattern = (object) => {
         circum +
         ")",
     ];
-  }
+  
   let roundNum = circum / 6 + 1;
 
   const wallsStart =
@@ -50,12 +45,7 @@ const CylinderPattern = (object) => {
   output.push("\n");
   output.push("Top Circle: \n");
 
-  if (!open) {
-    const top = CirclePattern([circum, true]);
-    output = output.concat(top);
-    const end = "Sew on top circle and fill with Polyfill.";
-    output.push(end);
-  }
+ 
   output.push("Fasten off.\n");
   return output;
 };

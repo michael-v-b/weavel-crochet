@@ -7,7 +7,7 @@ import CircumField from "../InfoAttributes/CircumField";
  * @returns {CircleField} - The circle field.
  */
 const CirclePage = ({ getFocused, avgPosition, object }) => {
-  return <CircumField getFocused={getFocused} object={object} />;
+  return <CircumField getFocused={getFocused} object={object} roundingNum = {8} />;
 };
 
 export default CirclePage;

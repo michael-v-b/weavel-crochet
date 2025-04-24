@@ -194,9 +194,6 @@ const ProjectReader = forwardRef(
         meshData.setHeight(saveData.height);
       }
 
-      if (attributes.includes("open")) {
-        meshData.setOpen(saveData.open);
-      }
 
       //set read project to true if last mesh
       numFinished -= 1;

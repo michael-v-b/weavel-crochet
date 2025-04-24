@@ -1,6 +1,5 @@
 import HeightField from "../InfoAttributes/HeightField";
 import CircumField from "../InfoAttributes/CircumField";
-import OpenField from "../InfoAttributes/OpenField";
 
 /**
  * @typedef {CylinderPage} - extra fields added when cylinder is selected.
@@ -11,9 +10,8 @@ import OpenField from "../InfoAttributes/OpenField";
 const CylinderPage = ({ object, getFocused }) => {
   return (
     <>
-      <CircumField object={object} getFocused={getFocused} />
+      <CircumField object={object} getFocused={getFocused} roundingNum = {0} />
       <HeightField object={object} getFocused={getFocused} />
-      <OpenField object={object} />
     </>
   );
 };

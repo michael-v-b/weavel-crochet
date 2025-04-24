@@ -1,6 +1,5 @@
 import HeightField from "../InfoAttributes/HeightField";
 import CircumField from "../InfoAttributes/CircumField";
-import OpenField from "../InfoAttributes/OpenField";
 import React, { useState } from "react";
 
 /**
@@ -19,19 +18,20 @@ const ConePage = ({ object, getFocused }) => {
   const handleCircum = (newCircum) => {
     setCurrentCircum(newCircum);
   };
+
   return (
     <>
       <CircumField
         object={object}
         getFocused={getFocused}
         getCircum={handleCircum}
+        roundingNum = {0}
       />
       <HeightField
         object={object}
         getFocused={getFocused}
         currentCircum={currentCircum}
       />
-      <OpenField object={object} />
     </>
   );
 };
