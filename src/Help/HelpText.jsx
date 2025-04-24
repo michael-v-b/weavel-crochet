@@ -36,6 +36,8 @@ const HelpText = ({wordList,getRefTree}) => {
                 textClass = "help-section";
             } else if (category == "$b$") {
                 textClass = "help-body";
+            } else if (category == '$u$') {
+                textClass = 'help-subsection';
             }
             key+=1;
             return <div ref = {divRef} key = {key} className = {textClass}> {text} </div>

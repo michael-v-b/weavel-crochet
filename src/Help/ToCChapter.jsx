@@ -8,7 +8,7 @@ const ToCChapter = ({chapter}) =>{
     const text = chapter?.text;
     const sections = chapter.children;
     const NUM_SECTIONS = sections.length;
-    const SECTION_HEIGHT = 3.5;
+    const SECTION_HEIGHT = 4.5;
 
     const clickedPlus = useRef(false);
 

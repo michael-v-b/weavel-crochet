@@ -9,7 +9,7 @@
 .help-toc {
     background-color:#dcf1ff;
     height:100vh;
-    width:20vw;
+    width:30vw;
     overflow-y:auto;
     overflow-x:hidden;
     position:sticky;
@@ -40,7 +40,7 @@
     background-color:#dcf1ff;
     align-content:center;
     width:100%;
-    font-size:1.5vw;
+    font-size:1.3vw;
     padding-top:1vh;
     padding-left:2vw;
 
@@ -57,7 +57,7 @@
 .toc-dropdown {
     
     transition: 0.25s;
-    overflow:hidden;
+    overflow:auto;
 }
 
 .toc-dropdown-section {
@@ -114,6 +114,19 @@
     font-weight:800;
 
     font-size:2vw;
+    padding-left:8vw;
+}
+.help-subsection{
+    display:flex;
+    align-items:center;
+    width: 70vw;
+    height:10vh;
+
+    color:#8ecef9;
+    font-family:"Nunito","sans-serif";
+    font-weight:800;
+
+    font-size:1.7vw;
     padding-left:8vw;
 }
 
