@@ -10,14 +10,15 @@ const SiloPattern = (input) => {
   const circum = input.userData.meshData.circum;
   const height = input.userData.meshData.height;
   let roundNum = 0;
-  const output = CirclePattern([circum, false,6]);
-  roundNum = circum / CIRCLE_CONST;
+  const output = CirclePattern([circum, false,CIRCLE_CONST]);
+  const radius = Math.floor(circum/(2*Math.PI));
+  roundNum = (circum / CIRCLE_CONST) + 1;
 
   output.push(
     "Round " +
-      (roundNum + 1) +
+      (roundNum) +
       "-" +
-      height +
+      (roundNum +(height-radius)) +
       ": sc x " +
       circum +
       ". (" +

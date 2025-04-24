@@ -39,18 +39,18 @@ const BallPattern = (input) => {
 
     roundNum = roundNum * 2;
   } else {
-    const diameter = Math.floor(circum / Math.PI);
+    const radius = Math.floor(circum / 2*Math.PI);
     second =
       "Round " +
       roundNum +
       "-" +
-      (roundNum + (height - diameter)) +
+      (roundNum + (height - radius)) +
       ": " +
       stitchCount +
       " sc. (" +
       stitchCount +
       ")\n";
-    roundNum = roundNum + (height - diameter) + 1;
+    roundNum = roundNum + (height - radius) + 1;
   }
   output.push(second);
 
