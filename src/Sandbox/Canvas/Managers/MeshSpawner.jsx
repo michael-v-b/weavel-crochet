@@ -8,6 +8,7 @@ import CircleMesh from "../Mesh/2DMesh/CircleMesh";
 import SquareMesh from "../Mesh/2DMesh/SquareMesh";
 import StadiumMesh from "../Mesh/2DMesh/StadiumMesh";
 import ChainMesh from "../Mesh/2DMesh/ChainMesh";
+import TriangleMesh from "../Mesh/2DMesh/TriangleMesh";
 
 import React, {
   useState,
@@ -25,7 +26,7 @@ import useStore from "../../DevTools/store";
  * @property {[string]} colorList - a list of colors available in project
  * @returns {Node} - a list of corresponding mesh components according to the meshes list.
  */
-const MeshSpawner = forwardRef(( _,ref) => {
+const MeshSpawner = forwardRef((_, ref) => {
   MeshSpawner.displayName = "MeshSpawner";
   const [meshes, setMeshes] = useState([]); //used to rerender list once completed
   const [action, setAction] = useState([["create"], []]);
@@ -44,6 +45,7 @@ const MeshSpawner = forwardRef(( _,ref) => {
     cone: ConeMesh,
     capsule: CapsuleMesh,
     cylinder: CylinderMesh,
+    triangle: TriangleMesh,
     circle: CircleMesh,
     square: SquareMesh,
     stadium: StadiumMesh,
@@ -79,12 +81,7 @@ const MeshSpawner = forwardRef(( _,ref) => {
     const newMeshRef = React.createRef();
     const newCellRef = React.createRef();
     const id = tempId == "" ? crypto.randomUUID() : tempId;
-    setMeshes([...meshes, [shape, newMeshRef, id,newCellRef]]);
-
-   
-    
-
-
+    setMeshes([...meshes, [shape, newMeshRef, id, newCellRef]]);
 
     //determines whether action is saved by undo button
     if (update) {
@@ -123,8 +120,6 @@ const MeshSpawner = forwardRef(( _,ref) => {
         action[1].push(newMeshRef);
       }
     }
-
-
 
     //determines whether action is saved by undo button.
     if (update) {
@@ -196,7 +191,7 @@ const MeshSpawner = forwardRef(( _,ref) => {
             name={
               shapeComponents[shape] ? capitalName : shape + " not implemented"
             }
-            hierarchyRef = {cellRef}
+            hierarchyRef={cellRef}
             colorList={colorList}
             position={[0, 1, 0]}
           />

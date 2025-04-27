@@ -12,7 +12,7 @@ const DrawWindow = ({ getShape }) => {
     getShape(shape);
   };
   const thirdShapes = ["ball", "silo", "capsule", "cone", "cylinder", "box"];
-  const secondShapes = ["chain", "circle", "stadium", "square"];
+  const secondShapes = ["chain", "circle", "stadium", "square", "triangle"];
   return (
     <>
       <div className="tool-window">
