@@ -37,9 +37,17 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
     let DEPTH_OFFSET = 0.125;
 
     for (let i = 0; i < 2; i++) {
-      const bottomLeft = [-1, -0.5, DEPTH_OFFSET];
-      const bottomRight = [1, -0.5, DEPTH_OFFSET];
-      const top = [0, 0.5, DEPTH_OFFSET];
+      const bottomLeft = [
+        -height_convert(base),
+        -height_convert(height),
+        DEPTH_OFFSET,
+      ];
+      const bottomRight = [
+        height_convert(base),
+        -height_convert(height),
+        DEPTH_OFFSET,
+      ];
+      const top = [0, height_convert(height), DEPTH_OFFSET];
 
       vertices.push(...top);
       vertices.push(...bottomLeft);
@@ -60,7 +68,7 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
       const b = inRange(i + 1, segments, 0);
       const c = inRange(i, segments, 3);
       const d = inRange(i + 1, segments, 3);
-      indices.push(a, c, d, d, b, a);
+      indices.push(b, c, d, a, c, b);
     }
 
     geo.setAttribute(

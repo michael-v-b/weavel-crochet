@@ -12,6 +12,7 @@ import CirclePage from "./ShapePages/CirclePage";
 import StadiumPage from "./ShapePages/StadiumPage";
 import SiloPage from "./ShapePages/SiloPage";
 import ChainPage from "./ShapePages/ChainPage";
+import TrianglePage from "./ShapePages/TrianglePage";
 
 /**
  *@typedef {InfoPage} - provides all of the information inside of the info window.
@@ -33,6 +34,7 @@ const InfoPage = ({ object, meshType }) => {
     stadium: StadiumPage,
     silo: SiloPage,
     chain: ChainPage,
+    triangle: TrianglePage,
   };
   const MeshType = shapePages[meshType];
 

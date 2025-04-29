@@ -43,10 +43,13 @@ const CircumferenceField = ({ object, getCircum, roundingNum = 6 }) => {
    * Rounds Circumference.
    */
   const findRadius = () => {
-    let roundedCircum = Math.max(3,circum);
+    let roundedCircum = Math.max(6, circum);
 
-    if (roundingNum != 0 ) {
-      roundedCircum = Math.max(roundingNum, roundingNum * Math.floor(circum / roundingNum));
+    if (roundingNum != 0) {
+      roundedCircum = Math.max(
+        roundingNum,
+        roundingNum * Math.floor(circum / roundingNum)
+      );
     }
 
     if (getCircum) {

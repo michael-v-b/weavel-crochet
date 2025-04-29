@@ -25,12 +25,13 @@ const ConePage = ({ object, getFocused }) => {
         object={object}
         getFocused={getFocused}
         getCircum={handleCircum}
-        roundingNum = {0}
+        roundingNum={0}
       />
       <HeightField
         object={object}
         getFocused={getFocused}
-        currentCircum={currentCircum}
+        maxRate={6}
+        currentBase={currentCircum}
       />
     </>
   );

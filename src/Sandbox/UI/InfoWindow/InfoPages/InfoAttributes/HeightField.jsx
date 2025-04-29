@@ -5,10 +5,16 @@ import useStore from "../../../../DevTools/store";
 /**
  * @typedef {HeightField} - A field used to edit an object's height.
  * @property {Object} object - object whose height is being edited.
- * @property {Number} cone - is true if object is a cone.
+ * @property {string} heightName - the text that appears on the height attribute.
+ * @property {Number} currentBase - states the current circumference of the object.
  * @returns {Component} - div with an input field that represents the object's height.
  */
-const HeightField = ({ heightName = "Height", object, currentCircum }) => {
+const HeightField = ({
+  heightName = "Height",
+  object,
+  currentBase,
+  maxRate,
+}) => {
   const [objectData, setObjectData] = useState(object.userData.meshData);
   const [height, setHeight] = useState(objectData.height);
   const [action, setAction] = useState(["height"]);
@@ -50,12 +56,13 @@ const HeightField = ({ heightName = "Height", object, currentCircum }) => {
    */
 
   useEffect(() => {
-    if (!currentCircum) {
+    if (!currentBase) {
       return;
     }
-    let temp = Math.min(currentCircum - HEIGHT_PAD, height);
+    let temp = Math.ceil(Math.max(currentBase / 6, height));
     setHeight(temp);
-  }, [currentCircum]);
+    objectData.setHeight(temp);
+  }, [currentBase]);
 
   /**
    * Updates the object's height when input field is no longer selected and sets focused state to false.
@@ -68,10 +75,10 @@ const HeightField = ({ heightName = "Height", object, currentCircum }) => {
     action.push(temp);
     undoList.push(action);
 
-    if (currentCircum) {
-      temp = Math.min(currentCircum - HEIGHT_PAD, height);
+    if (currentBase) {
+      temp = Math.ceil(Math.max(currentBase / maxRate, height));
     }
-    temp = Math.max(2, temp);
+
     objectData.setHeight(temp);
 
     setUndoList([...undoList]);

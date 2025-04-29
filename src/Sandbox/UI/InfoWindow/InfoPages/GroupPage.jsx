@@ -13,7 +13,7 @@ import PositionField from "./InfoAttributes/PositionField";
 const GroupPage = () => {
   return (
     <div>
-      <PositionField />
+      <ColorField />
     </div>
   );
 };
