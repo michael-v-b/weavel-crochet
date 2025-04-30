@@ -14,6 +14,7 @@ const HeightField = ({
   object,
   currentBase,
   maxRate,
+  isStadium = false,
 }) => {
   const [objectData, setObjectData] = useState(object.userData.meshData);
   const [height, setHeight] = useState(objectData.height);
@@ -56,15 +57,17 @@ const HeightField = ({
    */
 
   useEffect(() => {
-    if (!currentBase) {
-      return;
-    }
-    let temp = Math.ceil(Math.max(currentBase / maxRate, height));
-    //hard coded bad practice
-    // in the case of a triangle with base 2 set the height to 2
-    if (currentBase == 2) {
+    let temp = height;
+    console.log("current base changed to " + currentBase);
+    if (isStadium) {
+      temp = Math.max(height, currentBase + 1);
+      //rules if is cone or triangle
+    } else if (currentBase == 2) {
       temp = Math.max(2, height);
+    } else if (currentBase) {
+      temp = Math.ceil(Math.max(currentBase / maxRate, height));
     }
+
     setHeight(temp);
     objectData.setHeight(temp);
   }, [currentBase]);
@@ -80,7 +83,12 @@ const HeightField = ({
     action.push(temp);
     undoList.push(action);
 
-    if (currentBase == 2) {
+    //rules if is stadium
+    if (isStadium) {
+      console.log("is a stadium and this runs");
+      temp = Math.max(height, currentBase + 1);
+      //rules if is cone or triangle
+    } else if (currentBase == 2) {
       temp = Math.max(2, height);
     } else if (currentBase) {
       temp = Math.ceil(Math.max(currentBase / maxRate, height));

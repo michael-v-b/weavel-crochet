@@ -7,7 +7,12 @@ import useStore from "../../../../DevTools/store";
  * @property {Object} object - object whose base is being edited.
  * @returns {Component} - div with an input field that represents the object's width.
  */
-const WidthField = ({ object, getWidth, name = "Width: " }) => {
+const WidthField = ({
+  object,
+  getWidth,
+  name = "Width: ",
+  isStadium = false,
+}) => {
   const [objectData, setObjectData] = useState(object.userData.meshData);
 
   const [action, setAction] = useState(["base"]);
@@ -50,6 +55,9 @@ const WidthField = ({ object, getWidth, name = "Width: " }) => {
    */
   const handleBlur = () => {
     let temp = Math.max(2, width);
+    if (isStadium && temp % 2 != 0) {
+      temp += 1;
+    }
 
     action.push(object);
     action.push(objectData.width);
@@ -67,7 +75,6 @@ const WidthField = ({ object, getWidth, name = "Width: " }) => {
 
     setWidth(temp);
 
-    console.log("temp: " + temp);
     //update project file
     const newMesh = projectFile.meshes[object.userData.idNumber];
     newMesh.width = temp;
