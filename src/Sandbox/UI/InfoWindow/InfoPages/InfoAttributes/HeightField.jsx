@@ -59,7 +59,12 @@ const HeightField = ({
     if (!currentBase) {
       return;
     }
-    let temp = Math.ceil(Math.max(currentBase / 6, height));
+    let temp = Math.ceil(Math.max(currentBase / maxRate, height));
+    //hard coded bad practice
+    // in the case of a triangle with base 2 set the height to 2
+    if (currentBase == 2) {
+      temp = Math.max(2, height);
+    }
     setHeight(temp);
     objectData.setHeight(temp);
   }, [currentBase]);
@@ -75,8 +80,10 @@ const HeightField = ({
     action.push(temp);
     undoList.push(action);
 
-    if (currentBase) {
+    if (currentBase != 2) {
       temp = Math.ceil(Math.max(currentBase / maxRate, height));
+    } else {
+      temp = Math.max(2, height);
     }
 
     objectData.setHeight(temp);

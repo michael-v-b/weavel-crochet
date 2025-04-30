@@ -49,7 +49,7 @@ const BaseField = ({ object, getBase }) => {
    * Updates the object's height when input field is no longer selected and sets focused state to false.
    */
   const handleBlur = () => {
-    let temp = base;
+    let temp = Math.max(2, base);
 
     action.push(object);
     action.push(objectData.base);

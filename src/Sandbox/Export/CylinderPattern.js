@@ -10,14 +10,14 @@ const CylinderPattern = (object) => {
   const circum = objectData.circum;
   const height = objectData.height;
   let output = [];
-    output = [
-      "Chain " +
-        circum +
-        " then slip stitch ends together in a ring. (" +
-        circum +
-        ")",
-    ];
-  
+  output = [
+    "Chain " +
+      circum +
+      " then slip stitch ends together in a ring. (" +
+      circum +
+      ")",
+  ];
+
   let roundNum = circum / 6 + 1;
 
   const wallsStart =
@@ -41,11 +41,11 @@ const CylinderPattern = (object) => {
     "sc around walls (" +
     circum +
     ")\n";
+
   output.push(walls);
   output.push("\n");
   output.push("Top Circle: \n");
 
- 
   output.push("Fasten off.\n");
   return output;
 };

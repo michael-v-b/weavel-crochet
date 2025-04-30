@@ -1,5 +1,6 @@
 import HeightField from "../InfoAttributes/HeightField";
 import BaseField from "../InfoAttributes/BaseField";
+import { useState } from "react";
 
 /**
  * @typedef {TrianglePage} - extra fields added when box is selected.
@@ -7,12 +8,13 @@ import BaseField from "../InfoAttributes/BaseField";
  * @property {DimField} - Dimfield.
  */
 const TrianglePage = ({ object }) => {
+  const [currentBase, setBase] = useState(object.userData.meshData.base);
   const handleBase = (base) => {
-    console.log("base changes to " + base);
+    setBase(base);
   };
   return (
     <>
-      <HeightField object={object} />
+      <HeightField object={object} currentBase={currentBase} maxRate={2} />
       <BaseField object={object} getBase={handleBase} />
     </>
   );

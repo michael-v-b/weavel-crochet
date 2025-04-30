@@ -7,6 +7,7 @@ import ConePattern from "./ConePattern";
 import CapsulePattern from "./CapsulePattern";
 import ChainPattern from "./ChainPattern";
 import SiloPattern from "./SiloPattern";
+import TrianglePattern from "./TrianglePattern";
 import { forwardRef, useImperativeHandle } from "react";
 import { jsPDF } from "jspdf";
 import useStore from "../DevTools/store";
@@ -42,6 +43,7 @@ const Exporter = forwardRef((_, ref) => {
     capsule: CapsulePattern,
     chain: ChainPattern,
     silo: SiloPattern,
+    triangle: TrianglePattern,
   };
 
   /**
@@ -89,13 +91,9 @@ const Exporter = forwardRef((_, ref) => {
     doc.text("Stitch Key: ", 10, row);
     for (let i = 0; i < stitch_key_text.length; i++) {
       addRow(10, doc);
-      doc.text(
-        stitch_key_text[i],
-        10,
-        row
-      );
+      doc.text(stitch_key_text[i], 10, row);
     }
-  }
+  };
 
   /**
    *Adds a banner to the top of the page.
@@ -152,29 +150,48 @@ const Exporter = forwardRef((_, ref) => {
 
     addRow(20, doc);
 
-    
     doc.setFontSize(14);
-    
+
     doc.setFont("Helvetica", "bold");
 
-    doc.text("Thank you for using the Weavel Pattern Generator to create your custom ",10,row);
-    addRow(10,doc);
-    doc.text("crochet pattern! Simply follow the instructions below to create each piece, then",10,row);
-    addRow(10,doc);
-    doc.text("sew all the pieces together as you had them in your project. ",10,row);
-    addRow(10,doc);
-    doc.text("If you have any questions, please refer to the color and stitch keys below.",10,row);
-    addRow(10,doc);
-    doc.text("If you don't know how to perform any of these stitches, you can check the",10,row);
-    addRow(10,doc);
-    doc.text("'How to Crochet' page on the website",10,row);
+    doc.text(
+      "Thank you for using the Weavel Pattern Generator to create your custom ",
+      10,
+      row
+    );
+    addRow(10, doc);
+    doc.text(
+      "crochet pattern! Simply follow the instructions below to create each piece, then",
+      10,
+      row
+    );
+    addRow(10, doc);
+    doc.text(
+      "sew all the pieces together as you had them in your project. ",
+      10,
+      row
+    );
+    addRow(10, doc);
+    doc.text(
+      "If you have any questions, please refer to the color and stitch keys below.",
+      10,
+      row
+    );
+    addRow(10, doc);
+    doc.text(
+      "If you don't know how to perform any of these stitches, you can check the",
+      10,
+      row
+    );
+    addRow(10, doc);
+    doc.text("'How to Crochet' page on the website", 10, row);
 
-    addRow(10,doc);
+    addRow(10, doc);
 
     doc.setDrawColor(120, 165, 206);
     doc.line(10, row, pageWidth - 10, row);
 
-    addRow(10,doc);
+    addRow(10, doc);
 
     doc.setFontSize(16);
     doc.setTextColor(0, 0, 0);
@@ -182,16 +199,15 @@ const Exporter = forwardRef((_, ref) => {
 
     addColorKey(doc);
 
-    addRow(10,doc);
-    
+    addRow(10, doc);
+
     doc.setDrawColor(120, 165, 206);
     doc.line(10, row, pageWidth - 10, row);
 
-    addRow(10,doc);
+    addRow(10, doc);
 
     addStitchKey(doc);
-    
-    
+
     addRow(10, doc);
 
     //iterate through every mesh and its mesh pattern to the list.
