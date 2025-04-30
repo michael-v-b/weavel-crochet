@@ -8,6 +8,7 @@ import CapsulePattern from "./CapsulePattern";
 import ChainPattern from "./ChainPattern";
 import SiloPattern from "./SiloPattern";
 import TrianglePattern from "./TrianglePattern";
+import StadiumPattern from "./StadiumPattern";
 import { forwardRef, useImperativeHandle } from "react";
 import { jsPDF } from "jspdf";
 import useStore from "../DevTools/store";
@@ -44,6 +45,7 @@ const Exporter = forwardRef((_, ref) => {
     chain: ChainPattern,
     silo: SiloPattern,
     triangle: TrianglePattern,
+    stadium: StadiumPattern,
   };
 
   /**

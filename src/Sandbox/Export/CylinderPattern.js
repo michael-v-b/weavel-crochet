@@ -11,7 +11,7 @@ const CylinderPattern = (object) => {
   const height = objectData.height;
   let output = [];
   output = [
-    "Chain " +
+    "Round 1: Ch " +
       circum +
       " then slip stitch ends together in a ring. (" +
       circum +
@@ -38,7 +38,7 @@ const CylinderPattern = (object) => {
     (roundNum + height - 2) +
     ": " +
     circum +
-    "sc around walls (" +
+    " sc around walls (" +
     circum +
     ")\n";
 
