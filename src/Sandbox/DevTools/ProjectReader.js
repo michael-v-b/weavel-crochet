@@ -194,6 +194,9 @@ const ProjectReader = forwardRef(
         meshData.setHeight(saveData.height);
       }
 
+      if (attributes.includes("width")) {
+        meshData.setWidth(saveData.width);
+      }
 
       //set read project to true if last mesh
       numFinished -= 1;

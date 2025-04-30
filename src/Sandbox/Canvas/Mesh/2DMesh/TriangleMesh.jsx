@@ -8,23 +8,23 @@ import { BufferGeometry, BufferAttribute } from "three";
  */
 const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
   TriangleMesh.displayName = "Triangle Mesh";
-  const attributeList = ["height"];
+  const attributeList = ["height", "width"];
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
   const DEF_HEIGHT = useStore((state) => state.DEF_HEIGHT);
   const height_convert = useStore((state) => state.height_convert);
   const meshLoading = useStore((state) => state.meshLoading);
   const [height, setHeight] = useState(DEF_HEIGHT);
-  const [base, setBase] = useState(DEF_HEIGHT);
+  const [width, setWidth] = useState(DEF_HEIGHT);
 
-  const dependencyList = [height, base];
+  const dependencyList = [height, width];
 
   useEffect(() => {
     if (!meshLoading) {
       const newMesh = projectFile.meshes[id];
       newMesh.attributeList = attributeList;
       newMesh.height = height;
-      newMesh.base = base;
+      newMesh.width = width;
       setProjectFile({ ...projectFile });
     }
   }, []);
@@ -38,12 +38,12 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
 
     for (let i = 0; i < 2; i++) {
       const bottomLeft = [
-        -height_convert(base),
+        -height_convert(width),
         -height_convert(height),
         DEPTH_OFFSET,
       ];
       const bottomRight = [
-        height_convert(base),
+        height_convert(width),
         -height_convert(height),
         DEPTH_OFFSET,
       ];
@@ -86,7 +86,7 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
       id={id}
       dependencyList={dependencyList}
       meshType="triangle"
-      meshData={{ height, setHeight, base, setBase, attributeList }}
+      meshData={{ height, setHeight, width, setWidth, attributeList }}
       ref={ref}
       {...props}
     >

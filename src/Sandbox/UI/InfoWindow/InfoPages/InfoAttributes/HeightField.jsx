@@ -80,10 +80,10 @@ const HeightField = ({
     action.push(temp);
     undoList.push(action);
 
-    if (currentBase != 2) {
-      temp = Math.ceil(Math.max(currentBase / maxRate, height));
-    } else {
+    if (currentBase == 2) {
       temp = Math.max(2, height);
+    } else if (currentBase) {
+      temp = Math.ceil(Math.max(currentBase / maxRate, height));
     }
 
     objectData.setHeight(temp);

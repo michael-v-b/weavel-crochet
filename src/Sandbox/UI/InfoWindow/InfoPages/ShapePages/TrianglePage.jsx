@@ -1,5 +1,5 @@
 import HeightField from "../InfoAttributes/HeightField";
-import BaseField from "../InfoAttributes/BaseField";
+import WidthField from "../InfoAttributes/WidthField";
 import { useState } from "react";
 
 /**
@@ -8,14 +8,14 @@ import { useState } from "react";
  * @property {DimField} - Dimfield.
  */
 const TrianglePage = ({ object }) => {
-  const [currentBase, setBase] = useState(object.userData.meshData.base);
-  const handleBase = (base) => {
-    setBase(base);
+  const [currentWidth, setWidth] = useState(object.userData.meshData.width);
+  const handleWidth = (base) => {
+    setWidth(base);
   };
   return (
     <>
-      <HeightField object={object} currentBase={currentBase} maxRate={2} />
-      <BaseField object={object} getBase={handleBase} />
+      <HeightField object={object} currentBase={currentWidth} maxRate={2} />
+      <WidthField object={object} getWidth={handleWidth} name={"Base"} />
     </>
   );
 };

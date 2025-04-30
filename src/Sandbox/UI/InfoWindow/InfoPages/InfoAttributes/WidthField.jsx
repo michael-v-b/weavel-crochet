@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import useStore from "../../../../DevTools/store";
 
 /**
- * @typedef {BaseField} - A field used to edit an object's base.
+ * @typedef {WidthField} - A field used to edit an object's width.
  * @property {Object} object - object whose base is being edited.
- * @returns {Component} - div with an input field that represents the object's base.
+ * @returns {Component} - div with an input field that represents the object's width.
  */
-const BaseField = ({ object, getBase }) => {
+const WidthField = ({ object, getWidth, name = "Width: " }) => {
   const [objectData, setObjectData] = useState(object.userData.meshData);
 
   const [action, setAction] = useState(["base"]);
@@ -17,11 +17,11 @@ const BaseField = ({ object, getBase }) => {
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
 
-  const [base, setBase] = useState(objectData.base);
+  const [width, setWidth] = useState(objectData.width);
 
   useEffect(() => {
     setObjectData(object.userData.meshData);
-    setBase(object.userData.meshData.base);
+    setWidth(object.userData.meshData.width);
   }, [object]);
 
   /**
@@ -32,9 +32,9 @@ const BaseField = ({ object, getBase }) => {
     const initNumber = parseInt(e.target.value);
 
     if (isNaN(initNumber)) {
-      setBase(0);
+      setWidth(0);
     } else {
-      setBase(initNumber);
+      setWidth(initNumber);
     }
   };
 
@@ -49,24 +49,29 @@ const BaseField = ({ object, getBase }) => {
    * Updates the object's height when input field is no longer selected and sets focused state to false.
    */
   const handleBlur = () => {
-    let temp = Math.max(2, base);
+    let temp = Math.max(2, width);
 
     action.push(object);
-    action.push(objectData.base);
+    action.push(objectData.width);
     action.push(temp);
     undoList.push(action);
 
-    objectData.setBase(temp);
-    getBase(temp);
+    objectData.setWidth(temp);
+
+    if (getWidth) {
+      getWidth(temp);
+    }
 
     setUndoList([...undoList]);
-    setAction(["base"]);
+    setAction(["width"]);
 
-    setBase(temp);
+    setWidth(temp);
 
+    console.log("temp: " + temp);
     //update project file
     const newMesh = projectFile.meshes[object.userData.idNumber];
-    newMesh.base = temp;
+    newMesh.width = temp;
+
     setProjectFile({ ...projectFile });
 
     setFocused(false);
@@ -75,11 +80,11 @@ const BaseField = ({ object, getBase }) => {
   return (
     <>
       <div className="attribute">
-        <div className="attribute attribute-name">Base: </div>
+        <div className="attribute attribute-name">{name}</div>
         <input
           className="small field-style"
           type="text"
-          value={base}
+          value={width}
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={(e) => {
@@ -92,4 +97,4 @@ const BaseField = ({ object, getBase }) => {
   );
 };
 
-export default BaseField;
+export default WidthField;

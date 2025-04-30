@@ -11,26 +11,31 @@ import useStore from "../../../DevTools/store";
 const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
   StadiumMesh.displayName = "StadiumMesh";
 
- 
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
 
-  const height_convert = useStore((state)=>state.height_convert);
-  const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
+  const height_convert = useStore((state) => state.height_convert);
+  const DEF_HEIGHT = useStore((state) => state.DEF_HEIGHT);
 
-  const meshLoading = useStore((state)=>state.meshLoading);
+  const meshLoading = useStore((state) => state.meshLoading);
 
   const segments = 20;
-  const attributeList = ["height"];
+  const attributeList = ["height", "width"];
   const half = (segments - 2) / 2;
-  const [height, setHeight] = useState(DEF_HEIGHT);
 
-  const dependencyList = [height];
+  const [height, setHeight] = useState(DEF_HEIGHT * 2);
+  const [width, setWidth] = useState(DEF_HEIGHT);
+
+  const dependencyList = [height, width];
   const FRONT_OFFSET = segments + 2;
   const DEPTH_OFFSET = 0.125;
 
   const geometry = useMemo(() => {
     const geo = new BufferGeometry();
+
+    const midHeight = height_convert(height - width) / 2;
+
+    const radius = height_convert(width / 2);
 
     const vertices = [];
     const indices = [];
@@ -44,19 +49,17 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
       const z = i == 0 ? DEPTH_OFFSET : -DEPTH_OFFSET;
       const IS_FRONT = FRONT_OFFSET * i;
 
-      vertices.push(
-        ...[0, height_convert(DEF_HEIGHT), z, 0, -height_convert(DEF_HEIGHT), z]
-      );
+      vertices.push(...[0, midHeight, z, 0, -midHeight, z]);
 
       for (let j = 0; j < 2; j++) {
         for (let k = 0; k < half + 1; k++) {
           //go around circle until half theta = math.pi then offset
           const theta = j * Math.PI + (k / half) * Math.PI;
-          const x = Math.cos(theta);
+          const x = radius * Math.cos(theta);
           const y =
             j == 0
-              ? Math.sin(theta) + height_convert(DEF_HEIGHT)
-              : Math.sin(theta) - height_convert(DEF_HEIGHT);
+              ? radius * Math.sin(theta) + midHeight
+              : radius * Math.sin(theta) - midHeight;
 
           vertices.push(x, y, z);
 
@@ -104,25 +107,25 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
     geo.setIndex(indices);
     geo.computeVertexNormals();
     return geo;
-  }, [height]);
+  }, [height, width]);
 
   useEffect(() => {
-    if(!meshLoading) {
+    if (!meshLoading) {
       const newMesh = projectFile.meshes[id];
       newMesh.attributeList = attributeList;
       newMesh.height = height;
+      newMesh.width = width;
       setProjectFile({ ...projectFile });
     }
   }, []);
 
-  
   return (
     <SelectableMesh
       id={id}
       ref={ref}
-      dependencyList = {dependencyList}
+      dependencyList={dependencyList}
       meshType="stadium"
-      meshData={{ height, setHeight, attributeList }}
+      meshData={{ height, setHeight, width, setWidth, attributeList }}
       {...props}
     >
       <primitive object={geometry} />
