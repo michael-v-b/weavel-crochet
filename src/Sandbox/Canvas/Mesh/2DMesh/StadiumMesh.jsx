@@ -25,15 +25,21 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
 
   const [height, setHeight] = useState(DEF_HEIGHT * 2);
   const [width, setWidth] = useState(DEF_HEIGHT);
+  const [isHalf, setHalf] = useState(false);
 
-  const dependencyList = [height, width];
-  const FRONT_OFFSET = segments + 2;
+  const dependencyList = [height, width, isHalf];
+  const FRONT_OFFSET = isHalf ? (segments + 6) / 2 : segments + 2;
   const DEPTH_OFFSET = 0.125;
 
   const geometry = useMemo(() => {
     const geo = new BufferGeometry();
 
-    const midHeight = height_convert(height - width) / 2;
+    let midHeight = height;
+    if (isHalf) {
+      midHeight = height_convert(height - width / 2) / 2;
+    } else {
+      midHeight = height_convert(height - width) / 2;
+    }
 
     const radius = height_convert(width / 2);
 
@@ -47,14 +53,28 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
     for (let i = 0; i < 2; i++) {
       //seperates front from back
       const z = i == 0 ? DEPTH_OFFSET : -DEPTH_OFFSET;
+
       const IS_FRONT = FRONT_OFFSET * i;
 
-      vertices.push(...[0, midHeight, z, 0, -midHeight, z]);
-
       for (let j = 0; j < 2; j++) {
+        //seperated top and bottom
+
+        //add center vertex
+        if (j <= 0) {
+          console.log("top");
+          vertices.push(...[0, midHeight, z]);
+        } else if (!isHalf) {
+          console.log("bottom");
+          vertices.push(...[0, -midHeight, z]);
+        }
+
+        //offset between vertex in center at top and at bottom
+        const BOTTOM = half + 2;
+
         for (let k = 0; k < half + 1; k++) {
           //go around circle until half theta = math.pi then offset
           const theta = j * Math.PI + (k / half) * Math.PI;
+
           const x = radius * Math.cos(theta);
           const y =
             j == 0
@@ -63,28 +83,45 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
 
           vertices.push(x, y, z);
 
-          //set indices of faces the *j just activates the half
           if (k > 0) {
-            const temp = k + (half + 1) * j + IS_FRONT;
+            const temp = k + BOTTOM * j + IS_FRONT;
+
             if (IS_FRONT) {
-              indices.push(temp + 2, temp + 1, j + IS_FRONT);
+              indices.push(temp + 1, temp, j * BOTTOM + IS_FRONT);
             } else {
-              indices.push(j + IS_FRONT, temp + 1, temp + 2);
+              indices.push(j * BOTTOM + IS_FRONT, temp, temp + 1);
             }
           }
         }
+        if (isHalf) {
+          break;
+        }
       }
 
-      const a = segments + IS_FRONT + 1;
-      const b = half + IS_FRONT + 3;
-      const c = half + IS_FRONT + 2;
-      const d = IS_FRONT + 2;
-      if (IS_FRONT) {
-        indices.push(a, b, c);
-        indices.push(d, a, c);
+      //connect the 2 halves?
+
+      let a = IS_FRONT + 1;
+      let b = half + IS_FRONT + 1;
+      let c = 0;
+      let d = 0;
+
+      //set c and d, and add vertices if isHalf
+      if (!isHalf) {
+        c = half + IS_FRONT + 3;
+        d = segments + IS_FRONT + 1;
       } else {
-        indices.push(c, b, a);
-        indices.push(c, a, d);
+        c = b + 1;
+        d = c + 1;
+        vertices.push(-radius, -midHeight, z);
+        vertices.push(radius, -midHeight, z);
+      }
+
+      if (IS_FRONT) {
+        indices.push(a, d, b);
+        indices.push(d, c, b);
+      } else {
+        indices.push(a, b, d);
+        indices.push(d, b, c);
       }
     }
 
@@ -92,11 +129,21 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
       return (a % length) + bottom;
     };
     //connect walls
-    for (let i = 0; i < segments + 1; i++) {
-      const a = inRange(i, segments, 2);
-      const b = inRange(i + 1, segments, 2);
-      const c = inRange(i, segments, FRONT_OFFSET + 2);
-      const d = inRange(i + 1, segments, FRONT_OFFSET + 2);
+    for (let i = 0; i < FRONT_OFFSET - 1; i++) {
+      let a = inRange(i, FRONT_OFFSET - 1, 1);
+      let b = inRange(i + 1, FRONT_OFFSET - 1, 1);
+      let c = inRange(i, FRONT_OFFSET - 1, FRONT_OFFSET + 1);
+      let d = inRange(i + 1, FRONT_OFFSET - 1, FRONT_OFFSET + 1);
+      if (a == segments / 2 + 1 && !isHalf) {
+        a += 1;
+        c += 1;
+      }
+      if (b == segments / 2 + 1 && !isHalf) {
+        b += 1;
+        d += 1;
+      }
+
+      console.log(a, b, c, d);
       indices.push(c, b, a, d, b, c);
     }
 
@@ -107,7 +154,7 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
     geo.setIndex(indices);
     geo.computeVertexNormals();
     return geo;
-  }, [height, width]);
+  }, [height, width, isHalf]);
 
   useEffect(() => {
     if (!meshLoading) {
@@ -115,6 +162,7 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
       newMesh.attributeList = attributeList;
       newMesh.height = height;
       newMesh.width = width;
+      newMesh.isHalf = isHalf;
       setProjectFile({ ...projectFile });
     }
   }, []);
@@ -125,7 +173,15 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
       ref={ref}
       dependencyList={dependencyList}
       meshType="stadium"
-      meshData={{ height, setHeight, width, setWidth, attributeList }}
+      meshData={{
+        height,
+        setHeight,
+        width,
+        setWidth,
+        half,
+        setHalf,
+        attributeList,
+      }}
       {...props}
     >
       <primitive object={geometry} />

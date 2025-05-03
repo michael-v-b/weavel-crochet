@@ -1,5 +1,6 @@
 import HeightField from "../InfoAttributes/HeightField";
 import WidthField from "../InfoAttributes/WidthField";
+import HalfField from "../InfoAttributes/HalfField";
 import { useState } from "react";
 
 /**
@@ -22,6 +23,7 @@ const StadiumPage = ({ object }) => {
     <>
       <HeightField object={object} currentBase={width} isStadium={true} />
       <WidthField object={object} isStadium={true} getWidth={handleWidth} />
+      <HalfField object={object} />
     </>
   );
 };
