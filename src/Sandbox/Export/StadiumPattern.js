@@ -53,7 +53,7 @@ const StadiumPattern = (object) => {
           midHeight +
           " sc, inc x4, " +
           midHeight +
-          " sc, inc x4. (" +
+          " sc, inc x4, ch 1 and turn. (" +
           stitchCount +
           ")"
       );
