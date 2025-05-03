@@ -198,6 +198,12 @@ const ProjectReader = forwardRef(
         meshData.setWidth(saveData.width);
       }
 
+      console.log(attributes);
+      if (attributes.includes("isHalf")) {
+        console.log(saveData.isHalf);
+        meshData.setHalf(saveData.isHalf);
+      }
+
       //set read project to true if last mesh
       numFinished -= 1;
       if (numFinished == 0) {

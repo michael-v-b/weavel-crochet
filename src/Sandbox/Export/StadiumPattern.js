@@ -6,48 +6,93 @@
 const StadiumPattern = (object) => {
   const height = object.userData.meshData.height;
   const width = object.userData.meshData.width;
-  const midHeight = height - width;
+  const isHalf = object.userData.meshData.isHalf;
+  console.dir(object.userData.meshData);
 
-  let stitchCount = midHeight * 2 + 8;
-  let output = [
-    "Round 1: Ch " + (height - width + 2) + ".",
-    "Round 2: Skip first chain, (" +
-      midHeight +
-      " sc, insert 4 sc into next stitch) x 2 (" +
-      stitchCount +
-      ")",
-  ];
+  console.log("isHalf: " + isHalf);
+  const midHeight = isHalf ? height - width / 2 : height - width;
 
-  stitchCount += 8;
+  let stitchCount = isHalf ? midHeight * 2 + 4 : midHeight * 2 + 8;
+  let output = [];
 
-  if (width >= 2) {
-    output.push(
-      "Round 3: " +
+  const incrementStitches = () => {
+    if (isHalf) {
+      stitchCount += 4;
+    } else {
+      stitchCount += 8;
+    }
+  };
+
+  if (!isHalf) {
+    output = [
+      "Round 1: Ch " + (midHeight + 2) + ".",
+      "Round 2: Skip first chain, (" +
         midHeight +
-        " sc, inc x4, " +
-        midHeight +
-        " sc, inc x4. (" +
+        " sc, insert 4 sc into next stitch) x 2 (" +
         stitchCount +
-        ")"
-    );
+        ")",
+    ];
+
+    //if is half
+  } else {
+    output = [
+      "Round 1: Ch " + (midHeight + 1) + ".",
+      "Round 2: Skip first chain, " +
+        midHeight +
+        " sc, insert 4 sc into next stitch, ",
+      "\t\t" + midHeight + " sc, ch 1 and turn. (" + stitchCount + ")",
+    ];
   }
 
-  stitchCount += 8;
+  incrementStitches();
+
+  if (width >= 2) {
+    if (!isHalf) {
+      output.push(
+        "Round 3: " +
+          midHeight +
+          " sc, inc x4, " +
+          midHeight +
+          " sc, inc x4. (" +
+          stitchCount +
+          ")"
+      );
+    } else {
+      output.push(
+        "Round 3: " +
+          midHeight +
+          " sc, inc x4, " +
+          midHeight +
+          " sc. (" +
+          stitchCount +
+          ")"
+      );
+    }
+  }
+
+  incrementStitches();
 
   let roundNum = 3;
-  console.log("half width: " + width / 2);
+
   for (let i = 2; i < width / 2; i++) {
     roundNum += 1;
     let temp = "Round " + roundNum + ":";
 
-    for (let j = 0; j < 2; j++) {
-      const midString = " " + midHeight + " sc, ";
-      const inc = "(" + (i - 1) + " sc, inc) x4";
-      temp = temp + midString + inc;
+    if (!isHalf) {
+      for (let j = 0; j < 2; j++) {
+        const midString = " " + midHeight + " sc, ";
+        const inc = "(" + (i - 1) + " sc, inc) x4";
+        temp = temp + midString + inc;
+      }
+    } else {
+      const midString1 = " " + midHeight + " sc, ";
+      const inc = "(" + (i - 1) + " sc, inc) x4, ";
+      const midString2 = midHeight + " sc, ch1 and turn";
+      temp = temp + midString1 + inc + midString2;
     }
     temp = temp + ". (" + stitchCount + ")";
     output.push(temp);
-    stitchCount += 8;
+    incrementStitches();
   }
 
   output.push("Fasten off.");

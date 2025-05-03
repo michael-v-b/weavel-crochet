@@ -20,7 +20,7 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
   const meshLoading = useStore((state) => state.meshLoading);
 
   const segments = 20;
-  const attributeList = ["height", "width"];
+  const attributeList = ["height", "width", "isHalf"];
   const half = (segments - 2) / 2;
 
   const [height, setHeight] = useState(DEF_HEIGHT * 2);
@@ -61,10 +61,8 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
 
         //add center vertex
         if (j <= 0) {
-          console.log("top");
           vertices.push(...[0, midHeight, z]);
         } else if (!isHalf) {
-          console.log("bottom");
           vertices.push(...[0, -midHeight, z]);
         }
 
@@ -142,8 +140,6 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
         b += 1;
         d += 1;
       }
-
-      console.log(a, b, c, d);
       indices.push(c, b, a, d, b, c);
     }
 
@@ -178,7 +174,7 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
         setHeight,
         width,
         setWidth,
-        half,
+        isHalf,
         setHalf,
         attributeList,
       }}
