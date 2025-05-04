@@ -9,8 +9,8 @@ import CircumField from "../InfoAttributes/CircumField";
 const CapsulePage = ({ object, getFocused }) => {
   return (
     <>
-      <CircumField object={object} getFocused={getFocused} />
-      <HeightField object={object} getFocused={getFocused} />
+      <CircumField object={object} />
+      <HeightField object={object} />
     </>
   );
 };
