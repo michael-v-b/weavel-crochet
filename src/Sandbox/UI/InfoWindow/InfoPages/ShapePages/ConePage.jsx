@@ -1,10 +1,9 @@
 import HeightField from "../InfoAttributes/HeightField";
 import CircumField from "../InfoAttributes/CircumField";
-import React, { useState } from "react";
+import { useState } from "react";
 
 /**
  * @typedef {ConePage} - extra fields added when cone is selected.
- * @property {GetFocusedCallback} getFocused - allows isFocused to be accessed by App.
  * @property {Mesh} object - the cone whose info is being displayed.
  * @returns {Component} - CircumField and HeightField.
  */
@@ -23,7 +22,6 @@ const ConePage = ({ object, getFocused }) => {
     <>
       <CircumField
         object={object}
-        getFocused={getFocused}
         getCircum={handleCircum}
         roundingNum={0}
       />

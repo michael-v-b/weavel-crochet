@@ -1,5 +1,5 @@
 import "../InfoPages.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState,forwardRef,useImperativeHandle} from "react";
 import useStore from "../../../../DevTools/store";
 
 /**
@@ -9,13 +9,14 @@ import useStore from "../../../../DevTools/store";
  * @property {Number} currentBase - states the current circumference of the object.
  * @returns {Component} - div with an input field that represents the object's height.
  */
-const HeightField = ({
+const HeightField = forwardRef(({
   heightName = "Height",
+  getHeight,
   object,
-  currentBase,
-  maxRate,
-  isStadium = false,
-}) => {
+},ref) => {
+
+  HeightField.displayName = "Height Field";
+
   const [objectData, setObjectData] = useState(object.userData.meshData);
   const [height, setHeight] = useState(objectData.height);
   const [action, setAction] = useState(["height"]);
@@ -24,7 +25,6 @@ const HeightField = ({
   const setUndoList = useStore((state) => state.setUndoList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const HEIGHT_PAD = 2;
 
   useEffect(() => {
     setObjectData(object.userData.meshData);
@@ -52,25 +52,6 @@ const HeightField = ({
     setFocused(true);
   };
 
-  /**
-   * Set height once circum changes
-   */
-
-  useEffect(() => {
-    let temp = height;
-    console.log("current base changed to " + currentBase);
-    if (isStadium) {
-      temp = Math.max(height, currentBase + 1);
-      //rules if is cone or triangle
-    } else if (currentBase == 2) {
-      temp = Math.max(2, height);
-    } else if (currentBase) {
-      temp = Math.ceil(Math.max(currentBase / maxRate, height));
-    }
-
-    setHeight(temp);
-    objectData.setHeight(temp);
-  }, [currentBase]);
 
   /**
    * Updates the object's height when input field is no longer selected and sets focused state to false.
@@ -82,24 +63,22 @@ const HeightField = ({
     action.push(objectData.height);
     action.push(temp);
     undoList.push(action);
+    
 
-    //rules if is stadium
-    if (isStadium) {
-      console.log("is a stadium and this runs");
-      temp = Math.max(height, currentBase + 1);
-      //rules if is cone or triangle
-    } else if (currentBase == 2) {
-      temp = Math.max(2, height);
-    } else if (currentBase) {
-      temp = Math.ceil(Math.max(currentBase / maxRate, height));
-    }
+    temp = Math.max(2,height);
+    
 
     objectData.setHeight(temp);
+
+    //update for callback
+    getHeight(temp);
 
     setUndoList([...undoList]);
     setAction(["height"]);
 
     setHeight(temp);
+
+
 
     //update project file
     const newMesh = projectFile.meshes[object.userData.idNumber];
@@ -108,6 +87,10 @@ const HeightField = ({
 
     setFocused(false);
   };
+
+  useImperativeHandle(ref,()=>({setHeight}));
+
+
   return (
     <>
       <div className="attribute">
@@ -126,6 +109,6 @@ const HeightField = ({
       </div>
     </>
   );
-};
+});
 
 export default HeightField;

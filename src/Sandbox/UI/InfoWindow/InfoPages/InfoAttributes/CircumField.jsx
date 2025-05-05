@@ -1,5 +1,5 @@
 import "../InfoPages.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState,forwardRef,useImperativeHandle} from "react";
 import useStore from "../../../../DevTools/store";
 
 /**
@@ -8,7 +8,10 @@ import useStore from "../../../../DevTools/store";
  * @property {Mesh} object - object whose circumference is being changed
  * @returns {Component} - div that represents the circumference.
  */
-const CircumferenceField = ({ object, getCircum, roundingNum = 6 }) => {
+const CircumferenceField = forwardRef(({ object, getCircum, roundingNum = 6 },ref) => {
+
+  CircumferenceField.displayName = "Circumference Field";
+
   const [circum, setCircum] = useState(object.userData.meshData.circum);
   const [action, setAction] = useState(["circum"]);
   const setFocused = useStore((state) => state.setFocused);
@@ -42,13 +45,13 @@ const CircumferenceField = ({ object, getCircum, roundingNum = 6 }) => {
    * Calculates radius given current circum.
    * Rounds Circumference.
    */
-  const findRadius = () => {
-    let roundedCircum = Math.max(6, circum);
+  const findRadius = (tempCircum = circum) => {
+    let roundedCircum = Math.max(3, tempCircum);
 
     if (roundingNum != 0) {
       roundedCircum = Math.max(
         roundingNum,
-        roundingNum * Math.floor(circum / roundingNum)
+        roundingNum * Math.floor(tempCircum / roundingNum)
       );
     }
 
@@ -98,6 +101,10 @@ const CircumferenceField = ({ object, getCircum, roundingNum = 6 }) => {
 
     setFocused(false);
   };
+  
+
+  useImperativeHandle(ref,()=>({setCircum,findRadius}));
+
   return (
     <>
       <div className="attribute">
@@ -114,6 +121,6 @@ const CircumferenceField = ({ object, getCircum, roundingNum = 6 }) => {
       </div>
     </>
   );
-};
+});
 
 export default CircumferenceField;
