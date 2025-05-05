@@ -21,8 +21,9 @@ const ChainMesh = forwardRef(({ id, ...props }, ref) => {
 
   const dependencyList = [height];
 
+
   useEffect(() => {
-    if(meshLoading) {
+    if(!meshLoading) {
       const newMesh = projectFile.meshes[id];
       newMesh.attributeList = attributeList;
       newMesh.height = height;
