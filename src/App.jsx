@@ -4,7 +4,7 @@ import Register from "./Account/Register/Register";
 import Home from "./Home/Home";
 import Projects from "./Projects/Projects";
 import Help from "./Help/Help";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router";
 /**
  *@typedef {App} - page for full project, connects all parts of project together in a central unit.
  *@returns {Component} main page of project, contains all of the windows.
