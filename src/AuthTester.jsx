@@ -3,7 +3,7 @@ import useGlobalStore from "./globalStore";
 import supabase from "./supabase";
 import {useNavigate} from "react-router";
 
-const AuthTester = ({reroute}) => {
+const AuthTester = ({reverse = false, reroute}) => {
 
   const navigate = useNavigate();
 
@@ -18,8 +18,13 @@ const AuthTester = ({reroute}) => {
       setAuth(data.session.user.aud == "authenticated");
       setAuthData(data.session);
 
+      if(reverse) {
+        navigate(reroute);
+      }
+
       //if not authenticated reroute to location in reroute
-    } else {;
+    } else if(!reverse) {
+
       navigate(reroute);
       setAuth(false);
       setAuthData(null);

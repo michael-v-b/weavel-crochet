@@ -78,7 +78,7 @@ const Register = () => {
         setWarningText("*Email already in use");
       } else if (data) {
         createProfile(data);
-        navigate("/login");
+        navigate("/verification");
       }
     }
   };

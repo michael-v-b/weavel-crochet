@@ -1,0 +1,8 @@
+
+.verification-text {
+    font-family:"Nunito","sans-serif";
+    font-size:3vh;
+    text-align:center;
+    color:var(--project-text);
+    font-weight:600;
+}
