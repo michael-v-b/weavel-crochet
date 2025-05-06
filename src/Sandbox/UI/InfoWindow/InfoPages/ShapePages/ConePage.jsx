@@ -38,7 +38,7 @@ const ConePage = ({ object}) => {
       <CircumField
       ref = {circumRef}
         object={object}
-        getWidth = {handleWidth}
+        getWidth = {handleCircum}
       />
       <HeightField
       ref = {heightRef}

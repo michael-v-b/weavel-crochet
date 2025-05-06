@@ -14,8 +14,8 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
   const DEF_HEIGHT = useStore((state) => state.DEF_HEIGHT);
   const height_convert = useStore((state) => state.height_convert);
   const meshLoading = useStore((state) => state.meshLoading);
-  const [height, setHeight] = useState(DEF_HEIGHT);
-  const [width, setWidth] = useState(DEF_HEIGHT);
+  const [height, setHeight] = useState(DEF_HEIGHT/2);
+  const [width, setWidth] = useState(DEF_HEIGHT/2);
 
   const dependencyList = [height, width];
 
@@ -79,7 +79,7 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
     geo.computeVertexNormals();
 
     return geo;
-  });
+  },[height,width]);
 
   return (
     <SelectableMesh
