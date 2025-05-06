@@ -34,6 +34,8 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
+ 
+
   /**
    * When logo is clicked on, it will lead back to the home page.
    */

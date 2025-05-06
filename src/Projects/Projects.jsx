@@ -14,6 +14,7 @@ import "./Projects.css";
  */
 const Projects = () => {
   const auth = useGlobalStore((state) => state.auth);
+  const authData = useGlobalStore((state)=>state.authData);
   const [projectNames, setProjectNames] = useState([]);
   const [canRemove, setRemove] = useState(false);
   const removeButtonRef = useRef(null);
@@ -22,18 +23,45 @@ const Projects = () => {
   const projectManagerRef = useRef(null);
   const clickedX = useRef(false);
 
+    /**
+   * Adds a profile to the "Profiles" table 
+   * This is here because it's a bottle neck for authenticated users, they must go through here to create a project.
+   *@param {data} data - The user's data from the supabase.auth table.
+   */
+   const createProfile = async (data) => {
+    const { error } = await supabase.from("Profiles").insert({
+      email: data.user.email,
+      user_id: data.user.id,
+      created_at: data.user.created_at,
+    });
+  };
+  
+  /**
+   * 
+   */
+
+  const testProfile = async () => {
+    const {data,error} = await supabase.from("Profiles").select("*");
+
+    if(data.length == 0) {
+      createProfile(authData);
+    } else {
+      getProjects();
+    }
+  }
+
   /**
    * Initializes event listeners and project data.
    */
   useEffect(() => {
-      getProjects();
+      testProfile();
     
 
-    document.addEventListener("click", handleClick);
+      document.addEventListener("click", handleClick);
 
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
+      return () => {
+        document.removeEventListener("click", handleClick);
+      };
   }, []);
 
   /**
