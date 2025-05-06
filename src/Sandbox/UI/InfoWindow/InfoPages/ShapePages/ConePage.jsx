@@ -50,5 +50,3 @@ const ConePage = ({ object}) => {
   );
 };
 export default ConePage;
-git config --global user.email "michael.v.burton@gmail.com"
-  git config --global user.name "mikkel"
