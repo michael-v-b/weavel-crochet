@@ -10,7 +10,6 @@
 .register-window {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
 
   height: 70vh; /*hard- coded, may need to change*/

@@ -76,6 +76,8 @@
 .login-button-container {
   display: flex;
   flex-direction: row-reverse;
+  justify-content:space-between;
+  align-items:center;
   width: 50vh;
   padding-right:12vh;
 }
@@ -97,6 +99,15 @@
   background-color: rgb(109, 243, 255);
   color: white;
   border-radius: 5px;
+}
+
+.forgot-pass{
+  font-family:"Nunito",sans-serif;
+  font-weight:500;
+  text-decoration:underline dotted;
+  font-size:2.5vh;
+  margin-left:10vh;
+  color: rgb(137, 137, 137);
 }
 
 /*"I don't have an account"*/

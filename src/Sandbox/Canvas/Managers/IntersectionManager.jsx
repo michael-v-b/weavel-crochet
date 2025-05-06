@@ -30,7 +30,6 @@ const IntersectionManager = forwardRef((_, ref) => {
         matrix.multiply(selectedMesh.matrixWorld);
 
         const bTree = nonSelectedMesh.geometry.boundsTree;
-        console.log("bTree: " + bTree);
         const intersects = bTree.intersectsGeometry(
           selectedMesh.geometry,
           matrix

@@ -108,6 +108,7 @@ const Login = () => {
           <div className="warning-message">{warning} </div>
 
           <div className="login-button-container">
+           
             <motion.div
               className="login-button"
               whileHover={{ scale: 1.1, backgroundColor: "#11d5e9" }}
@@ -119,6 +120,14 @@ const Login = () => {
               onClick={handleLoginClick}
             >
               Log In{" "}
+            </motion.div>
+            <motion.div 
+            className = "forgot-pass"
+            whileHover = {{ color:"#000000",scale:1.1}} 
+            whileTap = {{ color:"#888888",scale:0.9}} 
+            onClick = {()=>{navigate ("/forgot_pass")}}
+            >
+              Forgot password?
             </motion.div>
             
           </div>

@@ -46,7 +46,6 @@ const SelectableMesh = forwardRef(
 
     useFrame(() => {
       if (ref.current) {
-        console.log("calculate the compute bounds");
         const geo = ref.current.geometry;
         geo.computeBoundsTree(geo);
       }

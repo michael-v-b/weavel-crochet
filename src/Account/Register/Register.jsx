@@ -2,8 +2,8 @@ import "./Register.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import logo from "../../assets/logo.png";
 import supabase from "../../supabase";
+import HomeIcon from "../HomeIcon";
 
 /**
  *@typedef {Register} - Screen users navigate to to create their accounts.
@@ -85,17 +85,7 @@ const Register = () => {
 
   return (
     <div className="web-container center">
-      <motion.img
-        className="register-logo"
-        whileHover={{
-          scale: 1.1,
-        }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => {
-          navigate("/");
-        }}
-        src={logo}
-      />
+      <HomeIcon/>
       <div className="register-window ">
         <div className="register-request">Please Create Your Account </div>
         <div className="register-inputs center">

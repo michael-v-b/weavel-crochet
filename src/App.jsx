@@ -2,6 +2,8 @@ import Sandbox from "./Sandbox/Sandbox";
 import Login from "./Account/Login/Login";
 import Register from "./Account/Register/Register";
 import Verification from "./Account/Verification/Verification";
+import ForgotPass from "./Account/ForgotPass";
+import ResetPass from "./Account/ResetPass";
 import Home from "./Home/Home";
 import Projects from "./Projects/Projects";
 import Help from "./Help/Help";
@@ -22,6 +24,8 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path = "/verification" element = {<Verification/>}/>
+        <Route path = "/forgot_pass" element = {<ForgotPass/>}/>
+        <Route path = "/reset_pass" element = {<ResetPass/>}/>
         <Route path="/projects" element={<Projects />} />
         <Route path = "/help" element = {<Help/>}/>
       </Routes>
