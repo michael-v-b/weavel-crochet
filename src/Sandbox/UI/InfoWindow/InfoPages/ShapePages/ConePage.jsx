@@ -9,7 +9,7 @@ import { useState,useRef} from "react";
  */
 const ConePage = ({ object}) => {
   const objectData = object.userData.meshData;
-  const MAX_RATE = 6;
+  const MAX_RATE = 2;
   const heightRef = useRef(null);
   const circumRef = useRef(null);
 
@@ -38,8 +38,7 @@ const ConePage = ({ object}) => {
       <CircumField
       ref = {circumRef}
         object={object}
-        getCircum={handleCircum}
-        roundingNum={0}
+        getWidth = {handleWidth}
       />
       <HeightField
       ref = {heightRef}

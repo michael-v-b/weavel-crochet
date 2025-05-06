@@ -1,5 +1,5 @@
 import "../InfoPages.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState ,forwardRef,useImperativeHandle} from "react";
 import useStore from "../../../../DevTools/store";
 
 /**
@@ -7,12 +7,11 @@ import useStore from "../../../../DevTools/store";
  * @property {Object} object - object whose base is being edited.
  * @returns {Component} - div with an input field that represents the object's width.
  */
-const WidthField = ({
+const WidthField = forwardRef(({
   object,
   getWidth,
   name = "Width: ",
-  isStadium = false,
-}) => {
+},ref) => {
   const [objectData, setObjectData] = useState(object.userData.meshData);
 
   const [action, setAction] = useState(["base"]);
@@ -55,9 +54,6 @@ const WidthField = ({
    */
   const handleBlur = () => {
     let temp = Math.max(2, width);
-    if (isStadium && temp % 2 != 0) {
-      temp += 1;
-    }
 
     action.push(object);
     action.push(objectData.width);
@@ -84,6 +80,8 @@ const WidthField = ({
     setFocused(false);
   };
 
+  useImperativeHandle(ref,()=>({setWidth,width}))
+
   return (
     <>
       <div className="attribute">
@@ -102,6 +100,6 @@ const WidthField = ({
       </div>
     </>
   );
-};
+});
 
 export default WidthField;

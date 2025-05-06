@@ -71,7 +71,9 @@ const HeightField = forwardRef(({
     objectData.setHeight(temp);
 
     //update for callback
-    getHeight(temp);
+    if(getHeight) {
+      getHeight(temp);
+    }
 
     setUndoList([...undoList]);
     setAction(["height"]);
