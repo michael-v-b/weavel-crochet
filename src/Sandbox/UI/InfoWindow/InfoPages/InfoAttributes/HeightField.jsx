@@ -88,7 +88,7 @@ const HeightField = forwardRef(({
     setFocused(false);
   };
 
-  useImperativeHandle(ref,()=>({setHeight}));
+  useImperativeHandle(ref,()=>({height,setHeight}));
 
 
   return (

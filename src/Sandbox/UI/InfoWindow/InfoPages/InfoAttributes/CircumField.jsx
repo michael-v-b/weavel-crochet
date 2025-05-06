@@ -103,7 +103,7 @@ const CircumferenceField = forwardRef(({ object, getCircum, roundingNum = 6 },re
   };
   
 
-  useImperativeHandle(ref,()=>({setCircum,findRadius}));
+  useImperativeHandle(ref,()=>({circum,setCircum,findRadius}));
 
   return (
     <>
