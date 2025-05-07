@@ -85,7 +85,7 @@ const Help = () => {
             Here will be a brief summary of the different types of shapes and what uses they would have for your project.`,
             `$b$ It is worth mentioning that if a shape has 2 variables that affect its dimensions, i.e. Cones, Capsules and Silos which all have
             fields for circumference and height, changing one value will affect the other to ensure that the shape remains possible to make using
-            crochet. `
+            crochet. `,
 
             `$s$ 3D Shapes`,
                 `$b$ These are the meat and potatoes of your model. It's what seperates amigurumi from regular crochet and what will give your projects depth.
@@ -124,7 +124,7 @@ const Help = () => {
             
                 '$u$ Circle',
                     `$b$ A common beginner shape, the circle can be used for ears and different colored bellies. You can adjust its circumference
-                    in terms of stitches.`
+                    in terms of stitches.`,
                 `$u$ Square`,
                     `$b$ A simple single crochet patch which stems from a chain. The square has fairly niche usage in amigurumi 
                     since it mostly consists for more natural, rounder shapes. However, the skilled amigurumi can still find a purpose
