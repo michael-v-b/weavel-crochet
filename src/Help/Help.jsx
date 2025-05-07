@@ -78,11 +78,14 @@ const Help = () => {
                 `$b$ To delete a shape you can select the shape and either press delete, or backspace key`,
                 `$b$ Each project will have a maximum of 25 shapes.`,
                 
-        `$c$ Shapes NEEDS CHANGE`,
+        `$c$ Shapes`,
 
             `$b$ Shapes are the main things you will be interacting with in your project. These are the essence of your model.
             You can adjust their position, rotation and dimensions in any way you want to make whatever you want to create come to life.
             Here will be a brief summary of the different types of shapes and what uses they would have for your project.`,
+            `$b$ It is worth mentioning that if a shape has 2 variables that affect its dimensions, i.e. Cones, Capsules and Silos which all have
+            fields for circumference and height, changing one value will affect the other to ensure that the shape remains possible to make using
+            crochet. `
 
             `$s$ 3D Shapes`,
                 `$b$ These are the meat and potatoes of your model. It's what seperates amigurumi from regular crochet and what will give your projects depth.
@@ -105,18 +108,23 @@ const Help = () => {
 
             // MIGHT CHANGE IMPLEMENTATION OF THE CONE
                 '$u$ Cone',
-                    `$b$`,
+                    `$b$ This shape is mostly used for ears and beaks, but it can also be used for horns and other conical shapes.
+                    You can adjust the circumference in terms of stitches and the height in terms of rows.`,
 
                 '$u$ Cylinder',
-                    `$b$ `,
+                    `$b$ Like a silo but without the curve, the cylinder can be used in to form long necks or connect 2 different shapes.
+                    You can adjust the cylinder's height in terms of rounds and circumference in terms of stiches.`,
 
                 '$u$ Box',
-                    `$b$ `,
+                    `$b$ While it is not the most common shape in Amigurumi, it can still have its uses for more niche artificial looking patterns.
+                    You can adjust each of the Box's dimensions individually to cuztomize it as you need.`,
 
 
             `$s$ 2D Shapes`,
             
                 '$u$ Circle',
+                    `$b$ A common beginner shape, the circle can be used for ears and different colored bellies. You can adjust its circumference
+                    in terms of stitches.`
                 `$u$ Square`,
                     `$b$ A simple single crochet patch which stems from a chain. The square has fairly niche usage in amigurumi 
                     since it mostly consists for more natural, rounder shapes. However, the skilled amigurumi can still find a purpose
@@ -128,6 +136,9 @@ const Help = () => {
                     `$b$ The most simple shape, it is technically misplaced here as it is 1-dimensional. The simple chain is often
                     used for tails, arms and legs. However, keep in mind that the chain is not able to support itself and will flop
                     in real life. You can adjust the chain's length.`,
+                    `$u$ Triangle`,
+                    `$b$ While at first it may seem niche, the triangle can have many uses in amigurumi. It is perfect for flat pointed ears, wings or
+                    webbed feet! You can adjust the triangle's height in terms of rows and base in terms of stitches.`,
 
 
 
