@@ -22,6 +22,9 @@ const History = forwardRef(
     const updateAvgPosition = useStore((state) => state.updateAvgPosition);
     const projectFile = useStore((state) => state.projectFile);
     const setProjectFile = useStore((state) => state.setProjectFile);
+    const isDragging = useStore((state)=>state.isDragging);
+
+
     /**
      * applies the action to the correct list
      * @param {[Oject]} action - action to be added.
@@ -36,6 +39,7 @@ const History = forwardRef(
         resetUndoList([...undoList]);
       }
     };
+
 
     /**
      * Does opposite of action for translate
@@ -73,6 +77,8 @@ const History = forwardRef(
      * @param {boolean} isUndo - true if undo, fals if redo.
      */
     const updateRotate = (action, isUndo) => {
+
+
       const objectList = action[1];
       const angle = action[2];
       const axisString = action[3];
@@ -198,6 +204,8 @@ const History = forwardRef(
       object.userData.meshData.setCircum(oldCircum);
 
       const id = object.userData.idNumber;
+
+
       projectFile.meshes[id].circum = oldCircum;
 
       action[3] = oldRadius;
@@ -250,11 +258,12 @@ const History = forwardRef(
      * @param {boolean} isUndo - Is true when being undone and true when redone.
      */
     const updateName = (action, isUndo) => {
+
       const object = action[1];
       const oldName = action[2];
       const newName = action[3];
 
-      object.userData.cellRef.setName(oldName);
+      //object.userData.cellRef.setName(oldName);
       object.name = oldName;
 
       const id = object.userData.idNumber;
@@ -291,9 +300,12 @@ const History = forwardRef(
 
       const handler = actionHandler[action[0]];
 
+
       if (handler) {
         handler(action, isUndo);
       }
+
+
 
       setProjectFile({ ...projectFile });
     };
@@ -302,6 +314,10 @@ const History = forwardRef(
 
     //keyboard short cut
     useEffect(() => {
+      if(isDragging) {
+        return;
+      }
+
       if (
         (keysPressed.includes("ControlLeft") ||
           keysPressed.includes("ControlRight")) &&

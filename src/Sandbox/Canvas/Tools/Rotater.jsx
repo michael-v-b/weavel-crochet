@@ -205,6 +205,7 @@ const Rotater = forwardRef(({raycaster}, ref) => {
 
     prevAngle.current = newAngle;
 
+    totalAngle +=angleDiff;
     
 
 
