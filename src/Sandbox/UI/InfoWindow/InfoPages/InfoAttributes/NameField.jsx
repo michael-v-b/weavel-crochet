@@ -1,6 +1,7 @@
 import "../InfoPages.css";
 import { useEffect, useState } from "react";
 import useStore from "../../../../DevTools/store";
+import InputField from "./InputField";
 
 /**
  * @typedef {NameField} - Input field used to edit an object's name.
@@ -62,7 +63,7 @@ const NameField = ({ object }) => {
     <>
       <div className="attribute">
         <div className="attribute attribute-name">Name: </div>
-        <input
+        <InputField
           className="attribute large field-style"
           type="text"
           minLength="1"

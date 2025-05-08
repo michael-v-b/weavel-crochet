@@ -1,6 +1,7 @@
 import "../InfoPages.css";
 import { useEffect, useState,forwardRef,useImperativeHandle} from "react";
 import useStore from "../../../../DevTools/store";
+import InputField from "./InputField";
 
 /**
  * @typedef {CircumField} - A field in the info window that is used to change an object's circumference.
@@ -109,7 +110,7 @@ const CircumferenceField = forwardRef(({ object, getCircum, roundingNum = 6 },re
     <>
       <div className="attribute">
         <div className="attribute attribute-name">Circum: </div>
-        <input
+        <InputField
           className="attribute small field-style"
           type="text"
           value={circum}

@@ -5,6 +5,7 @@ import  {
 } from "react";
 import { Vector3 } from "three";
 import useStore from "../../../../DevTools/store";
+import InputField from "./InputField";
 
 /**
  * @typedef {PositionField} - a field that represents an object's position in 3d space.
@@ -86,7 +87,7 @@ const PositionField = ({ object }) => {
       <div className=" attribute attribute-name"> Position: </div>
       <div className="attribute position-attribute">
         X:
-        <input
+        <InputField
           onFocus={handleFocus}
           onBlur={handleBlur}
           type="text"
@@ -97,7 +98,7 @@ const PositionField = ({ object }) => {
           className="small position-field-style"
         />
         Y:
-        <input
+        <InputField
           onFocus={handleFocus}
           onBlur={handleBlur}
           type="text"
@@ -108,7 +109,7 @@ const PositionField = ({ object }) => {
           className="small position-field-style"
         />
         Z:
-        <input
+        <InputField
           onFocus={handleFocus}
           onBlur={handleBlur}
           type="text"

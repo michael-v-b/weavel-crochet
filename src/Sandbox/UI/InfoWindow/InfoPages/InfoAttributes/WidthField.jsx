@@ -1,6 +1,7 @@
 import "../InfoPages.css";
 import { useEffect, useState ,forwardRef,useImperativeHandle} from "react";
 import useStore from "../../../../DevTools/store";
+import InputField from "./InputField";
 
 /**
  * @typedef {WidthField} - A field used to edit an object's width.
@@ -86,7 +87,7 @@ const WidthField = forwardRef(({
     <>
       <div className="attribute">
         <div className="attribute attribute-name">{name}</div>
-        <input
+        <InputField
           className="small field-style"
           type="text"
           value={width}

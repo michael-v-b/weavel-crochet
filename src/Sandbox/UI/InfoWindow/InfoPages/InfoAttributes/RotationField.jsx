@@ -3,6 +3,7 @@ import "../InfoPages.css";
 import { useState, useEffect } from "react";
 import { Euler } from "three";
 import useStore from "../../../../DevTools/store";
+import InputField from "./InputField";
 
 /**
  * @typedef {Rotation} - A field that represents an object's Euler Rotation.
@@ -94,7 +95,7 @@ const RotationField = ({ object }) => {
       <div className="attribute attribute-name">Rotation:</div>
       <div className="attribute position-attribute">
         X:
-        <input
+        <InputField
           type="text"
           value={newRotation[0]}
           className="small position-field-style"
@@ -105,7 +106,7 @@ const RotationField = ({ object }) => {
           onBlur={handleBlur}
         />
         Y:
-        <input
+        <InputField
           type="text"
           value={newRotation[1]}
           className="small position-field-style"
@@ -116,7 +117,7 @@ const RotationField = ({ object }) => {
           onBlur={handleBlur}
         />
         Z:
-        <input
+        <InputField
           type="text"
           value={newRotation[2]}
           className="small position-field-style"

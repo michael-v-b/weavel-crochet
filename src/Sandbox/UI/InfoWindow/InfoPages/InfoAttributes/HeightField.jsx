@@ -1,6 +1,7 @@
 import "../InfoPages.css";
 import { useEffect, useState,forwardRef,useImperativeHandle} from "react";
 import useStore from "../../../../DevTools/store";
+import InputField from "./InputField";
 
 /**
  * @typedef {HeightField} - A field used to edit an object's height.
@@ -97,7 +98,7 @@ const HeightField = forwardRef(({
     <>
       <div className="attribute">
         <div className="attribute attribute-name">{heightName} </div>
-        <input
+        <InputField
           className="small field-style"
           type="text"
           value={height}

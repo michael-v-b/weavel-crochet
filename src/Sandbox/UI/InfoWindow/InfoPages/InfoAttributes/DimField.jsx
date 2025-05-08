@@ -2,6 +2,7 @@ import "../InfoPages.css";
 import  { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import useStore from "../../../../DevTools/store";
+import InputField from "./InputField";
 
 /**
  * @typedef {DimField} - Input field that represents an objects dimensions in either 2d or 3d.
@@ -116,7 +117,7 @@ const DimField = ({ object, dimensions }) => {
       </div>
       <div className="attribute">
         X:
-        <input
+        <InputField
           className="small position-field-style"
           type="text"
           value={xDim}
@@ -127,7 +128,7 @@ const DimField = ({ object, dimensions }) => {
           }}
         />
         Y:
-        <input
+        <InputField
           className="small position-field-style"
           type="text"
           value={yDim}
@@ -140,7 +141,7 @@ const DimField = ({ object, dimensions }) => {
         {dimensions == 3 && (
           <>
             Z:
-            <input
+            <InputField
               className="small position-field-style"
               type="text"
               value={zDim}
