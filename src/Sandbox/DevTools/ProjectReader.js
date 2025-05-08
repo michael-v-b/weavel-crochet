@@ -4,6 +4,7 @@ import useStore from "./store";
 import useGlobalStore from "../../globalStore";
 import supabase from "../../supabase";
 import { useNavigate } from "react-router";
+import updateMesh from "./MeshUpdater";
 //import project from "../../color_test.json";
 
 /**
@@ -141,7 +142,7 @@ const ProjectReader = forwardRef(
       numFinished = meshRefs.length;
 
       for (let i = 0; i < meshRefs.length; i++) {
-        updateMesh(meshRefs[i], meshes[meshKeys[i]]);
+        readerUpdateMesh(meshRefs[i], meshes[meshKeys[i]]);
       }
       if (numFinished == 0) {
         setMeshLoading(false);
@@ -150,59 +151,19 @@ const ProjectReader = forwardRef(
       setMeshList([...meshList]);
     };
 
-    const updateMesh = (meshRef, saveData) => {
+    const readerUpdateMesh = (meshRef, saveData) => {
+      console.log("saveData");
+      console.dir(saveData);
+
       //makes program wait until not the cased this
       if (!meshRef.current) {
         if (!readProject.current) {
-          requestAnimationFrame(() => updateMesh(meshRef, saveData));
+          requestAnimationFrame(() => readerUpdateMesh(meshRef, saveData));
         }
         return;
       }
 
-      const userData = meshRef.current.userData;
-      //UNIVERSAL ATTRIBUTES
-      // name
-      meshRef.current.name = saveData.name;
-      //position
-      meshRef.current.position.copy(new Vector3().fromArray(saveData.position));
-      //rotation
-      meshRef.current.rotation.copy(new Euler().fromArray(saveData.rotation));
-      //color
-      userData.setColorIndex(saveData.colorIndex);
-
-      //CUSTOM ATTRIBUTES===============================================================
-
-      const attributes = saveData.attributeList;
-      const meshData = userData.meshData;
-
-      //circumference
-      if (attributes.includes("circum")) {
-        meshData.setCircum(saveData.circum);
-        meshData.setRadius(circum_radius_convert(saveData.circum));
-      }
-
-      if (attributes.includes("dim")) {
-        const dim = saveData.dim;
-        meshData.setX(dim[0]);
-        meshData.setY(dim[1]);
-        if (dim.length > 2) {
-          meshData.setZ(dim[2]);
-        }
-      }
-
-      if (attributes.includes("height")) {
-        meshData.setHeight(saveData.height);
-      }
-
-      if (attributes.includes("width")) {
-        meshData.setWidth(saveData.width);
-      }
-
-      console.log(attributes);
-      if (attributes.includes("isHalf")) {
-        console.log(saveData.isHalf);
-        meshData.setHalf(saveData.isHalf);
-      }
+      updateMesh(meshRef,saveData,circum_radius_convert);
 
       //set read project to true if last mesh
       numFinished -= 1;

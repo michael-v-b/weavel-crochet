@@ -2,6 +2,7 @@ import React, { forwardRef, useImperativeHandle, useEffect } from "react";
 import useStore from "./store";
 import { useThree } from "@react-three/fiber";
 import { Vector3 } from "three";
+import updateMesh from "../DevTools/MeshUpdater";
 
 /**
  * undo dim
@@ -23,6 +24,7 @@ const History = forwardRef(
     const projectFile = useStore((state) => state.projectFile);
     const setProjectFile = useStore((state) => state.setProjectFile);
     const isDragging = useStore((state)=>state.isDragging);
+    const circum_radius_convert = useStore((state)=>state.circum_radius_convert);
 
 
     /**
@@ -113,19 +115,41 @@ const History = forwardRef(
      * action[0] - name of action
      * action[1] - reference to object created
      * @param {boolean} isUndo - true if undo and false if redo.
-     
+     */
     const updateCreate = (action, isUndo) => {
       const objects = [...action[1]];
+      const objectTypes = [];
+      const objectIds = [];
+
+      const objectInfo = [];
 
       for (let i = 0; i < objects.length; i++) {
         objects[i] = objects[i].current;
-      }
+        if(objects[i]){
+          const objectData = objects[i].userData;
+          const saveData = {};
 
+          //save data
+          saveData.name = objects[i].name;
+          saveData.position = objects[i].position.toArray();
+          saveData.rotation = objects[i].rotation.toArray(); 
+          saveData.colorIndex = objectData.colorIndex;
+          saveData.attributeList = objectData.meshData.attributeList;
+
+          objectInfo.push(saveData);
+          //ids
+          objectIds.push(objectData.idNumber);
+          //shape types
+          objectTypes.push(objectData.meshType);
+        }
+        //console.dir(objectData);
+      }
       deleterRef.current.deleteMeshes(objects);
 
       action[0] = "delete";
-      action[1] = objects;
-      const test = [...action];
+      action[1] = objectIds;
+      action[2] = objectTypes;
+      action[3] = objectInfo;
       updateLists([...action], isUndo);
     };
 
@@ -133,25 +157,33 @@ const History = forwardRef(
      * Undoes deletion of object.
      * @param {[{string},{ObjectRef}]} action -
      * action[0] - name of action
-     * action[1] - reference to object deleted
+     * action[1] - object ids
+     * action[2] - object mesh types
+     * action[3] - object data/attribute lists
      * @param {boolean} isUndo - true if undo and false if redo.
      */
     const updateDelete = (action, isUndo) => {
-      const spawner = meshSpawnerRef.current;
-      const objects = [...action[1]];
-      const tempMeshes = [];
-      const objectRefs = [];
-      for (let i = 0; i < objects.length; i++) {
-        objectRef = React.createRef();
-        objectRef.current = objects[i];
 
-        const objectData = objects[i].userData;
-        tempMeshes.push([objectData.meshType, objectRefs, objectData.idNumber]);
-        objectRefs.push(objectRef);
-        scene.add(objects[i]);
+      const spawner = meshSpawnerRef.current;
+      const meshIds=  [...action[1]];
+      const meshTypes = [...action[2]];
+      const meshData = [...action[3]];
+
+      let objectRefs = []; //used for undo/redo
+
+      for (let i = 0; i < meshIds.length; i++) {
+        objectRefs = spawner.spawnMeshes(meshTypes,meshIds,false)
       }
 
-      spawner.setMeshes([...spawner.meshes, ...tempMeshes]);
+      console.log("objectRefs: ");
+      console.dir(objectRefs);
+
+      //update refs just spawned.
+      for(let i = 0; i < objectRefs.length;i++) {
+        updateMesh(objectRefs[i],meshData[i],circum_radius_convert);
+      }
+
+
       action[0] = "create";
       action[1] = objectRefs;
 
@@ -278,8 +310,8 @@ const History = forwardRef(
     const actionHandler = {
       translate: updateTranslate,
       rotate: updateRotate,
-      //create: updateCreate, REIMPLEMENT
-      //delete: updateDelete, REIMPLEMENT
+      create: updateCreate,
+      delete: updateDelete,
       height: updateHeight,
       circum: updateCircum,
       dim: updateDim,

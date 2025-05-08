@@ -14,8 +14,6 @@ const AuthTester = ({reverse = false, reroute}) => {
 
   const checkSession = async() => {
     const {data,error} = await supabase.auth.getSession();
-    console.log("data: ")
-    console.dir(data);
     if(data.session) {
       setAuth(data.session.user.aud == "authenticated");
       setAuthData(data.session);
