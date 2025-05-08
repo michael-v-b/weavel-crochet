@@ -37,11 +37,6 @@ const MeshSpawner = forwardRef((_, ref) => {
   const OBJECT_LIMIT = useStore((state) => state.OBJECT_LIMIT);
   const projectFile = useStore((state) => state.projectFile);
 
-  useEffect(()=>{
-    console.log("meshes");
-    console.dir(meshes);
-  },[meshes]);
-
   // list of all shapeComponents and the values of their meshTypes
   // add shape here when creating a new shape
   const shapeComponents = {
@@ -107,8 +102,6 @@ const MeshSpawner = forwardRef((_, ref) => {
     return shape;
   };
 
-  
-
   /**
    * spawns multiple meshes into the scene at once this is mostly for projectReader
    * @param [{string}] shapes - a list of strings stating the types of each mesh
@@ -118,8 +111,6 @@ const MeshSpawner = forwardRef((_, ref) => {
     const tempMeshes = [];
     const meshRefs = [];
 
-    console.log("shapes: " + shapes);
-  
     for (let i = 0; i < shapes.length; i++) {
       const newMeshRef = React.createRef();
       const id = Ids[i];
@@ -138,8 +129,7 @@ const MeshSpawner = forwardRef((_, ref) => {
     }
 
     setMeshes([...meshes, ...tempMeshes]);
-    console.log("meshRefs: ");
-    console.dir(meshRefs);
+
     return meshRefs;
   };
 
@@ -194,6 +184,7 @@ const MeshSpawner = forwardRef((_, ref) => {
 
         //sets MeshComponent to corresponding shape
         const MeshComponent = shapeComponents[shape] || BallMesh;
+
         return (
           <MeshComponent
             ref={meshRef}

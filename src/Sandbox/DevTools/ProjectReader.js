@@ -97,6 +97,9 @@ const ProjectReader = forwardRef(
         return;
       }
 
+      console.log("project");
+      console.dir(project);
+
       setProjectId(tempId);
       setProjectFile(project);
       setColorList(project.colorList);
@@ -139,6 +142,9 @@ const ProjectReader = forwardRef(
         false
       );
 
+      console.log("meshRefs immediately: ");
+      console.dir(meshRefs);
+
       numFinished = meshRefs.length;
 
       for (let i = 0; i < meshRefs.length; i++) {
@@ -152,9 +158,6 @@ const ProjectReader = forwardRef(
     };
 
     const readerUpdateMesh = (meshRef, saveData) => {
-      console.log("saveData");
-      console.dir(saveData);
-
       //makes program wait until not the cased this
       if (!meshRef.current) {
         if (!readProject.current) {
@@ -163,7 +166,7 @@ const ProjectReader = forwardRef(
         return;
       }
 
-      updateMesh(meshRef,saveData,circum_radius_convert);
+      updateMesh(meshRef, saveData, circum_radius_convert);
 
       //set read project to true if last mesh
       numFinished -= 1;
