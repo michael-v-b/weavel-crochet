@@ -1,7 +1,6 @@
-import { motion } from "framer-motion";
-import { jsPDF } from "jspdf";
+
 import ModeButton from "../Buttons/ModeButton.jsx";
-import React, { useState, useRef, useContext } from "react";
+import {useEffect,useRef} from "react";
 import "./ModeBar.css";
 import useStore from "../../DevTools/store.js";
 
@@ -18,10 +17,15 @@ import useStore from "../../DevTools/store.js";
  */
 const ModeBar = ({ exporterRef, historyRef }) => {
   //allows current mode to be changed
+  const mode = useStore((state)=>state.mode);
   const setMode = useStore((state) => state.setMode);
   const currentMode = useStore((state) => state.mode);
   const undoList = useStore((state) => state.undoList);
   const redoList = useStore((state) => state.redoList);
+  const keysPressed = useStore((state)=>state.keysPressed);
+  const isDragging = useStore((state)=>state.isDragging);
+  const isFocused = useStore((state)=>state.isFocused);
+
   const modeKey = ["camera", "transform", "draw"];
   //const [currentMode, setMode] = useState("camera");
   const cameraButton = useRef(null);
@@ -49,6 +53,19 @@ const ModeBar = ({ exporterRef, historyRef }) => {
       setMode("none");
     }
   };
+
+  useEffect(()=>{
+    if(!isFocused && !isDragging && keysPressed.includes("KeyC")) {
+      if(mode == 'camera') {
+        setMode('none');
+        cameraButton.current.setPressed(false);
+      } else {
+        setMode('camera');
+        cameraButton.current.setPressed(true);
+      }
+
+    }
+  },[keysPressed]);
 
   return (
     <div className="mode-bar">

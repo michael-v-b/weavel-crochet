@@ -15,8 +15,12 @@ import useStore from "../../DevTools/store";
 const ToolManager = forwardRef(({ raycaster, rotaterRef,intersectionManagerRef}, ref) => {
   ToolManager.displayName = "Tool Manager";
   const tool = useStore((state) => state.tool);
+  const setTool = useStore((state)=>state.setTool);
   const selectedList = useStore((state) => state.selectedMeshes);
   const updateAvgPosition = useStore((state) => state.updateAvgPosition);
+  const keysPressed = useStore((state)=>state.keysPressed);
+  const isFocused = useStore((state)=>state.isFocused);
+  const isDragging = useStore((state)=>state.isDragging);
   const translaterRef = useRef(null);
 
   /**
@@ -49,6 +53,25 @@ const ToolManager = forwardRef(({ raycaster, rotaterRef,intersectionManagerRef},
       updateAvgPosition();
     }
   }, [selectedList]);
+
+  //updates when not dragging or focused
+  useEffect(()=>{
+    if(!isFocused && !isDragging) {
+      if(keysPressed.includes("KeyT")) {
+        if(tool == 'translate') {
+          setTool('none');
+        } else {
+        setTool("translate");
+        }
+      } else if(keysPressed.includes("KeyR")) {
+        if(tool == 'rotate') {
+          setTool('none');
+        } else {
+          setTool("rotate");
+        }
+      }
+    }
+  },[keysPressed]);
 
   useImperativeHandle(ref, () => ({
     handleRay,

@@ -36,6 +36,7 @@ const CanvasWindow = forwardRef(
     CanvasWindow.displayName = "Canvas Window";
     const mode = useStore((state) => state.mode);
     const isFocused = useStore((state)=>state.isFocused);
+  
     const [pendingPointerEvent,setPendingPointerEvent] = useState(null);
 
     const raycasterRef = useRef(null);
