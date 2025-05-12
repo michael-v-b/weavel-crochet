@@ -36,6 +36,7 @@ const ColorField = ({ object }) => {
     //update project file
     const newMesh = projectFile.meshes[object.userData.idNumber];
     newMesh.colorIndex = value;
+
     setProjectFile({ ...projectFile });
   };
 
@@ -47,20 +48,20 @@ const ColorField = ({ object }) => {
     let r = 0;
     let g = 0;
     let b = 0;
-    if(typeof tempColor == "string") {
-      r = parseFloat(tempColor.substring(0, 2), 16)/255;
-      g = parseFloat(tempColor.substring(2, 4), 16)/255;
-      b = parseFloat(tempColor.substring(4, 6), 16)/255;
+    if (typeof tempColor == "string") {
+      r = parseFloat(tempColor.substring(0, 2), 16) / 255;
+      g = parseFloat(tempColor.substring(2, 4), 16) / 255;
+      b = parseFloat(tempColor.substring(4, 6), 16) / 255;
     } else {
       r = tempColor.r;
-      g= tempColor.g;
+      g = tempColor.g;
       b = tempColor.b;
     }
 
-    if (Math.max(r ,g ,b  ) < 0.5) {
-      return (true);
+    if (Math.max(r, g, b) < 0.5) {
+      return true;
     } else {
-      return (false);
+      return false;
     }
   };
   /**
@@ -95,8 +96,11 @@ const ColorField = ({ object }) => {
           return (
             <option
               key={key}
-              style={{ backgroundColor: value,
-                color: testWhite(value.replace(/^#/, '')) ? "#FFFFFF" : "#000000"
+              style={{
+                backgroundColor: value,
+                color: testWhite(value.replace(/^#/, ""))
+                  ? "#FFFFFF"
+                  : "#000000",
               }}
               value={key + 1}
             >

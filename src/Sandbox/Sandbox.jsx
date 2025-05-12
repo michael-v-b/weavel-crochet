@@ -16,7 +16,7 @@ import useStore from "./DevTools/store";
 
 import Exporter from "./Export/Exporter";
 
-import { useRef, useEffect} from "react";
+import { useRef, useEffect } from "react";
 import { useLocation } from "react-router";
 import useGlobalStore from "../globalStore";
 import AuthTester from "../AuthTester";
@@ -60,7 +60,9 @@ const Sandbox = () => {
       type: "application/json",
     });
 
-    const { data , error } = await supabase.storage
+    console.log("uploaded project file");
+    console.dir(projectFile);
+    const { data, error } = await supabase.storage
       .from("Project Files")
       .upload(path, jsonBlob, { upsert: true });
   };
@@ -74,9 +76,8 @@ const Sandbox = () => {
 
   //updates file when change occurs but only if projectId is correct.
   useEffect(() => {
-
     //update camera first prevents having to do this every frame
-    if(cameraTrackerRef?.current) {
+    if (cameraTrackerRef?.current) {
       projectFile.cameraPosition = cameraTrackerRef.current.getCameraPosition();
       projectFile.cameraRotation = cameraTrackerRef.current.getCameraRotation();
     }
@@ -94,9 +95,13 @@ const Sandbox = () => {
       <div className="webpage">
         <LoadScreen visible={meshLoading || nameLoading} />
 
-        <ProjectReader ref={projectReaderRef} cameraTrackerRef = {cameraTrackerRef} meshSpawnerRef={meshSpawnerRef} />
+        <ProjectReader
+          ref={projectReaderRef}
+          cameraTrackerRef={cameraTrackerRef}
+          meshSpawnerRef={meshSpawnerRef}
+        />
         <Banner />
-        <AuthTester reroute = {"/"} />
+        <AuthTester reroute={"/"} />
         <NameTag />
         <div className="sandbox">
           <Exporter ref={exporterRef} />
@@ -114,7 +119,7 @@ const Sandbox = () => {
               historyRef={historyRef}
               selectionManagerRef={selectionManagerRef}
               meshSpawnerRef={meshSpawnerRef}
-              cameraTrackerRef = {cameraTrackerRef}
+              cameraTrackerRef={cameraTrackerRef}
             />
           </div>
           <div className="right-window">

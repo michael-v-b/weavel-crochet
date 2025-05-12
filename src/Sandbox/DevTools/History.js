@@ -9,7 +9,7 @@ import updateMesh from "../DevTools/MeshUpdater";
  * undo name change
  */
 const History = forwardRef(
-  ({ rotaterRef, deleterRef, meshSpawnerRef}, ref) => {
+  ({ rotaterRef, deleterRef, meshSpawnerRef }, ref) => {
     History.displayName = "History";
 
     const { scene } = useThree();
@@ -23,9 +23,10 @@ const History = forwardRef(
     const updateAvgPosition = useStore((state) => state.updateAvgPosition);
     const projectFile = useStore((state) => state.projectFile);
     const setProjectFile = useStore((state) => state.setProjectFile);
-    const isDragging = useStore((state)=>state.isDragging);
-    const circum_radius_convert = useStore((state)=>state.circum_radius_convert);
-
+    const isDragging = useStore((state) => state.isDragging);
+    const circum_radius_convert = useStore(
+      (state) => state.circum_radius_convert
+    );
 
     /**
      * applies the action to the correct list
@@ -41,7 +42,6 @@ const History = forwardRef(
         resetUndoList([...undoList]);
       }
     };
-
 
     /**
      * Does opposite of action for translate
@@ -79,8 +79,6 @@ const History = forwardRef(
      * @param {boolean} isUndo - true if undo, fals if redo.
      */
     const updateRotate = (action, isUndo) => {
-
-
       const objectList = action[1];
       const angle = action[2];
       const axisString = action[3];
@@ -108,8 +106,8 @@ const History = forwardRef(
 
     /**
      * @TODO UPDATE CREATE AND DELETE
-     * 
-     * 
+     *
+     *
      * Undoes creation of an object.
      * @param {[{string}, {[ObjectRef]}]} action -
      * action[0] - name of action
@@ -125,16 +123,34 @@ const History = forwardRef(
 
       for (let i = 0; i < objects.length; i++) {
         objects[i] = objects[i].current;
-        if(objects[i]){
+        if (objects[i]) {
           const objectData = objects[i].userData;
+          const meshData = objectData.meshData;
+
+          const attributeMap = {
+            circum: meshData.circum,
+            height: meshData.height,
+            half: meshData.half,
+            dim: meshData.dim,
+            width: meshData.width,
+          };
+
           const saveData = {};
 
           //save data
           saveData.name = objects[i].name;
           saveData.position = objects[i].position.toArray();
-          saveData.rotation = objects[i].rotation.toArray(); 
+          saveData.rotation = objects[i].rotation.toArray();
           saveData.colorIndex = objectData.colorIndex;
           saveData.attributeList = objectData.meshData.attributeList;
+          saveData.type = objectData.meshType;
+
+          const attributeList = saveData.attributeList;
+
+          //set attributeList
+          for (const attribute of attributeList) {
+            saveData[attribute] = attributeMap[attribute];
+          }
 
           objectInfo.push(saveData);
           //ids
@@ -163,26 +179,30 @@ const History = forwardRef(
      * @param {boolean} isUndo - true if undo and false if redo.
      */
     const updateDelete = (action, isUndo) => {
-
       const spawner = meshSpawnerRef.current;
-      const meshIds=  [...action[1]];
+      const meshIds = [...action[1]];
       const meshTypes = [...action[2]];
       const meshData = [...action[3]];
 
       let objectRefs = []; //used for undo/redo
 
-      for (let i = 0; i < meshIds.length; i++) {
-        objectRefs = spawner.spawnMeshes(meshTypes,meshIds,false)
-      }
-
-      console.log("objectRefs: ");
-      console.dir(objectRefs);
+      objectRefs = spawner.spawnMeshes(meshTypes, meshIds, false);
 
       //update refs just spawned.
-      for(let i = 0; i < objectRefs.length;i++) {
-        updateMesh(objectRefs[i],meshData[i],circum_radius_convert);
+      for (let i = 0; i < objectRefs.length; i++) {
+        const checkRef = () => {
+          if (objectRefs[i].current) {
+            const objectData = objectRefs[i].current.userData;
+            projectFile.meshes[objectData.idNumber] = meshData[i];
+            updateMesh(objectRefs[i], meshData[i], circum_radius_convert);
+            setProjectFile({ ...projectFile });
+          } else {
+            requestAnimationFrame(checkRef);
+          }
+          return;
+        };
+        checkRef();
       }
-
 
       action[0] = "create";
       action[1] = objectRefs;
@@ -237,7 +257,6 @@ const History = forwardRef(
 
       const id = object.userData.idNumber;
 
-
       projectFile.meshes[id].circum = oldCircum;
 
       action[3] = oldRadius;
@@ -290,7 +309,6 @@ const History = forwardRef(
      * @param {boolean} isUndo - Is true when being undone and true when redone.
      */
     const updateName = (action, isUndo) => {
-
       const object = action[1];
       const oldName = action[2];
       const newName = action[3];
@@ -332,13 +350,10 @@ const History = forwardRef(
 
       const handler = actionHandler[action[0]];
 
-
       if (handler) {
         handler(action, isUndo);
       }
-
-
-
+      console.log(action[0] + " action made");
       setProjectFile({ ...projectFile });
     };
 
@@ -346,7 +361,7 @@ const History = forwardRef(
 
     //keyboard short cut
     useEffect(() => {
-      if(isDragging) {
+      if (isDragging) {
         return;
       }
 

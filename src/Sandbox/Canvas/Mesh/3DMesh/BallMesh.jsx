@@ -1,4 +1,4 @@
-import { useState, forwardRef, useEffect,useRef } from "react";
+import { useState, forwardRef, useEffect, useRef } from "react";
 import SelectableMesh from "../SelectableMesh";
 import useStore from "../../../DevTools/store";
 
@@ -12,7 +12,7 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
-  const meshLoading = useStore((state)=>state.meshLoading);
+  const meshLoading = useStore((state) => state.meshLoading);
 
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
@@ -26,7 +26,7 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
 
   useEffect(() => {
     // makes sure circum doesn't reset if loading
-    if (!meshLoading) {
+    if (!meshLoading && projectFile.meshes[id]) {
       const newMesh = projectFile.meshes[id];
       newMesh.attributeList = attributeList;
       newMesh.circum = circum;
@@ -34,23 +34,18 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
     }
   }, []);
 
-
-
-
-
   return (
     <>
-    
-    <SelectableMesh
-      meshType="ball"
-      ref={ref}
-      dependencyList = {dependencyList}
-      meshData={{ radius, setRadius, circum, setCircum, attributeList }}
-      id={id}
-      {...props}
-    >
-      <sphereGeometry ref = {ballGeoRef} args={[radius, 10, 10]} />
-    </SelectableMesh>
+      <SelectableMesh
+        meshType="ball"
+        ref={ref}
+        dependencyList={dependencyList}
+        meshData={{ radius, setRadius, circum, setCircum, attributeList }}
+        id={id}
+        {...props}
+      >
+        <sphereGeometry ref={ballGeoRef} args={[radius, 10, 10]} />
+      </SelectableMesh>
     </>
   );
 });

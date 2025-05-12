@@ -34,10 +34,11 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
     const indices = [];
     const geo = new BufferGeometry();
     const segments = 3;
-    let DEPTH_OFFSET = 0.125;
+    let DEPTH_OFFSET = 0.125 / 2;
 
     for (let i = 0; i < 2; i++) {
       const bottomLeft = [
+<<<<<<< HEAD
         -height_convert(width/2),
         -height_convert(height/2),
         DEPTH_OFFSET,
@@ -48,6 +49,18 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
         DEPTH_OFFSET,
       ];
       const top = [0, height_convert(height/2), DEPTH_OFFSET];
+=======
+        -height_convert(width) / 2,
+        -height_convert(height) / 2,
+        DEPTH_OFFSET,
+      ];
+      const bottomRight = [
+        height_convert(width) / 2,
+        -height_convert(height) / 2,
+        DEPTH_OFFSET,
+      ];
+      const top = [0, height_convert(height) / 2, DEPTH_OFFSET];
+>>>>>>> 7ad9ad40103e160c7e4b5d2b353f9f9777decc63
 
       vertices.push(...top);
       vertices.push(...bottomLeft);
@@ -79,7 +92,7 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
     geo.computeVertexNormals();
 
     return geo;
-  },[height,width]);
+  }, [height, width]);
 
   return (
     <SelectableMesh
