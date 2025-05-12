@@ -46,7 +46,7 @@ const CylinderPattern = (object) => {
   output.push("\n");
   output.push("Top Circle: \n");
 
-  output.push("Fasten off.\n");
+  output.push("sl st. Fasten off.\n");
   return output;
 };
 

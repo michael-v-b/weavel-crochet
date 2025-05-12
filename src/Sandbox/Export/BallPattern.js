@@ -71,9 +71,11 @@ const BallPattern = (input) => {
   }
 
   const stuff = "Fill with Polyfill\n";
-  const exit = "Round " + roundNum + ": dec x6. (6) \nFasten off.\n";
+  const exit = "Round " + roundNum + ": dec x6."
   output.push(stuff);
   output.push(exit);
+  output.push("sl st and Fasten off");
+  output.push("Close the circle.")
 
   return output;
 };

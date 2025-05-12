@@ -39,7 +39,7 @@ const CirclePattern = (input) => {
   }
 
   if (fastenOff) {
-    output.push("Fasten off.");
+    output.push("sl st. Fasten off.");
   }
 
   return output;

@@ -89,6 +89,7 @@ const Exporter = forwardRef((_, ref) => {
       "-ch: chain",
       "-inc: increase",
       "-dec: decrease",
+      "-sl st: slip stitch"
     ];
     doc.text("Stitch Key: ", 10, row);
     for (let i = 0; i < stitch_key_text.length; i++) {

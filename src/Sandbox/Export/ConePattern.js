@@ -66,7 +66,7 @@ const ConePattern = (object) => {
       output.push(tempString);
     }
   }
-  output.push("Fasten off.\n");
+  output.push("sl st. Fasten off.\n");
   return output;
 };
 
