@@ -14,8 +14,8 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
   const DEF_HEIGHT = useStore((state) => state.DEF_HEIGHT);
   const height_convert = useStore((state) => state.height_convert);
   const meshLoading = useStore((state) => state.meshLoading);
-  const [height, setHeight] = useState(DEF_HEIGHT/2);
-  const [width, setWidth] = useState(DEF_HEIGHT/2);
+  const [height, setHeight] = useState(DEF_HEIGHT);
+  const [width, setWidth] = useState(DEF_HEIGHT);
 
   const dependencyList = [height, width];
 
@@ -38,16 +38,16 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
 
     for (let i = 0; i < 2; i++) {
       const bottomLeft = [
-        -height_convert(width),
-        -height_convert(height),
+        -height_convert(width/2),
+        -height_convert(height/2),
         DEPTH_OFFSET,
       ];
       const bottomRight = [
-        height_convert(width),
-        -height_convert(height),
+        height_convert(width/2),
+        -height_convert(height/2),
         DEPTH_OFFSET,
       ];
-      const top = [0, height_convert(height), DEPTH_OFFSET];
+      const top = [0, height_convert(height/2), DEPTH_OFFSET];
 
       vertices.push(...top);
       vertices.push(...bottomLeft);

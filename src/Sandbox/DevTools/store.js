@@ -11,9 +11,9 @@ const useStore = create((set) => ({
   DEF_HEIGHT: Math.ceil(tempCircum/(Math.PI)),
 
   //CONVERTS convert real values to in game values.
-  //x(1/36) + 1/6
+  // old x(1/36) + 1/6
   //export
-  circum_radius_convert: (x) => {return (x/36 + (1/6))},
+  circum_radius_convert: (x) => {return (x/30)},
   height_convert: (x) => {return (x/(tempCircum/(2*Math.PI)))},
 
   projectName: "",

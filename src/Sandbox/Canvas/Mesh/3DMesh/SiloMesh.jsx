@@ -21,7 +21,7 @@ const SiloMesh = forwardRef(({ id, ...props }, ref) => {
 
 
   const attributeList = ["circum", "height"];
-  const segments = 20;
+  const segments = 10;
   const [height, setHeight] = useState(DEF_HEIGHT);
   const [circum, setCircum] = useState(DEF_CIRCUM);
   const [radius, setRadius] = useState(circum_radius_convert(DEF_CIRCUM));
