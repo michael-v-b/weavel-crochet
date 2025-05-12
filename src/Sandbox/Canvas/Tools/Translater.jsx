@@ -168,8 +168,12 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
 
     //update project file
     for (let i = 0; i < selectedList.length; i++) {
-      const id = selectedList[i].userData.idNumber;
-      projectFile.meshes[id].position = selectedList[i].position.toArray();
+      const selectedData = selectedList[i].userData;
+      const id = selectedData.idNumber;
+
+      console.log(id);
+      console.dir(selectedList[i]);
+      projectFile.meshes[id].position = selectedData.visualRef.current.position.toArray();
     }
     setProjectFile({ ...projectFile });
 
