@@ -29,7 +29,7 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
 
   const dependencyList = [height, width, isHalf];
   const FRONT_OFFSET = isHalf ? (segments + 6) / 2 : segments + 2;
-  const DEPTH_OFFSET = 0.125;
+  const DEPTH_OFFSET = 0.125/2;
 
   const geometry = useMemo(() => {
     const geo = new BufferGeometry();

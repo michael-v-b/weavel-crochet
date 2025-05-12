@@ -35,7 +35,7 @@ const CircleMesh = forwardRef(({ id, ...props }, ref) => {
       ref={ref}
       {...props}
     >
-      <cylinderGeometry args={[radius, radius, 0.125, 20]} />
+      <cylinderGeometry args={[radius, radius, 0.125/2, 20]} />
     </SelectableMesh>
   );
 });
