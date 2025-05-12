@@ -97,8 +97,6 @@ const ProjectReader = forwardRef(
         return;
       }
 
-      console.log("project");
-      console.dir(project);
 
       setProjectId(tempId);
       setProjectFile(project);
@@ -142,8 +140,6 @@ const ProjectReader = forwardRef(
         false
       );
 
-      console.log("meshRefs immediately: ");
-      console.dir(meshRefs);
 
       numFinished = meshRefs.length;
 

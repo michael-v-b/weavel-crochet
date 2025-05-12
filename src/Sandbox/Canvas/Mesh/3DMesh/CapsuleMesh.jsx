@@ -50,7 +50,6 @@ const CapsuleMesh = forwardRef(({ id, ...props }, ref) => {
     for (let i = 0; i < segments+1/*segments + 1*/; i++) {
       //keeps phi the same on final entry
       const phi =  (i/segments) * Math.PI;
-      console.log("phi: " + phi);
       const RING_HEIGHT =
         i < (segments/2) ? height_convert((height/2))-radius : -((height_convert(height/2)-radius));
 

@@ -27,11 +27,9 @@ const TrianglePage = ({ object }) => {
    * Updates the height when the height changes
    */
   const handleHeight = (newHeight) => {
-    console.log("height changes");
     const width = widthRef.current.width;
     const temp = Math.min(width,Math.ceil(newHeight*MAX_RATE));
 
-    console.log("new base should be " + temp);
     widthRef.current.setWidth(temp);
     objectData.setWidth(temp);
   } 

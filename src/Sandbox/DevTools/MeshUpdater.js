@@ -11,8 +11,6 @@ const updateMesh = (meshRef, saveData, circum_radius_convert) => {
     return;
   }
 
-  console.log("mesh updated");
-
   const userData = meshRef.current.userData;
   //UNIVERSAL ATTRIBUTES
   // name
@@ -22,7 +20,6 @@ const updateMesh = (meshRef, saveData, circum_radius_convert) => {
   //rotation
   meshRef.current.rotation.copy(new Euler().fromArray(saveData.rotation));
 
-  console.log("saveData.colorIndex: " + saveData.colorIndex);
   //color
   userData.setColorIndex(saveData.colorIndex);
 
@@ -54,7 +51,6 @@ const updateMesh = (meshRef, saveData, circum_radius_convert) => {
     meshData.setWidth(saveData.width);
   }
 
-  console.log(attributes);
   if (attributes.includes("isHalf")) {
     meshData.setHalf(saveData.isHalf);
   }

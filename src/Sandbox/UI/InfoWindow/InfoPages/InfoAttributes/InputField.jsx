@@ -11,7 +11,6 @@ const InputField = forwardRef(({...props},ref) => {
 
     const handleKeyPressed = (event) => {
         if(event.ctrlKey && (event.code == 'KeyZ' || event.code == 'KeyY')) {
-            console.log("ctrl was pressed with " + event.code);
             event.preventDefault();
         }
     }

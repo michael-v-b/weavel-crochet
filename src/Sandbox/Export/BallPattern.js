@@ -50,9 +50,6 @@ const BallPattern = (input) => {
       " sc. (" +
       stitchCount +
       ")\n";
-    console.log("roundNum: " + roundNum);
-    console.log("height: " + height);
-    console.log("radius: " + radius);
     roundNum = roundNum + Math.abs(height - 2 * radius) + 1;
   }
   output.push(second);

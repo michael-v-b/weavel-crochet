@@ -7,9 +7,6 @@ const StadiumPattern = (object) => {
   const height = object.userData.meshData.height;
   const width = object.userData.meshData.width;
   const isHalf = object.userData.meshData.isHalf;
-  console.dir(object.userData.meshData);
-
-  console.log("isHalf: " + isHalf);
   const midHeight = isHalf ? height - width / 2 : height - width;
 
   let stitchCount = isHalf ? midHeight * 2 + 4 : midHeight * 2 + 8;

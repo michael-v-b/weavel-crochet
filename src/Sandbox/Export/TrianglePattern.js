@@ -1,5 +1,5 @@
 const TrianglePattern = (object) => {
-  console.dir(object);
+  
   const objectData = object.userData.meshData;
 
   const height = objectData.height;
@@ -8,7 +8,6 @@ const TrianglePattern = (object) => {
   const stitchesLeft = base - START_SIZE;
   const heightLeft = height - 2;
   const rate = Math.floor(stitchesLeft / heightLeft);
-  console.log("rate: " + rate);
 
   const remain = stitchesLeft % heightLeft;
 
@@ -16,13 +15,10 @@ const TrianglePattern = (object) => {
 
   const remainRate = Math.floor(heightLeft / remain);
 
-  console.log("remainRate: " + remainRate);
 
   for (let i = 0; i < remain; i++) {
     order[i * remainRate] += 1;
   }
-
-  console.log("order: " + order);
 
   const start = "Ch 2 (2)";
   const firstInc = "Row 1: inc in first stitch, ch 1 and turn. (2)";

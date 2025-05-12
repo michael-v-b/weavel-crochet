@@ -17,9 +17,6 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
   const [radius, setRadius] = useState(1);
   const [circum, setCircum] = useState(DEF_CIRCUM);
 
-  useEffect(()=>{
-    console.log("radius: " + radius);
-  },[radius]);
   const dependencyList = [radius];
 
   const ballGeoRef = useRef(null);

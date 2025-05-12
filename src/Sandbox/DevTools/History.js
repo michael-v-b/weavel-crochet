@@ -353,7 +353,6 @@ const History = forwardRef(
       if (handler) {
         handler(action, isUndo);
       }
-      console.log(action[0] + " action made");
       setProjectFile({ ...projectFile });
     };
 

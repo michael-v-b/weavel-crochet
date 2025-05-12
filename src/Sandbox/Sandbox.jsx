@@ -60,8 +60,6 @@ const Sandbox = () => {
       type: "application/json",
     });
 
-    console.log("uploaded project file");
-    console.dir(projectFile);
     const { data, error } = await supabase.storage
       .from("Project Files")
       .upload(path, jsonBlob, { upsert: true });
