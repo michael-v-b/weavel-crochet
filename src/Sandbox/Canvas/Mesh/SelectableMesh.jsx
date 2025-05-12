@@ -33,6 +33,7 @@ const SelectableMesh = forwardRef(
 
     const [selected, setSelected] = useState(false);
     const [outlineWeight, setOutlineWeight] = useState(0);
+    const[outlineColor,setOutlineColor] = useState('black');
 
     const [colorIndex, setColorIndex] = useState(1);
     const bvhRef = useRef(null);
@@ -56,7 +57,8 @@ const SelectableMesh = forwardRef(
      *run every time selected changes.
      */
     useEffect(() => {
-      setOutlineWeight(selected ? 5 : 0);
+      setOutlineWeight(selected ? 5 : 1);
+      setOutlineColor(selected ? "#ff8800": 'black');
     }, [selected]);
 
 
@@ -88,7 +90,7 @@ const SelectableMesh = forwardRef(
           <meshBasicMaterial
             visible = {false}
           />
-          {selected && <Outlines thickness={outlineWeight} color="#ff8800" />}
+          <Outlines thickness={outlineWeight} color= {outlineColor}/>
         </mesh>
       </>
     );

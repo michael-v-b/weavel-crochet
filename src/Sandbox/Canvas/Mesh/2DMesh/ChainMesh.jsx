@@ -16,7 +16,7 @@ const ChainMesh = forwardRef(({ id, ...props }, ref) => {
   const meshLoading = useStore((state)=>state.meshLoading);
   
   const attributeList = ["height"];
-  const line = 0.125;
+  const line = 0.125/2;
   const [height, setHeight] = useState(DEF_HEIGHT);
 
   const dependencyList = [height];

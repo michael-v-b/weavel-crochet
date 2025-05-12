@@ -1,6 +1,7 @@
 
 
 import {useRef,useEffect,useState,forwardRef} from "react";
+import {Outlines} from '@react-three/drei';
 import {useFrame} from "@react-three/fiber";
 import useStore from "../../DevTools/store";
 import {DoubleSide} from "three";
@@ -63,6 +64,7 @@ const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
     return <mesh ref = {ref}>
         {geo && <primitive object = {geo}/>}
         <meshStandardMaterial roughness = {1} color = {colorList[colorIndex-1]} side = {DoubleSide}/>
+        {/*<Outlines/>(*/}
         </mesh>
 
 });
