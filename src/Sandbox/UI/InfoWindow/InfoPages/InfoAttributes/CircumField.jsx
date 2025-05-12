@@ -49,7 +49,13 @@ const CircumferenceField = forwardRef(({ object, getCircum, roundingNum = 6 },re
   const findRadius = (tempCircum = circum) => {
     let roundedCircum = Math.max(3, tempCircum);
 
-    if (roundingNum != 0) {
+    //no need for this when roundingNum is 0
+    //when roundingNum is 8 (circle), and tempCircum is smaller than 8 don't round up
+    console.log("roundingNum: " + roundingNum);
+    console.log("tempCircum: " + tempCircum);
+    if (roundingNum != 0 && !(roundingNum == 8 && roundedCircum < 8)) {
+
+
       roundedCircum = Math.max(
         roundingNum,
         roundingNum * Math.floor(tempCircum / roundingNum)
