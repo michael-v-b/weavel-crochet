@@ -19,6 +19,8 @@ const PositionField = ({ object }) => {
   const updateAvgPosition = useStore((state) => state.updateAvgPosition);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
+  const undoList = useStore((state)=>state.undoList);
+  const setUndoList = useStore((state)=>state.setUndoList);
   const [newPosition, setNewPosition] = useState([...avgPosition]);
 
   /**
@@ -36,6 +38,33 @@ const PositionField = ({ object }) => {
       setNewPosition(tempPosition);
     }
   };
+
+  /**
+   * Tests whether 2 arrays, a and b, are equal.
+   */
+
+  const testEquals  = (a,b) => {
+    for(let i =0; i < a.length; i++) {
+      if (a[i] != b[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * get displacement of the 2 objects
+   */
+
+  const getDisplacement = (a,b) => {
+    const displacement = [];
+
+    for(let i = 0; i < a.length;i++) {
+      
+      displacement.push(a[i] - b[i]);
+    }
+    return displacement;
+  }
 
   /**
    * Sets the focused state to true when input field is focused on.
@@ -60,10 +89,33 @@ const PositionField = ({ object }) => {
       }
     }
 
+    if(testEquals(positionNums,object.position.toArray())) {
+      console.log("are equal do nothing");
+    } else {
+      console.log("undo");
+      const displacement = getDisplacement(positionNums,object.position.toArray());
+      
+      console.log(displacement);
+
+      const action = ['translate'];
+      action.push([object]);
+      action.push(displacement);
+      undoList.push(action);
+      setUndoList([...undoList]);
+    }
+
+    //update undo
+
+
+
+
     //recently changed from parsing float, make sure it works
     object.position.copy(new Vector3().fromArray(positionNums));
     setNewPosition(positionStrings);
     updateAvgPosition();
+
+
+
     setFocused(false);
 
     const newMesh = projectFile.meshes[object.userData.idNumber];

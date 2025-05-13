@@ -5,7 +5,7 @@
      * action[1] - list of objects being rotated
      * action[2] - angle of rotation
      * action [3] - axis of rotation as string (used for groups can be edited if need be)
-     * action[4] - axis of rotation quaternion
+     * action[4] - axis of rotation as an array.
      * action[5] - rotation point
      */
 const updateRotate = (action,projectFile,rotaterRef) => {
@@ -14,6 +14,8 @@ const objectList = action[1];
       const axisString = action[3];
       const angleAxis = action[4];
       const rotationPoint = action[5];
+
+      console.log("rotate the object");
       rotaterRef.current.rotateGroup(
         objectList,
         -angle,

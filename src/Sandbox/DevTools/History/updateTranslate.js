@@ -10,9 +10,9 @@
      */
     const updateTranslate = (action,projectFile,updateAvgPosition) => {
 
-    
         const objectList = action[1];
         const displacement = new Vector3().fromArray(action[2]);
+
         objectList.forEach((object) => {
             object.position.sub(displacement);
             const id = object.userData.idNumber;

@@ -31,22 +31,15 @@ const History = forwardRef(
       (state) => state.circum_radius_convert
     );
 
-    useEffect(()=>{
-      console.log("====================")
-      console.log("undoList: " + undoList);
-      console.log("redoList: " + redoList);
-    },[undoList,redoList]);
+
+
     /**
      * applies the action to the correct list
      * @param {[Oject]} action - action to be added.
      * @param {boolean} isUndo - whether list should go to redo or undo list.
      */
     const updateLists = (action, isUndo) => {
-      console.log("action: " + action);
       if (isUndo) {
-        console.log("updateLists ~~~~~~~~~~~~~~~~~~~");
-        console.log("undoList: " + undoList);
-        console.log("redoList: " + redoList);
         redoList.push(action);
         setRedoList([...redoList]);
       } else {
@@ -61,7 +54,7 @@ const History = forwardRef(
       rotate: (action,projectFile) => {return updateRotate(action,projectFile,rotaterRef)},
       create: (action,_) => {return updateCreate(action,deleterRef)},
       delete: (action,projectFile) => {
-        setRedoList([]);
+        //setRedoList([]);
         return updateDelete(action,
           projectFile,
           setProjectFile,

@@ -1,7 +1,7 @@
 import "../InfoPages.css";
 
 import { useState, useEffect } from "react";
-import { Euler } from "three";
+import { Euler,Vector3} from "three";
 import useStore from "../../../../DevTools/store";
 import InputField from "./InputField";
 
@@ -18,6 +18,8 @@ const RotationField = ({ object }) => {
   const setProjectFile = useStore((state) => state.setProjectFile);
   const currentRotation = useStore((state)=>state.currentRotation);
   const setCurrentRotation = useStore((state)=>state.setCurrentRotation);
+  const setUndoList = useStore((state)=>state.setUndoList);
+  const undoList = useStore((state)=>state.undoList);
 
   useEffect(()=>{
     const temp = object.rotation.toArray();
@@ -28,6 +30,23 @@ const RotationField = ({ object }) => {
     }
     setNewRotation(temp);
   },[object])
+
+  /**
+   * Test whether 2 arrays a and b are equivalent.
+   * @param {[Number]} a 
+   * @param {[Number]} b 
+   * @returns {boolean} true if a= b and false if not.
+   */
+  const testEquals = (a,b) => {
+    console.log("a: " + a);
+    console.log("b: " + b);
+    for(let i = 0; i < a.length;i++) {
+      if(a[i]!=b[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
   
   const handleChange = (event, axis) => {
     const newValue = event.target.value;
@@ -43,7 +62,7 @@ const RotationField = ({ object }) => {
     setFocused(true);
   };
 
-  const handleBlur = () => {
+  const handleBlur = (axis) => {
     const tempRotation = [0, 0, 0];
     for (let i = 0; i < tempRotation.length; i++) {
       const degree = parseFloat(newRotation[i])
@@ -55,6 +74,42 @@ const RotationField = ({ object }) => {
         tempRotation[i] = (degree/360) * 2* Math.PI
       }
     }
+
+    //undo
+    if(!testEquals(tempRotation,object.rotation.toArray())) {
+    
+      const action = ['rotate'];
+      
+      let angle = tempRotation[axis] - object.rotation.toArray()[axis];
+      angle = (angle/360) *2*Math.PI;
+
+      let angleString = ''
+
+      if(axis == 0) {
+        angleString = 'x';
+      } else if (axis == 1) {
+        angleString = 'y';
+      } else if (axis == 2) {
+        angleString = 'z';
+      }
+
+      const axisVectorList = [0,0,0];
+      axisVectorList[axis] = 1;
+      const axisVector = new Vector3().fromArray(axisVectorList);
+      const objectPosition = object.position.toArray();
+
+      action.push(object);
+      action.push(angle);
+      action.push(angleString);
+      action.push(axisVector);
+      action.push(objectPosition);
+
+      undoList.push(action);
+      setUndoList([...undoList]);
+    
+    }
+    
+
     
     object.rotation.copy(new Euler().fromArray(tempRotation));
     //update
@@ -103,7 +158,7 @@ const RotationField = ({ object }) => {
             handleChange(e, 0);
           }}
           onFocus={handleFocused}
-          onBlur={handleBlur}
+          onBlur={() => {handleBlur(0)}}
         />
         Y:
         <InputField
@@ -114,7 +169,7 @@ const RotationField = ({ object }) => {
             handleChange(e, 1);
           }}
           onFocus={handleFocused}
-          onBlur={handleBlur}
+          onBlur={() => {handleBlur(1)}}
         />
         Z:
         <InputField
@@ -125,7 +180,7 @@ const RotationField = ({ object }) => {
             handleChange(e, 2);
           }}
           onFocus={handleFocused}
-          onBlur={handleBlur}
+          onBlur={() => {handleBlur(2)}}
         />
       </div>
     </>
