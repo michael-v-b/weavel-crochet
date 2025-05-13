@@ -18,6 +18,7 @@ const History = forwardRef(
     const isFocused = useStore((state) => state.isFocused);
     const undoList = useStore((state) => state.undoList);
     const resetUndoList = useStore((state) => state.resetUndoList);
+    const setUndoList = useStore((state)=>state.setUndoList);
     const redoList = useStore((state) => state.redoList);
     const setRedoList = useStore((state) => state.setRedoList);
     const updateAvgPosition = useStore((state) => state.updateAvgPosition);
@@ -27,6 +28,7 @@ const History = forwardRef(
     const circum_radius_convert = useStore(
       (state) => state.circum_radius_convert
     );
+
 
     /**
      * applies the action to the correct list
@@ -179,6 +181,11 @@ const History = forwardRef(
      * @param {boolean} isUndo - true if undo and false if redo.
      */
     const updateDelete = (action, isUndo) => {
+
+      //bandaid fix to delete crashes, no intention of replacing
+      setRedoList([]);
+      setUndoList([]);
+
       const spawner = meshSpawnerRef.current;
       const meshIds = [...action[1]];
       const meshTypes = [...action[2]];
@@ -371,8 +378,7 @@ const History = forwardRef(
       ) {
         if (keysPressed.includes("KeyZ")) {
           makeAction(undoList, true);
-        }
-        if (keysPressed.includes("KeyY")) {
+        } else if (keysPressed.includes("KeyY")) {
           makeAction(redoList, false);
         }
       }

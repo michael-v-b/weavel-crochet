@@ -45,23 +45,74 @@ const Deleter = forwardRef(
      * @param [{Object}] objectList - all objects to be deleted.
      */
     const deleteMeshes = (objectList) => {
+
+      const meshIds = [];
+      const meshTypes =[];
+      const meshInfo = [];
       for (let i = 0; i < objectList.length; i++) {
         //this is crazy man idk
         meshSpawnerRef.current.removeMesh(objectList[i]);
         scene.remove(objectList[i]);
         const meshIndex = findMesh(objectList[i]);
 
+        const saveData = {};
+
+     
+        
+          const objectData = objectList[i].userData;
+
+          const meshData = objectData.meshData;
+             const attributeMap = {
+            circum: meshData.circum,
+            height: meshData.height,
+            half: meshData.half,
+            dim: meshData.dim,
+            width: meshData.width,
+          };
+
         // if mesh found remove from meshlist
         if (meshIndex != -1) {
+
+          //update info for undo button
+
+          saveData.name = objectList[i].name;
+          saveData.position = objectList[i].position.toArray();
+          saveData.rotation = objectList[i].rotation.toArray();
+          saveData.colorIndex = objectData.colorIndex;
+          saveData.type = objectData.meshType;
+          saveData.attributeList = meshData.attributeList;
+
+          for(const attribute of meshData.attributeList) {
+            saveData[attribute] = attributeMap[attribute];
+          }
+
+          meshIds.push(objectData.idNumber);
+          meshTypes.push(objectData.meshType);
+          meshInfo.push(saveData);
+          
+          //remove object from meshList
+
           meshList.splice(meshIndex, 1);
 
           //update project file
-          delete projectFile.meshes[objectList[i].userData.idNumber];
+          delete projectFile.meshes[objectData.idNumber];
           setProjectFile({ ...projectFile });
         } else {
           console.log("couldn't find it");
         }
       }
+
+      // update undo list
+      if(meshIds.length > 0) {
+        const tempAction = ["delete"];
+        tempAction.push(meshIds);
+        tempAction.push(meshTypes);
+        tempAction.push(meshInfo);
+        undoList.push(tempAction);
+        setUndoList([...undoList]);
+      }
+
+
       setMeshList([...meshList]);
       selectionManagerRef.current.clearSelectedList(); //clears selected mesh list
     };
