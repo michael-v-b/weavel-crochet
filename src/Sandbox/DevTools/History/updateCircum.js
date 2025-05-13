@@ -6,10 +6,8 @@
      *action[2] - old circum.
      *action[3] - new circum.
      *action[4] - old radius.
-     *action[5] - new radius.
-     *@param {boolean} isUndo - Is true when being undone and true when redone.
-     */
-    const updateCircum = (action, projectFile,isUndo) => {
+     *action[5] - new radius. */
+    const updateCircum = (action, projectFile) => {
       const object = action[1];
       const oldRadius = action[2];
       const newRadius = action[3];
@@ -28,6 +26,6 @@
       action[4] = newCircum;
       action[5] = oldCircum;
       //updateLists(action, isUndo);
-      return [action,isUndo];
+      return action
     };
     export default updateCircum;

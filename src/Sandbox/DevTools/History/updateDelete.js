@@ -7,9 +7,8 @@ import updateMesh from "../MeshUpdater";
      * action[1] - object ids
      * action[2] - object mesh types
      * action[3] - object data/attribute lists
-     * @param {boolean} isUndo - true if undo and false if redo.
      */
-    const updateDelete = (action,projectFile, isUndo,meshSpawnerRef,circum_radius_convert) => {
+    const updateDelete = (action,projectFile,setProjectFile, meshSpawnerRef,circum_radius_convert) => {
 
 
       const spawner = meshSpawnerRef.current;
@@ -36,11 +35,12 @@ import updateMesh from "../MeshUpdater";
         };
         checkRef();
       }
+
       action = [];
       action[0] = "create";
       action[1] = objectRefs;
       //updateLists(action, isUndo);
-      return [action,isUndo];
+      return action;
     };
 
     export default updateDelete;

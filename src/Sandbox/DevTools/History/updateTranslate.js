@@ -7,9 +7,8 @@
      * a description of the action,
      * action[1] = list of objects translated,
      * action[2] = the displacement.
-     * @param {boolean} isUndo - true if undo, false if undo.
      */
-    const updateTranslate = (action,projectFile,isUndo,updateAvgPosition) => {
+    const updateTranslate = (action,projectFile,updateAvgPosition) => {
 
     
         const objectList = action[1];
@@ -25,7 +24,9 @@
 
         action[2] = displacement.multiplyScalar(-1).clone().toArray();
         //updateLists(action, isUndo);
-        return [action,isUndo];
+
+        const output = action;
+        return output;
     }
 
     export default updateTranslate;

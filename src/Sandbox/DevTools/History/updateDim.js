@@ -6,9 +6,8 @@
      * action[2] - dimensions.
      * action[3] - list of old dimensions.
      * action[4] - list of new dimensions.
-     * @param {boolean} isUndo -  Is true when being undone and true when redone.
      */
-    const updateDim = (action,projectFile, isUndo) => {
+    const updateDim = (action,projectFile) => {
       const object = action[1];
       const dimensions = action[2];
       const oldDims = action[3];
@@ -29,7 +28,7 @@
       action[4] = oldDims;
 
       //updateLists(action, isUndo);
-      return [action,isUndo];
+      return action;
     };
 
     export default updateDim;

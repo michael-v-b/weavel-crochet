@@ -13,6 +13,7 @@ import StadiumPage from "./ShapePages/StadiumPage";
 import SiloPage from "./ShapePages/SiloPage";
 import ChainPage from "./ShapePages/ChainPage";
 import TrianglePage from "./ShapePages/TrianglePage";
+import {useEffect} from 'react';
 
 /**
  *@typedef {InfoPage} - provides all of the information inside of the info window.
@@ -37,6 +38,20 @@ const InfoPage = ({ object, meshType }) => {
     triangle: TrianglePage,
   };
   const MeshType = shapePages[meshType];
+
+  const handleHistory =  (event) => {
+    if (
+      (event.inputType === 'historyUndo' || event.inputType === 'historyRedo') &&
+      event.target instanceof HTMLInputElement
+    ) {
+      event.preventDefault();
+    } 
+  }
+
+  useEffect(()=>{
+  document.addEventListener('beforeinput',handleHistory, { capture: true });
+  },[]);
+
 
   return (
     <div>

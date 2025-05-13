@@ -5,9 +5,8 @@
      * action[1] - object whose name was changed.
      * action[2] - old name.
      * action[3] - new name.
-     * @param {boolean} isUndo - Is true when being undone and true when redone.
      */
-    const updateName = (action,projectFile, isUndo) => {
+    const updateName = (action,projectFile) => {
       const object = action[1];
       const oldName = action[2];
       const newName = action[3];
@@ -22,7 +21,7 @@
       action[3] = oldName;
 
       //updateLists(action, isUndo);
-      return [action,isUndo];
+      return action;
     };
 
     export default updateName;

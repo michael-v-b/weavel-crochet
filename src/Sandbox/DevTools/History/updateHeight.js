@@ -5,9 +5,8 @@
      *action[1] - object whose color changed.
      *action[2] - old height.
      *action[3] - new height.
-     *@param {boolean} isUndo - Is true when being undone and true when redone.
      */
-    const updateHeight = (action, projectFile,isUndo) => {
+    const updateHeight = (action, projectFile) => {
 
       const object = action[1];
       const oldHeight = action[2];
@@ -21,7 +20,7 @@
       action[3] = oldHeight;
       action[2] = newHeight;
       //updateLists(action, isUndo);
-      return [action,isUndo];
+      return action;
     };
 
     export default updateHeight;

@@ -31,14 +31,22 @@ const History = forwardRef(
       (state) => state.circum_radius_convert
     );
 
-
+    useEffect(()=>{
+      console.log("====================")
+      console.log("undoList: " + undoList);
+      console.log("redoList: " + redoList);
+    },[undoList,redoList]);
     /**
      * applies the action to the correct list
      * @param {[Oject]} action - action to be added.
      * @param {boolean} isUndo - whether list should go to redo or undo list.
      */
     const updateLists = (action, isUndo) => {
+      console.log("action: " + action);
       if (isUndo) {
+        console.log("updateLists ~~~~~~~~~~~~~~~~~~~");
+        console.log("undoList: " + undoList);
+        console.log("redoList: " + redoList);
         redoList.push(action);
         setRedoList([...redoList]);
       } else {
@@ -49,12 +57,16 @@ const History = forwardRef(
     
 
     const actionHandler = {
-      translate: (action,projectFile,isUndo)=>{updateTranslate(action,projectFile,isUndo,updateAvgPosition)},
-      rotate: (action,projectFile,isUndo) => {updateRotate(action,projectFile,isUndo,rotaterRef)},
-      create: (action,_,isUndo) => {updateCreate(action,isUndo,deleterRef)},
-      delete: (action,projectFile,isUndo) => {
+      translate: (action,projectFile)=>{return updateTranslate(action,projectFile,updateAvgPosition)},
+      rotate: (action,projectFile) => {return updateRotate(action,projectFile,rotaterRef)},
+      create: (action,_) => {return updateCreate(action,deleterRef)},
+      delete: (action,projectFile) => {
         setRedoList([]);
-        updateDelete(action,projectFile,isUndo,meshSpawnerRef,circum_radius_convert)
+        return updateDelete(action,
+          projectFile,
+          setProjectFile,
+          meshSpawnerRef,
+          circum_radius_convert)
       },
       height: updateHeight,
       circum: updateCircum,
@@ -75,12 +87,9 @@ const History = forwardRef(
       const action = actionList.pop();
 
       const handler = actionHandler[action[0]];
-
       if (handler) {
-        const outputValue = handler(action,projectFile,isUndo);
-        const tempAction = outputValue[0];
-        const tempIsUndo = outputValue[1];
-        updateLists(tempAction,tempIsUndo);
+        const tempAction = handler(action,projectFile);
+        updateLists(tempAction,isUndo);
       }
       setProjectFile({ ...projectFile });
     };

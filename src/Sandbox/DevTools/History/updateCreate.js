@@ -3,9 +3,8 @@
      * @param {[{string}, {[ObjectRef]}]} action -
      * action[0] - name of action
      * action[1] - reference to object created
-     * @param {boolean} isUndo - true if undo and false if redo.
      */
-    const updateCreate = (action, isUndo,deleterRef) => {
+    const updateCreate = (action,deleterRef) => {
       const objects = [...action[1]];
       const objectTypes = [];
       const objectIds = [];
@@ -51,14 +50,14 @@
         }
         //console.dir(objectData);
       }
-      deleterRef.current.deleteMeshes(objects);
+      deleterRef.current.deleteMeshes(objects,true);
       action = [];
       action[0] = "delete";
       action[1] = objectIds;
       action[2] = objectTypes;
       action[3] = objectInfo;
       //updateLists([...action], isUndo);
-      return [action,isUndo];
+      return action;
     };
 
     export default updateCreate;

@@ -44,7 +44,7 @@ const Deleter = forwardRef(
      * THIS IS SO UNDO CAN BRING BACK OBJECT.
      * @param [{Object}] objectList - all objects to be deleted.
      */
-    const deleteMeshes = (objectList) => {
+    const deleteMeshes = (objectList,isUndo = false) => {
 
       const meshIds = [];
       const meshTypes =[];
@@ -103,7 +103,7 @@ const Deleter = forwardRef(
       }
 
       // update undo list
-      if(meshIds.length > 0) {
+      if(meshIds.length > 0 && !isUndo) {
         const tempAction = ["delete"];
         tempAction.push(meshIds);
         tempAction.push(meshTypes);

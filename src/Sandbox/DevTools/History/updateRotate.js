@@ -7,9 +7,8 @@
      * action [3] - axis of rotation as string (used for groups can be edited if need be)
      * action[4] - axis of rotation quaternion
      * action[5] - rotation point
-     * @param {boolean} isUndo - true if undo, fals if redo.
      */
-const updateRotate = (action,projectFile,isUndo,rotaterRef) => {
+const updateRotate = (action,projectFile,rotaterRef) => {
 const objectList = action[1];
       const angle = action[2];
       const axisString = action[3];
@@ -33,7 +32,7 @@ const objectList = action[1];
 
       action[2] = action[2] * -1;
       //updateLists(action, isUndo);
-      return [action,isUndo];
+      return action;
 }
 
 export default updateRotate;
