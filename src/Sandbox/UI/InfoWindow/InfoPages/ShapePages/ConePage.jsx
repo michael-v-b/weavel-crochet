@@ -10,6 +10,12 @@ import useStore from "../../../../DevTools/store";
  */
 const ConePage = ({ object}) => {
   const setWarningText = useStore((state)=>state.setWarningText);
+  const projectFile = useStore((state)=>state.projectFile);
+  const setProjectFile = useStore((state)=>state.setProjectFile);
+
+  const id = object.userData.idNumber;
+
+  const objectFile = projectFile.meshes[id];
   const objectData = object.userData.meshData;
   const MAX_RATE = 2;
   const heightRef = useRef(null);
@@ -29,6 +35,8 @@ const ConePage = ({ object}) => {
 
     heightRef.current.setHeight(temp);
     objectData.setHeight(temp);
+    objectFile.height =temp;
+    setProjectFile({...projectFile});
   };
 
   /**
@@ -47,6 +55,8 @@ const ConePage = ({ object}) => {
 
     circumRef.current.setCircum(temp);
     objectData.setRadius(circumRef.current.findRadius(temp));
+    objectFile.setCircum(temp);
+    setProjectFile({...projectFile});
   } 
 
   return (

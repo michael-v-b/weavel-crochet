@@ -10,6 +10,11 @@ import {useRef} from 'react';
  */
 const SiloPage = ({ object }) => {
   const setWarningText = useStore((state)=>state.setWarningText);
+  const projectFile = useStore((state)=>state.projectFile);
+  const setProjectFile = useStore((state)=>state.setProjectFile);
+
+  const id = object.userData.idNumber;
+  const objectFile = projectFile.meshes[id];
   const objectData = object.userData.meshData;
 
   const heightRef = useRef(null);
@@ -31,6 +36,8 @@ const SiloPage = ({ object }) => {
 
     circumRef.current.setCircum(temp);
     objectData.setRadius(circumRef.current.findRadius(temp));
+    objectFile.circum = temp;
+    setProjectFile({...projectFile});
   }
   
   /**
@@ -49,6 +56,8 @@ const SiloPage = ({ object }) => {
 
     objectData.setHeight(temp);
     heightRef.current.setHeight(temp);
+    objectFile.height = temp;
+    setProjectFile({...projectFile});
   }
   return (
     <>

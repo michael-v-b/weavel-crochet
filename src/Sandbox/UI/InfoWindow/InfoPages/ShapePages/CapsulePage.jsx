@@ -9,7 +9,12 @@ import {useRef} from 'react';
  */
 const CapsulePage = ({ object}) => {
     const setWarningText = useStore((state)=>state.setWarningText);
+    const projectFile = useStore((state)=>state.projectFile);
+    const setProjectFile = useStore((state)=>state.setProjectFile);
+
     const objectData = object.userData.meshData;
+    const id = object.userData.idNumber;
+    const objectFile = projectFile.meshes[id];
     const MAX_RATE = 6;
     const heightRef = useRef(null);
     const circumRef = useRef(null);
@@ -27,6 +32,8 @@ const CapsulePage = ({ object}) => {
 
       heightRef.current.setHeight(temp);
       objectData.setHeight(temp);
+      objectFile.height = temp;
+      setProjectFile({...projectFile});
     };
   
     /**
@@ -43,6 +50,8 @@ const CapsulePage = ({ object}) => {
 
       circumRef.current.setCircum(temp);
       objectData.setRadius(circumRef.current.findRadius(temp));
+      objectFile.circum = temp;
+      setProjectFile({...projectFile});
     } 
   return (
     <>

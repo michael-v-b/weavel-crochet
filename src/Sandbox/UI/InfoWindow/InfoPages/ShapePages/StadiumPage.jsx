@@ -11,7 +11,15 @@ import { useRef} from "react";
  */
 const StadiumPage = ({ object }) => {
   const setWarningText = useStore((state)=>state.setWarningText);
+  const projectFile = useStore((state)=>state.projectFile);
+  const setProjectFile = useStore((state)=>state.setProjectFile);
+
+
   const objectData = object.userData.meshData;
+  
+  const id = object.userData.idNumber;
+  const objectFile = projectFile.meshes[id];
+
   const heightRef = useRef(null);
   const widthRef = useRef(null);
   const rate = 8;
@@ -29,6 +37,8 @@ const StadiumPage = ({ object }) => {
 
     objectData.setHeight(temp);
     heightRef.current.setHeight(temp);
+    objectFile.height = temp;
+    setProjectFile({...projectFile});
   };
 
   const handleHeight = (newHeight) => {
@@ -43,6 +53,9 @@ const StadiumPage = ({ object }) => {
     }
     objectData.setWidth(temp);
     widthRef.current.setWidth(temp);
+    
+    objectFile.width = temp;
+    setProjectFile({...projectFile});
   }
 
   return (
