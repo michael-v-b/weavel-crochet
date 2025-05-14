@@ -153,7 +153,7 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
   }, [height, width, isHalf]);
 
   useEffect(() => {
-    if (!meshLoading) {
+    if (!meshLoading && projectFile.meshes[id]) {
       const newMesh = projectFile.meshes[id];
       newMesh.attributeList = attributeList;
       newMesh.height = height;

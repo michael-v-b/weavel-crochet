@@ -66,7 +66,7 @@ const Deleter = forwardRef(
             circum: meshData.circum,
             height: meshData.height,
             half: meshData.half,
-            dim: meshData.dim,
+            dim: meshData.zDim ? [meshData.xDim,meshData.yDim,meshData.zDim] : [meshData.xDim,meshData.yDim],
             width: meshData.width,
           };
 

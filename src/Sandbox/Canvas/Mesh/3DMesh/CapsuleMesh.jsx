@@ -23,17 +23,6 @@ const CapsuleMesh = forwardRef(({ id, ...props }, ref) => {
 
   const dependencyList = [height,radius];
 
-  useEffect(() => {
-
-    if(!meshLoading) {
-      const newMesh = projectFile.meshes[id];
-      newMesh.attributeList = attributeList;
-      newMesh.circum = circum;
-      newMesh.height = height;
-      setProjectFile({ ...projectFile });
-    }
-    
-  }, []);
 
   const inRange = (a, length, bottom) => {
     return (a % length) + bottom;
@@ -90,7 +79,7 @@ const CapsuleMesh = forwardRef(({ id, ...props }, ref) => {
   }, [height, circum]);
 
   useEffect(() => {
-    if(!meshLoading) {
+    if(!meshLoading && projectFile.meshes[id]) {
       const newMesh = projectFile.meshes[id];
       newMesh.attributeList = attributeList;
       newMesh.height = height;

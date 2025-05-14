@@ -16,12 +16,12 @@
         if (objects[i]) {
           const objectData = objects[i].userData;
           const meshData = objectData.meshData;
-
           const attributeMap = {
             circum: meshData.circum,
             height: meshData.height,
             half: meshData.half,
-            dim: meshData.dim,
+            //if zdim exists then include, otherwise don't
+            dim: meshData.zDim ? [meshData.xDim,meshData.yDim,meshData.zDim] : [meshData.xDim,meshData.yDim],
             width: meshData.width,
           };
 

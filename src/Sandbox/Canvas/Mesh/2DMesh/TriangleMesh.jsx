@@ -20,7 +20,7 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
   const dependencyList = [height, width];
 
   useEffect(() => {
-    if (!meshLoading) {
+    if (!meshLoading && projectFile.meshes[id]) {
       const newMesh = projectFile.meshes[id];
       newMesh.attributeList = attributeList;
       newMesh.height = height;

@@ -22,6 +22,7 @@ const History = forwardRef(
     const keysPressed = useStore((state) => state.keysPressed);
     const isFocused = useStore((state) => state.isFocused);
     const undoList = useStore((state) => state.undoList);
+    const setUndoList = useStore((state)=>state.setUndoList);
     const resetUndoList = useStore((state) => state.resetUndoList);
     const redoList = useStore((state) => state.redoList);
     const setRedoList = useStore((state) => state.setRedoList);
@@ -54,9 +55,11 @@ const History = forwardRef(
     const actionHandler = {
       translate: (action,projectFile)=>{return updateTranslate(action,projectFile,updateAvgPosition)},
       rotate: (action,projectFile) => {return updateRotate(action,projectFile,rotaterRef)},
-      create: (action,_) => {return updateCreate(action,deleterRef)},
+      create: (action,_) => {
+        setUndoList([]);
+        return updateCreate(action,deleterRef)},
       delete: (action,projectFile) => {
-        //setRedoList([]);
+        setUndoList([]);
         return updateDelete(action,
           projectFile,
           setProjectFile,
@@ -88,7 +91,9 @@ const History = forwardRef(
         const tempAction = handler(action,projectFile);
         updateLists(tempAction,isUndo);
       }
-      setProjectFile({ ...projectFile });
+      if(action[0] != 'delete') {
+        setProjectFile({ ...projectFile });
+      }
     };
 
     useImperativeHandle(ref, () => ({ makeAction }));

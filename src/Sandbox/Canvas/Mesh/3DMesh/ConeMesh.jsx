@@ -24,7 +24,7 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
   const dependencyList = [height, radius];
 
   useEffect(() => {
-    if (!meshLoading) {
+    if (!meshLoading && projectFile.meshes[id]) {
       const newMesh = projectFile.meshes[id];
       newMesh.attributeList = attributeList;
       newMesh.circum = circum;

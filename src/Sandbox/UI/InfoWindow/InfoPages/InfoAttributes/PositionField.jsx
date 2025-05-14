@@ -89,13 +89,8 @@ const PositionField = ({ object }) => {
       }
     }
 
-    if(testEquals(positionNums,object.position.toArray())) {
-      console.log("are equal do nothing");
-    } else {
-      console.log("undo");
+    if(!testEquals(positionNums,object.position.toArray())) {
       const displacement = getDisplacement(positionNums,object.position.toArray());
-      
-      console.log(displacement);
 
       const action = ['translate'];
       action.push([object]);

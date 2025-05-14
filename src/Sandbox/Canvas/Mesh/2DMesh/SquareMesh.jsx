@@ -22,7 +22,7 @@ const SquareMesh = forwardRef(({ id, ...props }, ref) => {
   const dependencyList = [xDim,yDim];
 
   useEffect(() => {
-    if(!meshLoading) {
+    if(!meshLoading && projectFile.meshes[id]) {
       const newMesh = projectFile.meshes[id];
       newMesh.attributeList = attributeList;
       newMesh.dim = [xDim, yDim];
