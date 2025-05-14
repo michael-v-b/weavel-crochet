@@ -15,6 +15,7 @@ const DimField = ({ object, dimensions }) => {
   const setUndoList = useStore((state) => state.setUndoList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
+  const setWarningText = useStore((state)=>state.setWarningText);
 
   const objectData = object.userData.meshData;
   const [action, setAction] = useState(["dim"]);
@@ -42,6 +43,7 @@ const DimField = ({ object, dimensions }) => {
     let diff = 0;
 
     if (isNaN(tempNum)) {
+      setWarningText("Entry was not a number");
       tempNum = 0;
     }
     if (axis == 0) {

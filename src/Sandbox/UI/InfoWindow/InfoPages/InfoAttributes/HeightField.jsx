@@ -26,6 +26,7 @@ const HeightField = forwardRef(({
   const setUndoList = useStore((state) => state.setUndoList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
+  const setWarningText = useStore((state)=>state.setWarningText);
 
   useEffect(() => {
     setObjectData(object.userData.meshData);
@@ -40,6 +41,7 @@ const HeightField = forwardRef(({
     const initNumber = parseInt(e.target.value);
 
     if (isNaN(initNumber)) {
+      setWarningText("Entry was not a number");
       setHeight(0);
     } else {
       setHeight(initNumber);

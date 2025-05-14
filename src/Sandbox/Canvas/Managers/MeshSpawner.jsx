@@ -36,6 +36,7 @@ const MeshSpawner = forwardRef((_, ref) => {
   const setMeshList = useStore((state) => state.setMeshList);
   const OBJECT_LIMIT = useStore((state) => state.OBJECT_LIMIT);
   const projectFile = useStore((state) => state.projectFile);
+  const setWarningText = useStore((state)=>state.setWarningText);
 
   // list of all shapeComponents and the values of their meshTypes
   // add shape here when creating a new shape
@@ -75,7 +76,9 @@ const MeshSpawner = forwardRef((_, ref) => {
    * should be updated when creating the mesh.
    */
   const spawnMesh = (shape, tempId = "", update = true) => {
+    //end method if above object limit
     if (meshes.length >= OBJECT_LIMIT) {
+      setWarningText("Each project has a maximum of " + OBJECT_LIMIT + " objects");
       return;
     }
     const newMeshRef = React.createRef();

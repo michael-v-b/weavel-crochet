@@ -20,6 +20,7 @@ const RotationField = ({ object }) => {
   const setCurrentRotation = useStore((state)=>state.setCurrentRotation);
   const setUndoList = useStore((state)=>state.setUndoList);
   const undoList = useStore((state)=>state.undoList);
+  const setWarningText = useStore((state)=>state.setWarningText);
 
   useEffect(()=>{
     const temp = object.rotation.toArray();
@@ -53,6 +54,8 @@ const RotationField = ({ object }) => {
       const tempRotation = [...newRotation];
       tempRotation[axis] = newValue;
       setNewRotation(tempRotation);
+    } else {
+        setWarningText("Entry was not a number");
     }
   };
 

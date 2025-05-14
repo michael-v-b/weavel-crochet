@@ -45,6 +45,7 @@ const Sandbox = () => {
   const setNameLoading = useStore((state) => state.setNameLoading);
   const nameLoading = useStore((state) => state.nameLoading);
   const meshLoading = useStore((state) => state.meshLoading);
+  const setWarningText = useStore((state)=>state.setWarningText);
 
   const location = useLocation();
   /**
@@ -70,6 +71,7 @@ const Sandbox = () => {
   useEffect(() => {
     setNameLoading(true);
     setMeshLoading(true);
+    setWarningText("");
     //loading is set false in name tag
   }, []);
 

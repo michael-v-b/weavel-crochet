@@ -1,11 +1,13 @@
 import Banner from "../UI/Banner/Banner";
 import { useEffect, useState, useRef } from "react";
+import useStore from "../Sandbox/DevTools/store";
 import useGlobalStore from "../globalStore";
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import supabase from "../supabase";
 import ProjectManager from "./ProjectManager";
 import AuthTester from "../AuthTester";
+import WarningPop from "../Sandbox/UI/WarningPop/WarningPop";
 import "./Projects.css";
 
 /**
@@ -15,6 +17,7 @@ import "./Projects.css";
 const Projects = () => {
   const auth = useGlobalStore((state) => state.auth);
   const authData = useGlobalStore((state)=>state.authData);
+  const setWarningText = useStore((state)=>state.setWarningText);
   const [projectNames, setProjectNames] = useState([]);
   const [canRemove, setRemove] = useState(false);
   const removeButtonRef = useRef(null);
@@ -55,8 +58,6 @@ const Projects = () => {
    */
   useEffect(() => {
       testProfile();
-    
-
       document.addEventListener("click", handleClick);
 
       return () => {
@@ -108,6 +109,8 @@ const Projects = () => {
       projectManagerRef.current.createProject(name, id);
 
       setProjectNames([...projectNames, [name, id]]);
+    } else {
+      setWarningText("You can only have a maximum of 3 projects");
     }
   };
 
@@ -127,6 +130,7 @@ const Projects = () => {
 
   return (
     <div className="projects-web-container">
+      <WarningPop/>
       <ProjectManager ref={projectManagerRef} />
       <Banner />
       <AuthTester reroute = {"/login"}/>

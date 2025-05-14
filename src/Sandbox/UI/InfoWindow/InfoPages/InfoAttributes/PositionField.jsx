@@ -21,6 +21,7 @@ const PositionField = ({ object }) => {
   const setProjectFile = useStore((state) => state.setProjectFile);
   const undoList = useStore((state)=>state.undoList);
   const setUndoList = useStore((state)=>state.setUndoList);
+  const setWarningText = useStore((state)=>state.setWarningText);
   const [newPosition, setNewPosition] = useState([...avgPosition]);
 
   /**
@@ -36,6 +37,8 @@ const PositionField = ({ object }) => {
       tempPosition[axis] = newValue;
 
       setNewPosition(tempPosition);
+    } else {
+      setWarningText("Entry was not a number");
     }
   };
 
@@ -85,6 +88,7 @@ const PositionField = ({ object }) => {
         .replace(/[.,]00$/, "");
       positionNums[i] = parseFloat(positionStrings[i]);
       if (isNaN(positionStrings[i])) {
+        
         positionStrings[i] = 0;
       }
     }

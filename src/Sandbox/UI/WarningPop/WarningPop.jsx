@@ -15,6 +15,8 @@ const WarningPop = () => {
         if(warningText[0] != "") {
             setMountKey(mountKey*-1);
             setVisible(true);
+        } else {
+            setVisible(false);
         }
     },[warningText]);
 
@@ -23,7 +25,7 @@ const WarningPop = () => {
         key = {mountKey}
     initial = {{opacity:1}} 
     animate = {{opacity:0}} 
-    transition = {{duration:4}}
+    transition = {{duration:2, ease:'easeIn'}}
     onAnimationComplete = {() => setVisible(false)}
     className = "warning-pop-container">
         {warningText}
