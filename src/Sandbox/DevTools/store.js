@@ -110,6 +110,9 @@ const useStore = create((set) => ({
 
   redoList: [],
   setRedoList: (newRedo) => set({ redoList: newRedo }),
+
+  warningText: [""],
+  setWarningText: (newText) => set({warningText:[newText]}),
 }));
 
 export default useStore;

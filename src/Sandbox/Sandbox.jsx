@@ -9,6 +9,7 @@ import NameTag from "./UI/NameTag/NameTag";
 import Banner from "../UI/Banner/Banner";
 import LoadScreen from "../UI/LoadScreen/LoadScreen";
 import ModeBar from "./UI/ModeBar/ModeBar";
+import WarningPop from "./UI/WarningPop/WarningPop";
 
 import KeyTracker from "./DevTools/KeyTracker";
 import ProjectReader from "./DevTools/ProjectReader";
@@ -91,6 +92,7 @@ const Sandbox = () => {
   return (
     <>
       <div className="webpage">
+        <WarningPop/>
         <LoadScreen visible={meshLoading || nameLoading} />
 
         <ProjectReader
