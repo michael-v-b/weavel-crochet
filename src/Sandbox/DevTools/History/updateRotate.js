@@ -15,7 +15,6 @@ const objectList = action[1];
       const angleAxis = action[4];
       const rotationPoint = action[5];
 
-      console.log("rotate the object");
       rotaterRef.current.rotateGroup(
         objectList,
         -angle,

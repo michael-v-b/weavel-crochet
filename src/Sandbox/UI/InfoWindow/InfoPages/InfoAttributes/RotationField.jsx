@@ -38,8 +38,6 @@ const RotationField = ({ object }) => {
    * @returns {boolean} true if a= b and false if not.
    */
   const testEquals = (a,b) => {
-    console.log("a: " + a);
-    console.log("b: " + b);
     for(let i = 0; i < a.length;i++) {
       if(a[i]!=b[i]) {
         return false;
@@ -81,7 +79,6 @@ const RotationField = ({ object }) => {
       const action = ['rotate'];
       
       let angle = tempRotation[axis] - object.rotation.toArray()[axis];
-      angle = (angle/360) *2*Math.PI;
 
       let angleString = ''
 
@@ -96,9 +93,9 @@ const RotationField = ({ object }) => {
       const axisVectorList = [0,0,0];
       axisVectorList[axis] = 1;
       const axisVector = new Vector3().fromArray(axisVectorList);
-      const objectPosition = object.position.toArray();
+      const objectPosition = object.position;
 
-      action.push(object);
+      action.push([object]);
       action.push(angle);
       action.push(angleString);
       action.push(axisVector);
