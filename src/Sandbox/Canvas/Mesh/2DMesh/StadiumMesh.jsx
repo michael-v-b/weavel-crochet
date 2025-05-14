@@ -163,6 +163,7 @@ const StadiumMesh = forwardRef(({ id, ...props }, ref) => {
     }
   }, []);
 
+
   return (
     <SelectableMesh
       id={id}

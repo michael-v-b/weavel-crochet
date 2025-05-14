@@ -32,6 +32,7 @@ const HeightField = forwardRef(({
     setObjectData(object.userData.meshData);
     setHeight(object.userData.meshData.height);
   }, [object]);
+  
 
   /**
    *updates the internal height when input field is edited.
@@ -62,13 +63,16 @@ const HeightField = forwardRef(({
   const handleBlur = () => {
     let temp = height;
 
-    action.push(object);
+   
+    
+  
+
+    temp = Math.max(2,height);
+
+     action.push(object);
     action.push(objectData.height);
     action.push(temp);
     undoList.push(action);
-    
-
-    temp = Math.max(2,height);
     
 
     objectData.setHeight(temp);

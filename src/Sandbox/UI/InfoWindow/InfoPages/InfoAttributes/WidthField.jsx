@@ -25,6 +25,8 @@ const WidthField = forwardRef(({
 
   const [width, setWidth] = useState(objectData.width);
 
+  const meshType = object.userData.meshType;
+
   useEffect(() => {
     setObjectData(object.userData.meshData);
     setWidth(object.userData.meshData.width);
@@ -57,6 +59,10 @@ const WidthField = forwardRef(({
    */
   const handleBlur = () => {
     let temp = Math.max(2, width);
+
+    if(meshType == 'stadium' && temp %2 != 0) {
+      temp +=1;
+    }
 
     action.push(object);
     action.push(objectData.width);

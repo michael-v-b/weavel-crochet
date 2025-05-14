@@ -23,7 +23,7 @@ const TrianglePage = ({ object }) => {
     const temp = Math.max(height,Math.ceil(newWidth/MAX_RATE));
 
     if(temp!=height) {
-      setWarningText("Width updated to fit max proportions");
+      setWarningText("Height updated to fit max proportions");
     }
 
     heightRef.current.setHeight(temp);
@@ -34,12 +34,14 @@ const TrianglePage = ({ object }) => {
    * Updates the height when the height changes
    */
   const handleHeight = (newHeight) => {
+    
+  
     const width = widthRef.current.width;
     const temp = Math.min(width,Math.ceil(newHeight*MAX_RATE));
 
     
       if(temp!=width) {
-        setWarningText("Height updated to fit max proportions");
+        setWarningText("Width updated to fit max proportions");
       }
 
     widthRef.current.setWidth(temp);

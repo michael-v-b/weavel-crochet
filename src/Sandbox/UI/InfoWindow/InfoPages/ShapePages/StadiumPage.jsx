@@ -1,7 +1,8 @@
 import HeightField from "../InfoAttributes/HeightField";
 import WidthField from "../InfoAttributes/WidthField";
 import HalfField from "../InfoAttributes/HalfField";
-import { useState } from "react";
+import useStore from "../../../../DevTools/store";
+import { useRef} from "react";
 
 /**
  * @typedef {StadiumPage} - extra fields added when stadium is selected.
@@ -9,20 +10,45 @@ import { useState } from "react";
  * @returns {Component} - HeightField
  */
 const StadiumPage = ({ object }) => {
-  const [width, setWidth] = useState(object.userData.meshData.width);
-  const [height, setHeight] = useState(object.userData.meshData.height);
+  const setWarningText = useStore((state)=>state.setWarningText);
+  const objectData = object.userData.meshData;
+  const heightRef = useRef(null);
+  const widthRef = useRef(null);
+  const rate = 8;
 
   //when min width is 2 no max width and width needs to be even
 
   const handleWidth = (newWidth) => {
-    setWidth(newWidth);
+    const height = heightRef.current.height;
+
+    const temp = Math.max(height,newWidth);
+
+    if(temp != height) {
+      setWarningText("Width updated to fit max proportions");
+    }
+
+    objectData.setHeight(temp);
+    heightRef.current.setHeight(temp);
   };
 
-  //height = -width, min height = width +1
+  const handleHeight = (newHeight) => {
+    const width = widthRef.current.width;
+    let temp = Math.min(width,newHeight);
+
+    if(temp %2 != 0) {
+      temp-=1;
+    }
+    if(temp != width) {
+      setWarningText("Width updated to fit max proportions");
+    }
+    objectData.setWidth(temp);
+    widthRef.current.setWidth(temp);
+  }
+
   return (
     <>
-      <HeightField object={object} currentBase={width} isStadium={true} />
-      <WidthField object={object} isStadium={true} getWidth={handleWidth} />
+      <HeightField ref = {heightRef} object={object}  getHeight = {handleHeight} />
+      <WidthField ref = {widthRef} object={object} getWidth={handleWidth} />
       <HalfField object={object} />
     </>
   );

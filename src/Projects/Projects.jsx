@@ -59,7 +59,7 @@ const Projects = () => {
   useEffect(() => {
       testProfile();
       document.addEventListener("click", handleClick);
-
+      setWarningText("");
       return () => {
         document.removeEventListener("click", handleClick);
       };
