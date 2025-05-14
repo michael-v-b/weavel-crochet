@@ -54,6 +54,7 @@ const CircumferenceField = forwardRef(({ object, getCircum, roundingNum = 6,minC
     if(tempCircum < 3 && (roundingNum == 8 || roundingNum == 0)) {
       setWarningText("Circumference must be at minimum " + minCircum);
     }
+
     let roundedCircum = Math.max(minCircum, tempCircum);
 
     if (roundingNum != 0 && !(roundingNum == 8 && roundedCircum < 8)) {
@@ -62,7 +63,7 @@ const CircumferenceField = forwardRef(({ object, getCircum, roundingNum = 6,minC
       roundedCircum = Math.max(
         roundingNum,
         roundingNum * Math.floor(tempCircum / roundingNum)
-      );
+      ); 
       
       //warning text
       if(tempCircum % roundingNum!= 0) {
@@ -71,6 +72,7 @@ const CircumferenceField = forwardRef(({ object, getCircum, roundingNum = 6,minC
       }
     }
 
+    console.dir(getCircum);
     if (getCircum) {
       getCircum(roundedCircum);
     }

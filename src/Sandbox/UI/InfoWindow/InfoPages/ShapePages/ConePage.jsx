@@ -17,7 +17,7 @@ const ConePage = ({ object}) => {
 
   const objectFile = projectFile.meshes[id];
   const objectData = object.userData.meshData;
-  const MAX_RATE = 2;
+  const MAX_RATE = 6;
   const heightRef = useRef(null);
   const circumRef = useRef(null);
 
@@ -30,11 +30,13 @@ const ConePage = ({ object}) => {
     const temp = Math.max(height,Math.ceil(newCircum/MAX_RATE));
 
     if(temp!=height) {
-      setWarningText("Circumference updated to fit max proportions");
+      setWarningText("Height updated to fit maximum proportions");
     }
+    console.log("circumference to " + temp);
 
     heightRef.current.setHeight(temp);
     objectData.setHeight(temp);
+
     objectFile.height =temp;
     setProjectFile({...projectFile});
   };
@@ -49,13 +51,13 @@ const ConePage = ({ object}) => {
 
     
       if(temp!=circum) {
-        setWarningText("Height updated to fit max proportions");
+        setWarningText("Circumference updated to fit maximum proportions");
       }
 
 
     circumRef.current.setCircum(temp);
     objectData.setRadius(circumRef.current.findRadius(temp));
-    objectFile.setCircum(temp);
+    objectFile.circum = temp;
     setProjectFile({...projectFile});
   } 
 
@@ -64,7 +66,7 @@ const ConePage = ({ object}) => {
       <CircumField
       ref = {circumRef}
         object={object}
-        getWidth = {handleCircum}
+        getCircum = {handleCircum}
         minCircum = {6}
         roundingNum = {0}
       />

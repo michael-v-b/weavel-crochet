@@ -27,7 +27,7 @@ const CapsulePage = ({ object}) => {
       const temp = Math.max(height,Math.ceil(2*newCircum/MAX_RATE));
 
       if(temp!=height) {
-        setWarningText("Height updated to fit max proportions");
+        setWarningText("Height updated to fit maximum proportions");
       }
 
       heightRef.current.setHeight(temp);
@@ -45,7 +45,7 @@ const CapsulePage = ({ object}) => {
       const temp = Math.min(circum,Math.ceil(roundedHeight*MAX_RATE));
 
       if(temp!=circum) {
-        setWarningText("Width updated to fit max proportions");
+        setWarningText("Width updated to fit maximum proportions");
       }
 
       circumRef.current.setCircum(temp);

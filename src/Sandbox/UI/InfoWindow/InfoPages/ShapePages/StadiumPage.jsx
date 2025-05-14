@@ -32,7 +32,7 @@ const StadiumPage = ({ object }) => {
     const temp = Math.max(height,newWidth);
 
     if(temp != height) {
-      setWarningText("Width updated to fit max proportions");
+      setWarningText("Width updated to fit maximum proportions");
     }
 
     objectData.setHeight(temp);
@@ -49,7 +49,7 @@ const StadiumPage = ({ object }) => {
       temp-=1;
     }
     if(temp != width) {
-      setWarningText("Width updated to fit max proportions");
+      setWarningText("Width updated to fit maximum proportions");
     }
     objectData.setWidth(temp);
     widthRef.current.setWidth(temp);

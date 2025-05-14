@@ -30,7 +30,7 @@ const SiloPage = ({ object }) => {
     const temp = Math.min(circum, MAX_RATE*newHeight);
 
     if(temp!=height) {
-      setWarningText("Circumference updated to fit max proportions");
+      setWarningText("Circumference updated to fit maximum proportions");
     }
 
 
@@ -50,7 +50,7 @@ const SiloPage = ({ object }) => {
 
     
       if(temp!=circum) {
-        setWarningText("Height updated to fit max proportions");
+        setWarningText("Height updated to fit maximum proportions");
       }
 
 
