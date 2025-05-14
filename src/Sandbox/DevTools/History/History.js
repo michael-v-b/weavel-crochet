@@ -8,6 +8,8 @@ import updateHeight from "./updateHeight";
 import updateCircum from "./updateCircum";
 import updateDim from "./updateDim";
 import updateName from "./updateName";
+import updateWidth from "./updateWidth";
+import updateHalf from "./updateHalf";
 
 /**
  * undo dim
@@ -61,7 +63,9 @@ const History = forwardRef(
           meshSpawnerRef,
           circum_radius_convert)
       },
+      half:updateHalf,
       height: updateHeight,
+      width:updateWidth,
       circum: updateCircum,
       dim: updateDim,
       name: updateName,

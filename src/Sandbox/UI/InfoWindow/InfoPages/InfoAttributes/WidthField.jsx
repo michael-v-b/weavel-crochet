@@ -15,7 +15,7 @@ const WidthField = forwardRef(({
 },ref) => {
   const [objectData, setObjectData] = useState(object.userData.meshData);
 
-  const [action, setAction] = useState(["base"]);
+  const [action, setAction] = useState(["width"]);
   const setFocused = useStore((state) => state.setFocused);
   const undoList = useStore((state) => state.undoList);
   const setUndoList = useStore((state) => state.setUndoList);

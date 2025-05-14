@@ -6,7 +6,8 @@ const HalfField = ({ object }) => {
 
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const selectedList = useStore((state) => state.selectedList);
+  const undoList = useStore((state)=>state.undoList);
+  const setUndoList = useStore((state)=>state.setUndoList);
   const [isHalf, setHalf] = useState(objectData.isHalf);
   const checkRef = useRef(null);
 
@@ -14,6 +15,12 @@ const HalfField = ({ object }) => {
     const tempHalf = event.target.checked;
     objectData.setHalf(tempHalf);
     setHalf(tempHalf);
+
+    //update undo
+    const action = ['half'];
+    action.push(object);
+    undoList.push(action);
+    setUndoList([...undoList]);
 
     //update project file
     const newMesh = projectFile.meshes[object.userData.idNumber];
@@ -25,6 +32,10 @@ const HalfField = ({ object }) => {
   useEffect(() => {
     setHalf(object.userData.meshData.isHalf);
   }, [object]);
+
+  useEffect(()=>{
+    setHalf(objectData.isHalf);
+  },[objectData.isHalf]);
 
   return (
     <>
