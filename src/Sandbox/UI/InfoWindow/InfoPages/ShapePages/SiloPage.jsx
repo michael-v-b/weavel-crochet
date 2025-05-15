@@ -49,7 +49,7 @@ const SiloPage = ({ object }) => {
     const temp = Math.max(height,Math.ceil(newCircum/MAX_RATE));
 
     
-      if(temp!=circum) {
+      if(temp!=height) {
         setWarningText("Height updated to fit maximum proportions");
       }
 
