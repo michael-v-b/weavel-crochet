@@ -1,6 +1,6 @@
 import HeightField from "../InfoAttributes/HeightField";
 import CircumField from "../InfoAttributes/CircumField";
-import {useRef} from "react";
+import { useRef } from "react";
 import useStore from "../../../../DevTools/store";
 
 /**
@@ -8,16 +8,16 @@ import useStore from "../../../../DevTools/store";
  * @property {Mesh} object - the cone whose info is being displayed.
  * @returns {Component} - CircumField and HeightField.
  */
-const ConePage = ({ object}) => {
-  const setWarningText = useStore((state)=>state.setWarningText);
-  const projectFile = useStore((state)=>state.projectFile);
-  const setProjectFile = useStore((state)=>state.setProjectFile);
+const ConePage = ({ object }) => {
+  const setWarningText = useStore((state) => state.setWarningText);
+  const projectFile = useStore((state) => state.projectFile);
+  const setProjectFile = useStore((state) => state.setProjectFile);
 
   const id = object.userData.idNumber;
 
   const objectFile = projectFile.meshes[id];
   const objectData = object.userData.meshData;
-  const MAX_RATE = 6;
+  const MAX_RATE = 3;
   const heightRef = useRef(null);
   const circumRef = useRef(null);
 
@@ -26,10 +26,10 @@ const ConePage = ({ object}) => {
    */
   const handleCircum = (newCircum) => {
     const height = heightRef.current.height;
-    
-    const temp = Math.max(height,Math.ceil(newCircum/MAX_RATE));
 
-    if(temp!=height) {
+    const temp = Math.max(height, Math.ceil(newCircum / MAX_RATE));
+
+    if (temp != height) {
       setWarningText("Height updated to fit maximum proportions");
     }
     console.log("circumference to " + temp);
@@ -37,8 +37,8 @@ const ConePage = ({ object}) => {
     heightRef.current.setHeight(temp);
     objectData.setHeight(temp);
 
-    objectFile.height =temp;
-    setProjectFile({...projectFile});
+    objectFile.height = temp;
+    setProjectFile({ ...projectFile });
   };
 
   /**
@@ -46,35 +46,29 @@ const ConePage = ({ object}) => {
    */
   const handleHeight = (newHeight) => {
     const circum = circumRef.current.circum;
-    
-    const temp = Math.min(circum,Math.ceil(newHeight*MAX_RATE));
 
-    
-      if(temp!=circum) {
-        setWarningText("Circumference updated to fit maximum proportions");
-      }
+    const temp = Math.min(circum, Math.ceil(newHeight * MAX_RATE));
 
+    if (temp != circum) {
+      setWarningText("Circumference updated to fit maximum proportions");
+    }
 
     circumRef.current.setCircum(temp);
     objectData.setRadius(circumRef.current.findRadius(temp));
     objectFile.circum = temp;
-    setProjectFile({...projectFile});
-  } 
+    setProjectFile({ ...projectFile });
+  };
 
   return (
     <>
       <CircumField
-      ref = {circumRef}
+        ref={circumRef}
         object={object}
-        getCircum = {handleCircum}
-        minCircum = {6}
-        roundingNum = {0}
+        getCircum={handleCircum}
+        minCircum={6}
+        roundingNum={0}
       />
-      <HeightField
-      ref = {heightRef}
-        object={object}
-        getHeight = {handleHeight}
-      />
+      <HeightField ref={heightRef} object={object} getHeight={handleHeight} />
     </>
   );
 };

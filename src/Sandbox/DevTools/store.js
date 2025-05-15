@@ -8,13 +8,17 @@ const useStore = create((set) => ({
   //constants
   OBJECT_LIMIT: 25,
   DEF_CIRCUM: tempCircum,
-  DEF_HEIGHT: Math.ceil(tempCircum/(Math.PI)),
+  DEF_HEIGHT: Math.ceil(tempCircum / Math.PI),
 
   //CONVERTS convert real values to in game values.
   // old x(1/36) + 1/6
   //export
-  circum_radius_convert: (x) => {return (x/30)},
-  height_convert: (x) => {return (x/(tempCircum/(2*Math.PI)))},
+  circum_radius_convert: (x) => {
+    return x / 30;
+  },
+  height_convert: (x) => {
+    return x / (tempCircum / (2 * Math.PI));
+  },
 
   projectName: "",
   setProjectName: (newName) => set({ projectName: newName }),
@@ -38,11 +42,12 @@ const useStore = create((set) => ({
   setTool: (newTool) => set({ tool: newTool }),
 
   isDragging: false,
-  setDragging: (newDragging) => set({isDragging: newDragging}),
+  setDragging: (newDragging) => set({ isDragging: newDragging }),
 
   isIntersecting: false,
-  setIntersecting: (newIntersecting) => set({isIntersecting:newIntersecting}),
-  
+  setIntersecting: (newIntersecting) =>
+    set({ isIntersecting: newIntersecting }),
+
   isFocused: false,
   setFocused: (newFocused) => set({ isFocused: newFocused }),
 
@@ -71,8 +76,8 @@ const useStore = create((set) => ({
   avgPosition: [0, 1, 0],
   setAvgPosition: (newAvgPosition) => set({ avgPosition: newAvgPosition }),
 
-  currentRotation: [0,0,0],
-  setCurrentRotation : (newRotation) => set({currentRotation:newRotation}),
+  currentRotation: [0, 0, 0],
+  setCurrentRotation: (newRotation) => set({ currentRotation: newRotation }),
 
   updateAvgPosition: () =>
     set((state) => {
@@ -103,7 +108,7 @@ const useStore = create((set) => ({
       };
     }),
 
-    //history
+  //history
   undoList: [],
   setUndoList: (newUndo) => set({ undoList: newUndo, redoList: [] }),
   resetUndoList: (newUndo) => set({ undoList: newUndo }),
@@ -112,7 +117,14 @@ const useStore = create((set) => ({
   setRedoList: (newRedo) => set({ redoList: newRedo }),
 
   warningText: [""],
-  setWarningText: (newText) => set({warningText:[newText]}),
+  setWarningText: (newText) => set({ warningText: [newText] }),
+
+  projectDims: [
+    [0, 0],
+    [0, 0],
+    [0, 0],
+  ],
+  setProjectDims: (newProjectDims) => set({ projectdims: newProjectDims }),
 }));
 
 export default useStore;

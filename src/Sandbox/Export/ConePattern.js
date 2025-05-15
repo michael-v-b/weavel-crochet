@@ -13,7 +13,7 @@ const ConePattern = (object) => {
 
   let output = [];
 
-  output = ["Round 1: Put 6 sc into a magic ring."];
+  output = ["Round 1: Put 3 sc into a magic ring."];
   let roundNum = 1;
 
   let stitchCount = 6;

@@ -1,0 +1,11 @@
+.project-dim {
+  margin-top: 28vh;
+  margin-right: 25vw;
+  position: absolute;
+  z-index: 1000000;
+
+  font-size: 1.5vw;
+  font-family: sans-serif;
+  font-weight: 800;
+  user-select: none;
+}

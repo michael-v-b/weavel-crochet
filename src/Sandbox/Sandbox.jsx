@@ -10,6 +10,7 @@ import Banner from "../UI/Banner/Banner";
 import LoadScreen from "../UI/LoadScreen/LoadScreen";
 import ModeBar from "./UI/ModeBar/ModeBar";
 import WarningPop from "./UI/WarningPop/WarningPop";
+import ProjectDim from "./UI/ProjectDim/ProjectDim";
 
 import KeyTracker from "./DevTools/KeyTracker";
 import ProjectReader from "./DevTools/ProjectReader";
@@ -45,7 +46,7 @@ const Sandbox = () => {
   const setNameLoading = useStore((state) => state.setNameLoading);
   const nameLoading = useStore((state) => state.nameLoading);
   const meshLoading = useStore((state) => state.meshLoading);
-  const setWarningText = useStore((state)=>state.setWarningText);
+  const setWarningText = useStore((state) => state.setWarningText);
 
   const location = useLocation();
   /**
@@ -94,7 +95,8 @@ const Sandbox = () => {
   return (
     <>
       <div className="webpage">
-        <WarningPop/>
+        <WarningPop />
+        <ProjectDim />
         <LoadScreen visible={meshLoading || nameLoading} />
 
         <ProjectReader
