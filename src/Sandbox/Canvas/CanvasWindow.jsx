@@ -9,6 +9,8 @@ import ToolManager from "./Managers/ToolManager";
 import Deleter from "./Managers/Deleter";
 import IntersectionManager from "./Managers/IntersectionManager";
 import History from "../DevTools/History/History";
+import SizeManager from "./Managers/SizeManager";
+
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import useStore from "../DevTools/store";
 
@@ -117,6 +119,8 @@ const CanvasWindow = forwardRef(
           borderBottomLeftRadius: "25px",
         }}
       >
+        <SizeManager/>
+
         <IntersectionManager ref = {intersectionManagerRef} />
         <History
           ref={historyRef}
