@@ -21,12 +21,15 @@ const ColorWindow = () => {
   const OBJECT_LIMIT = useStore((state) => state.OBJECT_LIMIT);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const setWarningText = useStore((state)=>state.setWarningText);
+  const setWarningText = useStore((state) => state.setWarningText);
 
   const addColor = (color) => {
     if (colorList.length < OBJECT_LIMIT) {
-      setWarningText("Each project can have a maximum of " + OBJECT_LIMIT + " colors");
       setColorList([...colorList, color]);
+    } else {
+      setWarningText(
+        "Each project can have a maximum of " + OBJECT_LIMIT + " colors"
+      );
     }
   };
 
