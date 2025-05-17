@@ -46,7 +46,7 @@ const SizeManager = () => {
     setProjectDims([...dims]);
   });
 
-  const getPosition = () => {
+  /*const getPosition = () => {
     const output = [0, 0, 0];
     for (let i = 0; i < projectDims.length; i++) {
       output[i] =
@@ -60,13 +60,13 @@ const SizeManager = () => {
     return output;
   };
 
-  return (
+  /return (
     <>
       <mesh position={getPosition()}>
         <boxGeometry args={[axisDim(0), axisDim(1), axisDim(2)]} />
         <meshStandardMaterial color="green" wireframe />
       </mesh>
     </>
-  );
+  );*/
 };
 export default SizeManager;
