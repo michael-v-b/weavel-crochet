@@ -5,12 +5,7 @@ import useStore from "../../DevTools/store";
 const SizeManager = () => {
   const meshList = useStore((state) => state.meshList);
   const meshLoading = useStore((state) => state.meshLoading);
-
-  const [projectDims, setProjectDims] = useState([
-    [0, 0],
-    [0, 0],
-    [0, 0],
-  ]);
+  const setProjectDims = useStore((state)=>state.setProjectDims);
 
   useFrame(() => {
     const dims = [
@@ -43,7 +38,11 @@ const SizeManager = () => {
       }
     }
 
-    setProjectDims([...dims]);
+    const xDim = dims[0][1]-dims[0][0];
+    const yDim = dims[1][1]-dims[1][0];
+    const zDim = dims[2][1] - dims[2][0];
+
+    setProjectDims([xDim,yDim,zDim]);
   });
 
   /*const getPosition = () => {

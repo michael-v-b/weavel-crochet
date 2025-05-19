@@ -1,6 +1,14 @@
 .project-dim {
-  margin-top: 28vh;
-  margin-right: 25vw;
+  display:flex;
+  flex-direction:row;
+  
+
+  width:20vw;
+
+  margin-top: 30vh;
+  margin-left: 30vw;
+  top:0;
+  left:0;
   position: absolute;
   z-index: 1000000;
 
@@ -8,4 +16,8 @@
   font-family: sans-serif;
   font-weight: 800;
   user-select: none;
+}
+.project-dim-text {
+  margin-right:1vw;
+  margin-left:1vw;
 }

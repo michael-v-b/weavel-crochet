@@ -96,7 +96,7 @@ const Sandbox = () => {
     <>
       <div className="webpage">
         <WarningPop />
-        <ProjectDim />
+       <ProjectDim/>
         <LoadScreen visible={meshLoading || nameLoading} />
 
         <ProjectReader

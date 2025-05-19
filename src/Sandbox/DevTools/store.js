@@ -119,12 +119,8 @@ const useStore = create((set) => ({
   warningText: [""],
   setWarningText: (newText) => set({ warningText: [newText] }),
 
-  projectDims: [
-    [0, 0],
-    [0, 0],
-    [0, 0],
-  ],
-  setProjectDims: (newProjectDims) => set({ projectdims: newProjectDims }),
+  projectDims: [0,0,0],
+  setProjectDims: (newProjectDims) => set({ projectDims: newProjectDims }),
 }));
 
 export default useStore;
