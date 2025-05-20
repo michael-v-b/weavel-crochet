@@ -89,7 +89,7 @@ const Exporter = forwardRef((_, ref) => {
       "-ch: chain",
       "-inc: increase",
       "-dec: decrease",
-      "-sl st: slip stitch"
+      "-sl st: slip stitch",
     ];
     doc.text("Stitch Key: ", 10, row);
     for (let i = 0; i < stitch_key_text.length; i++) {
@@ -157,6 +157,31 @@ const Exporter = forwardRef((_, ref) => {
 
     doc.setFont("Helvetica", "bold");
 
+    doc.setTextColor(255, 90, 90);
+    doc.text(
+      "DISCLAIMER: The size estimation is a loose approximation. There are many ",
+      10,
+      row
+    );
+    addRow(10, doc);
+
+    doc.text(
+      "factors the size of a pattern including the yarn weight, tension and hook size.",
+      10,
+      row
+    );
+    addRow(10, doc);
+
+    doc.text(
+      "For the best use results, use the recommended materials.",
+      10,
+      row
+    );
+    addRow(20, doc);
+
+    //DISCLAIMER
+    doc.setTextColor(120, 165, 206);
+
     doc.text(
       "Thank you for using the Weavel Pattern Generator to create your custom ",
       10,
@@ -180,14 +205,6 @@ const Exporter = forwardRef((_, ref) => {
       10,
       row
     );
-    addRow(10, doc);
-    doc.text(
-      "If you don't know how to perform any of these stitches, you can check the",
-      10,
-      row
-    );
-    addRow(10, doc);
-    doc.text("'How to Crochet' page on the website", 10, row);
 
     addRow(10, doc);
 
@@ -210,6 +227,33 @@ const Exporter = forwardRef((_, ref) => {
     addRow(10, doc);
 
     addStitchKey(doc);
+
+    addRow(10, doc);
+
+    doc.setDrawColor(120, 165, 206);
+    doc.line(10, row, pageWidth - 10, row);
+
+    addRow(50, doc);
+
+    //recommended materials
+
+    doc.setDrawColor(120, 165, 206);
+    doc.line(10, row, pageWidth - 10, row);
+    addRow(10, doc);
+
+    doc.text("Recommended Materials:", 10, row);
+    addRow(10, doc);
+
+    doc.text("- #4 weight yarn in previous colors", 10, row);
+    addRow(10, doc);
+
+    doc.text("- 3.5mm corchet hook", 10, row);
+    addRow(10, doc);
+
+    doc.text("- Stuffing", 10, row);
+    addRow(10, doc);
+
+    doc.text("- Scissors", 10, row);
 
     addRow(10, doc);
 

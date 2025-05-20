@@ -1,14 +1,14 @@
 .project-dim {
-  display:flex;
-  flex-direction:row;
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 
-  width:50vw;
+  width: 55vw;
 
   margin-top: 30vh;
-  margin-left: 30vw;
-  top:0;
-  left:0;
+  margin-left: 20vw;
+  top: 0;
+  left: 0;
   position: absolute;
   z-index: 1000000;
 
@@ -16,11 +16,14 @@
   font-family: sans-serif;
   font-weight: 800;
   user-select: none;
+
+  color: #346ca8;
+  font-family: "Nunito";
 }
 .project-dim-text {
-  display:flex;
-  width:auto;
-  flex-direction:row;
-  margin-right:1vw;
-  margin-left:1vw;
+  display: flex;
+  width: auto;
+  flex-direction: row;
+  margin-right: 1vw;
+  margin-left: 1vw;
 }
