@@ -261,36 +261,38 @@ const Exporter = forwardRef((_, ref) => {
 
     //iterate through every mesh and its mesh pattern to the list.
     for (let i = 0; i < meshList.length; i++) {
+     
       let stringList = [];
       const object = meshList[i];
-
-      doc.setDrawColor(120, 165, 206);
-      doc.line(10, row, pageWidth - 10, row);
-
-      addRow(14, doc);
-
-      //Object Title Back
-      doc.setFillColor(191, 237, 245);
-      doc.roundedRect(10, row - 7, 100, 10, 5, 5, "F");
-      //Object Title
-      doc.setFont("Helvetica", "bold");
-      doc.setTextColor(120, 165, 206);
-      doc.text(object.name + ": ", 20, row);
-      doc.setTextColor(0, 0, 0);
-      doc.setFont("Helvetica", "normal");
-
-      addRow(14, doc);
-
-      //switch color
-      doc.text(
-        "Switch to color " + object.userData.colorIndex + " yarn.\n",
-        10,
-        row
-      );
-
-      addRow(14, doc);
-
+      
       if(object.userData.meshType!="eye") {
+        doc.setDrawColor(120, 165, 206);
+        doc.line(10, row, pageWidth - 10, row);
+
+        addRow(14, doc);
+
+        //Object Title Back
+        doc.setFillColor(191, 237, 245);
+        doc.roundedRect(10, row - 7, 100, 10, 5, 5, "F");
+        //Object Title
+        doc.setFont("Helvetica", "bold");
+        doc.setTextColor(120, 165, 206);
+        doc.text(object.name + ": ", 20, row);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont("Helvetica", "normal");
+
+        addRow(14, doc);
+
+        //switch color
+        doc.text(
+          "Switch to color " + object.userData.colorIndex + " yarn.\n",
+          10,
+          row
+        );
+
+        addRow(14, doc);
+
+      
         const eyeList = EyeTracker.getIntersectingEyes(object,meshList);
         //concat actual pattern
         stringList = stringList.concat(

@@ -1,11 +1,12 @@
 import SquarePattern from "./SquarePattern";
+import insertEyes from "./insertEyes";
 
 /**
  *@typedef {BoxPattern} Creates pattern based on a ball.
  *@property {Mesh} object - object used to get dimensions from meshData.
  *@returns {string} - a crochet pattern to make a box.
  */
-const BoxPattern = (object) => {
+const BoxPattern = (object,eyeList) => {
   const objectData = object.userData.meshData;
   const x = objectData.xDim;
   const y = objectData.yDim;
@@ -31,6 +32,12 @@ const BoxPattern = (object) => {
   output.push("Top Square:");
   //make another ball based on squares
   output = output.concat(SquarePattern([x, z, true]));
+
+  //add eyes
+  if(Object.keys(eyeList).length > 0) {
+    const eyes = insertEyes(eyeList);
+    output.push(eyes)
+  }
 
   const end =
     "Sew final square to the top of the cube and fill with Polyfill.\n";

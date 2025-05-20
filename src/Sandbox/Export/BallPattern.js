@@ -15,7 +15,6 @@ const BallPattern = (input,eyeList) => {
     circum = input.userData.meshData.circum;
   }
   if (typeof input == "object" && input.length == 2) {
-    console.log("custom input for capsules");
     circum = input[0];
     height = input[1];
   }
@@ -70,9 +69,16 @@ const BallPattern = (input,eyeList) => {
     roundNum += 1;
     output.push(third);
   }
+  
+  if(Object.keys(eyeList).length > 0) {
+    const eyes = insertEyes(eyeList);
+    output.push(eyes)
+  }
 
-  const stuff = "Fill with Polyfill\n";
+
+  const stuff = "Fill with stuffing\n";
   const exit = "Round " + roundNum + ": dec x6."
+  
   output.push(stuff);
   output.push(exit);
   output.push("sl st and Fasten off");

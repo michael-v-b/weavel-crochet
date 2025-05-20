@@ -1,11 +1,11 @@
-import CirclePattern from "./CirclePattern";
+import insertEyes from "./insertEyes";
 
 /**
  * @typedef {CylinderPattern} - a crochet pattern on how to make a Cylinder
  * @property {Mesh} object - used to find dimensions of cylinder
  * @returns {string} - crochet pattern for a cylinder
  */
-const CylinderPattern = (object) => {
+const CylinderPattern = (object,eyeList) => {
   const objectData = object.userData.meshData;
   const circum = objectData.circum;
   const height = objectData.height;
@@ -47,6 +47,10 @@ const CylinderPattern = (object) => {
   output.push("Top Circle: \n");
 
   output.push("sl st. Fasten off.\n");
+
+  if(Object.keys(eyeList).length > 0) {
+    output.push(insertEyes(eyeList));
+  }
   return output;
 };
 

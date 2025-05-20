@@ -1,11 +1,11 @@
-import CirclePattern from "./CirclePattern";
+import insertEyes from "./insertEyes";
 
 /**
  * @typedef {ConePattern} - a crochet pattern on how to make a cone pattern
  * @param {Mesh} object - object used to determine dimensions.
  * @returns {string} - a crochet pattern on how to make a cone.
  */
-const ConePattern = (object) => {
+const ConePattern = (object,eyeList) => {
   const objectData = object.userData.meshData;
   const height = objectData.height;
   const circum = objectData.circum;
@@ -67,6 +67,11 @@ const ConePattern = (object) => {
     }
   }
   output.push("sl st. Fasten off.\n");
+
+  if(Object.keys(eyeList).length > 0) {
+    output.push(insertEyes(eyeList));
+  }
+  
   return output;
 };
 

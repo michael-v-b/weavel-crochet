@@ -1,10 +1,12 @@
+import insertEyes from "./insertEyes";
+
 /**
  * @typedef {CirclePattern} - a crochet pattern on how to make a circle
  * @property {Mesh || [circum: {Number},height: {Number}]} - either a mesh
  * or an array that has the dimensions of the circle.
  * @returns {[{string}]} - a crochet pattern for a crochet circle.
  */
-const CirclePattern = (input) => {
+const CirclePattern = (input,eyeList) => {
   let output = [];
   let circum = -1;
   let fastenOff = true;
@@ -40,6 +42,10 @@ const CirclePattern = (input) => {
 
   if (fastenOff) {
     output.push("sl st. Fasten off.");
+  }
+
+  if(Object.keys(eyeList).length > 0) {
+    output.push(insertEyes(eyeList));
   }
 
   return output;

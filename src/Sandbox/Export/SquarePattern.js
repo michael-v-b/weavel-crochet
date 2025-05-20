@@ -1,10 +1,12 @@
+import insertEyes from "./insertEyes";
+
 /**
  * @typedef {SquarePattern} - a crochet pattern on how to make a square.
  * @property {Mesh || [x: {Number},x: {Number}]} - either a mesh
  * or an array that has the dimensions of the square.
  * @returns {string} - a crochet pattern for a crochet square.
  */
-const SquarePattern = (input) => {
+const SquarePattern = (input,eyeList) => {
   let x = -1;
   let y = -1;
   let fasten = true;
@@ -28,6 +30,10 @@ const SquarePattern = (input) => {
 
   if (fasten) {
     output.push("Fasten off.");
+  }
+
+   if(Object.keys(eyeList).length > 0) {
+    output.push(insertEyes(eyeList));
   }
   return output;
 };

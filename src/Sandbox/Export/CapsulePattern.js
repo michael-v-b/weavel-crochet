@@ -4,10 +4,12 @@ import BallPattern from "./BallPattern";
  * @property {Mesh} object - the object whose parameters are being measured.
  * @returns {string} - string detailing a crochet pattern
  */
-const CapsulePattern = (object) => {
+const CapsulePattern = (object, eyeList) => {
   const objectData = object.userData.meshData;
   //a capsule is basically just a longer ball
-  return BallPattern([objectData.circum, objectData.height]);
+  console.log("capsule");
+  console.log(eyeList);
+  return BallPattern([objectData.circum, objectData.height],eyeList);
 };
 
 export default CapsulePattern;

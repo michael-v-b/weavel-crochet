@@ -1,5 +1,10 @@
 
 
+/**
+ * Creates a string for how many of each kind of eye should be added into shape after completion
+ * @param {{Number}} eyeList - Object containing numbers and counts of eyes for each number 
+ * @returns string that will be added to the exported pdf
+ */
 const insertEyes = (eyeList) => {
 
     const keys = Object.keys(eyeList);
@@ -10,9 +15,9 @@ const insertEyes = (eyeList) => {
         let numEyes = "";
         
         if(eyeList[eyeSize] == 1) {
-            numEyes = eyeSize +"mm safety eye";
+            numEyes = eyeSize +" mm safety eye";
         } else {
-            numEyes = "x" + eyeList[eyeSize] + " " + eyeSize + "mm safety eyes";
+            numEyes = "x " + eyeList[eyeSize] + " " + eyeSize + "mm safety eyes";
         }
         return numEyes;
     }
