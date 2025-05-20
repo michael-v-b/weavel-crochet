@@ -29,9 +29,15 @@ const ProjectDim = () => {
 
   const simplifyFeet = (num) => {
     const FOOT = 12;
-    const feet = Math.floor(num / FOOT);
+    let feet = Math.floor(num / FOOT);
 
-    const inches = parseFloat((num % FOOT).toFixed(2));
+    if(!isFinite(feet)) {
+      feet = 0;
+    }
+    let inches = parseFloat((num % FOOT).toFixed(2));
+    if(isNaN(inches)) {
+      inches = 0;
+    }
 
     let output = "";
     if (feet > 0) {
@@ -44,8 +50,11 @@ const ProjectDim = () => {
 
   const simplifyMeter = (num) => {
     let mm = num * 25.4;
+
+    if(!isFinite(mm)) {
+      mm = 0;
+    }
     let cm = 0;
-    let m = 0;
 
     if (mm > 10) {
       cm = mm / 10;
