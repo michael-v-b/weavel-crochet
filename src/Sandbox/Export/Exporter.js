@@ -12,7 +12,9 @@ import StadiumPattern from "./StadiumPattern";
 import { forwardRef, useImperativeHandle } from "react";
 import { jsPDF } from "jspdf";
 import useStore from "../DevTools/store";
+import EyeTracker from "../DevTools/EyeTracker";
 import banner from "../../assets/banner.png";
+
 
 /**
  * @typedef {Exporter} - exports crochet patterns of every mesh in scene.
@@ -47,6 +49,8 @@ const Exporter = forwardRef((_, ref) => {
     triangle: TrianglePattern,
     stadium: StadiumPattern,
   };
+
+  
 
   /**
    *Converts hex codes to rgb values
@@ -130,9 +134,7 @@ const Exporter = forwardRef((_, ref) => {
     }
   };
 
-  /**
-   * exports a pdf that lists crochet patterns for every mesh in the scene.
-   */
+
 
   const exportPDF = () => {
     const doc = new jsPDF();
@@ -288,11 +290,14 @@ const Exporter = forwardRef((_, ref) => {
 
       addRow(14, doc);
 
-      //concat actual pattern
-      stringList = stringList.concat(
-        Patterns[object.userData.meshType](object)
-      );
-      stringList.push("\n");
+      if(object.userData.meshType!="eye") {
+        const eyeList = EyeTracker.getIntersectingEyes(object,meshList);
+        //concat actual pattern
+        stringList = stringList.concat(
+          Patterns[object.userData.meshType](object,eyeList)
+        );
+        stringList.push("\n");
+      }
       printToDoc(stringList, doc);
     }
 

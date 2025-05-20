@@ -76,7 +76,7 @@ const ProjectDim = () => {
     }
     setProjectText([...projectText]);
   }, [projectDims]);
-  //rgb(52, 108, 168);
+  
   return (
     <motion.div
       whileHover={{ color: "#72a5db", scale: 1.025 }}

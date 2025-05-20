@@ -40,6 +40,8 @@ const SelectableMesh = forwardRef(
     const visualRef = useRef(null);
     const cellRef = useRef(hierarchyRef);
 
+    const [hasEyes,setEyes] = useState([]);
+
     const idNumber = id;
 
 
@@ -81,6 +83,8 @@ const SelectableMesh = forwardRef(
             meshType: meshType,
             meshData,
             bvhRef,
+            hasEyes,
+            setEyes
           }}
           {...props}
           layer={2}

@@ -1,4 +1,5 @@
 import CirclePattern from "./CirclePattern";
+import insertEyes from "./insertEyes";
 
 /**
  *@typedef {BallPattern} Creates pattern based on a ball.
@@ -6,7 +7,7 @@ import CirclePattern from "./CirclePattern";
  *either based on meshData or on array of inputs.
  *@returns {[string]} - an array of rows depicting crochet pattern to make a ball.
  */
-const BallPattern = (input) => {
+const BallPattern = (input,eyeList) => {
   let output = [];
   let circum = -1;
   let height = -1;
@@ -14,9 +15,12 @@ const BallPattern = (input) => {
     circum = input.userData.meshData.circum;
   }
   if (typeof input == "object" && input.length == 2) {
+    console.log("custom input for capsules");
     circum = input[0];
     height = input[1];
   }
+
+  console.log(insertEyes(eyeList));
 
   //first part of ball is just a circle.
   output = CirclePattern([circum, false, 6]);

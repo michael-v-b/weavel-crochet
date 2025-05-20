@@ -24,16 +24,28 @@ const IntersectionManager = forwardRef((_, ref) => {
       for (let j = 0; j < nonSelectedMeshes.length; j++) {
         const nonSelectedMesh = nonSelectedMeshes[j];
 
+        
+        //my explanation
+        //A position = I*TMatrix
+        //B position = I*TMatrix
+        //normalize A in terms of B is like this
+        //B B^-1 = I
+        //A = ATMatrix*B-1TMatrix
+
         //CHAT GPT CODE
         const matrix = new Matrix4();
         matrix.copy(nonSelectedMesh.matrixWorld).invert();
         matrix.multiply(selectedMesh.matrixWorld);
+        //CHAT GPT CODE end
 
         const bTree = nonSelectedMesh.geometry.boundsTree;
+
+        //if selected mesh is eye, bTree
         const intersects = bTree.intersectsGeometry(
           selectedMesh.geometry,
           matrix
         );
+
         if (intersects) {
           setIntersecting(true);
           return true;
