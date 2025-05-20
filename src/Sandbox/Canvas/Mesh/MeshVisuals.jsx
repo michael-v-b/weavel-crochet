@@ -15,6 +15,8 @@ const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
     const colorList = useStore((state)=>state.colorList);
     const isIntersecting = useStore((state)=>state.isIntersecting);
     const [geo,setGeo] = useState();
+    const [isEye,setEye] = useState(false);
+    const [eyeSize,setEyeSize] = useState(0);
 
 
     /**
@@ -30,6 +32,12 @@ const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
      */
     useEffect(()=>{
         rerender();
+        if(hitboxRef?.current?.userData?.meshType =='eye') {
+            setEye(true);
+            const tempEyeSize = hitboxRef.current.userData.meshData.size;
+            setEyeSize((tempEyeSize/2.5/10));
+        }
+        
     },[...dependencyList]);
 
     //run initial rerender
@@ -38,6 +46,15 @@ const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
             rerender();
         }
     },[ref.current]);
+
+    useEffect(()=>{
+        if(hitboxRef?.current?.userData?.meshType =='eye') {
+            setEye(true);
+            const tempEyeSize = hitboxRef.current.userData.meshData.size;
+            setEyeSize((tempEyeSize/2.5/10));
+        }
+    },[hitboxRef]);
+
 
 
     
@@ -59,11 +76,17 @@ const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
 
         }
     });
-
-
     return <mesh ref = {ref}>
         {geo && <primitive object = {geo}/>}
-        <meshStandardMaterial roughness = {1} color = {colorList[colorIndex-1]} side = {DoubleSide}/>
+        {!isEye && <meshStandardMaterial roughness = {1} color = {colorList[colorIndex-1]} side = {DoubleSide}/>}
+        {isEye && <>
+        <meshStandardMaterial roughness = {0.15} metalness = {20} color = 'black'/>
+        <mesh rotation = {[Math.PI,0,0]} position = {[0,-eyeSize/5,0]}>
+            <coneGeometry args = {[eyeSize/5,eyeSize/2]}/>
+            <meshStandardMaterial color = "black"/>
+        </mesh>
+        </>}
+        
         {/*<Outlines/>(*/}
         </mesh>
 

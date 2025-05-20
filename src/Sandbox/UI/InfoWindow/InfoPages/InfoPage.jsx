@@ -13,6 +13,7 @@ import StadiumPage from "./ShapePages/StadiumPage";
 import SiloPage from "./ShapePages/SiloPage";
 import ChainPage from "./ShapePages/ChainPage";
 import TrianglePage from "./ShapePages/TrianglePage";
+import EyePage from "./ShapePages/EyePage";
 import {useEffect} from 'react';
 
 /**
@@ -36,6 +37,7 @@ const InfoPage = ({ object, meshType }) => {
     silo: SiloPage,
     chain: ChainPage,
     triangle: TrianglePage,
+    eye: EyePage,
   };
   const MeshType = shapePages[meshType];
 

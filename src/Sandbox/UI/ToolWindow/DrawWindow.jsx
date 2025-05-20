@@ -1,6 +1,5 @@
 import "./ToolWindow.css";
 import DrawButton from "../Buttons/DrawButton.jsx";
-import React, { useRef, useState } from "react";
 
 /**
  *@typedef {DrawWindow} - Window that showcases all the different shapes that can be added to the scene.
@@ -11,7 +10,7 @@ const DrawWindow = ({ getShape }) => {
   const handleClick = (shape) => {
     getShape(shape);
   };
-  const thirdShapes = ["ball", "silo", "capsule", "cone", "cylinder", "box"];
+  const thirdShapes = ["ball", "silo", "capsule", "cone", "cylinder", "box","eye"];
   const secondShapes = ["chain", "circle", "stadium", "square", "triangle"];
   return (
     <>

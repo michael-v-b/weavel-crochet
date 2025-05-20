@@ -9,6 +9,7 @@ import SquareMesh from "../Mesh/2DMesh/SquareMesh";
 import StadiumMesh from "../Mesh/2DMesh/StadiumMesh";
 import ChainMesh from "../Mesh/2DMesh/ChainMesh";
 import TriangleMesh from "../Mesh/2DMesh/TriangleMesh";
+import EyeMesh from "../Mesh/2DMesh/EyeMesh";
 
 import React, {
   useState,
@@ -52,6 +53,7 @@ const MeshSpawner = forwardRef((_, ref) => {
     stadium: StadiumMesh,
     silo: SiloMesh,
     chain: ChainMesh,
+    eye:EyeMesh,
   };
 
   /**
