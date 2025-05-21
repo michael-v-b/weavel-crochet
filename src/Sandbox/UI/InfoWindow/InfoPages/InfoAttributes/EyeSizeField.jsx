@@ -56,7 +56,7 @@ const EyeSizeField = forwardRef(({
    * Updates the object's height when input field is no longer selected and sets focused state to false.
    */
   const handleBlur = () => {
-    let temp = Math.min(50,Math.max(5, size));
+    let temp = Math.min(30,Math.max(5, size));
 
 
     action.push(object);

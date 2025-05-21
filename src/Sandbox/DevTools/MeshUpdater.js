@@ -54,6 +54,10 @@ const updateMesh = (meshRef, saveData, circum_radius_convert) => {
   if (attributes.includes("isHalf")) {
     meshData.setHalf(saveData.isHalf);
   }
+
+  if(attributes.includes("size")) {
+    meshData.setSize(saveData.size);
+  }
 };
 
 export default updateMesh;
