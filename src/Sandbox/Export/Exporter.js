@@ -256,8 +256,15 @@ const Exporter = forwardRef((_, ref) => {
     addRow(10, doc);
 
     doc.text("- Scissors", 10, row);
-
     addRow(10, doc);
+
+    //add eyes to materials
+    const eyeCount = EyeTracker.getEyeCount(meshList);
+    const eyeSizes = Object.keys(eyeCount);
+    for(let i = 0; i < eyeSizes.length;i++) {
+      doc.text("- " + eyeCount[eyeSizes[i]] + " x " + eyeSizes[i] + " mm. safety eyes",10,row);
+      addRow(10,doc);
+    }
 
     //iterate through every mesh and its mesh pattern to the list.
     for (let i = 0; i < meshList.length; i++) {
@@ -293,10 +300,10 @@ const Exporter = forwardRef((_, ref) => {
         addRow(14, doc);
 
       
-        const eyeList = EyeTracker.getIntersectingEyes(object,meshList);
+        const meshEyeList = EyeTracker.getIntersectingEyes(object,meshList);
         //concat actual pattern
         stringList = stringList.concat(
-          Patterns[object.userData.meshType](object,eyeList)
+          Patterns[object.userData.meshType](object,meshEyeList)
         );
         stringList.push("\n");
       }

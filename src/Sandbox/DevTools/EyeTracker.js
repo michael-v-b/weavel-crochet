@@ -12,15 +12,28 @@ const EyeTracker = () => {
  */
 EyeTracker.getEyeList = (meshList) => {
     const eyeList = [];
-    const nonEyeList = [];
     for(let i = 0; i < meshList.length;i++) {
         if(meshList[i].userData.meshType =="eye") {
             eyeList.push(meshList[i]);
-        } else {
-            nonEyeList.push(meshList[i]);
         }
     }
     return eyeList;
+}
+
+EyeTracker.getEyeCount = (meshList) => {
+    const eyeList = EyeTracker.getEyeList(meshList);
+    const eyeCount = {};
+
+    for(let i = 0; i < eyeList.length; i++) {
+        const eyeSize = eyeList[i].userData.meshData.size;
+        if(eyeCount[eyeSize]) {
+            eyeCount[eyeSize] +=1;
+        } else {
+            eyeCount[eyeSize] = 1;
+        }
+    }
+
+    return eyeCount;
 }
 
 
