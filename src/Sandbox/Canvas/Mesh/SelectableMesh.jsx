@@ -72,6 +72,7 @@ const SelectableMesh = forwardRef(
        
         <mesh
           ref={ref}
+          scale = {[0.9,0.9,0.9]}
           userData={{
             visualRef,
             idNumber,
