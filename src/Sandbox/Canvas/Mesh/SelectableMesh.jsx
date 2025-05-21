@@ -1,7 +1,7 @@
 import { Outlines } from "@react-three/drei";
 import { forwardRef, useEffect, useState, useRef } from "react";
 import { DoubleSide, BufferGeometry, Box3, Vector3 } from "three";
-import { useFrame } from "@react-three/fiber";
+import { useFrame,useThree } from "@react-three/fiber";
 import MeshVisuals from "./MeshVisuals";
 import { computeBoundsTree } from "three-mesh-bvh";
 
@@ -39,10 +39,15 @@ const SelectableMesh = forwardRef(
     const bvhRef = useRef(null);
     const visualRef = useRef(null);
     const cellRef = useRef(hierarchyRef);
+    const [distanceFromCamera,setDistanceFromCamera] = useState(0);
 
     const [hasEyes,setEyes] = useState([]);
 
     const idNumber = id;
+
+    const {camera} = useThree();
+
+    
 
 
     BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
@@ -52,6 +57,7 @@ const SelectableMesh = forwardRef(
         const geo = ref.current.geometry;
         geo.computeBoundsTree(geo);
       }
+      setDistanceFromCamera(camera.position.distanceTo(ref.current.position));
     });
 
     /**
@@ -59,9 +65,18 @@ const SelectableMesh = forwardRef(
      *run every time selected changes.
      */
     useEffect(() => {
-      setOutlineWeight(selected ? 5 : 1);
+
+      const outlineFactor = 15;
+
+      const outlineSize = outlineFactor*(1/Math.max(0.5,Math.log(distanceFromCamera)));
+
+      if(outlineSize > 100) {
+        
+        console.log("outlineSize: " + outlineSize.toFixed(2) + " doc: " + Math.log(distanceFromCamera.toFixed(2)));
+      }
+      setOutlineWeight(selected ?  outlineSize: 1);
       setOutlineColor(selected ? "#ff8800": 'black');
-    }, [selected]);
+    }, [selected,distanceFromCamera]);
 
 
 
