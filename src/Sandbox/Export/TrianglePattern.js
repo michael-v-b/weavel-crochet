@@ -1,4 +1,6 @@
-const TrianglePattern = (object) => {
+import insertEyes from "./insertEyes";
+
+const TrianglePattern = (object,eyeList) => {
   
   const objectData = object.userData.meshData;
 
@@ -66,6 +68,10 @@ const TrianglePattern = (object) => {
   }
 
   output.push("Fasten off.");
+
+    if(Object.keys(eyeList).length > 0) {
+    output.push(insertEyes(eyeList));
+  }
   return output;
 };
 

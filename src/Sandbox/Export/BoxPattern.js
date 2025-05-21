@@ -13,7 +13,7 @@ const BoxPattern = (object,eyeList) => {
   const z = objectData.zDim;
   let roundNum = 1;
   //start with square in the base
-  let output = SquarePattern([x, z, false]);
+  let output = SquarePattern([x, z, false],{});
   roundNum = x;
 
   //make walls based on height.
@@ -31,7 +31,7 @@ const BoxPattern = (object,eyeList) => {
 
   output.push("Top Square:");
   //make another ball based on squares
-  output = output.concat(SquarePattern([x, z, true]));
+  output = output.concat(SquarePattern([x, z, true],{}));
 
   //add eyes
   if(Object.keys(eyeList).length > 0) {

@@ -44,6 +44,7 @@ const CirclePattern = (input,eyeList) => {
     output.push("sl st. Fasten off.");
   }
 
+
   if(Object.keys(eyeList).length > 0) {
     output.push(insertEyes(eyeList));
   }

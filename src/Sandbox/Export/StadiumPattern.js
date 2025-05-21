@@ -1,9 +1,12 @@
+
+import insertEyes from "./insertEyes";
+
 /**
  * @typedef {StadiumPattern} - lists the instructions for the pattern the stadium object.
  * @property {Mesh} object - the object whose pattern is being made.
  * @returns {[String]} - a list of strings that create the pattern for the stadium
  */
-const StadiumPattern = (object) => {
+const StadiumPattern = (object,eyeList) => {
   const height = object.userData.meshData.height;
   const width = object.userData.meshData.width;
   const isHalf = object.userData.meshData.isHalf;
@@ -93,6 +96,10 @@ const StadiumPattern = (object) => {
   }
 
   output.push("Fasten off.");
+
+  if(Object.keys(eyeList).length > 0) {
+    output.push(insertEyes(eyeList));
+  }
 
   return output;
 };
