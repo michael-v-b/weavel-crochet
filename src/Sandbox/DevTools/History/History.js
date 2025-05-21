@@ -10,6 +10,7 @@ import updateDim from "./updateDim";
 import updateName from "./updateName";
 import updateWidth from "./updateWidth";
 import updateHalf from "./updateHalf";
+import updateSize from "./updateSize";
 
 /**
  * undo dim
@@ -72,6 +73,7 @@ const History = forwardRef(
       circum: updateCircum,
       dim: updateDim,
       name: updateName,
+      size: updateSize,
     };
 
     /**

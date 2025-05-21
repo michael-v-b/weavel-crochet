@@ -2,7 +2,7 @@
      *Undoes an object's height.
      *@param {[{string}, {object}, {Number},{Number}]} action-
      *action[0] - name of action.
-     *action[1] - object whose color changed.
+     *action[1] - object whose height changed.
      *action[2] - old height.
      *action[3] - new height.
      */
