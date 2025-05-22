@@ -16,6 +16,7 @@ const Hierarchy = ({ selectionManager }) => {
 
   const cellSelectorRef = useRef(null);
   const meshList = useStore((state) => state.meshList);
+  const OBJECT_LIMIT = useStore((state)=>state.OBJECT_LIMIT);
   /**
    * only allows one cell to be selected unless control or shit is pressed.
    * @param {Number} id - the id associated with the hier archy that was selected.
@@ -26,7 +27,7 @@ const Hierarchy = ({ selectionManager }) => {
 
   return (
     <div className="side-window">
-      <div className="side-title-bar">Object List</div>
+      <div className="side-title-bar">Object List {meshList.length}/{OBJECT_LIMIT}</div>
       <div className="hierarchy">
         <CellSelector ref={cellSelectorRef} />
         {meshList.map((object) => {
