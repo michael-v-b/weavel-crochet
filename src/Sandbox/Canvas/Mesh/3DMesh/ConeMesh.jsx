@@ -55,7 +55,7 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
       materialProps={{ side: DoubleSide }}
       {...props}
     >
-      <coneGeometry args={[radius, height_convert(height), 10, 10, true]} />
+      <coneGeometry args={[radius, height_convert(height), 20, 20, true]} />
     </SelectableMesh>
   );
 });

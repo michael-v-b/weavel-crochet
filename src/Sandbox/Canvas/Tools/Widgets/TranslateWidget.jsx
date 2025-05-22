@@ -24,7 +24,7 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
       return;
     }
     const distance = ref.current.position.distanceTo(camera.position);
-    const scale = distance / 10;
+    const scale = distance / 15;
     ref.current.scale.set(scale, scale, scale);
   });
 

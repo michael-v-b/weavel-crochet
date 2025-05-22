@@ -59,7 +59,7 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
       {...props}
     >
       <cylinderGeometry 
-        args = {[radius,radius,height_convert(height),10,10,true]}
+        args = {[radius,radius,height_convert(height),20,20,true]}
       />
     </SelectableMesh>
   );
