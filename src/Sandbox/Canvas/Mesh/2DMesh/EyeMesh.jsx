@@ -80,7 +80,7 @@ const convertMM = (mm) => {
     for(let i = 0; i < segments +1;i++) {
         const a = inRange(i,segments,first_vertex);
         const b = inRange(i+1,segments,first_vertex);
-        indices.push(0,a,b);
+       indices.push(0,a,b);
     }
     
 

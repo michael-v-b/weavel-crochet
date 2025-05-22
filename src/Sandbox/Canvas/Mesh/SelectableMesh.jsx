@@ -32,8 +32,6 @@ const SelectableMesh = forwardRef(
     SelectableMesh.displayName = "Selectable Mesh";
 
     const [selected, setSelected] = useState(false);
-    const [outlineWeight, setOutlineWeight] = useState(0);
-    const[outlineColor,setOutlineColor] = useState('black');
 
     const [colorIndex, setColorIndex] = useState(1);
     const bvhRef = useRef(null);
@@ -64,26 +62,14 @@ const SelectableMesh = forwardRef(
      * update outline weight of mesh when selected.
      *run every time selected changes.
      */
-    useEffect(() => {
-
-      const outlineFactor = 15;
-
-      const outlineSize = outlineFactor*(1/Math.max(0.5,Math.log(distanceFromCamera)));
-
-      if(outlineSize > 100) {
-        
-        console.log("outlineSize: " + outlineSize.toFixed(2) + " doc: " + Math.log(distanceFromCamera.toFixed(2)));
-      }
-      setOutlineWeight(selected ?  outlineSize: 1);
-      setOutlineColor(selected ? "#ff8800": 'black');
-    }, [selected,distanceFromCamera]);
+   
 
 
 
     //change for draggability
     return (
       <>
-        <MeshVisuals ref = {visualRef} hitboxRef = {ref} dependencyList = {dependencyList} colorIndex = {colorIndex}/>
+        <MeshVisuals ref = {visualRef} selected = {selected} hitboxRef = {ref} dependencyList = {dependencyList} colorIndex = {colorIndex}/>
        
         <mesh
           ref={ref}
@@ -110,7 +96,7 @@ const SelectableMesh = forwardRef(
           <meshBasicMaterial
             visible = {false}
           />
-          <Outlines thickness={outlineWeight} color= {outlineColor}/>
+          <Outlines thickness={1} color= 'yellow'/>
         </mesh>
       </>
     );

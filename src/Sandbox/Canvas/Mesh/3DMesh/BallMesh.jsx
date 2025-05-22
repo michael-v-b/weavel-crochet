@@ -41,7 +41,7 @@ const BallMesh = forwardRef(({ id, ...props }, ref) => {
         id={id}
         {...props}
       >
-        <sphereGeometry ref={ballGeoRef} args={[radius, 10, 10]} />
+        <sphereGeometry ref={ballGeoRef} args={[radius, 20, 20]} />
       </SelectableMesh>
     </>
   );

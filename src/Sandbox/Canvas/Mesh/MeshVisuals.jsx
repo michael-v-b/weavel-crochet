@@ -10,13 +10,15 @@ import {DoubleSide} from "three";
  * @typedef {MeshVisuals} - the visual component of the mesh, the main mesh is simply a hitbox.
  * @returns {Mesh}
  */
-const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
+const MeshVisuals = forwardRef(({hitboxRef,selected, dependencyList,colorIndex},ref) => {
     MeshVisuals.displayName = "Mesh Visuals";
     const colorList = useStore((state)=>state.colorList);
     const isIntersecting = useStore((state)=>state.isIntersecting);
     const [geo,setGeo] = useState();
     const [isEye,setEye] = useState(false);
     const [eyeSize,setEyeSize] = useState(0);
+    const [outlineWeight,setOutlineWeight] = useState(1);
+    const [outlineColor,setOutlineColor] = useState('black');
 
 
     /**
@@ -55,6 +57,11 @@ const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
         }
     },[hitboxRef]);
 
+    useEffect(()=>{
+        setOutlineWeight(selected ?  5 : 1);
+        setOutlineColor(selected ? "#ff8800": 'black');
+    },[selected]);
+
 
 
     
@@ -87,7 +94,7 @@ const MeshVisuals = forwardRef(({hitboxRef,dependencyList,colorIndex},ref) => {
         </mesh>
         </>}
         
-        {/*<Outlines/>(*/}
+        {geo && <Outlines thickness = {outlineWeight} color = {outlineColor}/>}
         </mesh>
 
 });
