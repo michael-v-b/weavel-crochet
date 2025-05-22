@@ -27,7 +27,7 @@ const Hierarchy = ({ selectionManager }) => {
 
   return (
     <div className="side-window">
-      <div className="side-title-bar">Object List {meshList.length}/{OBJECT_LIMIT}</div>
+      <div className="side-title-bar">Object List: {meshList.length}/{OBJECT_LIMIT}</div>
       <div className="hierarchy">
         <CellSelector ref={cellSelectorRef} />
         {meshList.map((object) => {
