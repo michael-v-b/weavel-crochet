@@ -5,7 +5,7 @@ import insertEyes from "./insertEyes";
  * @property {Mesh} object - used to find dimensions of cylinder
  * @returns {string} - crochet pattern for a cylinder
  */
-const CylinderPattern = (object,eyeList) => {
+const CylinderPattern = (object, eyeList) => {
   const objectData = object.userData.meshData;
   const circum = objectData.circum;
   const height = objectData.height;
@@ -18,7 +18,7 @@ const CylinderPattern = (object,eyeList) => {
       ")",
   ];
 
-  let roundNum = circum / 6 + 1;
+  let roundNum = 2;
 
   const wallsStart =
     "Round " +
@@ -48,7 +48,7 @@ const CylinderPattern = (object,eyeList) => {
 
   output.push("sl st. Fasten off.\n");
 
-  if(Object.keys(eyeList).length > 0) {
+  if (Object.keys(eyeList).length > 0) {
     output.push(insertEyes(eyeList));
   }
   return output;

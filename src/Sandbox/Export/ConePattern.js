@@ -5,18 +5,18 @@ import insertEyes from "./insertEyes";
  * @param {Mesh} object - object used to determine dimensions.
  * @returns {string} - a crochet pattern on how to make a cone.
  */
-const ConePattern = (object,eyeList) => {
+const ConePattern = (object, eyeList) => {
   const objectData = object.userData.meshData;
   const height = objectData.height;
   const circum = objectData.circum;
-  const POINT_NUMBER = 6; //stitch count for point
+  const POINT_NUMBER = 3; //stitch count for point
 
   let output = [];
 
   output = ["Round 1: Put 3 sc into a magic ring."];
   let roundNum = 1;
 
-  let stitchCount = 6;
+  let stitchCount = 3;
 
   //the number of decreases to reach point
   const rate = Math.floor((circum - POINT_NUMBER) / (height - 1));
@@ -68,10 +68,10 @@ const ConePattern = (object,eyeList) => {
   }
   output.push("sl st. Fasten off.\n");
 
-  if(Object.keys(eyeList).length > 0) {
+  if (Object.keys(eyeList).length > 0) {
     output.push(insertEyes(eyeList));
   }
-  
+
   return output;
 };
 
