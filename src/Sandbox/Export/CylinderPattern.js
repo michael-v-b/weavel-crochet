@@ -21,13 +21,7 @@ const CylinderPattern = (object, eyeList) => {
   let roundNum = 2;
 
   const wallsStart =
-    "Round " +
-    roundNum +
-    ": " +
-    circum +
-    " sc in front loop around the bases (" +
-    circum +
-    ")\n";
+    "Round " + roundNum + ": " + circum + " sc (" + circum + ")\n";
   output.push(wallsStart);
 
   roundNum += 1;
@@ -44,7 +38,6 @@ const CylinderPattern = (object, eyeList) => {
 
   output.push(walls);
   output.push("\n");
-  output.push("Top Circle: \n");
 
   output.push("sl st. Fasten off.\n");
 

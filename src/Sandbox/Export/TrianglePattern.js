@@ -1,14 +1,13 @@
 import insertEyes from "./insertEyes";
 
-const TrianglePattern = (object,eyeList) => {
-  
+const TrianglePattern = (object, eyeList) => {
   const objectData = object.userData.meshData;
 
   const height = objectData.height;
-  const base = objectData.base;
+  const base = objectData.width;
   const START_SIZE = 2;
   const stitchesLeft = base - START_SIZE;
-  const heightLeft = height - 2;
+  const heightLeft = height - 1;
   const rate = Math.floor(stitchesLeft / heightLeft);
 
   const remain = stitchesLeft % heightLeft;
@@ -17,17 +16,16 @@ const TrianglePattern = (object,eyeList) => {
 
   const remainRate = Math.floor(heightLeft / remain);
 
-
   for (let i = 0; i < remain; i++) {
     order[i * remainRate] += 1;
   }
 
-  const start = "Ch 2 (2)";
-  const firstInc = "Row 1: inc in first stitch, ch 1 and turn. (2)";
+  const start = "Row 1: Ch 2  and turn. (1)";
+  const firstInc = "Row 2: skip closest stitch and inc, ch 1 and turn. (2)";
 
   const output = [start, firstInc];
 
-  let roundNum = 2;
+  let roundNum = 3;
 
   let stitchCount = 2;
 
@@ -69,7 +67,7 @@ const TrianglePattern = (object,eyeList) => {
 
   output.push("Fasten off.");
 
-    if(Object.keys(eyeList).length > 0) {
+  if (Object.keys(eyeList).length > 0) {
     output.push(insertEyes(eyeList));
   }
   return output;
