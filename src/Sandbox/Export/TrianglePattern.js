@@ -52,14 +52,18 @@ const TrianglePattern = (object, eyeList) => {
       );
       stitchCount += 1;
     } else if (order[i] == 2) {
-      output.push(
-        roundString +
-          "inc, sc " +
-          (stitchCount - 1) +
-          ", inc. Ch1 and turn. (" +
-          (stitchCount + 2) +
-          ")"
-      );
+      if (stitchCount > 2) {
+        output.push(
+          roundString +
+            "inc, sc " +
+            (stitchCount - 2) +
+            ", inc. Ch1 and turn. (" +
+            (stitchCount + 2) +
+            ")"
+        );
+      } else {
+        output.push(roundString + "inc x 2. (4).");
+      }
       stitchCount += 2;
     }
     roundNum += 1;
