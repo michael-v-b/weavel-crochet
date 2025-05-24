@@ -18,8 +18,6 @@ const BallPattern = (input, eyeList) => {
     circum = input[0];
     height = input[1];
   }
-  const tempRadius = Math.floor(circum / (2 * Math.PI));
-  console.log("extra height: " + Math.abs(height - 2 * tempRadius));
   //first part of ball is just a circle.
   output = CirclePattern([circum, false, 6], {});
 
@@ -41,7 +39,9 @@ const BallPattern = (input, eyeList) => {
 
     roundNum = roundNum * 2;
   } else {
-    const radius = Math.floor(circum / (2 * Math.PI));
+    const radius = Math.ceil(circum / (2 * Math.PI));
+    console.log("roundnum: " + roundNum);
+    console.log("radius: " + radius);
     second =
       "Round " +
       roundNum +
