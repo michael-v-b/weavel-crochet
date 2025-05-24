@@ -7,7 +7,7 @@ import insertEyes from "./insertEyes";
  *either based on meshData or on array of inputs.
  *@returns {[string]} - an array of rows depicting crochet pattern to make a ball.
  */
-const BallPattern = (input,eyeList) => {
+const BallPattern = (input, eyeList) => {
   let output = [];
   let circum = -1;
   let height = -1;
@@ -18,11 +18,10 @@ const BallPattern = (input,eyeList) => {
     circum = input[0];
     height = input[1];
   }
-
-  console.log(insertEyes(eyeList));
-
+  const tempRadius = Math.floor(circum / (2 * Math.PI));
+  console.log("extra height: " + Math.abs(height - 2 * tempRadius));
   //first part of ball is just a circle.
-  output = CirclePattern([circum, false, 6],{});
+  output = CirclePattern([circum, false, 6], {});
 
   //second part of ball,just a large amount of single crochets, more depending on height
   let roundNum = circum / 6 + 1;
@@ -47,7 +46,7 @@ const BallPattern = (input,eyeList) => {
       "Round " +
       roundNum +
       "-" +
-      (roundNum + Math.abs(height - 2 * radius)) +
+      (roundNum * 2 - 1 + Math.abs(height - 2 * radius)) +
       ": " +
       stitchCount +
       " sc. (" +
@@ -69,20 +68,19 @@ const BallPattern = (input,eyeList) => {
     roundNum += 1;
     output.push(third);
   }
-  
-  if(Object.keys(eyeList).length > 0) {
+
+  if (Object.keys(eyeList).length > 0) {
     const eyes = insertEyes(eyeList);
-    output.push(eyes)
+    output.push(eyes);
   }
 
-
   const stuff = "Fill with stuffing\n";
-  const exit = "Round " + roundNum + ": dec x6."
-  
+  const exit = "Round " + roundNum + ": dec x6.";
+
   output.push(stuff);
   output.push(exit);
   output.push("sl st and Fasten off");
-  output.push("Close the circle.")
+  output.push("Close the circle.");
 
   return output;
 };
