@@ -71,8 +71,6 @@ const CircumferenceField = forwardRef(({ object, getCircum, roundingNum = 6,minC
           + roundingNum);
       }
     }
-
-    console.dir(getCircum);
     if (getCircum) {
       getCircum(roundedCircum);
     }
