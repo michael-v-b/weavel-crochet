@@ -14,7 +14,7 @@ const BannerDropdown = () => {
   const [dropdownHeight, setDropdownHeight] = useState("0%");
   const navigate = useNavigate();
   const DROPDOWN_SELECT_COLOR = "#dddddd";
-  const OPTIONS = 4;
+  const OPTIONS = 5;
 
   useEffect(() => {
     if (dropped) {
@@ -41,7 +41,7 @@ const BannerDropdown = () => {
           setDropped(!dropped);
         }}
       >
-        logged in as {authData.user.email}
+        {"[PUT PFP HERE]"}
       </motion.div>
 
       <div
@@ -89,6 +89,10 @@ const BannerDropdown = () => {
           }}
         >
           Sign Out
+        </motion.div>        <motion.div
+          className="profile-dropdown-option"
+        >
+          logged in as {authData.user.email}
         </motion.div>
       </div>
     </div>
