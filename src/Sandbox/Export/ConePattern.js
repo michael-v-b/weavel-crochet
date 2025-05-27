@@ -25,10 +25,17 @@ const ConePattern = (object, eyeList) => {
   const order = Array(height - 1).fill(rate);
   const indexRate = Math.floor(height / remain);
 
+  
+
+
+  let singleSide = 1;
+
   //create list of entries that should have extra decreases
   for (let i = 0; i < remain; i++) {
     order[i * indexRate] += 1;
   }
+
+    console.log("order: " + order);
 
   //create pattern
   for (let i = 0; i < order.length; i++) {
@@ -41,7 +48,7 @@ const ConePattern = (object, eyeList) => {
 
     const roundString = "Round " + roundNum + ": (";
     const scString = scCount > 0 ? scCount + " sc, " : "";
-    const dcString = "inc) x" + repeatCount;
+    const incString = "inc) x" + repeatCount;
 
     stitchCount += order[i];
 
@@ -49,17 +56,33 @@ const ConePattern = (object, eyeList) => {
 
     const transition = "";
 
-    if (order[i] != 0) {
+
+    //if order is only 1 stitch, alternate stitching pattern to avoid curvature
+    if (order[i] == 1) {
+      let tempString = "Round " + roundNum + ": ";
+      if(singleSide == -1) {
+        //minus 2 because stich count already had one added to it
+        tempString = tempString + (stitchCount-2) + " sc, inc. " +  "(" + stitchCount + ")"; 
+      } else {
+        tempString = tempString + Math.floor((stitchCount-2)/2) + " sc, inc, " + Math.ceil((stitchCount-2)/2) + " sc. (" +stitchCount + ")";
+      }
+      singleSide *= -1;
+      output.push(tempString);
+
+    //otherwise use default sc divisibility
+    } else if (order[i] != 0) {
       output.push(
         roundString +
           scString +
-          dcString +
+          incString +
           extraScString +
           transition +
           ". (" +
           stitchCount +
           ")\n"
       );
+
+      //otherwise just do a full sc ring
     } else {
       const tempString =
         "Round " + roundNum + ": " + repeatSize + " sc. (" + stitchCount + ")";
