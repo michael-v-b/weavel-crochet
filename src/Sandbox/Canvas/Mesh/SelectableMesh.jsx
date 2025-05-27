@@ -96,7 +96,7 @@ const SelectableMesh = forwardRef(
           <meshBasicMaterial
             visible = {false}
           />
-          <Outlines thickness={1} color= 'yellow'/>
+          <Outlines thickness={1/distanceFromCamera} color= 'yellow'/>
         </mesh>
       </>
     );
