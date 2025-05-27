@@ -46,7 +46,7 @@ const StadiumPattern = (object,eyeList) => {
 
   incrementStitches();
 
-  if (width >= 2) {
+  if (width >= 4) {
     if (!isHalf) {
       output.push(
         "Round 3: " +
@@ -70,11 +70,9 @@ const StadiumPattern = (object,eyeList) => {
     }
   }
 
-  incrementStitches();
 
   let roundNum = 3;
-
-  for (let i = 2; i < width / 2; i++) {
+  for (let i = 2; i < (width / 2); i++) {
     roundNum += 1;
     let temp = "Round " + roundNum + ":";
 
