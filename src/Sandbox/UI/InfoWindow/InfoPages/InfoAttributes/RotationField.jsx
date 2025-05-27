@@ -24,9 +24,11 @@ const RotationField = ({ object }) => {
 
   useEffect(()=>{
     const temp = object.rotation.toArray();
-    for(let i =0; i < temp; i++) {
+    for(let i =0; i < temp.length; i++) {
       if(!isNaN(temp[i])) {
-        temp[i] = temp.toFixed(2).replace(/[.,]00$/, "");
+        const radian = temp[i];
+        const degree = 360 * (radian/(2*Math.PI));
+        temp[i] = degree.toFixed(2).replace(/[.,]00$/, "");
       }
     }
     setNewRotation(temp);
