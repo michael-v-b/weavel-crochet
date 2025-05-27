@@ -15,7 +15,7 @@
 
 /*Container for full projects window (including Title Bar)*/
 .projects-container {
-  background-color: #98c0e5;
+  background-color: #91b9df;
   margin-top: 3%;
   height: 100%;
   width: 100%;
@@ -40,7 +40,7 @@
 
 /*Title text*/
 .projects-title {
-  font-size: xx-large;
+  font-size: 8vh;
 }
 
 /*Button to enable 'remove projects mode'*/
@@ -51,6 +51,7 @@
   padding: 1%;
   border-radius: 15px;
   margin-right: 5%;
+  font-size:3vh;
 }
 
 /*Window that actually contains the projects*/
@@ -60,7 +61,7 @@
   justify-content: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
-
+  
   padding: 3%;
 
   height: 90%;
@@ -117,6 +118,7 @@
   flex-direction: column;
   padding: 5%;
   height: 80%;
+  font-size:3.8vh;
 
   aspect-ratio: 1/1;
   background-color: #cdf6ff;

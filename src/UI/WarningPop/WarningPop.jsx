@@ -2,7 +2,7 @@
 
 import "./WarningPop.css";
 import {motion} from 'framer-motion';
-import useStore from "../../DevTools/store";
+import useStore from "../../Sandbox/DevTools/store";
 import {useEffect,useState} from 'react';
 
 const WarningPop = () => {

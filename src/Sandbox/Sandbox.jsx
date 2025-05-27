@@ -9,7 +9,7 @@ import NameTag from "./UI/NameTag/NameTag";
 import Banner from "../UI/Banner/Banner";
 import LoadScreen from "../UI/LoadScreen/LoadScreen";
 import ModeBar from "./UI/ModeBar/ModeBar";
-import WarningPop from "./UI/WarningPop/WarningPop";
+import WarningPop from "../UI/WarningPop/WarningPop";
 import ProjectDim from "./UI/ProjectDim/ProjectDim";
 
 import KeyTracker from "./DevTools/KeyTracker";
