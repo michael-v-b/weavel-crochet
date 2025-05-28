@@ -52,11 +52,6 @@ const Rotater = forwardRef(({raycaster}, ref) => {
 
     const ringValue = Math.round(Math.abs(Math.cos(camera.rotation.z)));
     const tempAxis = meshList[0].userData.axis;
-    if (ringValue == 1) {
-      setVertAxis("x");
-    } else {
-      setVertAxis("z");
-    }
 
     if (tempAxis == "x") {
       setAxisVector(new Vector3(1, 0, 0));
