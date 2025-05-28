@@ -17,7 +17,7 @@ const insertEyes = (eyeList) => {
         if(eyeList[eyeSize] == 1) {
             numEyes = eyeSize +" mm safety eye";
         } else {
-            numEyes = "x " + eyeList[eyeSize] + " " + eyeSize + "mm safety eyes";
+            numEyes = "x " + eyeList[eyeSize] + " " + eyeSize + " mm. safety eyes";
         }
         return numEyes;
     }

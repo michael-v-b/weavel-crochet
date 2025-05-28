@@ -28,7 +28,7 @@ const CapsuleMesh = forwardRef(({ id, ...props }, ref) => {
     return (a % length) + bottom;
   };
 
-  const segments = 10;
+  const segments = 20;
 
   const geometry = useMemo(() => {
     const geo = new BufferGeometry();

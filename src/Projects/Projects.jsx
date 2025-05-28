@@ -7,8 +7,10 @@ import { motion } from "framer-motion";
 import supabase from "../supabase";
 import ProjectManager from "./ProjectManager";
 import AuthTester from "../AuthTester";
-import WarningPop from "../Sandbox/UI/WarningPop/WarningPop";
+import WarningPop from "../UI/WarningPop/WarningPop";
+import ProjectDelete from "./ProjectDelete/ProjectDelete";
 import "./Projects.css";
+import { p } from "framer-motion/client";
 
 /**
  * @typedef {Projects} - a page used to display all of the user's projects.
@@ -20,11 +22,14 @@ const Projects = () => {
   const setWarningText = useStore((state)=>state.setWarningText);
   const [projectNames, setProjectNames] = useState([]);
   const [canRemove, setRemove] = useState(false);
+  const [deletedProject,setDeletedProject] = useState('');
+  const [deletedIndex,setDeletedIndex] = useState(-1);
   const removeButtonRef = useRef(null);
   const plusButtonRef = useRef(null);
   const navigate = useNavigate();
   const projectManagerRef = useRef(null);
   const clickedX = useRef(false);
+  
 
     /**
    * Adds a profile to the "Profiles" table 
@@ -120,22 +125,40 @@ const Projects = () => {
   const handleRemoveProject = (project_id) => {
     for (let i = 0; i < projectNames.length; i++) {
       if (projectNames[i][1] == project_id) {
-        projectNames.splice(i, 1);
+        setDeletedProject(projectNames[i][0]);
+        setDeletedIndex(i);
         break;
       }
     }
-    setProjectNames([...projectNames]);
-    projectManagerRef.current.removeProject(project_id);
   };
+
+  /**
+   * Delete project from index
+   * @param {Number} i - index of deleted project 
+   */
+
+  const deleteProject = (i) => {
+      const project_id = projectNames[i][1];
+      projectNames.splice(i);
+      setProjectNames([...projectNames]);
+      projectManagerRef.current.removeProject(project_id);
+  }
 
   return (
     <div className="projects-web-container">
       <WarningPop/>
+
+      {deletedProject.length > 0 && <ProjectDelete index = {deletedIndex} 
+      projectName = {deletedProject} 
+      deleteProject = {deleteProject}
+      setDeletedProject = {setDeletedProject}/>}
+
       <ProjectManager ref={projectManagerRef} />
       <Banner />
       <AuthTester reroute = {"/login"}/>
       <div className="projects-container">
         <div className="projects-title-bar">
+
           <div className="projects-title">Your Projects</div>
           <motion.div
             ref={removeButtonRef}
@@ -152,10 +175,12 @@ const Projects = () => {
             Remove Project{" "}
           </motion.div>
         </div>
+
         <div className="projects-sub-container">
           {projectNames.map((valuePair, key) => {
             const project_name = valuePair[0];
             const project_id = valuePair[1];
+
             return (
               <div className="project-container" key={key}>
                 {canRemove && (

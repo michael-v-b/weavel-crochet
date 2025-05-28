@@ -50,9 +50,9 @@
   align-items:flex-start;
   flex-direction: row-reverse;
   user-select: none;
-
+  
   height: 100%;
-  width: 100vw;
+  width: 13vh;
 }
 
 .banner-image {
@@ -73,7 +73,7 @@
 .banner-text {
   text-wrap: nowrap;
   font-family: "Pacifico", serif;
-  font-size: 5vh;
+  font-size: 2.8vw;
   color: rgb(255, 235, 123);
   text-shadow: 2px 2px 0 var(--banner-text-outline-color),
     -2px 2px 0 var(--banner-text-outline-color),

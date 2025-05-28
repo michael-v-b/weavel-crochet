@@ -32,7 +32,7 @@ const ConePage = ({ object }) => {
     if (temp != height) {
       setWarningText("Height updated to fit maximum proportions");
     }
-    console.log("circumference to " + temp);
+
 
     heightRef.current.setHeight(temp);
     objectData.setHeight(temp);

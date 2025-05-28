@@ -32,19 +32,14 @@ const Rotater = forwardRef(({raycaster}, ref) => {
   const [action, setAction] = useState(["rotate"]);
 
   const [rotationAxis, setAxis] = useState("x");
-  const [vertAxis, setVertAxis] = useState("x");
-  const [sensitivity, setSensitivity] = useState(1);
   const [axisVector, setAxisVector] = useState(new Vector3(0, 0, 0));
-  //const [isDragging,setDragging] = useState(false);
-
-  const prevMouse = useRef({ x: 0, y: 0 });
+  
   const prevAngle = useRef(0);
   const widgetRef = useRef(null);
 
   const [widgetPosition, setWidgetPosition] = useState(
     new Vector3(avgPosition[0], avgPosition[1], avgPosition[2])
   );
-  const groupDampening = 1;
 
   
 
@@ -57,11 +52,6 @@ const Rotater = forwardRef(({raycaster}, ref) => {
 
     const ringValue = Math.round(Math.abs(Math.cos(camera.rotation.z)));
     const tempAxis = meshList[0].userData.axis;
-    if (ringValue == 1) {
-      setVertAxis("x");
-    } else {
-      setVertAxis("z");
-    }
 
     if (tempAxis == "x") {
       setAxisVector(new Vector3(1, 0, 0));
@@ -155,17 +145,6 @@ const Rotater = forwardRef(({raycaster}, ref) => {
    *@param (Event) event - used for mouse location.
    */
   const handleDrag = (event) => {
-    /*//get difference in mouse x and y
-    const deltaX = event.clientX - prevMouse.current.x;
-    const deltaY = event.clientY - prevMouse.current.y;
-
-    //set previous mouse values to current mouse values for next frame
-    prevMouse.current = { x: event.clientX, y: event.clientY };
-
-    //set angle based on mouse movement
-    const angle =
-      rotationAxis == vertAxis ? deltaY * sensitivity : deltaX * sensitivity;
-    totalAngle += angle * 1.5;*/
 
     const tempPlanePosition = new Vector3().fromArray(avgPosition);
     const rotatePlane = new Plane(axisVector,-tempPlanePosition.dot(axisVector));

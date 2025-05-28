@@ -7,7 +7,6 @@ import InputField from "./InputField";
  * @typedef {HeightField} - A field used to edit an object's height.
  * @property {Object} object - object whose height is being edited.
  * @property {string} heightName - the text that appears on the height attribute.
- * @property {Number} currentBase - states the current circumference of the object.
  * @returns {Component} - div with an input field that represents the object's height.
  */
 const HeightField = forwardRef(({

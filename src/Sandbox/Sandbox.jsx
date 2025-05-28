@@ -9,7 +9,7 @@ import NameTag from "./UI/NameTag/NameTag";
 import Banner from "../UI/Banner/Banner";
 import LoadScreen from "../UI/LoadScreen/LoadScreen";
 import ModeBar from "./UI/ModeBar/ModeBar";
-import WarningPop from "./UI/WarningPop/WarningPop";
+import WarningPop from "../UI/WarningPop/WarningPop";
 import ProjectDim from "./UI/ProjectDim/ProjectDim";
 
 import KeyTracker from "./DevTools/KeyTracker";
@@ -78,10 +78,19 @@ const Sandbox = () => {
 
   //updates file when change occurs but only if projectId is correct.
   useEffect(() => {
-    //update camera first prevents having to do this every frame
     if (cameraTrackerRef?.current) {
-      projectFile.cameraPosition = cameraTrackerRef.current.getCameraPosition();
-      projectFile.cameraRotation = cameraTrackerRef.current.getCameraRotation();
+      const cameraPosition = cameraTrackerRef.current.getCameraPosition();
+      const cameraRotation = cameraTrackerRef.current.getCameraRotation();
+
+    
+      for(let i = 0; i < cameraPosition.length;i++) {
+        cameraPosition[i] = parseFloat(cameraPosition[i].toFixed(2));
+        cameraRotation[i] = parseFloat(cameraRotation[i].toFixed(2)); 
+      }
+      //update camera first prevents having to do this every frame
+  
+      projectFile.cameraPosition = cameraPosition;
+      projectFile.cameraRotation = cameraRotation;
     }
 
     const currentURL = location.pathname;
