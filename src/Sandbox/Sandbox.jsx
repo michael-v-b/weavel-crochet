@@ -80,8 +80,8 @@ const Sandbox = () => {
   useEffect(() => {
     //update camera first prevents having to do this every frame
     if (cameraTrackerRef?.current) {
-      projectFile.cameraPosition = cameraTrackerRef.current.getCameraPosition();
-      projectFile.cameraRotation = cameraTrackerRef.current.getCameraRotation();
+      projectFile.cameraPosition = parseFloat(cameraTrackerRef.current.getCameraPosition().toFixed(2));
+      projectFile.cameraRotation = parseFloat(cameraTrackerRef.current.getCameraRotation().toFixed(2));
     }
 
     const currentURL = location.pathname;
