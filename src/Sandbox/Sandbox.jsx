@@ -78,10 +78,17 @@ const Sandbox = () => {
 
   //updates file when change occurs but only if projectId is correct.
   useEffect(() => {
+    const cameraPosition = cameraTrackerRef.current.getCameraPosition();
+    const cameraRotation = cameraTrackerRef.current.getCameraRotation();
+
+    for(let i = 0; i < cameraPosition.length;i++) {
+      cameraPosition[i] = parseFloat(cameraPosition.toFixed(2));
+      cameraRotation[i] = parseFloat(cameraRotation.toFixed(2)); 
+    }
     //update camera first prevents having to do this every frame
     if (cameraTrackerRef?.current) {
-      projectFile.cameraPosition = parseFloat(cameraTrackerRef.current.getCameraPosition().toFixed(2));
-      projectFile.cameraRotation = parseFloat(cameraTrackerRef.current.getCameraRotation().toFixed(2));
+      projectFile.cameraPosition = cameraPosition;
+      projectFile.cameraRotation = cameraRotation;
     }
 
     const currentURL = location.pathname;
