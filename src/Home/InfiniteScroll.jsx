@@ -5,7 +5,7 @@ const InfiniteScroll = () => {
     const scrollList = [
         1,2,3,4,5
     ]
-    const animationTime = 10;
+    const animationTime = 12;
 
     return <div className = "scroll-container">
         {scrollList.map((value,key) => {

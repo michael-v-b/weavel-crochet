@@ -137,7 +137,7 @@
 }
 
 .download-container{
-  margin-top:15vh;
+  margin-top:20vh;
   font-family:"Nunito","sans-serif";
   text-align:center;
 
@@ -150,12 +150,9 @@
   
 }
 
-.download-text{
-  margin-top:3vh;
-}
 
 .trial-error {
-  margin-top: 15vh;
+  margin-top: 20vh;
   font-size: 3vw;
   margin-bottom: 3%;
   text-align: center;
