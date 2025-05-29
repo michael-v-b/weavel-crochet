@@ -80,7 +80,6 @@ const MeshVisuals = forwardRef(({hitboxRef,selected, dependencyList,colorIndex},
                     visualMesh.rotation.copy(hitbox.rotation);
                 }
             }
-
         }
     });
     return <mesh ref = {ref}>

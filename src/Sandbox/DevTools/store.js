@@ -14,7 +14,7 @@ const useStore = create((set) => ({
   // old x(1/36) + 1/6
   //export
   circum_radius_convert: (x) => {
-    return (((x-6)/6) *.375 + .5)/2;
+    return (((x-6)/6) *.25 + .75)/2;
   },
 
   height_convert: (x) => {
