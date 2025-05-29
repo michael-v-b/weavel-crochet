@@ -4,6 +4,7 @@ import { DoubleSide, BufferGeometry, Box3, Vector3 } from "three";
 import { useFrame,useThree } from "@react-three/fiber";
 import MeshVisuals from "./MeshVisuals";
 import { computeBoundsTree } from "three-mesh-bvh";
+import useStore from "../../DevTools/store";
 
 /**
  *@typedef {SelectableMesh} - creates a mesh that can be selected or deselected.
@@ -44,6 +45,8 @@ const SelectableMesh = forwardRef(
     const idNumber = id;
 
     const {camera} = useThree();
+
+    const isIntersecting = useStore((state)=>state.isIntersecting);
 
     
 
@@ -96,7 +99,7 @@ const SelectableMesh = forwardRef(
           <meshBasicMaterial
             visible = {false}
           />
-          <Outlines thickness={1/distanceFromCamera} color= 'yellow'/>
+          {isIntersecting&& selected && <Outlines thickness={1/distanceFromCamera} color= 'yellow'/>}
         </mesh>
       </>
     );
