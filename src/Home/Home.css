@@ -32,6 +32,40 @@
   bottom: 0;
 }
 
+.first-summary {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+
+  font-family:'Nunito','sans-serif';
+  color:var(--project-text);
+
+  margin-top:80vh;
+
+  font-size:3vw;
+
+  width:70vw;
+
+  border-color:rgb(255, 225, 114);
+  border-style:solid;
+  border-width:1vh;
+  border-radius:25px;
+  padding:5vh;
+}
+
+.first-summary-title {
+  font-weight:800;
+  text-decoration:underline;
+  margin-bottom:5vh;
+}
+
+.first-summary-text{
+  width:60vw;
+  font-weight:500;
+  font-size:2.5vw;
+}
+
 .center {
   display: flex;
   justify-content: center;
@@ -45,7 +79,7 @@
 
 .bubble-div {
   display: flex;
-  margin-top: 100vh;
+  margin-top: 20vh;
   width: var(--webpage-width);
   height: 80vh;
 }
@@ -57,6 +91,7 @@
   padding-top: 10vh;
   width: 50%;
 }
+
 .bubble-info {
   display: flex;
   justify-content: center;
@@ -73,7 +108,7 @@
   text-align: center;
   font-family: "Nunito", sans-serif;
   font-weight: 800;
-  font-size: 150%;
+  font-size: 2vw;
 
   color: var(--project-text);
   background-color: var(--logo-blue);
@@ -82,8 +117,7 @@
   margin-top: 20vh;
   margin-left: 25%;
 }
-.big-bubble {
-}
+
 .under-bubble-text {
   font-family: "Nunito", sans-serif;
   margin-top: 40vh;
@@ -102,8 +136,26 @@
   border-radius: 15px;
 }
 
+.download-container{
+  margin-top:15vh;
+  font-family:"Nunito","sans-serif";
+  text-align:center;
+
+  color:rgb(40, 99, 162);
+  
+  font-weight:800;
+  font-size:2vw;
+
+  text-decoration:underline;
+  
+}
+
+.download-text{
+  margin-top:3vh;
+}
+
 .trial-error {
-  margin-top: 10%;
+  margin-top: 15vh;
   font-size: 3vw;
   margin-bottom: 3%;
   text-align: center;
@@ -119,22 +171,7 @@
   width: var(--webpage-width);
   height: 70vh;
 }
-.compare-weavel {
-  background-color: rgb(255, 92, 92);
-  border-style: solid;
-  border-width: 0dvh 2px 0dvh 0px;
-  border-color: white;
-  left: 0;
-  width: 50vw;
-}
-.compare-real {
-  background-color: rgb(118, 118, 247);
-  border-style: solid;
-  border-color: white;
-  border-width: 0px 0px 0px 2px;
-  width: 50vw;
-  right: 0;
-}
+
 .change-prop-text {
   margin-top: 20vh;
   font-family: "Nunito", sans-serif;

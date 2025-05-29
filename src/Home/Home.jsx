@@ -2,6 +2,7 @@ import Banner from "../UI/Banner/Banner";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import AuthTester from "../AuthTester";
+import InfiniteScroll from "./InfiniteScroll";
 
 import "./Home.css";
 
@@ -34,7 +35,7 @@ const Home = () => {
     const sequence = async () => {
       await heroSpace.start({
         opacity: 1,
-        height: "75vh",
+        height: "65vh",
         transition: { duration: 0.8 },
       });
       await heroText.start({
@@ -67,6 +68,11 @@ const Home = () => {
     }
   };
 
+
+  /**
+   * Srinks value when played
+  */
+
   /**
    * Plays Trial and Error animation.
    */
@@ -98,6 +104,25 @@ const Home = () => {
             Crochet Pattern Creator!{" "}
           </motion.div>
         </motion.div>
+          
+        {/*CREATE YOUR OWN AMIGURUMI PATTERNS//////////////////*/}
+        <motion.div 
+        whileInView = {{scale:0.9}} 
+        transition ={{duration:0.4, ...SPRING_TRANSITION}}
+        initial = {{scale:0.8}}  
+        viewport ={{amount:0.7}}
+        className = "first-summary">
+
+          <div className = "first-summary-title">
+            Create Your Own Free Amigurumi Patterns!
+          </div>
+          <div className = "first-summary-text">
+            Weavel is a 3D Modeling software that lets you export your export it as an Amigurumi pattern.
+          </div>
+        </motion.div>
+
+
+        {/*BUBBLES/////////////////////////////////////////////*/}
         <motion.div className="bubble-div">
           <motion.div
             initial={{ width: "0%" }}
@@ -128,7 +153,7 @@ const Home = () => {
             <motion.div
               style={{
                 height: BUBBLE_SIZE * BUBBLE_RATIO + "%",
-                fontSize: "100%",
+                fontSize: "1vw",
               }}
               className="bubble-info small-bubble"
               initial={{ scale: 0 }}
@@ -151,36 +176,32 @@ const Home = () => {
               Export your designs into custom crochet patterns.
             </motion.div>
             <motion.div
-              style={{ backgroundColor: "red",margin: "5%", position: "absolute" }}
+              style={{margin: "5%", position: "absolute" }}
               whileInView={bubbleAnimations}
               className="animation-trigger"
             />
+
+
           </div>
         </motion.div>
-
-        <div className="trial-error"> NO MORE TRIAL AND ERROR</div>
-        <div className="compare-div">
-          <motion.div
-            initial={{ width: "0vw" }}
-            animate={fakeEnter}
-            className="compare-weavel"
-          />
-          <motion.div
-            initial={{ width: "0vw" }}
-            animate={realEnter}
-            className="compare-real"
-          />
-          <motion.div
-            style={{ marginTop: "50vh", width: "50vh", position: "absolute" }}
-            whileInView={trialErrorAnimation}
-            className="animation-trigger"
-            transition={{ ease: "easeIn", duration: 0.25 }}
-          />
+        
+        <div className=  "download-container">
+          <div className = "download-title">No Downloads. No Installations.</div>
+          <div className = "download-text">Just create an account and get stitching!</div>
         </div>
+
+        {/*SCROLL ////////////////////////////////////////////////*/}
+        <div className="trial-error"> NO MORE TRIAL AND ERROR</div>
+
+        <InfiniteScroll/>
+
+
         <div className="change-prop-text">
           {" "}
           Change proportions with the click of a button{" "}
         </div>
+
+
         <div className="change-prop-img" />
         <div style={{ position: "absolute", bottom: "-265vh" }}> FOOTER </div>
       </div>

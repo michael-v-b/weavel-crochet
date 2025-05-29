@@ -1,0 +1,17 @@
+
+.scroll-container {
+    display:flex;
+    flex-direction:row-reverse;
+    width:98vw;
+    height:30vh;
+    position:relative;
+}
+
+.scroll-image {
+    position:absolute;
+    height:30vh;
+    width:30vh;
+    background-color:blue;
+    margin-right:1vw;
+    margin-left:1vw;
+}
