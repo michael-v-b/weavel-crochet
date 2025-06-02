@@ -2,9 +2,10 @@
 .scroll-container {
     display:flex;
     flex-direction:row-reverse;
-    width:98vw;
+    width:90vw;
     height:30vh;
     position:relative;
+    overflow:hidden;
 }
 
 .scroll-image {
