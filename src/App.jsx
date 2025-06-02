@@ -17,17 +17,17 @@ import { BrowserRouter, Routes, Route } from "react-router";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename = "/weavel-crochet">
       <Routes>
         <Route path="" element={<Home />} />
-        <Route path="/sandbox/:info" element={<Sandbox />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path = "/verification" element = {<Verification/>}/>
-        <Route path = "/forgot_pass" element = {<ForgotPass/>}/>
-        <Route path = "/reset_pass" element = {<ResetPass/>}/>
-        <Route path="/projects" element={<Projects />} />
-        <Route path = "/help" element = {<Help/>}/>
+        <Route path="sandbox/:info" element={<Sandbox />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path = "verification" element = {<Verification/>}/>
+        <Route path = "forgot_pass" element = {<ForgotPass/>}/>
+        <Route path = "reset_pass" element = {<ResetPass/>}/>
+        <Route path="projects" element={<Projects />} />
+        <Route path = "help" element = {<Help/>}/>
       </Routes>
     </BrowserRouter>
   );
