@@ -35,18 +35,14 @@ const TrianglePattern = (object, eyeList) => {
     if (order[i] == 0) {
       output.push(
         roundString +
-          "sc " +
-          stitchCount +
-          ". Ch 1 and turn. (" +
+          stitchCount + "sc, ch 1 and turn. (" +
           stitchCount +
           ")"
       );
     } else if (order[i] == 1) {
       output.push(
         roundString +
-          "sc " +
-          (stitchCount - 1) +
-          ", inc. Ch 1 and turn. (" +
+          (stitchCount - 1) +"sc, inc, ch 1 and turn. (" +
           (stitchCount + 1) +
           ")"
       );
@@ -55,9 +51,8 @@ const TrianglePattern = (object, eyeList) => {
       if (stitchCount > 2) {
         output.push(
           roundString +
-            "inc, sc " +
-            (stitchCount - 2) +
-            ", inc. Ch1 and turn. (" +
+            "inc, " + 
+            (stitchCount - 2) + "sc, inc. Ch1 and turn. (" +
             (stitchCount + 2) +
             ")"
         );

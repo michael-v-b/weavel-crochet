@@ -79,7 +79,7 @@ const StadiumPattern = (object,eyeList) => {
     if (!isHalf) {
       for (let j = 0; j < 2; j++) {
         const midString = " " + midHeight + " sc, ";
-        const inc = "(" + (i - 1) + " sc, inc) x4";
+        const inc = "(" + (i - 1) + " sc, inc) x4,";
         temp = temp + midString + inc;
       }
     } else {

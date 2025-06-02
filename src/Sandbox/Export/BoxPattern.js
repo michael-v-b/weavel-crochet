@@ -40,7 +40,7 @@ const BoxPattern = (object,eyeList) => {
   }
 
   const end =
-    "Sew final square to the top of the cube and fill with Polyfill.\n";
+    "Sew final square to the top of the cube and fill with stuffing.\n";
   output.push(end);
   return output;
 };

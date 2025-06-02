@@ -21,7 +21,7 @@ const CirclePattern = (input,eyeList) => {
     rate = input[2];
   } 
 
-  const intro = "Round 1: make " + rate + " sc into a magic ring (" + rate + ")";
+  const intro = "Round 1: make " + rate + " sc into a magic ring. (" + rate + ")";
 
   output.push(intro);
   let stitchCount = rate;
@@ -35,7 +35,7 @@ const CirclePattern = (input,eyeList) => {
     if (roundNum > 2) {
       scCount = roundNum - 2 + " sc, ";
     }
-    first = roundString + scCount + "inc) x" + rate + " (" + stitchCount + ").\n";
+    first = roundString + scCount + "inc) x" + rate + ". (" + stitchCount + ")\n";
     roundNum += 1;
     output.push(first);
   }

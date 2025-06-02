@@ -21,9 +21,7 @@ const SiloPattern = (input,eyeList) => {
       (roundNum) +
       "-" +
       (roundNum +(height-radius)) +
-      ": sc x " +
-      circum +
-      ". (" +
+      ": " + circum + " sc. (" +
       circum +
       ")"
   );
@@ -32,7 +30,7 @@ const SiloPattern = (input,eyeList) => {
     output.push(insertEyes(eyeList));
   }
 
-  output.push("Stuff with polyfill.");
+  output.push("Fill with stuffing.");
   output.push("Fasten off.");
   return output;
 };

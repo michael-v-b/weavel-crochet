@@ -32,8 +32,6 @@ const ConePattern = (object, eyeList) => {
     order[i * indexRate] += 1;
   }
 
-  console.log("order: " + order);
-
   //create pattern
   for (let i = 0; i < order.length; i++) {
     roundNum += 1;
@@ -100,7 +98,7 @@ const ConePattern = (object, eyeList) => {
   }
   roundNum += 1;
   output.push(
-    "Round " + roundNum + ": sc " + stitchCount + ". (" + stitchCount + ")"
+    "Round " + roundNum + ": " + stitchCount + " sc " + ". (" + stitchCount + ")"
   );
   output.push("sl st. Fasten off.\n");
 

@@ -64,7 +64,7 @@ const BallPattern = (input, eyeList) => {
     let scCount = "";
     scCount = stitchCount / 6 - 1 + " sc, ";
 
-    third = roundString + scCount + "dec) x6 (" + stitchCount + ").\n";
+    third = roundString + scCount + "dec) x6. (" + stitchCount + ")\n";
     roundNum += 1;
     output.push(third);
   }
@@ -74,12 +74,12 @@ const BallPattern = (input, eyeList) => {
     output.push(eyes);
   }
 
-  const stuff = "Fill with stuffing\n";
+  const stuff = "Fill with stuffing.\n";
   const exit = "Round " + roundNum + ": dec x6.";
 
   output.push(stuff);
   output.push(exit);
-  output.push("sl st and Fasten off");
+  output.push("sl st and Fasten off.");
   output.push("Close the circle.");
 
   return output;
