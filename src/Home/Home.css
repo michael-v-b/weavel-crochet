@@ -134,6 +134,7 @@
   left: 0;
   background-color: rgb(135, 135, 228);
   border-radius: 15px;
+  overflow:hidden;
 }
 
 .download-container{

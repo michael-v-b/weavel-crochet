@@ -3,12 +3,12 @@
   flex-direction: row;
   justify-content: center;
 
-  width: 55vw;
+  width: 40vw;
 
-  margin-top: 30vh;
-  margin-left: 20vw;
+  background-color:red;
+
+  margin-top: 10vh;
   top: 0;
-  left: 0;
   position: absolute;
   z-index: 1000000;
 

@@ -105,7 +105,6 @@ const Sandbox = () => {
     <>
       <div className="webpage">
         <WarningPop />
-       <ProjectDim/>
         <LoadScreen visible={meshLoading || nameLoading} />
 
         <ProjectReader
@@ -127,6 +126,7 @@ const Sandbox = () => {
 
           <div className="canvas-div">
             <ModeBar exporterRef={exporterRef} historyRef={historyRef} />
+            <ProjectDim/>
             <CanvasWindow
               ref={canvasRef}
               historyRef={historyRef}

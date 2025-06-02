@@ -88,6 +88,8 @@ const ColorField = ({ object }) => {
         }}
         style={{
           color: isWhite ? "#FFFFFF" : "#000000",
+          width:'7vw',
+          fontSize:'1vw',
           backgroundColor: currentColor,
           borderRadius: "5px",
         }}

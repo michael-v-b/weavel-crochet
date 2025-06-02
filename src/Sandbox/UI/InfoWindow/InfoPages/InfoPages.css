@@ -31,7 +31,8 @@
   border-width: 2px;
 }
 .small {
-  width: 20%;
+  width: 3vw;
+  font-size:1vw;
 }
 .large {
   width: 80%;

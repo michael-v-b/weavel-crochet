@@ -8,13 +8,11 @@ import useGlobalStore from '../globalStore';
 import AuthTester from "../AuthTester";
 
 const ResetPass = () => {
-    const authData = useGlobalStore((state)=>state.authData);
     const [pass1,setPass1] = useState("");
     const [pass2,setPass2] = useState("");
     const [warningText,setWarningText] = useState("");
     const PASS_LENGTH = 6;
     const navigate = useNavigate();
-    const location = useLocation();
 
     const handlePass1 = (event) => {
         setPass1(event.target.value);
