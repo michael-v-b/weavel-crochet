@@ -5,6 +5,7 @@ import useStore from "../../DevTools/store";
 const SizeManager = () => {
   const meshList = useStore((state) => state.meshList);
   const meshLoading = useStore((state) => state.meshLoading);
+  const projectDims = useStore((state)=>state.projectDims);
   const setProjectDims = useStore((state)=>state.setProjectDims);
 
   useFrame(() => {
@@ -41,31 +42,11 @@ const SizeManager = () => {
     const xDim = dims[0][1]-dims[0][0];
     const yDim = dims[1][1]-dims[1][0];
     const zDim = dims[2][1] - dims[2][0];
-
-    setProjectDims([xDim,yDim,zDim]);
+    if(xDim!=projectDims[0] || yDim != projectDims[1] || zDim != projectDims[2]){
+      setProjectDims([xDim,yDim,zDim]);
+    }
   });
 
-  /*const getPosition = () => {
-    const output = [0, 0, 0];
-    for (let i = 0; i < projectDims.length; i++) {
-      output[i] =
-        (projectDims[i][0] - projectDims[i][1]) / 2 + projectDims[i][1];
-    }
-    return output;
-  };
 
-  const axisDim = (axis) => {
-    const output = projectDims[axis][0] - projectDims[axis][1];
-    return output;
-  };
-
-  /return (
-    <>
-      <mesh position={getPosition()}>
-        <boxGeometry args={[axisDim(0), axisDim(1), axisDim(2)]} />
-        <meshStandardMaterial color="green" wireframe />
-      </mesh>
-    </>
-  );*/
 };
 export default SizeManager;

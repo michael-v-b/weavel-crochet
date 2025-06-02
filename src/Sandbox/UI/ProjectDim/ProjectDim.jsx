@@ -18,6 +18,7 @@ const ProjectDim = () => {
   }, [metric]);
 
   const simplify = (num) => {
+    
     let output = "";
     if (metric) {
       output = simplifyMeter(num);
