@@ -126,7 +126,7 @@ const Sandbox = () => {
 
           <div className="canvas-div">
             <ModeBar exporterRef={exporterRef} historyRef={historyRef} />
-            <ProjectDim/>
+            {!meshLoading && !nameLoading && <ProjectDim/>}
             <CanvasWindow
               ref={canvasRef}
               historyRef={historyRef}
