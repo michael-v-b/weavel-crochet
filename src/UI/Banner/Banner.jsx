@@ -36,7 +36,7 @@ const Banner = () => {
           src={logo}
         />
         <div className="banner-text-container">
-          <div className="banner-text"> WEAVEL PATTERN GENERATOR</div>
+          <div className="banner-text"> WEAVEL AMIGURUMI DESIGNER</div>
         </div>
       </div>
 

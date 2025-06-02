@@ -101,7 +101,7 @@ const Home = () => {
             className="hero-text"
           >
             {" "}
-            Crochet Pattern Creator!{" "}
+            Custom Crochet Patterns!{" "}
           </motion.div>
         </motion.div>
           

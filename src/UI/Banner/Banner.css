@@ -11,7 +11,7 @@
   top: 0;
 
   width: var(--webpage-width);
-  height: 12vh;
+  height: 6vw;
 
   background-color: #bfedf5;
   z-index: 1000;
@@ -75,8 +75,15 @@
   font-family: "Pacifico", serif;
   font-size: 2.8vw;
   color: rgb(255, 235, 123);
-  text-shadow: 2px 2px 0 var(--banner-text-outline-color),
-    -2px 2px 0 var(--banner-text-outline-color),
-    2px -2px 0 var(--banner-text-outline-color),
-    -2px -2px 0 var(--banner-text-outline-color);
+  text-shadow: .15vw .15vw 0 var(--banner-text-outline-color),
+  -.15vw .15vw 0 var(--banner-text-outline-color),
+  .15vw -.15vw 0 var(--banner-text-outline-color),
+  -.15vw -.15vw 0 var(--banner-text-outline-color);
+   
+}
+
+.temp {
+   text-shadow: 
+    
+    
 }

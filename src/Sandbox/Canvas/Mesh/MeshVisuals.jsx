@@ -82,6 +82,7 @@ const MeshVisuals = forwardRef(({hitboxRef,selected, dependencyList,colorIndex},
             }
         }
     });
+
     return <mesh ref = {ref}>
         {geo && <primitive object = {geo}/>}
         {!isEye && <meshStandardMaterial roughness = {1} color = {colorList[colorIndex-1]} side = {DoubleSide}/>}
