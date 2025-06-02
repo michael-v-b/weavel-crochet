@@ -25,9 +25,6 @@ const ConePattern = (object, eyeList) => {
   const order = Array(height - 1).fill(rate);
   const indexRate = Math.floor(height / remain);
 
-  
-
-
   let singleSide = 1;
 
   //create list of entries that should have extra decreases
@@ -35,7 +32,7 @@ const ConePattern = (object, eyeList) => {
     order[i * indexRate] += 1;
   }
 
-    console.log("order: " + order);
+  console.log("order: " + order);
 
   //create pattern
   for (let i = 0; i < order.length; i++) {
@@ -56,20 +53,32 @@ const ConePattern = (object, eyeList) => {
 
     const transition = "";
 
-
     //if order is only 1 stitch, alternate stitching pattern to avoid curvature
     if (order[i] == 1) {
       let tempString = "Round " + roundNum + ": ";
-      if(singleSide == -1) {
+      if (singleSide == -1) {
         //minus 2 because stich count already had one added to it
-        tempString = tempString + (stitchCount-2) + " sc, inc. " +  "(" + stitchCount + ")"; 
+        tempString =
+          tempString +
+          (stitchCount - 2) +
+          " sc, inc. " +
+          "(" +
+          stitchCount +
+          ")";
       } else {
-        tempString = tempString + Math.floor((stitchCount-2)/2) + " sc, inc, " + Math.ceil((stitchCount-2)/2) + " sc. (" +stitchCount + ")";
+        tempString =
+          tempString +
+          Math.floor((stitchCount - 2) / 2) +
+          " sc, inc, " +
+          Math.ceil((stitchCount - 2) / 2) +
+          " sc. (" +
+          stitchCount +
+          ")";
       }
       singleSide *= -1;
       output.push(tempString);
 
-    //otherwise use default sc divisibility
+      //otherwise use default sc divisibility
     } else if (order[i] != 0) {
       output.push(
         roundString +
@@ -89,6 +98,10 @@ const ConePattern = (object, eyeList) => {
       output.push(tempString);
     }
   }
+  roundNum += 1;
+  output.push(
+    "Round " + roundNum + ": sc " + stitchCount + ". (" + stitchCount + ")"
+  );
   output.push("sl st. Fasten off.\n");
 
   if (Object.keys(eyeList).length > 0) {

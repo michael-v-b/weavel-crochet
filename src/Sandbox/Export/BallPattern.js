@@ -52,7 +52,7 @@ const BallPattern = (input, eyeList) => {
       " sc. (" +
       stitchCount +
       ")\n";
-    roundNum = roundNum + Math.abs(height - 2 * radius) + 1;
+    roundNum = roundNum * 2 + Math.abs(height - 2 * radius);
   }
   output.push(second);
 
