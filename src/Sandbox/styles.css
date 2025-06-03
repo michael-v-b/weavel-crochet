@@ -2,6 +2,11 @@
   --webpage-width: 98.5vw;
 }
 
+html,body {
+  margin:0;
+  padding:0;
+}
+
 .sandbox {
   display: flex;
   flex-direction: row;

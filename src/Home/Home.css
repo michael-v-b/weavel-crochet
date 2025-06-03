@@ -79,6 +79,8 @@
 
 .bubble-div {
   display: flex;
+  align-items:center;
+  justify-content:center;
   margin-top: 20vh;
   width: var(--webpage-width);
   height: 80vh;
@@ -116,6 +118,7 @@
 .small-bubble {
   margin-top: 20vh;
   margin-left: 25%;
+  font-size:1vw;
 }
 
 .under-bubble-text {
@@ -184,4 +187,35 @@
   border-radius: 5vw;
   box-shadow: 5px 10px var(--project-text);
   background-color: orange;
+}
+
+@media (max-width:480px) {
+  .bubble-div{
+    margin-top:40vh;
+    flex-direction:column-reverse;
+  }
+  .bubble-screenshot{
+    margin-top:10vw;
+    height:100vw;
+    flex:none;
+  }
+  .bubble-info{
+    font-size:4vw;
+  }
+  .small-bubble{
+    font-size:3vw;
+  }
+
+  .under-bubble-text{
+    font-size:3.5vw;
+  }
+
+  .download-container{
+    margin-top:40vh;
+    font-size:3.5vw;
+  }
+  .trial-error{
+    font-size:5vw;
+    margin-bottom:10vw;
+  }
 }

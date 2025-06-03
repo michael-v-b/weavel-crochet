@@ -19,8 +19,6 @@ const Home = () => {
   const screenshot = useAnimation();
   const bubbles = useAnimation();
   const underBubbleText = useAnimation();
-  const realEnter = useAnimation();
-  const fakeEnter = useAnimation();
 
   const SPRING_TRANSITION = {
     type: "spring",
@@ -50,7 +48,13 @@ const Home = () => {
    * plays bubble animations once checkpoint is visible on screen.
    */
   const bubbleAnimations = async () => {
-    screenshot.start({ width: "50%" });
+
+    let tempWidth = "50%";
+    if(window.innerWidth <= 480) {
+      tempWidth = "98%";
+    }
+    screenshot.start({ width: tempWidth });
+    
     if (!bubblePlayed) {
       setBubblePlayed(true);
       bubbles.start({
@@ -69,17 +73,9 @@ const Home = () => {
   };
 
 
-  /**
-   * Srinks value when played
-  */
+  useEffect(()=>{
 
-  /**
-   * Plays Trial and Error animation.
-   */
-  const trialErrorAnimation = async () => {
-    realEnter.start({ width: "50vw" });
-    fakeEnter.start({ width: "50vw" });
-  };
+  })
 
   return (
     <>
@@ -117,7 +113,8 @@ const Home = () => {
             Create Your Own Free Amigurumi Patterns!
           </div>
           <div className = "first-summary-text">
-            Weavel is a 3D Modeling software that lets you export your export it as an Amigurumi pattern.
+            Weavel is a 3D modeling software that lets you create your own unique Amigurumi designs,
+            and download it as a crochet pattern to bring it to life.
           </div>
         </motion.div>
 
@@ -135,6 +132,7 @@ const Home = () => {
           >
             SCREEN SHOT GOES HERE
           </motion.div>
+
           <div className="bubble-container">
             <motion.div
               style={{ height: BUBBLE_SIZE + "%" }}
@@ -150,10 +148,10 @@ const Home = () => {
             >
               Bring your crochet ideas to life!
             </motion.div>
+
             <motion.div
               style={{
                 height: BUBBLE_SIZE * BUBBLE_RATIO + "%",
-                fontSize: "1vw",
               }}
               className="bubble-info small-bubble"
               initial={{ scale: 0 }}
@@ -173,7 +171,7 @@ const Home = () => {
               initial={{ scale: 0 }}
               animate={underBubbleText}
             >
-              Export your designs into custom crochet patterns.
+              Access your projects from anywhere!
             </motion.div>
             <motion.div
               style={{margin: "5%", position: "absolute" }}

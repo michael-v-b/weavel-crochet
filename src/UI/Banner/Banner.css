@@ -4,10 +4,15 @@
   --logo-yellow: rgb(255, 235, 123);
   --logo-blue: #bfedf5;
 }
+
+
+
+
 .banner-style {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  align-items:center;
   top: 0;
 
   width: var(--webpage-width);
@@ -22,20 +27,17 @@
   align-items: center;
   justify-content: center;
 
-  height: 96%;
+  height: 90%;
   aspect-ratio: 1/1;
 
   background-color: var(--logo-blue);
 
   color:var(--project-text);
-  font-size:2.5vh;
+  font-size:1.5vw;
   font-weight:800;
+  text-align:center;
   font-family:"Nunito",sans-serif;
 
-  border-radius: 5px;
-  border-color: #98d6e0;
-  border-style: solid;
-  border-width: 3px;
 }
 .left-container {
   display: flex;
@@ -47,12 +49,12 @@
 .right-container {
   z-index: 1000;
   display: flex;
-  align-items:flex-start;
+  align-items:center;
+  justify-content:space-between;
   flex-direction: row-reverse;
   user-select: none;
-  
   height: 100%;
-  width: 13vh;
+  width: 13vw;
 }
 
 .banner-image {
@@ -81,4 +83,21 @@
   -.15vw -.15vw 0 var(--banner-text-outline-color);
    
 }
+
+@media (max-width:480px) {
+  .banner-style {
+    height:9vh;
+  }
+  .banner-text{
+    font-size:4vw;
+      text-shadow: .3vw .3vw 0 var(--banner-text-outline-color),
+  -.3vw .3vw 0 var(--banner-text-outline-color),
+  .3vw -.3vw 0 var(--banner-text-outline-color),
+  -.3vw -.3vw 0 var(--banner-text-outline-color);
+  }
+  .banner-login{
+    font-size:4vw;
+  }
+}
+
 

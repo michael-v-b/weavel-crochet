@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import useGlobalStore from "../../globalStore";
 import useStore from "../../Sandbox/DevTools/store";
 import BannerDropdown from "./BannerDropdown";
+import {useState,useEffect} from 'react';
 import "./Banner.css";
 
 const Banner = () => {
@@ -11,6 +12,7 @@ const Banner = () => {
   const setAuth = useGlobalStore((state) => state.setAuth);
   const authData = useGlobalStore((state) => state.authData);
   const setSelectedMeshes = useStore((state) => state.setSelectedMeshes);
+  const [bannerText,setBannerText] = useState("WEAVEL CROCHET DESIGNER");
   const navigate = useNavigate();
 
   const handleHomeClick = () => {
@@ -24,6 +26,14 @@ const Banner = () => {
     navigate("/login");
   };
 
+  useEffect(()=>{
+    if (window.innerWidth > 480) {
+      setBannerText("WEAVEL CROCHET DESIGNER");
+    } else {
+      setBannerText("WEAVEL CROCHET");
+    }
+  },[])
+
 
   return (
     <div className="banner-style">
@@ -36,7 +46,7 @@ const Banner = () => {
           src={logo}
         />
         <div className="banner-text-container">
-          <div className="banner-text"> WEAVEL AMIGURUMI DESIGNER</div>
+          <div className="banner-text"> {bannerText}</div>
         </div>
       </div>
 

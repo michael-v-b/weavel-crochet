@@ -1,23 +1,44 @@
 import {motion} from 'framer-motion';
+import {useEffect,useState} from 'react';
 import "./InfiniteScroll.css";
+import { createJSONStorage } from 'zustand/middleware';
+import jsPDF from 'jspdf';
 
 const InfiniteScroll = () => {
     const scrollList = [
         1,2,3,4,5,6
     ]
-    const animationTime = 12;
+
+    const onPhone = (window.innerWidth > 480) ? false : true;
+    const animationTime = onPhone? 10 :20;
+    
+    const phoneBuffer = onPhone ?2: 1;
+
 
     return <div className = "scroll-container">
         {scrollList.map((value,key) => {
-            console.log("key: " + key);
             return <motion.div key = {key} 
             initial = {{x:'20vw',opacity:1}}
             animate = {{x:'-90vw',opacity:[0,1,1,0]}}
             transition = {
                 
                 {
-                x:{ease:"linear",delay: key*(animationTime/6), duration:animationTime,repeat:Infinity},
-                opacity:{ease:"linear",delay:key*(animationTime/6),times:[0,0.2,0.9,1],duration:animationTime,repeat:Infinity}}
+                    
+                x:{
+                    ease:"linear",
+                    delay: key*(phoneBuffer*(animationTime)/scrollList.length), 
+                    duration:(animationTime),
+                    repeat:Infinity,
+                    repeatDelay:onPhone*animationTime,
+                },
+                opacity:{
+                    ease:"linear",
+                    delay:key*(phoneBuffer*(animationTime)/scrollList.length),
+                    times:[0,0.2,0.9,1],
+                    duration:(animationTime),
+                    repeat:Infinity,
+                    repeatDelay:onPhone*animationTime,
+                }}
             }
             className = "scroll-image"> 
                 {value}
