@@ -7,10 +7,11 @@ import {useState,useRef} from 'react';
 /**
  * @typedef {ToCChapter} - Represents a chapter in the help page.
  * @param {ToCChapter} chapter - the chapter this is based off of.
+ * @param {CallBackFunction} setOpen - sets the value of open in the table of contents
  * @returns {HTMLComponent} - Features a chapter element that has a drop down containing the
  * sections within that chapter.
  */
-const ToCChapter = ({chapter}) =>{
+const ToCChapter = ({chapter,setOpen}) =>{
     const text = chapter?.text;
     const sections = chapter.children;
     const NUM_SECTIONS = sections.length;
@@ -44,6 +45,7 @@ const ToCChapter = ({chapter}) =>{
                     clickedPlus.current = false;
                 } else {
                     chapter?.reference?.current.scrollIntoView({behavior:'smooth'});
+                    setOpen(false);
                 }
             }}> 
             {NUM_SECTIONS > 0 && 
@@ -70,6 +72,7 @@ const ToCChapter = ({chapter}) =>{
                 whileTap = {{backgroundColor:'#b0e0e8',scale:1.1}}
                 onTap = {()=>{
                     section.reference.current.scrollIntoView({behavior:'smooth'});
+                    setOpen(false);
                 }}>
                     {sectionTitle}
 

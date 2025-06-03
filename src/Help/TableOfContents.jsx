@@ -13,6 +13,10 @@ import "./help.css";
 const TableOfContents = ({refTree}) => {
     
 
+  
+    const onPhone = window.innerWidth <= 480;
+    
+    const [open,setOpen] = useState(!onPhone);
     const [chapters,setChapters] = useState([]);
 
     
@@ -27,17 +31,42 @@ const TableOfContents = ({refTree}) => {
     
 
  
+    return  <>
 
-    return <div className = "help-toc ">
-        <div className = "toc-title">
-            Table of Contents
-        </div>
-        {chapters?.length > 0 && chapters.map((currentNode,key)=>{
-            key +=1;
-            return <ToCChapter key = {key} chapter = {currentNode}/>
-        })}
 
-    </div>
+    <motion.div className = "toc-container">
+
+        {onPhone && <motion.div 
+        whileTap = {{backgroundColor:"#eee"}}
+                style = {{height:open ? "100vh" : "70vw", marginTop:open ? "0vh" : "15vh",
+            transition: "0.5s"
+        }}
+        onClick = {()=>{
+            setOpen(!open);
+        }}
+        className = "toc-sidebar">
+        {!open ? ">" : "<"}   
+        </motion.div>}
+
+
+        <motion.div
+
+        style = {onPhone && {width:open ? "90vw" : "0vw",
+            transition: "0.5s"
+        }}
+
+        className = "help-toc ">
+                <div className = "toc-title">
+                    Table of Contents
+                </div>
+                {chapters?.length > 0 && chapters.map((currentNode,key)=>{
+                    key +=1;
+                    return <ToCChapter key = {key} chapter = {currentNode} setOpen = {setOpen}/>
+                })}
+
+        </motion.div>
+    </motion.div>
+    </>
 }
 
 export default TableOfContents;

@@ -190,6 +190,13 @@
 }
 
 @media (max-width:480px) {
+
+  .first-summary-title{
+    font-size:5vw;
+  }
+  .first-summary-text{
+    font-size:4vw;
+  }
   .bubble-div{
     margin-top:20vh;
     flex-direction:column-reverse;
