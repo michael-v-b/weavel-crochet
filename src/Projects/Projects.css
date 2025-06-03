@@ -40,17 +40,20 @@
 
 /*Title text*/
 .projects-title {
-  font-size: 8vh;
+  font-size: 5vh;
 }
 
 /*Button to enable 'remove projects mode'*/
 .remove-projects-button {
+
   user-select: none;
   border-style: solid;
   border-color: rgb(177, 233, 253);
   padding: 1%;
   border-radius: 15px;
   margin-right: 5%;
+
+  text-align:center;
   font-size:3vh;
 }
 
@@ -169,4 +172,30 @@
 
   color: var(--project-text);
   background-color: #cdf6ff;
+}
+
+@media (max-width:480px) {
+  .projects-title{
+    font-size:7vw;
+  }
+  .remove-projects-button {
+    font-size:3vw;
+    height:3vh;
+    width:25vw;
+  }
+
+
+  .project-button-container{
+    position:absolute;
+    right:0;
+    top:0;
+    margin-right:10vw;
+    margin-top:50vh;
+
+    height:40vw;
+  }
+
+  .add-project-button{
+    font-size:10vw;
+  }
 }

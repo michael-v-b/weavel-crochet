@@ -1,6 +1,6 @@
 .web-container {
   height: 100vh;
-  width: 99vw;
+  width: 100vw;
   background-color: #bfedf5;
 }
 .center {
@@ -22,7 +22,7 @@
   align-items: center;
 
   height: 70vh;
-  width: 60vh; /*hard coded might need to redo*/
+  width: 60vh; 
 
   background-color: rgb(255, 255, 255);
 
@@ -56,7 +56,7 @@
 .login-field-name {
   user-select: none;
   text-align: center;
-  width: 200%;
+  width: 70vw;
   font-family: "Nunito", sans-serif;
   font-size: 4vh;
   font-weight: 800;
@@ -67,7 +67,7 @@
 .warning-message {
   color: red;
   text-align: center;
-  width: 200%;
+  width: 70vw;
   margin-bottom: 4vh;
   font-size:2.5vh;
 }

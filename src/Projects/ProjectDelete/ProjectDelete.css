@@ -68,3 +68,18 @@
 
     border-radius:15px;
 }
+
+@media (max-width:480px) {
+    .project-delete-container{
+        border-width:4px;
+        width:80vw;
+        height:40vh;
+    }
+
+    .project-delete-question{
+        font-size:5vw;
+    }
+    .project-delete-button{
+        height: 12vw;
+    }
+}

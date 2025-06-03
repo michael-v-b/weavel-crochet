@@ -191,7 +191,7 @@
 
 @media (max-width:480px) {
   .bubble-div{
-    margin-top:40vh;
+    margin-top:20vh;
     flex-direction:column-reverse;
   }
   .bubble-screenshot{
