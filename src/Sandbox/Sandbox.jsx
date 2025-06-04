@@ -85,7 +85,7 @@ const Sandbox = () => {
     const handleResize = () => {
       if(window.innerWidth > 480) {
         setPortrait(false);
-      } else {
+      } else if (window.innerHeight > 480){
         setPortrait(true);
       }
     }
