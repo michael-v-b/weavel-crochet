@@ -17,6 +17,7 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
   const [xPos,setXPos] = useState([0,0,2]);
   const [yPos,setYPos] = useState([2,0,0]);
   const [zPos,setZPos] = useState([0,2,0]);
+  const [onPhone,setOnPhone] = useState(false);
   const widgetRef = useRef(null);
   const lineWidth = 0.05;
 
@@ -28,7 +29,7 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
       return;
     }
     const distance = widgetRef.current.position.distanceTo(camera.position);
-    const scale = distance / 10;
+    const scale = onPhone ? distance/7 : distance / 10;
     widgetRef.current.scale.set(scale, scale, scale);
   });
 
@@ -36,6 +37,20 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
   useEffect(()=>{
     setKey(key*-1);
   },[meshList]);
+
+    useEffect(()=>{
+    const handleResize = () => {
+      if(window.innerHeight > 480) {
+        setOnPhone(false);
+      } else {
+        setOnPhone(true);
+      }
+    }
+    handleResize();
+    window.addEventListener('resize',handleResize);
+
+    return () => {window.removeEventListener('resize',handleResize)}
+  },[]);
 
 
 

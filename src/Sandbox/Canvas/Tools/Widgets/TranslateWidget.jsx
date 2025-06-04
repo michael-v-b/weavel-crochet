@@ -13,8 +13,10 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
   TranslateWidget.displayName = "Translate Widget";
   const lineSize = 0.2;
   const [key,setKey] = useState(-1);
+  const [onPhone,setOnPhone] = useState(false);
   const meshList = useStore((state)=>state.meshList);
   const { camera } = useThree();
+  
 
   /**
    *updates size of widget to match distance to camera every frame.
@@ -24,14 +26,28 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
       return;
     }
     const distance = ref.current.position.distanceTo(camera.position);
-    const scale = distance / 15;
+    const scale = onPhone ? distance/7 : distance / 10;
     ref.current.scale.set(scale, scale, scale);
   });
 
   //rerenders widget on selection
   useEffect(()=>{
     setKey(key*-1);
-  },[meshList])
+  },[meshList]);
+
+  useEffect(()=>{
+    const handleResize = () => {
+      if(window.innerHeight > 480) {
+        setOnPhone(false);
+      } else {
+        setOnPhone(true);
+      }
+    }
+    handleResize();
+    window.addEventListener('resize',handleResize);
+
+    return () => {window.removeEventListener('resize',handleResize)}
+  },[]);
 
 
   return (

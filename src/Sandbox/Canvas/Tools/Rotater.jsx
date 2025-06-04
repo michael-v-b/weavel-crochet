@@ -50,7 +50,6 @@ const Rotater = forwardRef(({raycaster}, ref) => {
    */
   const handleRay = (meshList) => {
 
-    const ringValue = Math.round(Math.abs(Math.cos(camera.rotation.z)));
     const tempAxis = meshList[0].userData.axis;
 
     if (tempAxis == "x") {
