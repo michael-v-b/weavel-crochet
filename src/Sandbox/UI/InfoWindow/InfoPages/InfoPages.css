@@ -52,3 +52,26 @@
   margin-left: 1%;
   font-size: 1vw;
 }
+
+.delete-button {
+
+  font-family:"Nunito","sans-serif";
+  font-size:1.3vw;
+  font-weight:700;
+  text-align:center;
+
+  margin-top:4vh;
+  margin-left:1vw;
+
+  width:7vw;
+  
+  color:red;
+  background-color:white;
+  border-color:red;
+
+  border-radius:25px;
+  border-style:solid;
+  border-width:0.2vw;
+
+  user-select:none;
+}

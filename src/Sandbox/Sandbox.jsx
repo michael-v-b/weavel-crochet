@@ -40,6 +40,8 @@ const Sandbox = () => {
   const historyRef = useRef(null);
   const cameraTrackerRef = useRef(null);
   const projectReaderRef = useRef(null);
+  const deleterRef = useRef(null);
+
   const auth = useGlobalStore((state) => state.auth);
   const authData = useGlobalStore((state) => state.authData);
   const projectFile = useStore((state) => state.projectFile);
@@ -151,6 +153,7 @@ const Sandbox = () => {
             <CanvasWindow
               ref={canvasRef}
               historyRef={historyRef}
+              deleterRef = {deleterRef}
               selectionManagerRef={selectionManagerRef}
               meshSpawnerRef={meshSpawnerRef}
               cameraTrackerRef={cameraTrackerRef}
@@ -161,7 +164,7 @@ const Sandbox = () => {
               ref={hierarchyRef}
               selectionManager={selectionManagerRef}
             />
-            <InfoWindow />
+            <InfoWindow deleterRef = {deleterRef}/>
           </div>
         </div>
         <div className="bottom-area">

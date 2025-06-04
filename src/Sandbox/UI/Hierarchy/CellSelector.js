@@ -11,6 +11,9 @@ const CellSelector = forwardRef((_, ref) => {
 
   const meshList = useStore((state) => state.meshList);
   const keysPressed = useStore((state) => state.keysPressed);
+  const multiSelect = useStore((state)=>state.multiSelect);
+  const setMultiSelect = useStore((state)=>state.setMultiSelect);
+  const isFocused = useStore((state)=>state.isFocused);
   const [controlPressed, setControlPressed] = useState(false);
   const [shiftPressed, setShiftPressed] = useState(false);
 
@@ -70,14 +73,17 @@ const CellSelector = forwardRef((_, ref) => {
   };
 
   const updateCells = (id) => {
-    if (controlPressed) {
-      return;
-    }
 
     if (shiftPressed) {
       shiftUpdateCells(id);
       return;
     }
+
+    if (controlPressed || multiSelect) {
+      return;
+    }
+
+    
 
     //deactivates all entries
     for (let i = 0; i < meshList.length; i++) {
@@ -95,20 +101,26 @@ const CellSelector = forwardRef((_, ref) => {
    * key commands
    */
   useEffect(() => {
+    if(isFocused) {
+      return;
+    }
     if (
       keysPressed.includes("ShiftLeft") ||
       keysPressed.includes("ShiftRight")
     ) {
       setShiftPressed(true);
       setControlPressed(false);
+      setMultiSelect(true);
     } else if (
       keysPressed.includes("ControlLeft") ||
       keysPressed.includes("ControlRight")
     ) {
       setControlPressed(true);
+      setMultiSelect(true);
     } else {
       setControlPressed(false);
       setShiftPressed(false);
+      setMultiSelect(false);
     }
   }, [keysPressed]);
 

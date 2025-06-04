@@ -5,14 +5,10 @@ import useStore from "../../DevTools/store";
 
 /**
  * @typedef {InfowWindow} - Showcases all of a selected objects attributes that can be edited freely.
- *@property {[{Mesh}]} selectedMeshes - list of meshes whose info is being represented.
- 
- *@property {ToolManagerRef} toolManagerRef - allows access to all public methods from the ToolManager.
- *@property {[string]} colorList - prop drilling for InfoPages.
- *@property {[{Number}]} rotation - rotation of currently selected object.
+ * @property {deleterReference} deleterRef - a reference to the deleter object that deletes objects
  * @returns {Component} - window full of all field relevant to a selected item.
  */
-const InfoWindow = () => {
+const InfoWindow = ({deleterRef}) => {
   const selectedMeshes = useStore((state) => state.selectedMeshes);
   return (
     <div className="side-window">
@@ -23,9 +19,11 @@ const InfoWindow = () => {
             {selectedMeshes.length == 1 && (
               <>
                 {<InfoPage
+                  deleterRef = {deleterRef}
                   object={selectedMeshes[0]}
                   meshType={selectedMeshes[0].userData.meshType}
             />}
+
               </>
             )}
             {/* IMPLEMENT LATER QOL CHANGE

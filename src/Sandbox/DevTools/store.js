@@ -122,6 +122,9 @@ const useStore = create((set) => ({
 
   projectDims: [0,0,0],
   setProjectDims: (newProjectDims) => set({ projectDims: newProjectDims }),
+
+  multiSelect: false,
+  setMultiSelect: (newMultiSelect) => set({multiSelect:newMultiSelect})
 }));
 
 export default useStore;

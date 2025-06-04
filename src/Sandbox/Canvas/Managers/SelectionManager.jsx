@@ -17,6 +17,7 @@ const SelectionManager = forwardRef((_, ref) => {
   const setSelectedMeshes = useStore((state) => state.setSelectedMeshes);
   const selectedList = useStore((state) => state.selectedMeshes);
   const setSelectedList = useStore((state) => state.setSelectedMeshes);
+  const multiSelect = useStore((state)=>state.multiSelect);
 
   let tempSelectedList = selectedList; //templist so updates can happen immediately, before state is changed
 
@@ -112,7 +113,7 @@ const SelectionManager = forwardRef((_, ref) => {
     //if shift is pressed, then it will add an object
     if (
       keysPressed.includes("ShiftLeft") ||
-      keysPressed.includes("ShiftRight")
+      keysPressed.includes("ShiftRight") || multiSelect
     ) {
       if (!selectedList.includes(objectList[0])) {
         setObjectSelected(objectList[0], true);

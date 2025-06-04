@@ -23,3 +23,25 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+.multi-select{
+
+  text-align:center;
+
+  background-color:white;
+  color:black;
+  width:10vw;
+  font-size:1.2vw;
+  
+  border-style:solid;
+  border-width:.12vw;
+  border-radius:15px;
+
+  margin-left:2vw;
+  margin-top:1vh;
+  margin-bottom:2vh;
+
+  user-select:none;
+
+  cursor:pointer;
+}

@@ -18,7 +18,9 @@ import useStore from "../DevTools/store";
  * @typedef {CanvasWindow} - window that shows and allows interaction with the meshes.
 
   * @property {SelectionManagerReference} selectionManagerRef - allows access to all of selection manager's public methods.
- * @property {ToolManagerReference} toolManagerRef - allows access to all of ToolManager's public methods.
+ * @property {MeshSpawnerReference} meshSpawnerRef - allows the mesh spawner to be accessed by canvas parents
+ * @property {cameraTrackerReference} cameraTrackerRef - allows the cameraTracker to be accessed by canvas parents
+ * @property {deleterReference} deleterRef - allows the deleterRef to be accessed by canvas parents
  * @property {Component} children - component to be given parent-child relationship with Canvas Window
 
  */
@@ -26,6 +28,7 @@ const CanvasWindow = forwardRef(
   (
     {
       historyRef,
+      deleterRef,
       selectionManagerRef,
       meshSpawnerRef,
       cameraTrackerRef,
@@ -45,7 +48,6 @@ const CanvasWindow = forwardRef(
     const canvasRef = useRef(null);
     const toolManagerRef = useRef(null);
     const intersectionManagerRef = useRef(null);
-    const deleterRef = useRef(null);
     const rotaterRef = useRef(null);
 
    

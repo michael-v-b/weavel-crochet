@@ -15,6 +15,7 @@ import ChainPage from "./ShapePages/ChainPage";
 import TrianglePage from "./ShapePages/TrianglePage";
 import EyePage from "./ShapePages/EyePage";
 import {useEffect} from 'react';
+import {motion} from 'framer-motion'
 
 /**
  *@typedef {InfoPage} - provides all of the information inside of the info window.
@@ -24,7 +25,7 @@ import {useEffect} from 'react';
  *@property {ToolManagerRef} toolManagerRef- lets all public methods from ToolManager to be accessible.
  *@property {[string]} colorList - a list of all colors available in project.
  */
-const InfoPage = ({ object, meshType }) => {
+const InfoPage = ({ object, deleterRef, meshType }) => {
   const shapePages = {
     ball: BallPage,
     capsule: CapsulePage,
@@ -62,6 +63,13 @@ const InfoPage = ({ object, meshType }) => {
       <RotationField object={object} />
       <ColorField object={object} />
       {MeshType && <MeshType object={object} />}
+                      <motion.div 
+                whileHover ={{scale:1.1}} 
+                whileTap = {{scale:0.9}} 
+                onClick = {()=>{
+                  deleterRef.current.deleteMeshes([object]);
+                }}
+                className= "delete-button selectable">Delete</motion.div>
     </div>
   );
 };
