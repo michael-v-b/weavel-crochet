@@ -79,3 +79,13 @@ html,body {
   background-color: #85c1e9;
   width: var(--webpage-width);
 }
+
+@media (max-height:480px) {
+  .side-title-bar{
+    height:5vh;
+    font-size:4vh;
+  }
+  .right-window{
+    height:90vh;
+  }
+}
