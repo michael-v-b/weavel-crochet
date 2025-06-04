@@ -27,11 +27,22 @@ const Banner = () => {
   };
 
   useEffect(()=>{
-    if (window.innerWidth > 480) {
-      setBannerText("WEAVEL CROCHET DESIGNER");
-    } else {
-      setBannerText("WEAVEL CROCHET");
+
+    const handleResize = () =>{
+      if (window.innerWidth > 480) {
+        setBannerText("WEAVEL CROCHET DESIGNER");
+      } else {
+        setBannerText("WEAVEL CROCHET");
+      }
+      
     }
+
+    handleResize();
+    window.addEventListener('resize',handleResize);
+
+    return ()=>{window.removeEventListener('resize',handleResize);}
+
+    
   },[])
 
 

@@ -12,9 +12,22 @@ import "./help.css";
  */
 const TableOfContents = ({refTree}) => {
     
-
+    
   
-    const onPhone = window.innerWidth <= 480;
+    const [onPhone,setPhone] = useState(window.innerWidth <= 480);
+
+    useEffect(()=>{
+        const handleResize = () => {
+            setPhone(window.innerWidth<=480);
+        }
+
+        handleResize();
+        window.addEventListener("resize",handleResize);
+
+        return ()=>{
+            window.removeEventListener('resize',handleResize);
+        }
+    });
     
     const [open,setOpen] = useState(!onPhone);
     const [chapters,setChapters] = useState([]);

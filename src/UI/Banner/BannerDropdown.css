@@ -43,4 +43,12 @@
   text-align:right;
   padding-right:2vh;
   padding-left:2vh;
+  height:3vh;
+}
+
+@media (max-height:480px) {
+  .profile-dropdown-option{
+    height:6vh;
+    font-size:5vh;
+  }
 }

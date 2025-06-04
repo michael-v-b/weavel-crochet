@@ -11,18 +11,36 @@ const BannerDropdown = () => {
   const setAuth = useGlobalStore((state) => state.setAuth);
   const setSelectedMeshes = useStore((state) => state.setSelectedMeshes);
   const [dropped, setDropped] = useState(false);
+  const [optionHeight,setOptionHeight] = useState(3);
   const [dropdownHeight, setDropdownHeight] = useState("0%");
+
   const navigate = useNavigate();
   const DROPDOWN_SELECT_COLOR = "#dddddd";
   const OPTIONS = 5;
 
   useEffect(() => {
     if (dropped) {
-      setDropdownHeight(3 * OPTIONS + "vh");
+      setDropdownHeight(optionHeight * OPTIONS + "vh");
     } else {
       setDropdownHeight("0%");
     }
-  }, [dropped]);
+  }, [dropped,optionHeight]);
+
+  //resize dropdown if in portrait
+  useEffect(()=>{
+    const handleResize = () => {
+      if(window.innerHeight < 480) {
+        setOptionHeight(6);
+      } else {
+        setOptionHeight(3);
+      }
+    }
+    handleResize();
+    window.addEventListener('resize',handleResize);
+    return () => {
+      window.removeEventListener('resize',handleResize);
+    }
+  },[]);
 
   const signOut = async () => {
     const { data, error } = await supabase.auth.signOut();
