@@ -65,9 +65,6 @@ const Rotater = forwardRef(({raycaster}, ref) => {
     setDragging(true);
     setAxis(tempAxis);
     setWidgetPosition(new Vector3().fromArray(avgPosition));
-    //updates the sensitivity based on the distance from the camera.
-    const distance = widgetPosition.distanceTo(camera.position);
-    setSensitivity(camera.rotation.z >= 0 ? -distance / 500 : distance / 500);
   };
 
   /**

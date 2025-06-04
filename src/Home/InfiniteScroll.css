@@ -19,7 +19,7 @@
 
 @media (max-width: 480px) {
     .scroll-image {
-        height:20vh;
-        width:20vh;
+        height:30vw;
+        width:30vw;
     }
 }

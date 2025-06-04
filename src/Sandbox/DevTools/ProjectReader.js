@@ -58,7 +58,7 @@ const ProjectReader = forwardRef(
      */
 
     const resetProject = () => {
-      setMode("none");
+      setMode("camera");
       setTool("none");
       setMeshList([]);
       setUndoList([]);

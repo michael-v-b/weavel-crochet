@@ -36,7 +36,7 @@ const useStore = create((set) => ({
   projectId: "",
   setProjectId: (newProjectId) => set({ projectId: newProjectId }),
 
-  mode: "none",
+  mode: "camera",
   setMode: (newMode) => set({ mode: newMode }),
 
   tool: "none",

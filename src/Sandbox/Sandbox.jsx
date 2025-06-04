@@ -73,6 +73,7 @@ const Sandbox = () => {
     setNameLoading(true);
     setMeshLoading(true);
     setWarningText("");
+    
     //loading is set false in name tag
   }, []);
 

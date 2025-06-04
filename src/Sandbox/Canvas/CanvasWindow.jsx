@@ -53,7 +53,7 @@ const CanvasWindow = forwardRef(
     /**
      * when mouseDown cast ray with raycaster and update selections.
      * Disabled during Camera mode.
-     *@param {Event} event - used for pointer position in raycaster.
+     * @param {Event} event - used for pointer position in raycaster.
      */
     const handleRay = (event) => {
       if (
@@ -90,6 +90,22 @@ const CanvasWindow = forwardRef(
 
     },[pendingPointerEvent, isFocused]);
 
+
+    //removes touch move functionality.
+    useEffect(()=>{
+      const canvas = document.querySelector('canvas');
+
+      const handleTouchMove = (e) => {
+        e.preventDefault();
+      }
+      
+      canvas.addEventListener('touchmove',handleTouchMove,{passive:false});
+
+      return ()=>{
+        canvas.removeEventListener('touchmove',handleTouchMove);
+      }
+    },[]);
+
     /**
      * Spawns a mesh in the canvas.
      *@param {string} shape - meshType being spawned.
@@ -117,6 +133,7 @@ const CanvasWindow = forwardRef(
           backgroundColor: "#ebf5fb ",
           borderBottomRightRadius: "25px",
           borderBottomLeftRadius: "25px",
+          touchAction:"none",
         }}
       >
         <SizeManager/>

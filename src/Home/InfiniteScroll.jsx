@@ -11,8 +11,7 @@ const InfiniteScroll = () => {
 
     const onPhone = (window.innerWidth > 480) ? false : true;
     const animationTime = onPhone? 10 :20;
-    
-    const phoneBuffer = onPhone ?2: 1;
+    const phoneBuffer = onPhone?2:1;
 
 
     return <div className = "scroll-container">
