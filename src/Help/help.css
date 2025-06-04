@@ -209,5 +209,24 @@
     .help-body{
         font-size:2vw;
     }
+
+    .toc-title{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:10vh;
+        font-size:6vw;
+    }
+
+    .toc-chapter{
+        height:5vh;
+        font-size:4.5vw;
+    }
+    .toc-dropdown-section{
+        height:4vh;
+        font-size:3.5vw;
+    }
+
+
 }
 
