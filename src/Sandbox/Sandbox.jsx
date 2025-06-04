@@ -18,7 +18,9 @@ import useStore from "./DevTools/store";
 
 import Exporter from "./Export/Exporter";
 
-import { useRef, useEffect } from "react";
+import PortraitWarning from "./PortraitWarning/PortraitWarning";
+
+import { useRef, useEffect,useState } from "react";
 import { useLocation } from "react-router";
 import useGlobalStore from "../globalStore";
 import AuthTester from "../AuthTester";
@@ -48,6 +50,8 @@ const Sandbox = () => {
   const meshLoading = useStore((state) => state.meshLoading);
   const setWarningText = useStore((state) => state.setWarningText);
 
+  const [isPortrait, setPortrait] = useState(false);
+
   const location = useLocation();
   /**
    *spawns a new mesh into the scene.
@@ -74,7 +78,22 @@ const Sandbox = () => {
     setMeshLoading(true);
     setWarningText("");
     
-    //loading is set false in name tag
+    //set is landscape
+
+    const handleResize = () => {
+      if(window.innerWidth > 480) {
+        setPortrait(false);
+      } else {
+        setPortrait(true);
+      }
+    }
+
+    handleResize();
+
+    window.addEventListener('resize',handleResize);
+
+    return ()=> {window.removeEventListener('resize',handleResize)}
+    
   }, []);
 
   //updates file when change occurs but only if projectId is correct.
@@ -106,6 +125,7 @@ const Sandbox = () => {
     <>
       <div className="webpage">
         <WarningPop />
+        {isPortrait && <PortraitWarning/>}
         <LoadScreen visible={meshLoading || nameLoading} />
 
         <ProjectReader

@@ -1,0 +1,45 @@
+
+.portrait-warning-container{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    background-color:white;
+
+    margin-top:10vh;
+
+    height:80vh;
+    width:80vw;
+
+    position:fixed;
+
+    z-index:10000000;
+    
+    opacity:0.9;
+
+    border-radius:25px;
+}
+
+.portrait-warning-text{
+    font-family:"Nunito","sans-serif";
+    font-size:8vw;
+    text-align:center;
+    font-weight:600;
+    color:red;
+}
+
+.portrait-warning-image{
+
+    width:60vw;
+
+    aspect-ratio:1/1;
+    
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
