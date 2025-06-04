@@ -88,12 +88,9 @@ const ColorField = ({ object }) => {
         }}
         style={{
           color: isWhite ? "#FFFFFF" : "#000000",
-          width:'7vw',
-          fontSize:'1vw',
           backgroundColor: currentColor,
-          borderRadius: "5px",
-          cursor:'pointer'
         }}
+        className = "color-field"
       >
         {colorList.map((value, key) => {
           return (

@@ -45,23 +45,8 @@ const HierarchyCell = forwardRef(
     return (
       <motion.div
         style={{
-          display: "flex",
-          alignItems: "center",
-
-          userSelect: "none",
-          overflow: "hidden",
-          textWrap: "nowrap",
           backgroundColor: isPressed ? "#76b8e3" : "#d6eaf8",
-          color: "black",
-          borderRadius: "5px",
-
-          height: "4vh",
-          width: "95%",
-
-          marginBottom: "3px",
-          paddingLeft: "10px",
-
-          fontSize: "2.5vh",
+ 
         }}
         whileHover={{
           scale: 1.05,
@@ -74,7 +59,7 @@ const HierarchyCell = forwardRef(
           backgroundColor: "#76b8e3",
           transition: { duration: 0.1 },
         }}
-        className="cell clickable"
+        className="hierarchy-cell clickable"
         onClick={handleClick}
         {...props}
       >

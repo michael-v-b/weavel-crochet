@@ -75,3 +75,43 @@
 
   user-select:none;
 }
+
+.color-field {
+  width:7vw;
+  font-size:1vw;
+  border-radius: 5px;
+  cursor:pointer;
+}
+
+@media (max-height:480px) {
+  .attribute-name {
+    height:5vh;
+    font-size:3vh;
+    margin-top:2vh;
+  }
+
+  .attribute{
+    margin-top:2vh;
+    font-size:3vh;
+  }
+
+  .position-field-style{
+    height:5vh;
+    font-size:3vh;
+  }
+
+  .color-field{
+    height:5vh;
+    width:10vw;
+    font-size:3vh;
+  }
+
+  .stitch-text{
+    font-size:2.5vh;
+  }
+
+  .delete-button{
+    height:5vh;
+    font-size:3vh;
+  }
+}

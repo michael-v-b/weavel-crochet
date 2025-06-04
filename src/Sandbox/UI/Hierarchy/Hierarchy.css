@@ -24,8 +24,26 @@
   overflow-x: hidden;
 }
 
-.multi-select{
+.hierarchy-cell{
+  align-items: center;
 
+  user-select: none;
+  overflow: hidden;
+  text-wrap: nowrap;
+  color: black;
+  border-radius: 5px;
+
+  height: 4vh;
+  width: 95%;
+
+  margin-bottom: 3px;
+  padding-left: 10px;
+
+  font-size: 2.5vh;
+}
+
+.multi-select{
+  display:flex;
   text-align:center;
 
   background-color:white;
@@ -37,6 +55,8 @@
   border-width:.12vw;
   border-radius:15px;
 
+  padding-left:1vw;
+
   margin-left:2vw;
   margin-top:1vh;
   margin-bottom:2vh;
@@ -44,4 +64,19 @@
   user-select:none;
 
   cursor:pointer;
+}
+
+@media (max-height:480px) {
+  .multi-select{
+    justify-content:center;
+    align-items:center;
+    font-size:4vh;
+    height:5vh;
+    width:15vw;
+  }
+  .hierarchy-cell{
+    align-content:center;
+    height:7vh;
+    font-size:4.5vh;
+  }
 }
