@@ -58,7 +58,7 @@ const ColorWindow = () => {
           );
         })}
 
-        <div className="add-button-container">
+        <div className="add-button-container clickable">
           <motion.button
             className="button-style"
             whileHover={{ scale: 1.2 }}

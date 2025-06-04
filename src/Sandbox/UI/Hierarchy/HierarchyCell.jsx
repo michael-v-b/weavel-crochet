@@ -74,7 +74,7 @@ const HierarchyCell = forwardRef(
           backgroundColor: "#76b8e3",
           transition: { duration: 0.1 },
         }}
-        className="cell"
+        className="cell clickable"
         onClick={handleClick}
         {...props}
       >

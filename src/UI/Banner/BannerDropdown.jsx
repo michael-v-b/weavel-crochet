@@ -36,7 +36,7 @@ const BannerDropdown = () => {
     <div className="profile-container">
       <motion.div
         whileHover={{ backgroundColor: "#defaff" }}
-        className="banner-profile"
+        className="banner-profile clickable"
         onClick={() => {
           setDropped(!dropped);
         }}
@@ -52,7 +52,7 @@ const BannerDropdown = () => {
         }}
       >
         <motion.div
-          className="profile-dropdown-option"
+          className="profile-dropdown-option clickable"
           whileHover={{ backgroundColor: DROPDOWN_SELECT_COLOR }}
           onClick={() => {
             navigate("/");
@@ -62,7 +62,7 @@ const BannerDropdown = () => {
           Home
         </motion.div>
         <motion.div
-          className="profile-dropdown-option"
+          className="profile-dropdown-option clickable"
           whileHover={{ backgroundColor: DROPDOWN_SELECT_COLOR }}
           onClick={() => {
             navigate("/projects");
@@ -72,7 +72,7 @@ const BannerDropdown = () => {
           Your Projects{" "}
         </motion.div>
         <motion.div
-          className="profile-dropdown-option"
+          className="profile-dropdown-option clickable"
           whileHover={{ backgroundColor: DROPDOWN_SELECT_COLOR }}
           onClick={() => {
             navigate("/help");
@@ -82,14 +82,15 @@ const BannerDropdown = () => {
           Help
         </motion.div>
         <motion.div
-          className="profile-dropdown-option"
+          className="profile-dropdown-option clickable"
           whileHover={{ backgroundColor: DROPDOWN_SELECT_COLOR }}
           onClick={() => {
             signOut();
           }}
         >
           Sign Out
-        </motion.div>        <motion.div
+        </motion.div>       
+        <motion.div
           className="profile-dropdown-option"
         >
           logged in as {authData.user.email}

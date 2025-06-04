@@ -92,12 +92,14 @@ const ColorField = ({ object }) => {
           fontSize:'1vw',
           backgroundColor: currentColor,
           borderRadius: "5px",
+          cursor:'pointer'
         }}
       >
         {colorList.map((value, key) => {
           return (
             <option
               key={key}
+              
               style={{
                 backgroundColor: value,
                 color: testWhite(value.replace(/^#/, ""))

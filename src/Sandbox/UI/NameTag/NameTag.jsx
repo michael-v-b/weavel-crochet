@@ -52,7 +52,7 @@ const NameTag = () => {
   }, [projectId]);
 
   return (
-    <div className="name-tag-container">
+    <div className="name-tag-container clickable">
       <input
         className="name-tag"
         type="text"

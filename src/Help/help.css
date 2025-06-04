@@ -178,12 +178,14 @@
     flex-direction:row-reverse;
     overflow:visible;
     z-index:10000;
-    position:fixed;
     top:0;
+    position:sticky;
 }
 
 @media (max-width:480px) {
-
+    .toc-container{
+        position:fixed;
+    }
     .help-text-container{
         margin-left:15vw;
     }

@@ -7,6 +7,10 @@ html,body {
   padding:0;
 }
 
+.clickable {
+  cursor:pointer;
+}
+
 .sandbox {
   display: flex;
   flex-direction: row;

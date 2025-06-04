@@ -20,7 +20,7 @@ const ProjectDelete = ({projectName,index,deleteProject,setDeletedProject}) => {
         <div className = "project-delete-button-container">
             <motion.div  whileHover = {{scale:1.1,backgroundColor:"#fff"}} 
             whileTap = {{scale:0.95}}
-            className = "project-delete-button"
+            className = "project-delete-button clickable"
             onClick = {()=>{
                 setDeletedProject('');
                 deleteProject(index);
@@ -30,7 +30,7 @@ const ProjectDelete = ({projectName,index,deleteProject,setDeletedProject}) => {
             </motion.div>
             <motion.div whileHover = {{scale:1.1,backgroundColor:"#fff"}} 
             whileTap = {{scale:0.95}}
-             className = "project-delete-button"
+             className = "project-delete-button clickable"
              onClick = {()=>{
                 setDeletedProject('');
              }}>

@@ -10,7 +10,7 @@ const DrawButton = ({ children, ...props }) => {
     <MotionButton
       {...props}
       borderColor={"#29ffed"}
-      className="draw-button-style"
+      className="draw-button-style clickable"
     >
       {children}
     </MotionButton>

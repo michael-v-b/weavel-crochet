@@ -82,7 +82,7 @@ const ColorButton = ({
       <MotionButton
         {...props}
         hasBorder={false}
-        className="color-button-style"
+        className="color-button-style clickable"
         onClick={changeColor}
       >
         {children}

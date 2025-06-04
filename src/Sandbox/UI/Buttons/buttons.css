@@ -13,4 +13,5 @@
 
 .motion-button {
   user-select: none;
+  cursor:pointer;
 }

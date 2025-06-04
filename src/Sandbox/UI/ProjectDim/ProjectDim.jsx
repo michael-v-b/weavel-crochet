@@ -85,7 +85,7 @@ const ProjectDim = () => {
       onClick={() => {
         setMetric(!metric);
       }}
-      className="project-dim"
+      className="project-dim clickable"
     >
       Dimensions:
       <div className="project-dim-text">{simplify(projectText[0])}</div>x

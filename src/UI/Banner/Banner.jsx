@@ -39,7 +39,7 @@ const Banner = () => {
     <div className="banner-style">
       <div className="left-container">
         <motion.img
-          className="banner-image"
+          className="banner-image clickable"
           whileHover={{ scale: 1.05, backgroundColor: "#e6fbff" }}
           whileTap={{ scale: 0.95 }}
           onClick={handleHomeClick}
@@ -54,7 +54,7 @@ const Banner = () => {
         {!auth && (
           <>
             <motion.div
-              className="banner-login"
+              className="banner-login clickable"
               whileHover={{ scale: 1.1, backgroundColor: "#e6fbff" }}
               whileTap={{ scale: 1 }}
               onClick={handleRegisterClick}
@@ -62,7 +62,7 @@ const Banner = () => {
               Sign Up{" "}
             </motion.div>
             <motion.div
-              className="banner-login"
+              className="banner-login clickable"
               whileHover={{ scale: 1.1, backgroundColor: "#e6fbff" }}
               whileTap={{ scale: 1 }}
               onClick={handleLoginClick}

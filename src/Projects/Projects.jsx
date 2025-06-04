@@ -162,7 +162,7 @@ const Projects = () => {
           <div className="projects-title">Your Projects</div>
           <motion.div
             ref={removeButtonRef}
-            className="remove-projects-button"
+            className="remove-projects-button clickable"
             style={{ backgroundColor: canRemove ? "#a5cff5" : "#FFFFFF" }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -182,7 +182,7 @@ const Projects = () => {
             const project_id = valuePair[1];
 
             return (
-              <div className="project-container" key={key}>
+              <div className="project-container clickable" key={key}>
                 {canRemove && (
                   <div className="remove-project-container">
                     <motion.div
@@ -238,7 +238,7 @@ const Projects = () => {
               whileHover={{ scale: 1.1, backgroundColor: "#ecfbff" }}
               whileTap={{ scale: 0.9, backgroundColor: "#FFFFFF" }}
               onClick={handleCreateProject}
-              className="add-project-button"
+              className="add-project-button clickable"
             >
               {" "}
               +{" "}

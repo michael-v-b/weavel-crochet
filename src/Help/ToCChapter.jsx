@@ -37,7 +37,7 @@ const ToCChapter = ({chapter,setOpen}) =>{
     }
     
     return <>
-        <motion.div className = 'toc-chapter' 
+        <motion.div className = 'toc-chapter clickable' 
         whileHover = {{backgroundColor:'#cff0ff'}}
         whileTap = {{backgroundColor: '#b0e0e8'}}
         onTap= {()=>{
@@ -62,7 +62,7 @@ const ToCChapter = ({chapter,setOpen}) =>{
         
         </motion.div>
 
-        <motion.div style = {{height: dropdownHeight + 'vh'}} className = 'toc-dropdown'>
+        <motion.div style = {{height: dropdownHeight + 'vh'}} className = 'toc-dropdown clickable'>
             {sections.map((section,key) => {
                 const sectionTitle=  section.text;
                 key+=1;
