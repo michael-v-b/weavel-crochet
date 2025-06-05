@@ -28,8 +28,8 @@ const StadiumPage = ({ object }) => {
 
   const handleWidth = (newWidth) => {
     const height = heightRef.current.height;
-
-    const temp = Math.max(height,newWidth);
+    const isHalf = objectData.isHalf;
+    const temp = isHalf ? Math.max(height,newWidth/2) : Math.max(height,newWidth);
 
     if(temp != height) {
       setWarningText("Width updated to fit maximum proportions");
@@ -43,11 +43,16 @@ const StadiumPage = ({ object }) => {
 
   const handleHeight = (newHeight) => {
     const width = widthRef.current.width;
-    let temp = Math.min(width,newHeight);
+    const isHalf = objectData.isHalf;
+    
 
+    
+    let temp = isHalf ? Math.min(width,newHeight*2) :Math.min(width,newHeight);
+  
     if(temp %2 != 0) {
       temp-=1;
     }
+
     if(temp != width) {
       setWarningText("Width updated to fit maximum proportions");
     }
@@ -58,11 +63,24 @@ const StadiumPage = ({ object }) => {
     setProjectFile({...projectFile});
   }
 
+
+  //reset dimensions if stadium changed to half
+  const handleHalf = (newHalf)=>{
+    console.log("handle half happens");
+    if(newHalf){
+      return;
+    }
+    const width = widthRef.current.width;
+    const height = heightRef.current.height;
+
+    objectData.setHeight(Math.max(width,height));
+  }
+
   return (
     <>
       <HeightField ref = {heightRef} object={object}  getHeight = {handleHeight} />
       <WidthField ref = {widthRef} object={object} getWidth={handleWidth} />
-      <HalfField object={object} />
+      <HalfField object={object} getHalf = {handleHalf}/>
     </>
   );
 };

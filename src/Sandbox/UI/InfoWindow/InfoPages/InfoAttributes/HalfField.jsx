@@ -1,7 +1,7 @@
 import useStore from "../../../../DevTools/store";
 import { useRef, useEffect, useState } from "react";
 
-const HalfField = ({ object }) => {
+const HalfField = ({ object,getHalf}) => {
   const objectData = object.userData.meshData;
 
   const projectFile = useStore((state) => state.projectFile);
@@ -14,7 +14,10 @@ const HalfField = ({ object }) => {
   const handleChange = (event) => {
     const tempHalf = event.target.checked;
     objectData.setHalf(tempHalf);
+
     setHalf(tempHalf);
+    getHalf(tempHalf);
+
 
     //update undo
     const action = ['half'];
