@@ -84,7 +84,7 @@ const Login = () => {
       />
       <div className="login-window ">
         <div className="login-request">Please Log In </div>
-        <div className="login-inputs center">
+        <div className="center">
 
           <div className="login-field-name"> Email Address: </div>
           <motion.input

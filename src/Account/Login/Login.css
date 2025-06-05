@@ -78,7 +78,7 @@
   flex-direction: row-reverse;
   justify-content:space-between;
   align-items:center;
-  width: 50vh;
+  width: 60vh;
   padding-right:12vh;
 }
 
@@ -119,4 +119,25 @@
   text-decoration: underline dotted;
   color: rgb(137, 137, 137);
   font-size: 2.5vh;
+}
+
+@media (max-width:480px) {
+ .login-window{
+  width:100vw;
+ }
+ .login-button-container{
+  width:100vw;
+  padding:0vh;
+  justify-content:space-between;
+  background-color:red;
+ }
+ .login-button{
+  margin-right:10vw;
+ }
+
+ .forgot-pass{
+  margin-left:10vh;
+ }
+
+ 
 }

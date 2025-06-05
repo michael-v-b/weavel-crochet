@@ -21,6 +21,7 @@ const ToolWindow = ({
             style={{
               color: "red",
               backgroundColor: "#d6eaf8",
+              fontSize:"3.5vh"
             }}
           >
             NOTE: YOU CANNOT USE TOOLS, SELECT, OR DESELECT OBJECTS IN CAMERA
