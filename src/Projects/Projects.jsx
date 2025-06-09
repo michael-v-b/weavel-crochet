@@ -42,7 +42,7 @@ const Projects = () => {
   },[]);
 
   useEffect(()=>{
-    if(projectNames.length > 0) {
+    if(projectNames) {
       setProjectsLoading(false);
     } else {
       setProjectsLoading(true);
