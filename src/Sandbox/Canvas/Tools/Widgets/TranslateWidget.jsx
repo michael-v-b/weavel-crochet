@@ -11,7 +11,7 @@ import useStore from  "../../../DevTools/store";
  */
 const TranslateWidget = forwardRef(({ ...props }, ref) => {
   TranslateWidget.displayName = "Translate Widget";
-  const lineSize = 0.2;
+  const lineSize = 0.15;
   const [key,setKey] = useState(-1);
   const [onPhone,setOnPhone] = useState(false);
   const meshList = useStore((state)=>state.meshList);
@@ -49,6 +49,12 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
     return () => {window.removeEventListener('resize',handleResize)}
   },[]);
 
+  const LineCone = ({color, axisLock}) => {
+    return <mesh position = {[0,1,0]}>
+      <coneGeometry args = {[0.25,.5]}userData ={{axisLock:axisLock}} layer = {3}/>
+      <meshBasicMaterial depthTest = {false} color = {color}/>
+    </mesh>
+  }
 
   return (
     <>
@@ -61,6 +67,7 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
           }}
           materialProps={{ color: "#ffffff", depthTest: false }}
         />
+
         <ILine
           lineWidth={lineSize}
           meshProps={{
@@ -69,17 +76,22 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
             layer: 3,
           }}
           materialProps={{ depthTest: false, color: "#00FF00" }}
-        />
+        >
+          <LineCone color = "#00FF00" axisLock = "y"/>
+        </ILine>
+
         <ILine
           lineWidth={lineSize}
           meshProps={{
             userData: { axisLock: "x" },
-            rotation: [0, 0, Math.PI / 2],
+            rotation: [0, 0, -Math.PI / 2],
             position: [1.25, 0, 0],
             layer: 3,
           }}
           materialProps={{ depthTest: false, color: "#FF0000" }}
-        />
+        >
+          <LineCone color = "#FF0000" axisLock = "x"/>
+        </ILine>
         <ILine
           lineWidth={lineSize}
           meshProps={{
@@ -89,7 +101,9 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
             layer: 3,
           }}
           materialProps={{ depthTest: false, color: "#0000FF" }}
-        />
+        >
+          <LineCone axisLock = "z" color = "#0000ff"/>
+        </ILine>
       </mesh>
     </>
   );
