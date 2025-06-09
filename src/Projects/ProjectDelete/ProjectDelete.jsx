@@ -28,6 +28,8 @@ const ProjectDelete = ({projectName,index,deleteProject,setDeletedProject}) => {
                 <div>Delete</div>
                 <div> {projectName}</div>
             </motion.div>
+
+            
             <motion.div whileHover = {{scale:1.1,backgroundColor:"#fff"}} 
             whileTap = {{scale:0.95}}
              className = "project-delete-button clickable"

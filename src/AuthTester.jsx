@@ -7,7 +7,6 @@ const AuthTester = ({reverse = false, reroute}) => {
 
   const navigate = useNavigate();
 
-  const auth = useGlobalStore((state)=>state.auth);
   const setAuth = useGlobalStore((state)=>state.setAuth);
   const setAuthData = useGlobalStore((state)=>state.setAuthData);
 
