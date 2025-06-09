@@ -66,7 +66,6 @@ const StadiumPage = ({ object }) => {
 
   //reset dimensions if stadium changed to half
   const handleHalf = (newHalf)=>{
-    console.log("handle half happens");
     if(newHalf){
       return;
     }

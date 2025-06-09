@@ -22,25 +22,23 @@ const StadiumPattern = (object,eyeList) => {
       stitchCount += 8;
     }
   };
-
+  const midString = midHeight > 0 ? midHeight + " sc, " : "";
   if (!isHalf) {
     output = [
       "Round 1: Ch " + (midHeight + 2) + ".",
-      "Round 2: Skip first chain, (" +
-        midHeight +
-        " sc, insert 4 sc into next stitch) x 2 (" +
+      "Round 2: Skip first chain, ( " +
+        midString + "insert 4 sc into next stitch) x 2 (" +
         stitchCount +
         ")",
     ];
 
     //if is half
   } else {
+    
     output = [
-      "Round 1: Ch " + (midHeight + 1) + ".",
-      "Round 2: Skip first chain, " +
-        midHeight +
-        " sc, insert 4 sc into next stitch, ",
-      "\t\t" + midHeight + " sc, ch 1 and turn. (" + stitchCount + ")",
+      "Round 1: Ch " + Math.min(2,(midHeight + 1)) + ".",
+      "Round 2: Skip first chain, " + midString + "insert 4 sc into next stitch, ",
+      "\t\t" + midString + "ch 1 and turn. (" + stitchCount + ")",
     ];
   }
 
@@ -50,20 +48,16 @@ const StadiumPattern = (object,eyeList) => {
     if (!isHalf) {
       output.push(
         "Round 3: " +
-          midHeight +
-          " sc, inc x4, " +
-          midHeight +
-          " sc, inc x4, ch 1 and turn. (" +
+          midString + "inc x4, " +
+          midString + "inc x4, ch 1 and turn. (" +
           stitchCount +
           ")"
       );
     } else {
       output.push(
         "Round 3: " +
-          midHeight +
-          " sc, inc x4, " +
-          midHeight +
-          " sc. (" +
+          midString + "inc x4, " +
+          midString + "(" +
           stitchCount +
           ")"
       );
@@ -78,15 +72,13 @@ const StadiumPattern = (object,eyeList) => {
 
     if (!isHalf) {
       for (let j = 0; j < 2; j++) {
-        const midString = " " + midHeight + " sc, ";
         const inc = "(" + (i - 1) + " sc, inc) x4,";
         temp = temp + midString + inc;
       }
     } else {
-      const midString1 = " " + midHeight + " sc, ";
       const inc = "(" + (i - 1) + " sc, inc) x4, ";
-      const midString2 = midHeight + " sc, ch1 and turn";
-      temp = temp + midString1 + inc + midString2;
+      const midString2 =  midString + "ch1 and turn";
+      temp = temp + midString + inc + midString2;
     }
     temp = temp + ". (" + stitchCount + ")";
     output.push(temp);

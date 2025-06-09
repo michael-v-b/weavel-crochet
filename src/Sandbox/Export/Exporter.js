@@ -233,14 +233,19 @@ const Exporter = forwardRef((_, ref) => {
     addRow(10, doc);
 
     doc.setDrawColor(120, 165, 206);
+
     doc.line(10, row, pageWidth - 10, row);
 
-    addRow(50, doc);
+    //if recommended materials would bleed to next page, make it on next page
+    //otherwise keep it right under
+    if (pageHeight-row < 50) {
+      addRow(pageHeight-row,doc);
+      doc.line(10, row, pageWidth - 10, row);
+      addRow(10,doc);
+    } else {
+      addRow(10,doc);
+    }
 
-    //recommended materials
-
-    doc.setDrawColor(120, 165, 206);
-    doc.line(10, row, pageWidth - 10, row);
     addRow(10, doc);
 
     doc.text("Recommended Materials:", 10, row);
