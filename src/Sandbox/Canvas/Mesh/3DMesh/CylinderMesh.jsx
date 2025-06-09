@@ -59,7 +59,6 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
       ref={ref}
       {...props}
     >
-      {console.log("cylinder radius: " + radius)}
       <cylinderGeometry 
         args = {[radius,radius,height_convert(height),20,20,true]}
       />

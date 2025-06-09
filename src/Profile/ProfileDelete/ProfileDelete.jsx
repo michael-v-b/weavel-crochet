@@ -8,6 +8,11 @@ import "./ProfileDelete.css";
  */
 const ProjectDelete = ({setDeleteAccount}) => {
 
+
+    const deleteAccount = () => {
+        console.log("delete this account ig");
+    }
+
     return <div className = "profile-delete-container">
         <div className = "profile-delete-question">
         Are you sure you want to delete your account? 
@@ -21,6 +26,7 @@ const ProjectDelete = ({setDeleteAccount}) => {
             whileTap = {{scale:0.95}}
             className = "profile-delete-button clickable"
             onClick = {()=>{
+                deleteAccount();
             }}>
                 <div>Delete Account</div>
             </motion.div>

@@ -1,8 +1,15 @@
-.profile-option{
-    margin-left:10vw;
-}
 
+
+.profile-option-container {
+    padding-top:10vh;
+    padding-left:10vw;
+    font-family:"Nunito";
+    color:rgb(15, 70, 118);
+    font-weight:800;
+}
 .profile-delete {
+    margin-top:2vh;
+    margin-left:0vh;
     font-size:1.2vw;
     width:10vw;;
 }

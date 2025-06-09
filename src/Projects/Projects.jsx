@@ -8,6 +8,7 @@ import supabase from "../supabase";
 import ProjectManager from "./ProjectManager";
 import AuthTester from "../AuthTester";
 import WarningPop from "../UI/WarningPop/WarningPop";
+import LoadScreen from "../UI/LoadScreen/LoadScreen";
 import ProjectDelete from "./ProjectDelete/ProjectDelete";
 import "./Projects.css";
 import { p } from "framer-motion/client";
@@ -18,17 +19,37 @@ import { p } from "framer-motion/client";
  */
 const Projects = () => {
   const auth = useGlobalStore((state) => state.auth);
+
   const authData = useGlobalStore((state)=>state.authData);
   const setWarningText = useStore((state)=>state.setWarningText);
   const [projectNames, setProjectNames] = useState([]);
   const [canRemove, setRemove] = useState(false);
   const [deletedProject,setDeletedProject] = useState('');
   const [deletedIndex,setDeletedIndex] = useState(-1);
+  const [projectsLoading,setProjectsLoading] = useState(true);
+
   const removeButtonRef = useRef(null);
   const plusButtonRef = useRef(null);
   const navigate = useNavigate();
   const projectManagerRef = useRef(null);
   const clickedX = useRef(false);
+
+  
+  useEffect(()=>{
+    if(projectNames) {
+      setProjectsLoading(true);
+    }
+  },[]);
+
+  useEffect(()=>{
+    if(projectNames.length > 0) {
+      setProjectsLoading(false);
+    } else {
+      setProjectsLoading(true);
+    }
+  },[projectNames]);
+
+
   
 
     /**
@@ -152,6 +173,8 @@ const Projects = () => {
       projectName = {deletedProject} 
       deleteProject = {deleteProject}
       setDeletedProject = {setDeletedProject}/>}
+      
+      <LoadScreen visible = {projectsLoading}/>
 
       <ProjectManager ref={projectManagerRef} />
       <Banner />
