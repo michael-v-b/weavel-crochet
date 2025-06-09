@@ -16,11 +16,12 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
   const DEF_HEIGHT = useStore((state)=>state.DEF_HEIGHT);
   const height_convert = useStore((state)=>state.height_convert);
+  const circum_radius_convert = useStore((state)=>state.circum_radius_convert);
   const meshLoading = useStore((state)=>state.meshLoading);
 
   const [height,setHeight] = useState(DEF_HEIGHT);
   const [circum, setCircum] = useState(DEF_CIRCUM);
-  const [radius, setRadius] = useState(1);
+  const [radius, setRadius] = useState(circum_radius_convert(DEF_CIRCUM));
 
   const geoRef = useRef(null);
 
@@ -58,6 +59,7 @@ const CylinderMesh = forwardRef(({ id, ...props }, ref) => {
       ref={ref}
       {...props}
     >
+      {console.log("cylinder radius: " + radius)}
       <cylinderGeometry 
         args = {[radius,radius,height_convert(height),20,20,true]}
       />

@@ -15,9 +15,10 @@ const ConeMesh = forwardRef(({ id, ...props }, ref) => {
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
   const DEF_HEIGHT = useStore((state) => state.DEF_HEIGHT);
   const height_convert = useStore((state) => state.height_convert);
+  const circum_radius_convert = useStore((state)=>state.circum_radius_convert);
   const meshLoading = useStore((state) => state.meshLoading);
 
-  const [radius, setRadius] = useState(1);
+  const [radius, setRadius] = useState(circum_radius_convert(DEF_CIRCUM));
   const [circum, setCircum] = useState(DEF_CIRCUM);
   const [height, setHeight] = useState(DEF_HEIGHT);
   const dependencyList = [height, radius];
