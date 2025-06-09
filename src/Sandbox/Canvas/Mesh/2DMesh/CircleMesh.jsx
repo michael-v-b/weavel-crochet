@@ -11,8 +11,9 @@ const CircleMesh = forwardRef(({ id, ...props }, ref) => {
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
   const DEF_CIRCUM = useStore((state) => state.DEF_CIRCUM);
+  const circum_radius_convert = useStore((state)=>state.circum_radius_convert);
   const meshLoading = useStore((state)=>state.meshLoading);
-  const [radius, setRadius] = useState(1);
+  const [radius, setRadius] = useState(circum_radius_convert(DEF_CIRCUM));
   const [circum, setCircum] = useState(DEF_CIRCUM+2);
 
   const dependencyList = [radius];

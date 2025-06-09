@@ -51,7 +51,7 @@ const HierarchyCell = forwardRef(
         whileHover={{
           scale: 1.05,
           backgroundColor: isPressed ? "#9cccec" : "#FFFFFF",
-          color: "black",
+          color: "#000",
           transition: { duration: 0.1 },
         }}
         whileTap={{

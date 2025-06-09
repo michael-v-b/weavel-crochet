@@ -69,16 +69,7 @@ const BannerDropdown = () => {
           height: dropdownHeight,
         }}
       >
-        <motion.div
-          className="profile-dropdown-option clickable"
-          whileHover={{ backgroundColor: DROPDOWN_SELECT_COLOR }}
-          onClick={() => {
-            navigate("/");
-            setSelectedMeshes([]);
-          }}
-        >
-          Home
-        </motion.div>
+      
            <motion.div
           className="profile-dropdown-option clickable"
           whileHover={{ backgroundColor: DROPDOWN_SELECT_COLOR }}
@@ -117,6 +108,16 @@ const BannerDropdown = () => {
           }}
         >
           Sign Out
+        </motion.div>
+          <motion.div
+          className="profile-dropdown-option clickable"
+          whileHover={{ backgroundColor: DROPDOWN_SELECT_COLOR }}
+          onClick={() => {
+            navigate("/");
+            setSelectedMeshes([]);
+          }}
+        >
+          Home
         </motion.div>       
         <motion.div
           className="profile-dropdown-option"

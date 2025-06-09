@@ -18,7 +18,7 @@ const useStore = create((set) => ({
   },
 
   height_convert: (x) => {
-    return x / (tempCircum / (2 * Math.PI));
+    return x / ((tempCircum) / (2 * Math.PI));
   },
 
   projectName: "",

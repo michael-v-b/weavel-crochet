@@ -40,8 +40,6 @@ const BallPattern = (input, eyeList) => {
     roundNum = roundNum * 2;
   } else {
     const radius = Math.ceil(circum / (2 * Math.PI));
-    console.log("roundnum: " + roundNum);
-    console.log("radius: " + radius);
     second =
       "Round " +
       roundNum +

@@ -47,6 +47,7 @@ const TriangleMesh = forwardRef(({ id, ...props }, ref) => {
         -height_convert(height/2),
         DEPTH_OFFSET,
       ];
+
       const top = [0, height_convert(height/2), DEPTH_OFFSET];
 
       vertices.push(...top);
