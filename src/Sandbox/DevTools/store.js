@@ -82,6 +82,7 @@ const useStore = create((set) => ({
 
   updateAvgPosition: () =>
     set((state) => {
+
       if (state.selectedMeshes.length <= 0) {
         return {
           x: state.avgPosition[0],
@@ -89,6 +90,7 @@ const useStore = create((set) => ({
           z: state.avgPosition[2],
         };
       }
+
       const updateCoords = () => {
         let x = 0;
         let y = 0;
@@ -98,9 +100,11 @@ const useStore = create((set) => ({
           y += mesh.position.y;
           z += mesh.position.z;
         });
+
         x /= state.selectedMeshes.length;
         y /= state.selectedMeshes.length;
         z /= state.selectedMeshes.length;
+
         return { x: x, y: y, z: z };
       };
 

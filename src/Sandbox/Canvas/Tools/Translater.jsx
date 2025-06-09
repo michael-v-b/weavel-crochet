@@ -195,6 +195,8 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
 
   useImperativeHandle(ref, () => ({ handleRay }));
 
+
+
   return (
     <>
       {selectedList.length > 0 && tool == "translate" && (

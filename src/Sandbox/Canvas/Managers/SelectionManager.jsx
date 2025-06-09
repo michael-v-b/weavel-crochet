@@ -51,7 +51,9 @@ const SelectionManager = forwardRef((_, ref) => {
     //select object
     if (selected) {
       object.userData.setSelected(true);
-      tempSelectedList = [...tempSelectedList, object];
+      if(!tempSelectedList.includes(object)) {
+        tempSelectedList = [...tempSelectedList, object];
+      }
 
       //deselect object
     } else {

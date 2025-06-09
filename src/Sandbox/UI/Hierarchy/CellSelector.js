@@ -87,8 +87,6 @@ const CellSelector = forwardRef((_, ref) => {
 
     //deactivates all entries
     for (let i = 0; i < meshList.length; i++) {
-
- 
       
       const cellRef = meshList[i].userData.cellRef;
       if (cellRef.current.id != id) {
