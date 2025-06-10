@@ -211,8 +211,17 @@ const Rotater = forwardRef(({raycaster}, ref) => {
     for (let i = 0; i < selectedList.length; i++) {
       const object = selectedList[i];
       const id = object.userData.idNumber;
-      projectFile.meshes[id].position = object.position.toArray();
-      projectFile.meshes[id].rotation = object.rotation.toArray();
+      const tempPosition = object.position.toArray();
+      const tempRotation = object.rotation.toArray();
+
+      //round position and rotation to hundredths place
+      for(let j = 0; j < tempPosition.length;j++) {
+        tempPosition[j] = parseFloat(tempPosition[j].toFixed(2));
+        tempRotation[j] = parseFloat(tempRotation[j].toFixed(2));
+      }
+
+      projectFile.meshes[id].position = tempPosition;
+      projectFile.meshes[id].rotation = tempRotation;
     }
     setProjectFile({ ...projectFile });
     totalAngle = 0;

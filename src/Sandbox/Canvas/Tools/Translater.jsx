@@ -171,7 +171,13 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
       const selectedData = selectedList[i].userData;
       const id = selectedData.idNumber;
 
-      projectFile.meshes[id].position = selectedData.visualRef.current.position.toArray();
+      //round position values to hundredth place
+      const tempPosition = selectedData.visualRef.current.position.toArray();
+      for(let j = 0; j < tempPosition.length;j++){
+        tempPosition[j] = parseFloat(tempPosition[j].toFixed(2));
+      }
+      
+      projectFile.meshes[id].position = tempPosition;
     }
     setProjectFile({ ...projectFile });
 
