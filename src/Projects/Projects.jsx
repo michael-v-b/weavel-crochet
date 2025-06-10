@@ -72,7 +72,7 @@ const Projects = () => {
   const testProfile = async () => {
     const {data,error} = await supabase.from("Profiles").select("*");
 
-    if(data.length == 0) {
+    if(data?.length == 0) {
       createProfile(authData);
     } else {
       getProjects();
