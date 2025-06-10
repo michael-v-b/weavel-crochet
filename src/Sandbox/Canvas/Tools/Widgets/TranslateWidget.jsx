@@ -16,6 +16,7 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
   const [onPhone,setOnPhone] = useState(false);
   const meshList = useStore((state)=>state.meshList);
   const { camera } = useThree();
+  const transparency = 0.65;
   
 
   /**
@@ -50,9 +51,9 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
   },[]);
 
   const LineCone = ({color, axisLock}) => {
-    return <mesh position = {[0,1,0]}>
-      <coneGeometry args = {[0.25,.5]}userData ={{axisLock:axisLock}} layer = {3}/>
-      <meshBasicMaterial depthTest = {false} color = {color}/>
+    return <mesh position = {[0,1,0]} layer = {3} userData ={{axisLock:axisLock}}>
+      <coneGeometry args = {[0.25,.5]} />
+      <meshBasicMaterial depthTest = {false} color = {color} transparent = {true} opacity = {transparency}/>
     </mesh>
   }
 
@@ -65,7 +66,7 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
             userData: { axisLock: "none" },
             layer: 3,
           }}
-          materialProps={{ color: "#ffffff", depthTest: false }}
+          materialProps={{ color: "#ffffff", depthTest: false,transparent:true,opacity:transparency }}
         />
 
         <ILine
@@ -75,7 +76,7 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
             position: [0, 1.25, 0],
             layer: 3,
           }}
-          materialProps={{ depthTest: false, color: "#00FF00" }}
+          materialProps={{ depthTest: false, color: "#00FF00",transparent:true,opacity:transparency}}
         >
           <LineCone color = "#00FF00" axisLock = "y"/>
         </ILine>
@@ -88,7 +89,7 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
             position: [1.25, 0, 0],
             layer: 3,
           }}
-          materialProps={{ depthTest: false, color: "#FF0000" }}
+          materialProps={{ depthTest: false, color: "#FF0000",transparent:true,opacity:transparency }}
         >
           <LineCone color = "#FF0000" axisLock = "x"/>
         </ILine>
@@ -100,7 +101,7 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
             position: [0, 0, 1.25],
             layer: 3,
           }}
-          materialProps={{ depthTest: false, color: "#0000FF" }}
+          materialProps={{ depthTest: false, color: "#0000FF",transparent:true,opacity:transparency }}
         >
           <LineCone axisLock = "z" color = "#0000ff"/>
         </ILine>

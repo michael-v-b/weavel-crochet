@@ -20,6 +20,7 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
   const [onPhone,setOnPhone] = useState(false);
   const widgetRef = useRef(null);
   const lineWidth = 0.05;
+  const transparency = 0.65;
 
   /**
    *updates size of widget to match distance to camera every frame.
@@ -73,13 +74,15 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
             depthTest: false,
             color: "#FF0000",
             opacity: 0,
+            transparent:true,
+            opacity:transparency
           }}
         />
         <IBall 
       
         dim ={0.33}
         meshProps ={{position: xPos,userData: {axis:"x"},layer: 3}}
-        materialProps = {{depthTest:false,color:"#FF0000"}}/>
+        materialProps = {{depthTest:false,color:"#FF0000",transparent:true,opacity:transparency}}/>
 
         {
           //Z AXIS
@@ -88,15 +91,17 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
         <IRing
           lineWidth={lineWidth}
           meshProps={{ layer: 3, userData: { axis: "z" } }}
-          materialProps={{ color: "#0000FF", depthTest: false }}
+          materialProps={{ color: "#0000FF", depthTest: false,transparent:true,opacity:transparency }}
         />
-        <IBall dim = {0.33} meshProps = {{position: zPos, layer:3,userData:{axis:"z"}}} materialProps = {{color:"#0000FF",depthTest:false}}/>
+        <IBall dim = {0.33} meshProps = {{position: zPos, layer:3,userData:{axis:"z"}}} 
+        materialProps = {{color:"#0000FF",depthTest:false,transparent:true,opacity:transparency}}/>
 
         {
           //Y AXIS
         }
 
-        <IBall dim = {0.33} meshProps = {{position: yPos, layer:3, userData: {axis:"y"}}} materialProps = {{color:"#00FF00",depthTest:false}}/>
+        <IBall dim = {0.33} meshProps = {{position: yPos, layer:3, userData: {axis:"y"}}} 
+        materialProps = {{color:"#00FF00",depthTest:false,transparent:true,opacity:transparency}}/>
         <IRing
           lineWidth={lineWidth}
           meshProps={{
@@ -104,7 +109,7 @@ const RotateWidget = forwardRef(({ ...props }, ref) => {
             layer: 3,
             userData: { axis: "y" },
           }}
-          materialProps={{ color: "#00FF00", depthTest: false }}
+          materialProps={{ color: "#00FF00", depthTest: false,transparent:true,opacity:transparency}}
         />
       </mesh>
     </>
