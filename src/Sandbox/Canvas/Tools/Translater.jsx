@@ -39,6 +39,7 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
   const setProjectFile = useStore((state) => state.setProjectFile);
   const isDragging = useStore((state) => state.isDragging);
   const setDragging = useStore((state) => state.setDragging);
+  
 
   /**
    * makes selected axis when new ray is cast.
@@ -72,9 +73,16 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
       planeNormal = new Vector3(cameraPlane.x, 0, cameraPlane.z);
     } else if (tempAxisLock == "z") {
       planeNormal = new Vector3(cameraPlane.x, cameraPlane.y, 0);
+    } else if (tempAxisLock == "xy") {
+      planeNormal = new Vector3(0, 0,cameraPlane.z);
+    } else if (tempAxisLock == "yz") {
+      planeNormal = new Vector3(cameraPlane.x,0,0);
+    } else if (tempAxisLock == "xz") {
+      planeNormal = new Vector3(0,cameraPlane.y,0);
     }
 
     newPlane = new Plane(planeNormal, -mesh.position.clone().dot(planeNormal));
+
 
     //set associate all selected meshes with their position in a pseudo-map.
     const keyPairs = selectedList.map((mesh) => [
@@ -144,6 +152,18 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
       newPosition.copy(
         new Vector3(initialPosition.x, initialPosition.y, mousePosition.z)
       );
+    } else if (axisLock == "xy") {
+      newPosition.copy(
+        new Vector3(mousePosition.x,mousePosition.y,initialPosition.z)
+      );
+    } else if (axisLock == "yz") {
+      newPosition.copy(
+        new Vector3(initialPosition.x,mousePosition.y,mousePosition.z)
+      );
+    } else if (axisLock == "xz") {
+      newPosition.copy(
+        new Vector3(mousePosition.x,initialPosition.y,mousePosition.z)
+      );
     }
 
     //test whether object intersects before moving
@@ -176,7 +196,7 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
       for(let j = 0; j < tempPosition.length;j++){
         tempPosition[j] = parseFloat(tempPosition[j].toFixed(2));
       }
-      
+
       projectFile.meshes[id].position = tempPosition;
     }
     setProjectFile({ ...projectFile });
@@ -206,7 +226,9 @@ const Translater = forwardRef(({ raycaster, ...props }, ref) => {
   return (
     <>
       {selectedList.length > 0 && tool == "translate" && (
-        <TranslateWidget ref={meshRef} position={avgPosition} {...props} />
+        <>
+          <TranslateWidget ref={meshRef} position={avgPosition} {...props} />
+        </>
       )}
     </>
   );

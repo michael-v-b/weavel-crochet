@@ -2,6 +2,7 @@ import { useFrame, useThree} from "@react-three/fiber";
 import  {forwardRef,useState,useEffect} from "react";
 import IBox from "../../Mesh/InteractiveMeshes/IBox.jsx";
 import ILine from "../../Mesh/InteractiveMeshes/ILine.jsx";
+import IPlane from "../../Mesh/InteractiveMeshes/IPlane.jsx";
 import useStore from  "../../../DevTools/store";
 
 /**
@@ -16,7 +17,10 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
   const [onPhone,setOnPhone] = useState(false);
   const meshList = useStore((state)=>state.meshList);
   const { camera } = useThree();
-  const transparency = 0.65;
+  const transparency = 0.4;
+  const planeTransparency = 0.3;
+  const planeDistance = 1.8;
+  const planeDim = 1.5;
   
 
   /**
@@ -60,6 +64,47 @@ const TranslateWidget = forwardRef(({ ...props }, ref) => {
   return (
     <>
      <mesh ref={ref}  key = {key} {...props} layer={3}>
+      {/**PLANES WIDGET */}
+
+      <IPlane dim = {planeDim} meshProps = {
+        {position:[planeDistance,planeDistance,0],
+        layer:3,
+        userData: {axisLock:"xy"}}}
+        materialProps = {{
+          color:"#FF0000",
+          depthTest:false,
+          transparent:true,
+          opacity:planeTransparency
+        }}
+      />
+
+      <IPlane dim = {planeDim} meshProps = {
+        {position:[0,planeDistance,planeDistance],
+        rotation:[0,Math.PI/2,0],
+        layer:3,
+        userData: {axisLock:"yz"}}}
+        materialProps = {{
+          color:"#00FF00",
+          depthTest:false,
+          transparent:true,
+          opacity:planeTransparency
+        }}
+      />
+
+      <IPlane dim = {planeDim} meshProps = {
+        {position:[planeDistance,0,planeDistance],
+        rotation:[-Math.PI/2,0,0],
+        layer:3,
+        userData: {axisLock:"xz"}}}
+        materialProps = {{
+          color:"#0000FF",
+          depthTest:false,
+          transparent:true,
+          opacity:planeTransparency
+        }}
+      />
+
+      {/**MAIN TRANSLATER WIDGET========================================================== */}
         <IBox
           dim={0.5}
           meshProps={{
