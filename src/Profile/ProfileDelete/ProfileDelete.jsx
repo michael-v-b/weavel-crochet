@@ -29,8 +29,13 @@ const ProjectDelete = ({setDeleteAccount}) => {
             const {data: storageData, error: storageError} = await supabase.storage.from("Project Files").remove([path]);
         })
 
+        //set projects to 0
+        const {data:projectNumData, error:projectNumError} = await supabase.from("Profiles").update({num_of_projects:0}).eq("user_id",user_id);
+
+        //delete profile
         const {data: userData, error: userError} = await supabase.from("Profiles").delete().eq("user_id",user_id);
 
+        //sign out
         const {error:signOutError} = await supabase.auth.signOut();
 
        navigate("/");
