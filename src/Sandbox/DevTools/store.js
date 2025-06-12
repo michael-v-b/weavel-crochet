@@ -14,11 +14,15 @@ const useStore = create((set) => ({
   // old x(1/36) + 1/6
   //export
   circum_radius_convert: (x) => {
-    return (((x-6)/6) *.25 + .75)/2;
+    if (x >= 6) {
+      return (((x - 6) / 6) * 0.25 + 0.75) / 2;
+    } else {
+      return (((x - 3) / 3) * 0.25 + 0.5) / 2;
+    }
   },
 
   height_convert: (x) => {
-    return x / ((tempCircum) / (2 * Math.PI));
+    return x / ((tempCircum + 6) / (2 * Math.PI));
   },
 
   projectName: "",
@@ -82,7 +86,6 @@ const useStore = create((set) => ({
 
   updateAvgPosition: () =>
     set((state) => {
-
       if (state.selectedMeshes.length <= 0) {
         return {
           x: state.avgPosition[0],
@@ -124,11 +127,11 @@ const useStore = create((set) => ({
   warningText: [""],
   setWarningText: (newText) => set({ warningText: [newText] }),
 
-  projectDims: [0,0,0],
+  projectDims: [0, 0, 0],
   setProjectDims: (newProjectDims) => set({ projectDims: newProjectDims }),
 
   multiSelect: false,
-  setMultiSelect: (newMultiSelect) => set({multiSelect:newMultiSelect})
+  setMultiSelect: (newMultiSelect) => set({ multiSelect: newMultiSelect }),
 }));
 
 export default useStore;
