@@ -70,10 +70,10 @@ const CircumferenceField = forwardRef(
       if (getCircum) {
         getCircum(roundedCircum);
       }
-
       setCircum(roundedCircum);
 
       const newRadius = circum_radius_convert(roundedCircum);
+      console.log("newRadius: " + newRadius);
 
       action.push(object);
       action.push(object.userData.meshData.radius);
@@ -94,7 +94,6 @@ const CircumferenceField = forwardRef(
 
       object.userData.meshData.setCircum(roundedCircum);
 
-      console.log("newRadius: " + newRadius * 2);
       return newRadius;
     };
 

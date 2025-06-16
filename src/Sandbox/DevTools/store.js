@@ -1,7 +1,8 @@
 import { create } from "zustand";
 
 //real default circumference
-const tempCircum = 30;
+const tempCircum = 36;
+const conversionRate = (2/(tempCircum/Math.PI))/2;
 
 //used for state management
 const useStore = create((set) => ({
@@ -13,16 +14,21 @@ const useStore = create((set) => ({
   //CONVERTS convert real values to in game values.
   // old x(1/36) + 1/6
   //export
+
+  
   circum_radius_convert: (x) => {
-    if (x >= 6) {
-      return (((x - 6) / 6) * 0.25 + 0.75) / 2;
+    
+
+    if (x > 6) {
+      //return (((x - 6) / 6) * .25+ 0.75) / 2;
+      return x/(Math.PI)*conversionRate;
     } else {
       return (((x - 3) / 3) * 0.25 + 0.5) / 2;
     }
   },
 
   height_convert: (x) => {
-    return x / ((tempCircum + 6) / (2 * Math.PI));
+    return x / ((tempCircum ) / (2 * Math.PI));
   },
 
   projectName: "",

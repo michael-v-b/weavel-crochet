@@ -20,7 +20,7 @@ const SizeManager = () => {
     //[0] axis [1] max,min
 
     let differs = false;
-
+    
     for (const mesh of meshList) {
       mesh.geometry.computeBoundingBox();
 

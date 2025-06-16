@@ -13,6 +13,7 @@ const EyeMesh = forwardRef(({ id, ...props }, ref) => {
 
   const meshLoading = useStore((state)=>state.meshLoading);
 
+
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
 
@@ -25,8 +26,11 @@ const EyeMesh = forwardRef(({ id, ...props }, ref) => {
 
 
 const convertMM = (mm) => {
-    return (mm/10)/2.54
+    const tempCircum = 36;
+    const conversionRate = ((tempCircum/(2*Math.PI))/5.46);
+    return ((mm/10)/2.54)*conversionRate;
 }
+
   const inRange = (a, length, bottom) => {
     return (a % length) + bottom;
   };
