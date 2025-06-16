@@ -50,7 +50,7 @@ const InfoPage = ({ object, deleterRef, meshType }) => {
       <NameField objects={[object]} />
       <PositionField object={object} />
       <RotationField object={object} />
-      <ColorField object={object} />
+      <ColorField objects={[object]} />
       {MeshType && <MeshType object={object} />}
                       <motion.div 
                 whileHover ={{scale:1.1}} 

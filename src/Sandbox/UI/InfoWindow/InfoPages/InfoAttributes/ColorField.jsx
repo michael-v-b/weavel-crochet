@@ -8,15 +8,16 @@ import useStore from "../../../../DevTools/store";
  * @property {[string]} colorList - a list of all colors in project.
  * @returns {Component} - a component used to change the color of an object.
  */
-const ColorField = ({ object }) => {
+const ColorField = ({ objects}) => {
   const colorList = useStore((state) => state.colorList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
+  const selectedMeshes = useStore((state)=>state.selectedMeshes);
 
-  const objectData = object.userData;
-  const [currentIndex, setCurrentIndex] = useState(objectData.colorIndex);
+    
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [currentColor, setCurrentColor] = useState(
-    colorList[objectData.colorIndex - 1]
+    colorList[0]
   );
   const [isWhite, setWhite] = useState(false);
 
@@ -24,18 +25,23 @@ const ColorField = ({ object }) => {
    *When new option is selected, update currentcolor
    *@param {Event} event - new value for currentColor
    */
+
   const handleChange = (value) => {
     const newColor = colorList[value - 1];
+    objects.forEach((object) =>{
+    
+      object.material.color.set(newColor);
 
-    object.material.color.set(newColor);
+      object.userData.setColorIndex(value);
+
+
+      //update project file
+      const newMesh = projectFile.meshes[object.userData.idNumber];
+      newMesh.colorIndex = value;
+    });
     setCurrentColor(newColor);
-    objectData.setColorIndex(value);
     setCurrentIndex(value);
-    setWhite(testWhite(object.material.color));
-
-    //update project file
-    const newMesh = projectFile.meshes[object.userData.idNumber];
-    newMesh.colorIndex = value;
+    setWhite(testWhite(newColor));
 
     setProjectFile({ ...projectFile });
   };
@@ -64,19 +70,57 @@ const ColorField = ({ object }) => {
       return false;
     }
   };
+
+  /**
+   * 
+   * @returns True if all of the objects have the same color index, and false otherwise
+   */
+  const testMatching = () => {
+    const temp = objects[0].userData.colorIndex;
+    for(let i =0 ; i < objects.length;i++) {
+      if(objects[i].userData.colorIndex != temp) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   /**
    * change background of field when the color changes.
    */
   useEffect(() => {
-    const minIndex = Math.min(objectData.colorIndex, colorList.length);
-    handleChange(minIndex);
+
+    objects.forEach((object) => {
+      const objectData = object.userData;
+      const minIndex = Math.min(objectData.colorIndex,colorList.length);
+      objectData.setColorIndex(minIndex);
+    });
+
+    let matches = testMatching();
+    
+    
+    const colorValue = matches ? Math.min(objects[0].userData.colorIndex,colorList.length) : 1;
+
+    const newColor = colorList[colorValue-1];
+    setCurrentColor(newColor);
+    setCurrentIndex(colorValue);
+    setWhite(testWhite(newColor));
+
+    setProjectFile({ ...projectFile });
+
+    //handleChange(minIndex);
   }, [colorList]);
 
   useEffect(() => {
-    setCurrentIndex(objectData.colorIndex);
-    setCurrentColor(colorList[objectData.colorIndex - 1]);
-    setWhite(testWhite(object.material.color));
-  }, [object]);
+    const temp = objects[0].userData.colorIndex;
+    let matches = testMatching();
+   
+    const colorValue = matches ? temp : 1;
+    setCurrentIndex(colorValue);
+    setCurrentColor(colorList[colorValue - 1]);
+    setWhite(testWhite(colorValue));
+  }, [selectedMeshes]);
+
 
   return (
     <div className="attribute">
