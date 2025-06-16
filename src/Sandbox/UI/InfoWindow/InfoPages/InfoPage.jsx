@@ -52,13 +52,14 @@ const InfoPage = ({ object, deleterRef, meshType }) => {
       <RotationField object={object} />
       <ColorField objects={[object]} />
       {MeshType && <MeshType object={object} />}
-                      <motion.div 
-                whileHover ={{scale:1.1}} 
-                whileTap = {{scale:0.9}} 
-                onClick = {()=>{
-                  deleterRef.current.deleteMeshes([object]);
-                }}
-                className= "delete-button selectable">Delete</motion.div>
+      <motion.div 
+          whileHover ={{scale:1.1}} 
+          whileTap = {{scale:0.9}} 
+          onClick = {()=>{
+          deleterRef.current.deleteMeshes([object]);
+        }}
+                className= "delete-button selectable">Delete
+      </motion.div>
     </div>
   );
 };

@@ -44,7 +44,7 @@ const InfoWindow = ({deleterRef}) => {
               </>
             )}
             
-            {selectedMeshes.length > 1 && <GroupPage objects = {selectedMeshes}/>}
+            {selectedMeshes.length > 1 && <GroupPage deleterRef = {deleterRef} objects = {selectedMeshes}/>}
           </>
         )}
       </div>
