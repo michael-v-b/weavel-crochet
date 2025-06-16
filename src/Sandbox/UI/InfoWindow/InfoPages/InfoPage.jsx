@@ -42,23 +42,12 @@ const InfoPage = ({ object, deleterRef, meshType }) => {
   };
   const MeshType = shapePages[meshType];
 
-  const handleHistory =  (event) => {
-    if (
-      (event.inputType === 'historyUndo' || event.inputType === 'historyRedo') &&
-      event.target instanceof HTMLInputElement
-    ) {
-      event.preventDefault();
-    } 
-  }
 
-  useEffect(()=>{
-  document.addEventListener('beforeinput',handleHistory, { capture: true });
-  },[]);
 
 
   return (
     <div>
-      <NameField object={object} />
+      <NameField objects={[object]} />
       <PositionField object={object} />
       <RotationField object={object} />
       <ColorField object={object} />

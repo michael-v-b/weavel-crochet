@@ -1,19 +1,11 @@
-import PositionField from "./InfoAttributes/PositionField";
+import NameField from "./InfoAttributes/NameField";
+import ColorField from "./InfoAttributes/ColorField";
+import RotationField from "./InfoAttributes/RotationField";
 
-/**
- * Fields types:
- * Circum
- * Color
- * Dim
- * Hieght
- * Open
- * Position
- * Rotation
- */
-const GroupPage = () => {
+const GroupPage = ({objects}) => {
   return (
     <div>
-      <ColorField />
+      <NameField objects = {objects}/>
     </div>
   );
 };
