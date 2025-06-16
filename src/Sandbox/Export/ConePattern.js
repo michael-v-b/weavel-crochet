@@ -96,6 +96,8 @@ const ConePattern = (object, eyeList) => {
       output.push(tempString);
     }
   }
+  roundNum+=1;
+  output.push("Round " + roundNum + ": " + stitchCount + "sc. (" + stitchCount +")");
   roundNum += 1;
   output.push("sl st. Fasten off.\n");
 
