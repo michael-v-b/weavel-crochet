@@ -4,14 +4,27 @@
  * @param {List} action -
  * action[0] - action name
  * action[1] - object
+ * action[2] - old values
+ * action[3] - new values
  */
 const updateHalf=  (action,projectFile) => {
-    const object = action[1];
-    const objectData = object.userData.meshData;
-    const id = object.userData.idNumber;
+    const objects = action[1];
+    const oldValues = action[2];
+    const newValues = action[3];
+    
+    for(let i= 0 ; i< objects.length;i++) {
+        const object=  objects[i];
 
-    projectFile.meshes[id].isHalf = !objectData.isHalf
-    objectData.setHalf(!objectData.isHalf);
+        const objectData = object.userData.meshData;
+        
+        objectData.setHalf(oldValues[i]);
+        const id = object.userData.idNumber;
+
+        projectFile.meshes[id].isHalf = oldValues[i];
+    };
+
+    action[2] = newValues;
+    action[3] = oldValues;
 
     return action
 }
