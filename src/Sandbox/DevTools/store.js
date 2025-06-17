@@ -19,11 +19,11 @@ const useStore = create((set) => ({
   circum_radius_convert: (x) => {
     
 
-    if (x > 6) {
+    if (x >8) {
       //return (((x - 6) / 6) * .25+ 0.75) / 2;
       return x/(Math.PI)*conversionRate;
     } else {
-      return (((x - 3) / 3) * 0.25 + 0.5) / 2;
+      return (((x - 3) / 3) * 0.125 + 0.37) / 2;
     }
   },
 
