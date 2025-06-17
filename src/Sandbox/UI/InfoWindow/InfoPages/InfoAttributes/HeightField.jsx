@@ -5,21 +5,22 @@ import InputField from "./InputField";
 
 /**
  * @typedef {HeightField} - A field used to edit an object's height.
- * @property {Object} object - object whose height is being edited.
+ * @property {Object} objects - object whose height is being edited.
  * @property {string} heightName - the text that appears on the height attribute.
  * @returns {Component} - div with an input field that represents the object's height.
  */
 const HeightField = forwardRef(({
   heightName = "Height",
   getHeight,
-  object,
+  objects,
 },ref) => {
 
   HeightField.displayName = "Height Field";
 
-  const [objectData, setObjectData] = useState(object.userData.meshData);
-  const [height, setHeight] = useState(objectData.height);
-  const [action, setAction] = useState(["height"]);
+  const [height, setHeight] = useState("-");
+  const [action, setAction] = useState([["height"],[],[],[]]);
+  const [changed,setChanged] =useState(false);
+  const [matching,setMatching] = useState(true);
   const setFocused = useStore((state) => state.setFocused);
   const undoList = useStore((state) => state.undoList);
   const setUndoList = useStore((state) => state.setUndoList);
@@ -27,10 +28,30 @@ const HeightField = forwardRef(({
   const setProjectFile = useStore((state) => state.setProjectFile);
   const setWarningText = useStore((state)=>state.setWarningText);
 
+  /**
+   * 
+   * @returns true if all objects have the same height, false if not.
+   */
+  const testMatching = () => {
+    const temp = objects[0].userData.meshData.height;
+    for(let i = 0; i < objects.length;i++) {
+      if(objects[i].userData.meshData.height != temp) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+  useEffect(()=>{
+    setMatching(testMatching());
+  },[objects,...objects.map(object=>object.userData.meshData.height)]);
+
   useEffect(() => {
-    setObjectData(object.userData.meshData);
-    setHeight(object.userData.meshData.height);
-  }, [object]);
+    if(testMatching() && !changed) {
+      setHeight(objects[0].userData.meshData.height);
+    }
+  }, [objects,height,matching]);
   
 
   /**
@@ -46,6 +67,7 @@ const HeightField = forwardRef(({
     } else {
       setHeight(initNumber);
     }
+    setChanged(true);
   };
 
   /**
@@ -60,37 +82,40 @@ const HeightField = forwardRef(({
    * Updates the object's height when input field is no longer selected and sets focused state to false.
    */
   const handleBlur = () => {
+    if(!changed) {
+      return;
+    }
+
     let temp = height;
-
-   
-    
-  
-
     temp = Math.max(2,height);
 
-     action.push(object);
-    action.push(objectData.height);
-    action.push(temp);
-    undoList.push(action);
+    objects.forEach((object) => {
+      const objectData = object.userData.meshData;
     
 
-    objectData.setHeight(temp);
+      action[1].push(object);
+      action[2].push(objectData.height);
+      action[3].push(temp);
+
+      objectData.setHeight(temp);
+
+      //update project file
+      const newMesh = projectFile.meshes[object.userData.idNumber];
+      newMesh.height = temp;
+    })
 
     //update for callback
+    setHeight(temp);
+
     if(getHeight) {
       getHeight(temp);
     }
 
+    undoList.push(action);
     setUndoList([...undoList]);
     setAction(["height"]);
 
-    setHeight(temp);
 
-
-
-    //update project file
-    const newMesh = projectFile.meshes[object.userData.idNumber];
-    newMesh.height = temp;
     setProjectFile({ ...projectFile });
 
     setFocused(false);
@@ -106,7 +131,7 @@ const HeightField = forwardRef(({
         <InputField
           className="small field-style"
           type="text"
-          value={height}
+          value={(matching || changed) ? height : "-"}
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={(e) => {

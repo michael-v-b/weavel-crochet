@@ -68,7 +68,7 @@ const ConePage = ({ object }) => {
         minCircum={6}
         roundingNum={0}
       />
-      <HeightField ref={heightRef} object={object} getHeight={handleHeight} />
+      <HeightField ref={heightRef} objects={[object]} getHeight={handleHeight} />
     </>
   );
 };

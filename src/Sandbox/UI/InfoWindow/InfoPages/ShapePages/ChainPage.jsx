@@ -10,7 +10,7 @@ const ChainPage = ({ object, getFocused }) => {
     <>
       <HeightField
         heightName={"Length: "}
-        object={object}
+        objects={[object]}
         getFocused={getFocused}
       />
     </>

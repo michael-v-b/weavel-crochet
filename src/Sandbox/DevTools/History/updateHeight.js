@@ -8,17 +8,19 @@
      */
     const updateHeight = (action, projectFile) => {
 
-      const object = action[1];
-      const oldHeight = action[2];
-      const newHeight = action[3];
+      const objects = action[1];
+      const oldHeights = action[2];
+      const newHeights = action[3];
+      
+      for(let i= 0; i < objects.length;i++) {
+        objects[i].userData.meshData.setHeight(oldHeights[i]);
 
-      object.userData.meshData.setHeight(oldHeight);
+        const id = objects[i].userData.idNumber;
+        projectFile.meshes[id].height = oldHeights[i];
+      };
 
-      const id = object.userData.idNumber;
-      projectFile.meshes[id].height = oldHeight;
-
-      action[3] = oldHeight;
-      action[2] = newHeight;
+      action[3] = oldHeights;
+      action[2] = newHeights;
       //updateLists(action, isUndo);
       return action;
     };

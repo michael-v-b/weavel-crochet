@@ -11,7 +11,7 @@ const CylinderPage = ({ object}) => {
   return (
     <>
       <CircumField objects={[object]} roundingNum = {0} />
-      <HeightField object={object} />
+      <HeightField objects={[object]} />
     </>
   );
 };
