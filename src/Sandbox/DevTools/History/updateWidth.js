@@ -8,17 +8,21 @@
      */
     const updateWidth = (action, projectFile) => {
 
-      const object = action[1];
-      const oldWidth = action[2];
-      const newWidth = action[3];
+      const objects = action[1];
+      const oldWidths = action[2];
+      const newWidths = action[3];
       
-      object.userData.meshData.setWidth(oldWidth);
+      for(let i =0;i < objects.length;i++) {
+        const object = objects[i];
+        const oldWidth = oldWidths[i];
+        object.userData.meshData.setWidth(oldWidth);
 
-      const id = object.userData.idNumber;
-      projectFile.meshes[id].width = oldWidth;
+        const id = object.userData.idNumber;
+        projectFile.meshes[id].width = oldWidth;
+      }
 
-      action[3] = oldWidth;
-      action[2] = newWidth;
+      action[3] = oldWidths;
+      action[2] = newWidths;
       //updateLists(action, isUndo);
       return action;
     };

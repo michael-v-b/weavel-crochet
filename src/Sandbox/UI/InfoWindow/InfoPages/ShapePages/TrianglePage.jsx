@@ -49,7 +49,7 @@ const TrianglePage = ({ object }) => {
       <HeightField ref={heightRef} objects={[object]} getHeight={handleHeight} />
       <WidthField
         ref={widthRef}
-        object={object}
+        objects={[object]}
         getWidth={handleWidth}
         name={"Base"}
       />

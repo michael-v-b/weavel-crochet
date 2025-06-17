@@ -9,13 +9,14 @@ import InputField from "./InputField";
  * @returns {Component} - div with an input field that represents the object's width.
  */
 const WidthField = forwardRef(({
-  object,
+  objects,
   getWidth,
   name = "Width: ",
 },ref) => {
-  const [objectData, setObjectData] = useState(object.userData.meshData);
 
-  const [action, setAction] = useState(["width"]);
+  const [action, setAction] = useState([["width"],[],[],[]]);
+  const [matching, setMatching] = useState(true);
+  const [changes, setChanges] = useState(false);
   const setFocused = useStore((state) => state.setFocused);
   const undoList = useStore((state) => state.undoList);
   const setUndoList = useStore((state) => state.setUndoList);
@@ -23,14 +24,34 @@ const WidthField = forwardRef(({
   const setProjectFile = useStore((state) => state.setProjectFile);
   const setWarningText = useStore((state)=>state.setWarningText);
 
-  const [width, setWidth] = useState(objectData.width);
+  const [width, setWidth] = useState("-");
 
-  const meshType = object.userData.meshType;
+/**
+ * 
+ * @returns True if all the widths are the same, false if not
+ */
+  const testMatching = () => {
+    let temp = objects[0].userData.meshData.width;
+    for(let i = 0; i < objects.length;i++) {
+      if(temp != objects[i].userData.meshData.width) {
+        return false;
+      }
+    }
+    return true;
+  }
 
+  /**
+   * updates matching whenever an object's width is changed
+   */
+  useEffect(()=>{
+    setMatching(testMatching());
+  },[objects,...objects.map(object => object.userData.meshData.width)]);
+ 
   useEffect(() => {
-    setObjectData(object.userData.meshData);
-    setWidth(object.userData.meshData.width);
-  }, [object]);
+    if(objects && testMatching() && !changes) {
+      setWidth(objects[0].userData.meshData.width);
+    }
+  }, [objects,width,matching]);
 
   /**
    *updates the internal base when input field is edited.
@@ -45,6 +66,7 @@ const WidthField = forwardRef(({
     } else {
       setWidth(initNumber);
     }
+    setChanges(true);
   };
 
   /**
@@ -60,29 +82,42 @@ const WidthField = forwardRef(({
   const handleBlur = () => {
     let temp = Math.max(2, width);
 
-    if(meshType == 'stadium' && temp %2 != 0) {
-      temp +=1;
-    }
+    objects.forEach(object => {
 
-    action.push(object);
-    action.push(objectData.width);
-    action.push(temp);
-    undoList.push(action);
+      const objectData = object.userData.meshData;
+      const meshType = object.userData.meshType;
 
-    objectData.setWidth(temp);
+      let meshTemp = temp;
+
+      if(meshType == 'stadium' && temp %2 != 0) {
+        meshTemp = temp+1;
+      }
+
+      action[1].push(object);
+      action[2].push(objectData.width);
+      action[3].push(temp);
+      
+
+      objectData.setWidth(meshTemp);
+
+  
+
+
+      setWidth(meshTemp);
+
+      //update project file
+      const newMesh = projectFile.meshes[object.userData.idNumber];
+      newMesh.width = temp;
+    })
 
     if (getWidth) {
-      getWidth(temp);
+      getWidth(meshTemp);
     }
 
+    undoList.push(action);  
     setUndoList([...undoList]);
-    setAction(["width"]);
-
-    setWidth(temp);
-
-    //update project file
-    const newMesh = projectFile.meshes[object.userData.idNumber];
-    newMesh.width = temp;
+    setAction([["width"],[],[],[]]);
+    
 
     setProjectFile({ ...projectFile });
 
@@ -98,7 +133,7 @@ const WidthField = forwardRef(({
         <InputField
           className="small field-style"
           type="text"
-          value={width}
+          value={(!changes || matching) ? width : '-'}
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={(e) => {

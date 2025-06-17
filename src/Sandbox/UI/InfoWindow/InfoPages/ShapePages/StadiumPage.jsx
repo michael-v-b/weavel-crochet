@@ -78,7 +78,7 @@ const StadiumPage = ({ object }) => {
   return (
     <>
       <HeightField ref = {heightRef} objects={[object]}  getHeight = {handleHeight} />
-      <WidthField ref = {widthRef} object={object} getWidth={handleWidth} />
+      <WidthField ref = {widthRef} objects={[object]} getWidth={handleWidth} />
       <HalfField objects={[object]} getHalf = {handleHalf}/>
     </>
   );
