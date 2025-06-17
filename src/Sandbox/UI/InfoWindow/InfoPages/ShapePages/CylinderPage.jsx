@@ -10,7 +10,7 @@ import CircumField from "../InfoAttributes/CircumField";
 const CylinderPage = ({ object}) => {
   return (
     <>
-      <CircumField object={object} roundingNum = {0} />
+      <CircumField objects={[object]} roundingNum = {0} />
       <HeightField object={object} />
     </>
   );

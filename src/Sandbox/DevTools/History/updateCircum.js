@@ -3,28 +3,32 @@
      *@param {[{string}, {object}, {Number},{Number}]} action-
      *action[0] - name of action.
      *action[1] - object whose color changed.
-     *action[2] - old circum.
-     *action[3] - new circum.
-     *action[4] - old radius.
-     *action[5] - new radius. */
+     *action[2] - old radius.
+     *action[3] - new radius. 
+     *action[4] - old circum.
+     *action[5] - new circum.*/
+    
     const updateCircum = (action, projectFile) => {
-      const object = action[1];
-      const oldRadius = action[2];
-      const newRadius = action[3];
-      const oldCircum = action[4];
-      const newCircum = action[5];
+      const objects = action[1];
+      const oldRadii= action[2];
+      const newRadii = action[3];
+      const oldCircums = action[4];
+      const newCircums = action[5];
 
-      object.userData.meshData.setRadius(oldRadius);
-      object.userData.meshData.setCircum(oldCircum);
+      for(let i =0 ; i < objects.length;i++) {
+        objects[i].userData.meshData.setRadius(oldRadii[i]);
+        objects[i].userData.meshData.setCircum(oldCircums[i]);
 
-      const id = object.userData.idNumber;
+        const id = objects[i].userData.idNumber;
+        projectFile.meshes[id].circum = oldCircums[i];
+      }
 
-      projectFile.meshes[id].circum = oldCircum;
 
-      action[3] = oldRadius;
-      action[2] = newRadius;
-      action[4] = newCircum;
-      action[5] = oldCircum;
+
+      action[3] = oldRadii;
+      action[2] = newRadii;
+      action[4] = newCircums;
+      action[5] = oldCircums;
       //updateLists(action, isUndo);
       return action
     };

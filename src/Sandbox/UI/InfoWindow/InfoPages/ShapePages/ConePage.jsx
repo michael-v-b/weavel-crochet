@@ -63,7 +63,7 @@ const ConePage = ({ object }) => {
     <>
       <CircumField
         ref={circumRef}
-        object={object}
+        objects={[object]}
         getCircum={handleCircum}
         minCircum={6}
         roundingNum={0}

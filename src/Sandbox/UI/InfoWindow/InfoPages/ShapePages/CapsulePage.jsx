@@ -55,7 +55,7 @@ const CapsulePage = ({ object}) => {
     } 
   return (
     <>
-      <CircumField object={object} ref=  {circumRef} getCircum = {handleCircum} />
+      <CircumField objects={[object]} ref=  {circumRef} getCircum = {handleCircum} />
       <HeightField object={object} ref = {heightRef} getHeight=  {handleHeight}/>
     </>
   );

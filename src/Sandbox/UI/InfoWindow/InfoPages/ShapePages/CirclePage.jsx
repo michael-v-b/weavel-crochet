@@ -6,7 +6,7 @@ import CircumField from "../InfoAttributes/CircumField";
  * @returns {CircleField} - The circle field.
  */
 const CirclePage = ({ object }) => {
-  return <CircumField object={object} roundingNum = {8} />;
+  return <CircumField objects={[object]} roundingNum = {8} />;
 };
 
 export default CirclePage;

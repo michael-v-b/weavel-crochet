@@ -58,7 +58,7 @@ const SiloPage = ({ object }) => {
   };
   return (
     <>
-      <CircumField ref={circumRef} object={object} getCircum={handleCircum} />
+      <CircumField ref={circumRef} objects={[object]} getCircum={handleCircum} />
       <HeightField ref={heightRef} object={object} getHeight={handleHeight} />
     </>
   );
