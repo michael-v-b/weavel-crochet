@@ -6,7 +6,7 @@ import EyeSizeField from "../InfoAttributes/EyeSizeField";
  * @returns {CircumField} - CircumField.
  */
 const EyePage = ({  object }) => {
-  return <EyeSizeField  object={object} />;
+  return <EyeSizeField  objects={[object]} />;
 };
 
 export default EyePage;

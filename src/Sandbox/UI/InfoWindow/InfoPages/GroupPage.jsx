@@ -2,6 +2,7 @@ import NameField from "./InfoAttributes/NameField";
 import ColorField from "./InfoAttributes/ColorField";
 import CircumField from "./InfoAttributes/CircumField";
 import HeightField from "./InfoAttributes/HeightField";
+import EyeSizeField from "./InfoAttributes/EyeSizeField";
 import {motion} from 'framer-motion';
 import {useState,useEffect} from 'react';
 
@@ -10,17 +11,18 @@ const GroupPage = ({objects,deleterRef}) => {
 
   const CommonFields = () => {
     /**
-     * circum
+     * circum X
      * dim
      * size
      * width
-     * height
+     * height X
      * half
      */
 
     return <>
       {overlapping.includes('circum') && <CircumField objects = {objects}/>}
       {overlapping.includes('height') && <HeightField objects = {objects}/>}
+      {overlapping.includes('size') && <EyeSizeField objects = {objects}/>}
     </>
   }
 

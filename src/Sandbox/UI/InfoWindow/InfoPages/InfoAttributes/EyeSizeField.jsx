@@ -9,11 +9,12 @@ import InputField from "./InputField";
  * @returns {Component} - div with an input field that represents the object's width.
  */
 const EyeSizeField = forwardRef(({
-  object,
+  objects,
 },ref) => {
-  const [objectData, setObjectData] = useState(object.userData.meshData);
 
-  const [action, setAction] = useState(["size"]);
+  const [action, setAction] = useState([["size"],[],[],[]]);
+  const [matching, setMatching] = useState(true);
+  const [changed, setChanged] = useState(false);
   const setFocused = useStore((state) => state.setFocused);
   const undoList = useStore((state) => state.undoList);
   const setUndoList = useStore((state) => state.setUndoList);
@@ -21,14 +22,30 @@ const EyeSizeField = forwardRef(({
   const setProjectFile = useStore((state) => state.setProjectFile);
   const setWarningText = useStore((state)=>state.setWarningText);
 
-  const [size, setSize] = useState(objectData.size);
+  const [size, setSize] = useState("-");
 
-  const meshType = object.userData.meshType;
+  /**
+   * @returns true if all objects have same size, false if not
+   */
+  const testMatching = () => {
+    const temp = objects[0].userData.meshData.size;
+    for(let i = 0; i < objects.length;i++) {
+      if(temp != objects[i].userData.meshData.size) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  useEffect(()=>{
+    setMatching(testMatching());
+  },[objects,...objects.map(object => object.userData.meshData.size)]);
 
   useEffect(() => {
-    setObjectData(object.userData.meshData);
-    setSize(object.userData.meshData.size);
-  }, [object]);
+    if(testMatching() && !changed) {
+      setSize(objects[0].userData.meshData.size);
+    }
+  }, [objects,matching,size]);
 
   /**
    *updates the internal base when input field is edited.
@@ -43,6 +60,7 @@ const EyeSizeField = forwardRef(({
     } else {
       setSize(initNumber);
     }
+    setChanged(true);
   };
 
   /**
@@ -59,21 +77,26 @@ const EyeSizeField = forwardRef(({
     let temp = Math.min(30,Math.max(5, size));
 
 
-    action.push(object);
-    action.push(objectData.size);
-    action.push(temp);
+    objects.forEach(object => {
+
+      const objectData = object.userData.meshData;
+      action[1].push(object);
+      action[2].push(objectData.size);
+      action[3].push(temp);
+
+      objectData.setSize(temp);
+
+      setSize(temp);
+
+      //update project file
+      const newMesh = projectFile.meshes[object.userData.idNumber];
+      newMesh.size = temp;
+    })
+    
     undoList.push(action);
-
-    objectData.setSize(temp);
-
     setUndoList([...undoList]);
-    setAction(["size"]);
 
-    setSize(temp);
-
-    //update project file
-    const newMesh = projectFile.meshes[object.userData.idNumber];
-    newMesh.size = temp;
+    setAction([["size"],[],[],[]]);
 
     setProjectFile({ ...projectFile });
 
@@ -89,7 +112,7 @@ const EyeSizeField = forwardRef(({
         <InputField
           className="small field-style"
           type="text"
-          value={size}
+          value={(matching || changed) ? size : "-"}
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={(e) => {

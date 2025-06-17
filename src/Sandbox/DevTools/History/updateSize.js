@@ -10,17 +10,17 @@
      *action[3] - new size.
      */
 const updateSize = (action, projectFile) => {
-    const object = action[1];
-      const oldSize = action[2];
-      const newSize = action[3];
+    const objects = action[1];
+      const oldSizes = action[2];
+      const newSizes = action[3];
 
-      object.userData.meshData.setSize(oldSize);
-
-      const id = object.userData.idNumber;
-      projectFile.meshes[id].size = oldSize;
-
-      action[3] = oldSize;
-      action[2] = newSize;
+      for(let i =0; i < objects.length;i++) {
+        objects[i].userData.meshData.setSize(oldSizes[i]);
+        const id = objects[i].userData.idNumber;
+        projectFile.meshes[id].size = oldSizes[i];
+      }
+      action[3] = oldSizes;
+      action[2] = newSizes;
       //updateLists(action, isUndo);
       return action;
 }
