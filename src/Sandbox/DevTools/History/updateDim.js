@@ -8,21 +8,25 @@
      * action[4] - list of new dimensions.
      */
     const updateDim = (action,projectFile) => {
-      const object = action[1];
+      const objects = action[1];
       const dimensions = action[2];
       const oldDims = action[3];
       const newDims = action[4];
-      const objectData = object.userData.meshData;
 
-      objectData.setX(oldDims[0]);
-      objectData.setY(oldDims[1]);
+      for(let i =0 ; i< objects.length;i++) {
+        const object =  objects[i];
+        const objectData = object.userData.meshData;
 
-      if (dimensions == 3) {
-        objectData.setZ(oldDims[2]);
-      }
+        objectData.setX(oldDims[i][0]);
+        objectData.setY(oldDims[i][1]);
 
-      const id = object.userData.idNumber;
-      projectFile.meshes[id].dim = oldDims;
+        if (dimensions[i] == 3) {
+          objectData.setZ(oldDims[i][2]);
+        }
+
+        const id = object.userData.idNumber;
+        projectFile.meshes[id].dim = oldDims;
+    }
 
       action[3] = newDims;
       action[4] = oldDims;

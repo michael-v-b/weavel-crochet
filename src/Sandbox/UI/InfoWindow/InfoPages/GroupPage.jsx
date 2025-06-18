@@ -5,6 +5,7 @@ import HeightField from "./InfoAttributes/HeightField";
 import EyeSizeField from "./InfoAttributes/EyeSizeField";
 import HalfField from "./InfoAttributes/HalfField";
 import WidthField from "./InfoAttributes/WidthField";
+import DimField from "./InfoAttributes/DimField";
 import {motion} from 'framer-motion';
 import {useState,useEffect} from 'react';
 
@@ -16,7 +17,7 @@ const GroupPage = ({objects,deleterRef}) => {
      * circum X
      * dim
      * size X
-     * width
+     * width X
      * height X
      * half X
      */
@@ -25,6 +26,7 @@ const GroupPage = ({objects,deleterRef}) => {
       {overlapping.includes('circum') && <CircumField objects = {objects}/>}
       {overlapping.includes('height') && <HeightField objects = {objects}/>}
       {overlapping.includes('width') && <WidthField objects = {objects}/>}
+      {overlapping.includes('dim') && <DimField objects = {objects}/>}
       {overlapping.includes('size') && <EyeSizeField objects = {objects}/>}
       {overlapping.includes('isHalf') && <HalfField objects = {objects}/>}
     </>

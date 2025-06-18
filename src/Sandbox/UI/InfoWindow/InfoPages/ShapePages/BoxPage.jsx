@@ -8,7 +8,7 @@ import DimField from "../InfoAttributes/DimField";
 const BoxPage = ({ object }) => {
   return (
     <>
-      <DimField object={object} dimensions={3} />
+      <DimField objects={[object]} dimensions={3} />
     </>
   );
 };

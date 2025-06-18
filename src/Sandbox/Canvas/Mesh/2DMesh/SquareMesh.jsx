@@ -21,6 +21,8 @@ const SquareMesh = forwardRef(({ id, ...props }, ref) => {
   const [linked, setLinked] = useState(false);
   const dependencyList = [xDim,yDim];
 
+  const dimNum = 2;
+
   useEffect(() => {
     if(!meshLoading && projectFile.meshes[id]) {
       const newMesh = projectFile.meshes[id];
@@ -35,7 +37,7 @@ const SquareMesh = forwardRef(({ id, ...props }, ref) => {
       id={id}
       dependencyList = {dependencyList}
       meshType="square"
-      meshData={{ xDim, setX, yDim, setY, linked, setLinked, attributeList }}
+      meshData={{ xDim, setX, yDim, setY, linked, setLinked, attributeList,dimNum}}
       ref={ref}
       {...props}
     >

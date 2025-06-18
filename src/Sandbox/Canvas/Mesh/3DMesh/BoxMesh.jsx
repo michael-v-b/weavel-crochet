@@ -24,6 +24,8 @@ const BoxMesh = forwardRef(({ id, ...props }, ref) => {
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
 
+  const dimNum = 3;
+
   useEffect(() => {
     if(!meshLoading && projectFile.meshes[id]) {
       const newMesh = projectFile.meshes[id];
@@ -47,6 +49,7 @@ const BoxMesh = forwardRef(({ id, ...props }, ref) => {
         linked,
         setLinked,
         attributeList,
+        dimNum,
       }}
       id={id}
       ref={ref}
