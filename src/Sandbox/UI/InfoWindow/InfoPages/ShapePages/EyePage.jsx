@@ -5,8 +5,8 @@ import EyeSizeField from "../InfoAttributes/EyeSizeField";
  *  @property {Mesh} object - the ball whose info is being displayed.
  * @returns {CircumField} - CircumField.
  */
-const EyePage = ({  object }) => {
-  return <EyeSizeField  objects={[object]} />;
+const EyePage = ({ objects }) => {
+  return <EyeSizeField objects={objects} />;
 };
 
 export default EyePage;

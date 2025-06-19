@@ -7,11 +7,11 @@ import CircumField from "../InfoAttributes/CircumField";
  * @property {Mesh} object - the cylinder whose info is being displayed.
  * @returns {Component} - CircumField and HeightField.
  */
-const CylinderPage = ({ object}) => {
+const CylinderPage = ({ objects }) => {
   return (
     <>
-      <CircumField objects={[object]} roundingNum = {0} />
-      <HeightField objects={[object]} />
+      <CircumField objects={objects} roundingNum={0} />
+      <HeightField objects={objects} />
     </>
   );
 };

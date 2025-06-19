@@ -1,71 +1,63 @@
 import NameField from "./InfoAttributes/NameField";
 import ColorField from "./InfoAttributes/ColorField";
-import CircumField from "./InfoAttributes/CircumField";
-import HeightField from "./InfoAttributes/HeightField";
-import EyeSizeField from "./InfoAttributes/EyeSizeField";
-import HalfField from "./InfoAttributes/HalfField";
-import WidthField from "./InfoAttributes/WidthField";
-import DimField from "./InfoAttributes/DimField";
-import {motion} from 'framer-motion';
-import {useState,useEffect} from 'react';
+import BallPage from "./ShapePages/BallPage";
+import BoxPage from "./ShapePages/BoxPage";
+import ChainPage from "./ShapePages/ChainPage";
+import CirclePage from "./ShapePages/CirclePage";
+import EyePage from "./ShapePages/EyePage";
+import SquarePage from "./ShapePages/SquarePage";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
-const GroupPage = ({objects,deleterRef}) => {
-  const [overlapping,setOverlapping] = useState([]);
+const GroupPage = ({ objects, deleterRef }) => {
+  const [currentShape, setCurrentShape] = useState("none");
+
+  const shapePages = {
+    ball: BallPage,
+    box: BoxPage,
+    chain: ChainPage,
+    circle: CirclePage,
+    eye: EyePage,
+    square: SquarePage,
+  };
 
   const CommonFields = () => {
-    /**
-     * circum X
-     * dim
-     * size X
-     * width X
-     * height X
-     * half X
-     */
-
-    return <>
-      {overlapping.includes('circum') && <CircumField objects = {objects}/>}
-      {overlapping.includes('height') && <HeightField objects = {objects}/>}
-      {overlapping.includes('width') && <WidthField objects = {objects}/>}
-      {overlapping.includes('dim') && <DimField objects = {objects}/>}
-      {overlapping.includes('size') && <EyeSizeField objects = {objects}/>}
-      {overlapping.includes('isHalf') && <HalfField objects = {objects}/>}
-    </>
-  }
+    const ShapePage = shapePages[currentShape];
+    return <>{ShapePage && <ShapePage objects={objects} />};</>;
+  };
 
   /**
    * see which options are overlapping amongst all the objects
    */
-  useEffect(()=>{
-    //create initial overlapping array
-    let tempOverlapping = objects[0].userData.meshData.attributeList;
-
-    //iterate through each object, if an object doesn't have an attribute remove it from overlapping.
-    for(let i = 0; i < objects.length; i++) {
-      const attributeList = objects[i].userData.meshData.attributeList;
-      for(let j = 0; j < tempOverlapping.length;j++) {
-        if(!attributeList.includes(tempOverlapping[j])) {
-          tempOverlapping.splice(j,1);  
-        }
+  useEffect(() => {
+    let temp = objects[0].userData.meshType;
+    for (let i = 0; i < objects.length; i++) {
+      if (temp != objects[i].userData.meshType) {
+        temp = "none";
+        break;
       }
     }
+    setCurrentShape(temp);
+  }, [objects]);
 
-    setOverlapping([...tempOverlapping]);
-  },[objects]);
-
-  
+  useEffect(() => {
+    console.log(currentShape);
+  }, [currentShape]);
 
   return (
     <div>
-      <NameField objects = {objects}/>
-      <ColorField objects = {objects}/>
-      <CommonFields/>
-      <motion.div 
-          whileHover ={{scale:1.1}} 
-          whileTap = {{scale:0.9}} 
-          onClick = {()=>{
+      <NameField objects={objects} />
+      <ColorField objects={objects} />
+      <CommonFields />
+      <motion.div
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => {
           deleterRef.current.deleteMeshes(objects);
         }}
-                className= "delete-button selectable">Delete
+        className="delete-button selectable"
+      >
+        Delete
       </motion.div>
     </div>
   );

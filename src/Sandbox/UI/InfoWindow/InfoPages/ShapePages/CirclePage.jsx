@@ -5,8 +5,8 @@ import CircumField from "../InfoAttributes/CircumField";
  * @property {Mesh} object - The circle whose info is being displayed.
  * @returns {CircleField} - The circle field.
  */
-const CirclePage = ({ object }) => {
-  return <CircumField objects={[object]} roundingNum = {8} />;
+const CirclePage = ({ objects }) => {
+  return <CircumField objects={objects} roundingNum={8} />;
 };
 
 export default CirclePage;

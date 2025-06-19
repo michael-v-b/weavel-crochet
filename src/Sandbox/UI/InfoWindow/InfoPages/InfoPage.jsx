@@ -14,8 +14,8 @@ import SiloPage from "./ShapePages/SiloPage";
 import ChainPage from "./ShapePages/ChainPage";
 import TrianglePage from "./ShapePages/TrianglePage";
 import EyePage from "./ShapePages/EyePage";
-import {useEffect} from 'react';
-import {motion} from 'framer-motion'
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 /**
  *@typedef {InfoPage} - provides all of the information inside of the info window.
@@ -42,23 +42,22 @@ const InfoPage = ({ object, deleterRef, meshType }) => {
   };
   const MeshType = shapePages[meshType];
 
-
-
-
   return (
     <div>
       <NameField objects={[object]} />
       <PositionField object={object} />
       <RotationField object={object} />
       <ColorField objects={[object]} />
-      {MeshType && <MeshType object={object} />}
-      <motion.div 
-          whileHover ={{scale:1.1}} 
-          whileTap = {{scale:0.9}} 
-          onClick = {()=>{
+      {MeshType && <MeshType objects={[object]} />}
+      <motion.div
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => {
           deleterRef.current.deleteMeshes([object]);
         }}
-                className= "delete-button selectable">Delete
+        className="delete-button selectable"
+      >
+        Delete
       </motion.div>
     </div>
   );

@@ -4,10 +4,10 @@ import DimField from "../InfoAttributes/DimField";
  * @property {Mesh} object - the square whose info is being displayed.
  * @returns {Component} - DimField.
  */
-const SquarePage = ({ object }) => {
+const SquarePage = ({ objects }) => {
   return (
     <>
-      <DimField objects={[object]} dimensions={2} />
+      <DimField objects={objects} dimensions={2} />
     </>
   );
 };

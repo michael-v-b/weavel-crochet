@@ -5,10 +5,10 @@ import DimField from "../InfoAttributes/DimField";
  * @property {Mesh} object - the box whose info is being displayed.
  * @property {DimField} - Dimfield.
  */
-const BoxPage = ({ object }) => {
+const BoxPage = ({ objects }) => {
   return (
     <>
-      <DimField objects={[object]} dimensions={3} />
+      <DimField objects={objects} dimensions={3} />
     </>
   );
 };
