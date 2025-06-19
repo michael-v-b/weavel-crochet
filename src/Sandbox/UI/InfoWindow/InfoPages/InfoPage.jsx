@@ -45,6 +45,7 @@ const InfoPage = ({ object, deleterRef, meshType }) => {
   return (
     <div>
       <NameField objects={[object]} />
+      <></>
       <PositionField object={object} />
       <RotationField object={object} />
       <ColorField objects={[object]} />

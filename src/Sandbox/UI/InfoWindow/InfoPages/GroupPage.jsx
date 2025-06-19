@@ -6,6 +6,11 @@ import ChainPage from "./ShapePages/ChainPage";
 import CirclePage from "./ShapePages/CirclePage";
 import EyePage from "./ShapePages/EyePage";
 import SquarePage from "./ShapePages/SquarePage";
+import CapsulePage from "./ShapePages/CapsulePage";
+import ConePage from "./ShapePages/ConePage";
+import SiloPage from "./ShapePages/SiloPage";
+import StadiumPage from "./ShapePages/StadiumPage";
+import TrianglePage from "./ShapePages/TrianglePage";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -19,6 +24,11 @@ const GroupPage = ({ objects, deleterRef }) => {
     circle: CirclePage,
     eye: EyePage,
     square: SquarePage,
+    capsule: CapsulePage,
+    cone: ConePage,
+    silo: SiloPage,
+    stadium: StadiumPage,
+    triangle: TrianglePage,
   };
 
   const CommonFields = () => {
@@ -39,10 +49,6 @@ const GroupPage = ({ objects, deleterRef }) => {
     }
     setCurrentShape(temp);
   }, [objects]);
-
-  useEffect(() => {
-    console.log(currentShape);
-  }, [currentShape]);
 
   return (
     <div>

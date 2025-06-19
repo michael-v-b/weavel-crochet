@@ -15,10 +15,10 @@ const CircumferenceField = forwardRef(
 
     const [circum, setCircum] = useState(-1);
     //action, objects, old radii, new radii,old circum, new circum
-    const [action, setAction] = useState([["circum"],[],[],[],[],[]]);
-    const [changed,setChanged] = useState(false);
-    const [matching,setMatching] = useState(true);
-    
+    const [action, setAction] = useState([["circum"], [], [], [], [], []]);
+    const [changed, setChanged] = useState(false);
+    const [matching, setMatching] = useState(true);
+
     const setFocused = useStore((state) => state.setFocused);
     const undoList = useStore((state) => state.undoList);
     const setUndoList = useStore((state) => state.setUndoList);
@@ -34,25 +34,25 @@ const CircumferenceField = forwardRef(
      */
     const testMatching = () => {
       const temp = objects[0].userData.meshData.circum;
-      for(let i= 0; i < objects.length;i++) {
-        if(objects[i].userData.meshData.circum != temp) {
+      for (let i = 0; i < objects.length; i++) {
+        if (objects[i].userData.meshData.circum != temp) {
           return false;
         }
       }
       return true;
-    }
+    };
 
     //sets matching based on all the values
-    useEffect(()=>{
+    useEffect(() => {
       setMatching(testMatching());
-    },[objects,...objects.map(object => object.userData.meshData.circum)]);
+    }, [objects, ...objects.map((object) => object.userData.meshData.circum)]);
 
     //changes circum based on objects changing
     useEffect(() => {
-      if(objects && testMatching() && !changed) {
+      if (objects && testMatching() && !changed) {
         setCircum(objects[0].userData.meshData.circum);
       }
-    }, [objects,circum,matching]);
+    }, [objects, circum, matching]);
 
     /**
      * When input field is changed, update the circum accordingly
@@ -74,8 +74,7 @@ const CircumferenceField = forwardRef(
      */
 
     const roundCircum = (tempCircum) => {
-      
-       if (tempCircum < 3 && (roundingNum == 8 || roundingNum == 0)) {
+      if (tempCircum < 3 && (roundingNum == 8 || roundingNum == 0)) {
         setWarningText("Circumference must be at minimum " + minCircum);
       }
 
@@ -98,8 +97,7 @@ const CircumferenceField = forwardRef(
       }
 
       return roundedCircum;
-
-    }
+    };
 
     /**
      * Calculates radius given current circum.
@@ -127,19 +125,17 @@ const CircumferenceField = forwardRef(
      * Set focused stated to false and updates the radius in the scene.
      */
     const handleBlur = () => {
-      if(!changed) {
+      if (!changed) {
         return;
       }
       const roundedCircum = roundCircum(circum);
-      
+
       setCircum(roundedCircum);
 
       objects.forEach((object) => {
-          
         object.userData.meshData.setRadius(findRadius(roundedCircum));
         object.userData.meshData.setCircum(roundedCircum);
 
-        
         action[1].push(object);
         action[2].push(object.userData.meshData.radius);
         action[4].push(object.userData.meshData.circum);
@@ -147,7 +143,7 @@ const CircumferenceField = forwardRef(
 
         const newMesh = projectFile.meshes[object.userData.idNumber];
         newMesh.circum = roundedCircum;
-      })
+      });
 
       //save project
       setProjectFile({ ...projectFile });
@@ -155,14 +151,13 @@ const CircumferenceField = forwardRef(
       //save undo list
       undoList.push(action);
       setUndoList([...undoList]);
-      setAction([["circum"],[],[],[],[],[]]);
+      setAction([["circum"], [], [], [], [], []]);
 
       //reset
       setFocused(false);
     };
 
     useImperativeHandle(ref, () => ({ circum, setCircum, findRadius }));
-
 
     return (
       <>
@@ -171,7 +166,7 @@ const CircumferenceField = forwardRef(
           <InputField
             className="attribute small field-style"
             type="text"
-            value={( matching || changed) ? circum : "-"}
+            value={matching || changed ? circum : "-"}
             onFocus={handleFocused}
             onBlur={handleBlur}
             onChange={handleChange}
