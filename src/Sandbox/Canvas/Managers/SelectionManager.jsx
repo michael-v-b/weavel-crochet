@@ -59,7 +59,7 @@ const SelectionManager = forwardRef((_, ref) => {
     } else {
       object.userData.setSelected(false);
       let objectIndex = tempSelectedList.indexOf(object);
-      tempSelectedList.splice(objectIndex);
+      tempSelectedList.splice(objectIndex,1);
       tempSelectedList = [
         ...tempSelectedList.slice(0, objectIndex),
         ...tempSelectedList.slice(objectIndex + 1),
@@ -137,6 +137,7 @@ const SelectionManager = forwardRef((_, ref) => {
       }
     }
   };
+  
 
   useImperativeHandle(ref, () => ({
     handleSelections,

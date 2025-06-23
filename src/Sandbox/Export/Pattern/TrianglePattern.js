@@ -1,4 +1,4 @@
-import insertEyes from "./insertEyes";
+import insertEyes from "../insertEyes";
 
 const TrianglePattern = (object, eyeList) => {
   const objectData = object.userData.meshData;

@@ -11,6 +11,7 @@ import ChainMesh from "../Mesh/2DMesh/ChainMesh";
 import TriangleMesh from "../Mesh/2DMesh/TriangleMesh";
 import EyeMesh from "../Mesh/2DMesh/EyeMesh";
 
+
 import React, {
   useState,
   forwardRef,
@@ -38,6 +39,7 @@ const MeshSpawner = forwardRef((_, ref) => {
   const OBJECT_LIMIT = useStore((state) => state.OBJECT_LIMIT);
   const projectFile = useStore((state) => state.projectFile);
   const setWarningText = useStore((state)=>state.setWarningText);
+  const meshList = useStore((state)=>state.meshList);
 
   // list of all shapeComponents and the values of their meshTypes
   // add shape here when creating a new shape
@@ -178,6 +180,7 @@ const MeshSpawner = forwardRef((_, ref) => {
     handleMeshes();
   }, [meshes]);
 
+
   return (
     <>
       {meshes.map((valuePair) => {
@@ -195,9 +198,7 @@ const MeshSpawner = forwardRef((_, ref) => {
             ref={meshRef}
             key={id}
             id={id}
-            name={
-              shapeComponents[shape] ? capitalName : shape + " not implemented"
-            }
+            name={shapeComponents[shape] ? capitalName : shape + " not implemented"}
             hierarchyRef={cellRef}
             colorList={colorList}
             position={[0, 1, 0]}

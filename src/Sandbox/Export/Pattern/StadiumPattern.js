@@ -1,5 +1,5 @@
 
-import insertEyes from "./insertEyes";
+import insertEyes from "../insertEyes";
 
 /**
  * @typedef {StadiumPattern} - lists the instructions for the pattern the stadium object.

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import useStore from "../../../../DevTools/store";
 import InputField from "./InputField";
 
+import checkName from "../../../../DevTools/CheckName";
+
 /**
  * @typedef {NameField} - Input field used to edit an object's name.
  * @property {[Object]} objects - object whose name is being changed.
@@ -18,6 +20,7 @@ const NameField = ({ objects }) => {
   const setUndoList = useStore((state) => state.setUndoList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
+  const meshList = useStore((state)=>state.meshList);
 
   //check if all objects have the same name
   useEffect(() => {
@@ -67,6 +70,8 @@ const NameField = ({ objects }) => {
       return;
     }
 
+    let tempName = checkName(name,meshList);
+
     //update action for undoList
     action.push(objects);
     action.push([]);
@@ -77,14 +82,14 @@ const NameField = ({ objects }) => {
     objects.forEach((object)=>{
       
       action[2].push(object.name);
-      action[3].push(name);
+      action[3].push(tempName);
 
-      object.userData.cellRef.current.setName(name);
-      object.name = name;
+      object.userData.cellRef.current.setName(tempName);
+      object.name = tempName;
 
       //update project file
       const newMesh = projectFile.meshes[object.userData.idNumber];
-      newMesh.name = name;
+      newMesh.name = tempName;
     })
 
     //update undoList

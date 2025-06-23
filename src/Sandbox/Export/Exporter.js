@@ -1,18 +1,24 @@
-import BallPattern from "./BallPattern";
-import BoxPattern from "./BoxPattern";
-import SquarePattern from "./SquarePattern";
-import CirclePattern from "./CirclePattern";
-import CylinderPattern from "./CylinderPattern";
-import ConePattern from "./ConePattern";
-import CapsulePattern from "./CapsulePattern";
-import ChainPattern from "./ChainPattern";
-import SiloPattern from "./SiloPattern";
-import TrianglePattern from "./TrianglePattern";
-import StadiumPattern from "./StadiumPattern";
+import BallPattern from "./Pattern/BallPattern";
+import BoxPattern from "./Pattern/BoxPattern";
+import SquarePattern from "./Pattern/SquarePattern";
+import CirclePattern from "./Pattern/CirclePattern";
+import CylinderPattern from "./Pattern/CylinderPattern";
+import ConePattern from "./Pattern/ConePattern";
+import CapsulePattern from "./Pattern/CapsulePattern";
+import ChainPattern from "./Pattern/ChainPattern";
+import SiloPattern from "./Pattern/SiloPattern";
+import TrianglePattern from "./Pattern/TrianglePattern";
+import StadiumPattern from "./Pattern/StadiumPattern";
+
+import Title from "./Title";
+import Disclaimer from "./Disclaimer";
+import Summary from "./Summary";
+import EyeTracker from "../DevTools/EyeTracker";
+
 import { forwardRef, useImperativeHandle } from "react";
 import { jsPDF } from "jspdf";
 import useStore from "../DevTools/store";
-import EyeTracker from "../DevTools/EyeTracker";
+
 import banner from "../../assets/banner.png";
 
 
@@ -159,54 +165,22 @@ const Exporter = forwardRef((_, ref) => {
 
     doc.setFont("Helvetica", "bold");
 
+    //DISCLAIMER//////////////////////////////////////
     doc.setTextColor(255, 90, 90);
-    doc.text(
-      "DISCLAIMER: The size estimation is a loose approximation. There are many ",
-      10,
-      row
-    );
+
+    Disclaimer().forEach((line) => {
+      doc.text(line,10,row);
+      addRow(10,doc);
+    })
     addRow(10, doc);
 
-    doc.text(
-      "factors the size of a pattern including the yarn weight, tension and hook size.",
-      10,
-      row
-    );
-    addRow(10, doc);
-
-    doc.text(
-      "For the best use results, use the recommended materials.",
-      10,
-      row
-    );
-    addRow(20, doc);
-
-    //DISCLAIMER
+    //SUMMARY////////////////////////////////////////////
     doc.setTextColor(120, 165, 206);
 
-    doc.text(
-      "Thank you for using the Weavel Pattern Generator to create your custom ",
-      10,
-      row
-    );
-    addRow(10, doc);
-    doc.text(
-      "crochet pattern! Simply follow the instructions below to create each piece, then",
-      10,
-      row
-    );
-    addRow(10, doc);
-    doc.text(
-      "sew all the pieces together as you had them in your project. ",
-      10,
-      row
-    );
-    addRow(10, doc);
-    doc.text(
-      "If you have any questions, please refer to the color and stitch keys below.",
-      10,
-      row
-    );
+    Summary().forEach((line)=>{
+      doc.text(line,10,row);
+      addRow(10);
+    })
 
     addRow(10, doc);
 
@@ -283,15 +257,8 @@ const Exporter = forwardRef((_, ref) => {
 
         addRow(14, doc);
 
-        //Object Title Back
-        doc.setFillColor(191, 237, 245);
-        doc.roundedRect(10, row - 7, 100, 10, 5, 5, "F");
         //Object Title
-        doc.setFont("Helvetica", "bold");
-        doc.setTextColor(120, 165, 206);
-        doc.text(object.name + ": ", 20, row);
-        doc.setTextColor(0, 0, 0);
-        doc.setFont("Helvetica", "normal");
+        Title(doc,object.name,row);
 
         addRow(14, doc);
 
@@ -314,6 +281,13 @@ const Exporter = forwardRef((_, ref) => {
       }
       printToDoc(stringList, doc);
     }
+
+    doc.setDrawColor(120, 165, 206);
+    doc.line(10, row, pageWidth - 10, row);
+    
+    addRow(14,doc);
+    
+    Title(doc,"Finishing",row);
 
     //doc.text("Sew all pieces together",row);
 

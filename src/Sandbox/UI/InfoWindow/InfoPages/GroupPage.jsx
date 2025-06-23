@@ -52,7 +52,9 @@ const GroupPage = ({ objects, deleterRef }) => {
 
   return (
     <div>
+      {/*removed because of name overlap functionality
       <NameField objects={objects} />
+      */}
       <ColorField objects={objects} />
       <CommonFields />
       <motion.div

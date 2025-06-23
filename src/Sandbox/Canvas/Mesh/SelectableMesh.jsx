@@ -6,6 +6,8 @@ import MeshVisuals from "./MeshVisuals";
 import { computeBoundsTree } from "three-mesh-bvh";
 import useStore from "../../DevTools/store";
 
+import checkName from '../../DevTools/CheckName';
+
 /**
  *@typedef {SelectableMesh} - creates a mesh that can be selected or deselected.
  *@property {String} meshType - name of the type of mesh being created
@@ -46,7 +48,7 @@ const SelectableMesh = forwardRef(
 
     const { camera } = useThree();
 
-    const isIntersecting = useStore((state) => state.isIntersecting);
+    const meshList = useStore((state)=>state.meshList);
 
     BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
 
@@ -62,6 +64,10 @@ const SelectableMesh = forwardRef(
      * update outline weight of mesh when selected.
      *run every time selected changes.
      */
+
+     useEffect(()=>{
+        ref.current.name = checkName(ref.current.name,meshList);
+     },[])
 
     //change for draggability
     return (
