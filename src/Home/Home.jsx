@@ -182,26 +182,23 @@ const Home = () => {
 
           </div>
         </motion.div>
-        
-        <div className=  "download-container">
-          <div className = "download-title">No Downloads. No Installations.</div>
-          <div className = "download-text">Just create an account and get stitching!</div>
-        </div>
+    
 
         {/*SCROLL ////////////////////////////////////////////////*/}
-        <div className="trial-error"> NO MORE TRIAL AND ERROR</div>
+        <div className="trial-error"> No downloads, no installations, No more trial and error!</div>
+        <div className="trial-error">Just create an account and get stitching!</div>
 
         <InfiniteScroll/>
 
 
-        <div className="change-prop-text">
+       {/* <div className="change-prop-text">
           {" "}
           Change proportions with the click of a button{" "}
         </div>
 
 
         <div className="change-prop-img" />
-        <div style={{ position: "absolute", bottom: "-265vh" }}> FOOTER </div>
+        <div style={{ position: "absolute", bottom: "-265vh" }}> FOOTER </div>*/}
       </div>
     </>
   );

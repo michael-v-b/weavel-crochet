@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 400vh;
+  height: 350vh;
   width: var(--webpage-width);
   z-index: 1;
   background-color: rgb(228, 246, 255);
@@ -82,6 +82,7 @@
   align-items:center;
   justify-content:center;
   margin-top: 20vh;
+  margin-bottom:20vh;
   width: var(--webpage-width);
   height: 80vh;
 }
@@ -156,7 +157,6 @@
 
 
 .trial-error {
-  margin-top: 20vh;
   font-size: 3vw;
   margin-bottom: 3%;
   text-align: center;

@@ -160,7 +160,7 @@ const Projects = () => {
 
   const deleteProject = (i) => {
       const project_id = projectNames[i][1];
-      projectNames.splice(i);
+      projectNames.splice(i,1);
       setProjectNames([...projectNames]);
       projectManagerRef.current.removeProject(project_id);
   }
