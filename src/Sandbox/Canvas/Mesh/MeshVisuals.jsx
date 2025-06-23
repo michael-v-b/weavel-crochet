@@ -59,8 +59,8 @@ const MeshVisuals = forwardRef(({hitboxRef,selected, dependencyList,colorIndex},
 
     useEffect(()=>{
         setOutlineWeight(selected ?  5 : 1);
-        setOutlineColor(selected ? "#ff8800": 'black');
-    },[selected]);
+        setOutlineColor(selected ? isIntersecting ? '#12d443' : "#ff8800": 'black');
+    },[selected,isIntersecting]);
 
 
 

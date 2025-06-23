@@ -35,7 +35,7 @@ const SiloPage = ({ objects }) => {
 
       ("set circum from handleHeight");
       circumRef.current.setCircum(temp);
-      objectData.setCircucm(temp);
+      objectData.setCircum(temp);
       objectData.setRadius(circumRef.current.findRadius(temp));
       objectFile.circum = temp;
     });

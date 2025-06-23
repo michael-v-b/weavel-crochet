@@ -113,7 +113,7 @@ const HeightField = forwardRef(({
 
     undoList.push(action);
     setUndoList([...undoList]);
-    setAction(["height"]);
+    setAction([["height"],[],[],[]]);
 
 
     setProjectFile({ ...projectFile });
