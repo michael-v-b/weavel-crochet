@@ -100,6 +100,8 @@ const Sandbox = () => {
 
   //updates file when change occurs but only if projectId is correct.
   useEffect(() => {
+    console.log("projectFile");
+    console.dir(projectFile);
     if (cameraTrackerRef?.current) {
       const cameraPosition = cameraTrackerRef.current.getCameraPosition();
       const cameraRotation = cameraTrackerRef.current.getCameraRotation();

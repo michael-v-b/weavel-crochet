@@ -13,6 +13,7 @@ const updateMesh = (meshRef, saveData, circum_radius_convert) => {
 
   const userData = meshRef.current.userData;
   //UNIVERSAL ATTRIBUTES
+  
   // name
   meshRef.current.name = saveData.name;
   //position

@@ -37,6 +37,7 @@ const SelectableMesh = forwardRef(
     const [selected, setSelected] = useState(false);
 
     const [colorIndex, setColorIndex] = useState(1);
+    
     const bvhRef = useRef(null);
     const visualRef = useRef(null);
     const cellRef = useRef(hierarchyRef);
@@ -49,6 +50,8 @@ const SelectableMesh = forwardRef(
     const { camera } = useThree();
 
     const meshList = useStore((state)=>state.meshList);
+    const projectFile = useStore((state)=>state.projectFile);
+    const setProjectFile = useStore((state)=>state.setProjectFile);
 
     BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
 
@@ -66,7 +69,14 @@ const SelectableMesh = forwardRef(
      */
 
      useEffect(()=>{
-        ref.current.name = checkName(ref.current.name,meshList);
+      const newName = checkName(ref.current.name,meshList);
+        
+        if(newName != ref.current.name) {
+          
+          ref.current.name = newName; 
+          projectFile.meshes[ref.current.userData.idNumber].name = newName;
+          setProjectFile({...projectFile});
+        }
      },[])
 
     //change for draggability

@@ -13,6 +13,8 @@ import StadiumPattern from "./Pattern/StadiumPattern";
 import Title from "./Title";
 import Disclaimer from "./Disclaimer";
 import Summary from "./Summary";
+import Finishing from "./Finishing";
+
 import EyeTracker from "../DevTools/EyeTracker";
 
 import { forwardRef, useImperativeHandle } from "react";
@@ -287,7 +289,10 @@ const Exporter = forwardRef((_, ref) => {
     
     addRow(14,doc);
     
+    //Finishing ////////////////////
     Title(doc,"Finishing",row);
+    
+    Finishing(meshList);
 
     //doc.text("Sew all pieces together",row);
 
