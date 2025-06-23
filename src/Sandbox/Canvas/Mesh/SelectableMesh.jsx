@@ -6,7 +6,7 @@ import MeshVisuals from "./MeshVisuals";
 import { computeBoundsTree } from "three-mesh-bvh";
 import useStore from "../../DevTools/store";
 
-import checkName from '../../DevTools/CheckName';
+import checkName from "../../DevTools/checkName";
 
 /**
  *@typedef {SelectableMesh} - creates a mesh that can be selected or deselected.
@@ -37,7 +37,7 @@ const SelectableMesh = forwardRef(
     const [selected, setSelected] = useState(false);
 
     const [colorIndex, setColorIndex] = useState(1);
-    
+
     const bvhRef = useRef(null);
     const visualRef = useRef(null);
     const cellRef = useRef(hierarchyRef);
@@ -49,9 +49,9 @@ const SelectableMesh = forwardRef(
 
     const { camera } = useThree();
 
-    const meshList = useStore((state)=>state.meshList);
-    const projectFile = useStore((state)=>state.projectFile);
-    const setProjectFile = useStore((state)=>state.setProjectFile);
+    const meshList = useStore((state) => state.meshList);
+    const projectFile = useStore((state) => state.projectFile);
+    const setProjectFile = useStore((state) => state.setProjectFile);
 
     BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
 
@@ -68,16 +68,15 @@ const SelectableMesh = forwardRef(
      *run every time selected changes.
      */
 
-     useEffect(()=>{
-      const newName = checkName(ref.current.name,meshList);
-        
-        if(newName != ref.current.name) {
-          
-          ref.current.name = newName; 
-          projectFile.meshes[ref.current.userData.idNumber].name = newName;
-          setProjectFile({...projectFile});
-        }
-     },[])
+    useEffect(() => {
+      const newName = checkName(ref.current.name, meshList);
+
+      if (newName != ref.current.name) {
+        ref.current.name = newName;
+        projectFile.meshes[ref.current.userData.idNumber].name = newName;
+        setProjectFile({ ...projectFile });
+      }
+    }, []);
 
     //change for draggability
     return (

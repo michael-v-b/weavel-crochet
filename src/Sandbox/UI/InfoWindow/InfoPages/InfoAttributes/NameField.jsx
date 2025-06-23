@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useStore from "../../../../DevTools/store";
 import InputField from "./InputField";
 
-import checkName from "../../../../DevTools/CheckName";
+import checkName from "../../../../DevTools/checkName";
 
 /**
  * @typedef {NameField} - Input field used to edit an object's name.
@@ -11,38 +11,36 @@ import checkName from "../../../../DevTools/CheckName";
  * @returns {Component} - input field that takes a string which represents the object's name.
  */
 const NameField = ({ objects }) => {
-
   const [action, setAction] = useState(["name"]);
   const [name, setName] = useState("-");
-  const [changed,setChanged] = useState(false);
+  const [changed, setChanged] = useState(false);
   const setFocused = useStore((state) => state.setFocused);
   const undoList = useStore((state) => state.undoList);
   const setUndoList = useStore((state) => state.setUndoList);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const meshList = useStore((state)=>state.meshList);
+  const meshList = useStore((state) => state.meshList);
 
   //check if all objects have the same name
   useEffect(() => {
-    if(!objects) {
+    if (!objects) {
       return;
     }
     const temp = objects[0].name;
     let matches = true;
 
-    for(let i = 0; i < objects.length;i++) {
-      if(objects[i].name != temp) {
+    for (let i = 0; i < objects.length; i++) {
+      if (objects[i].name != temp) {
         matches = false;
         break;
       }
     }
 
-    if(matches) {
+    if (matches) {
       setName(temp);
     } else {
       setName("-");
     }
-    
   }, [objects]);
 
   /**
@@ -65,22 +63,20 @@ const NameField = ({ objects }) => {
    * updates the object's name after deselecting.
    */
   const handleBlur = () => {
-    if(!changed){
+    if (!changed) {
       setFocused(false);
       return;
     }
 
-    let tempName = checkName(name,meshList);
+    let tempName = checkName(name, meshList);
 
     //update action for undoList
     action.push(objects);
     action.push([]);
     action.push([]);
-  
 
     //actually change name
-    objects.forEach((object)=>{
-      
+    objects.forEach((object) => {
       action[2].push(object.name);
       action[3].push(tempName);
 
@@ -90,15 +86,13 @@ const NameField = ({ objects }) => {
       //update project file
       const newMesh = projectFile.meshes[object.userData.idNumber];
       newMesh.name = tempName;
-    })
+    });
 
     //update undoList
     undoList.push(action);
     setUndoList(...[undoList]);
     setAction(["name"]);
 
-
-    
     setProjectFile({ ...projectFile });
 
     setFocused(false);
