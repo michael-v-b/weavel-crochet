@@ -291,8 +291,19 @@ const Exporter = forwardRef((_, ref) => {
     
     //Finishing ////////////////////
     Title(doc,"Finishing",row);
-    
-    Finishing(meshList);
+
+    addRow(14,doc);
+    const finishing = Finishing(meshList);
+    for(let i = 0; i < finishing.length;i++) {
+      printToDoc(finishing[i],doc);
+
+      
+      if(i < finishing.length-1) { //prevent line on last entry
+        doc.line(10,row,pageWidth -10,row);
+        addRow(14,doc);
+      }
+    }
+
 
     //doc.text("Sew all pieces together",row);
 
