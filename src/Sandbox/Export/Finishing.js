@@ -84,7 +84,7 @@ const Finishing = (meshList) => {
             const larger = testSize(baseMesh,connectedMesh).name;
             const smaller = connections[j] == larger ? baseObject : connections[j];
 
-            temp.push("- sew " + smaller + " onto " + larger);
+            temp.push("- Sew " + smaller + " onto " + larger);
         }
         if(temp.length > 1) {
             output.push(temp);
