@@ -52,13 +52,6 @@ const TransformWindow = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (keysPressed.includes("KeyT") && !isFocused) {
-      handleClick(0);
-    } else if (keysPressed.includes("KeyR") && !isFocused) {
-      handleClick(1);
-    }
-  }, [keysPressed]);
 
   return (
     <>
