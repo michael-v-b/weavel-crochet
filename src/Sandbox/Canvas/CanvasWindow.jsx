@@ -10,6 +10,7 @@ import Deleter from "./Managers/Deleter";
 import IntersectionManager from "./Managers/IntersectionManager";
 import History from "../DevTools/History/History";
 import SizeManager from "./Managers/SizeManager";
+import Screenshotter from "../DevTools/Screenshotter";
 
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import useStore from "../DevTools/store";
@@ -33,6 +34,7 @@ const CanvasWindow = forwardRef(
       meshSpawnerRef,
       cameraTrackerRef,
       children,
+      screenshotRef,
     },
     ref
   ) => {
@@ -45,7 +47,6 @@ const CanvasWindow = forwardRef(
     const [pendingPointerEvent,setPendingPointerEvent] = useState(null);
 
     const raycasterRef = useRef(null);
-    const canvasRef = useRef(null);
     const toolManagerRef = useRef(null);
     const intersectionManagerRef = useRef(null);
     const rotaterRef = useRef(null);
@@ -126,7 +127,6 @@ const CanvasWindow = forwardRef(
 
     return (
       <Canvas
-        ref={canvasRef}
         onPointerDown={handleClick}
         shadows={true}
         style={{
@@ -139,6 +139,7 @@ const CanvasWindow = forwardRef(
         }}
       >
         <SizeManager/>
+        <Screenshotter ref = {screenshotRef}/>
 
         <IntersectionManager ref = {intersectionManagerRef} />
         <History

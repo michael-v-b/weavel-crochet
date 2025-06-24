@@ -34,6 +34,7 @@ import supabase from "../supabase";
 const Sandbox = () => {
   const selectionManagerRef = useRef(null);
   const canvasRef = useRef(null);
+  const screenshotRef = useRef(null);
   const meshSpawnerRef = useRef(null);
   const hierarchyRef = useRef(null);
   const exporterRef = useRef(null);
@@ -100,8 +101,6 @@ const Sandbox = () => {
 
   //updates file when change occurs but only if projectId is correct.
   useEffect(() => {
-    console.log("projectFile");
-    console.dir(projectFile);
     if (cameraTrackerRef?.current) {
       const cameraPosition = cameraTrackerRef.current.getCameraPosition();
       const cameraRotation = cameraTrackerRef.current.getCameraRotation();
@@ -141,7 +140,7 @@ const Sandbox = () => {
         <AuthTester reroute={"/"} />
         <NameTag />
         <div className="sandbox">
-          <Exporter ref={exporterRef} />
+          <Exporter ref={exporterRef} screenshotRef = {screenshotRef}/>
           <KeyTracker />
 
           <div className="left-window">
@@ -154,6 +153,7 @@ const Sandbox = () => {
             {!meshLoading && !nameLoading && <ProjectDim/>}
             <CanvasWindow
               ref={canvasRef}
+              screenshotRef = {screenshotRef}
               historyRef={historyRef}
               deleterRef = {deleterRef}
               selectionManagerRef={selectionManagerRef}
