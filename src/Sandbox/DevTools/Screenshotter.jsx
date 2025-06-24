@@ -8,7 +8,7 @@ const Screenshotter = forwardRef(({},ref)=> {
     const takeScreenshot = () => {
         gl.render(scene,camera);
 
-        return gl.domElement.toDataURL('image/png',0.5);
+        return gl.domElement.toDataURL('image/png');
     }
 
     useImperativeHandle(ref,()=>({takeScreenshot}));
