@@ -12,7 +12,8 @@ import "./Home.css";
 const Home = () => {
   const [bubblePlayed, setBubblePlayed] = useState(false);
   const BUBBLE_SIZE = 30;
-  const BUBBLE_RATIO = 0.5;
+  const [onPhone,setOnPhone] = useState(window.innerWidth < 480);
+  const BUBBLE_RATIO = onPhone ? 0.7 : .5;
   const BUBBLE_DELAY = 0.7;
   const heroSpace = useAnimation();
   const heroText = useAnimation();
@@ -25,6 +26,25 @@ const Home = () => {
     stiffness: 100,
     boune: 2,
   };
+
+  useEffect(()=>{
+    console.log(window.width);
+    console.log("onPhone: " + onPhone);
+  },[onPhone]);
+
+    useEffect(()=>{
+    const handleResize = () => {
+      if(window.innerHeight > 480) {
+        setOnPhone(false);
+      } else {
+        setOnPhone(true);
+      }
+    }
+    handleResize();
+    window.addEventListener('resize',handleResize);
+
+    return () => {window.removeEventListener('resize',handleResize)}
+  },[]);
 
   /**
    * plays opening animation.
@@ -73,9 +93,6 @@ const Home = () => {
   };
 
 
-  useEffect(()=>{
-
-  })
 
   return (
     <>
@@ -151,7 +168,7 @@ const Home = () => {
 
             <motion.div
               style={{
-                height: BUBBLE_SIZE * BUBBLE_RATIO + "%",
+                height: BUBBLE_SIZE * BUBBLE_RATIO + "vh",
               }}
               className="bubble-info small-bubble"
               initial={{ scale: 0 }}

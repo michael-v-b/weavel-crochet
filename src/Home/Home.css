@@ -119,12 +119,12 @@
 .small-bubble {
   margin-top: 20vh;
   margin-left: 25%;
-  font-size:1vw;
+  font-size:1.8vw;
 }
 
 .under-bubble-text {
   font-family: "Nunito", sans-serif;
-  margin-top: 40vh;
+  margin-top: 45vh;
   margin-left: 8%;
   margin-right: 8%;
   font-size: 2vw;
@@ -207,14 +207,17 @@
     flex:none;
   }
   .bubble-info{
-    font-size:4vw;
+    font-size:5vw;
   }
   .small-bubble{
-    font-size:3vw;
+    font-size:5vw;
   }
 
   .under-bubble-text{
-    font-size:3.5vw;
+    width:80vw;
+    margin-left:0;
+    margin-right:0;
+    font-size:5vw;
   }
 
   .download-container{
