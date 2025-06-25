@@ -218,7 +218,7 @@ const Home = () => {
         <div className="change-prop-img" />
         <div style={{ position: "absolute", bottom: "-265vh" }}> FOOTER </div>*/}
       </div>
-      {/*<Footer/>*/}
+      <Footer/>
     </>
   );
 };
