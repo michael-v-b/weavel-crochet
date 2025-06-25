@@ -1,7 +1,7 @@
 .footer-container{
     display:flex;
     flex-direction:row;
-    background-color: rgb(86, 127, 189);
+    background-color: rgb(97, 137, 197);
     height:25vh;
     width:var(--webpage-width);
 }
@@ -41,7 +41,7 @@
 }
 
 .footer-text {
-    color:rgb(183, 211, 227);
+    color:rgb(206, 227, 239);
     font-family:"Nunito","sans-serif";
     font-size:1.5vw;
     font-weight:800;

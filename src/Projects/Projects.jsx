@@ -1,4 +1,5 @@
 import Banner from "../UI/Banner/Banner";
+import Footer from "../UI/Footer/Footer";
 import { useEffect, useState, useRef } from "react";
 import useStore from "../Sandbox/DevTools/store";
 import useGlobalStore from "../globalStore";
@@ -165,7 +166,7 @@ const Projects = () => {
       projectManagerRef.current.removeProject(project_id);
   }
 
-  return (
+  return (<>
     <div className="projects-web-container">
       <WarningPop/>
 
@@ -270,6 +271,8 @@ const Projects = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 
