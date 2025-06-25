@@ -1,4 +1,5 @@
 import Banner from "../UI/Banner/Banner";
+import Footer from "../UI/Footer/Footer";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import AuthTester from "../AuthTester";
@@ -217,6 +218,7 @@ const Home = () => {
         <div className="change-prop-img" />
         <div style={{ position: "absolute", bottom: "-265vh" }}> FOOTER </div>*/}
       </div>
+      {/*<Footer/>*/}
     </>
   );
 };
