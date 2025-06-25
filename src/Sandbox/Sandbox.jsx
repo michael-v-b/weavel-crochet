@@ -1,12 +1,14 @@
 import "./styles.css";
 import CanvasWindow from "./Canvas/CanvasWindow";
 
+import Banner from "../UI/Banner/Banner";
+import Footer from "../UI/Footer/Footer";
+
 import ToolWindow from "./UI/ToolWindow/ToolWindow";
 import InfoWindow from "./UI/InfoWindow/InfoWindow";
 import Hierarchy from "./UI/Hierarchy/Hierarchy";
 import ColorWindow from "./UI/ColorWindow/ColorWindow";
 import NameTag from "./UI/NameTag/NameTag";
-import Banner from "../UI/Banner/Banner";
 import LoadScreen from "../UI/LoadScreen/LoadScreen";
 import ModeBar from "./UI/ModeBar/ModeBar";
 import WarningPop from "../UI/WarningPop/WarningPop";
@@ -169,11 +171,8 @@ const Sandbox = () => {
             <InfoWindow deleterRef = {deleterRef}/>
           </div>
         </div>
-        <div className="bottom-area">
-          <h1>
-            promotional stuff, you can bring it to your website or whatever
-          </h1>
-        </div>
+        <div style = {{height:'10vh'}}></div>
+        <Footer/>
       </div>
     </>
   );
