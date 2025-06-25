@@ -77,7 +77,8 @@ const Finishing = (meshList) => {
 
             const baseMesh = findMesh(baseObject);
             const connectedMesh = findMesh(connections[j]);
-            if(visited.includes(connections[j]) || baseMesh.userData.meshType == 'eye' || connectedMesh.userData.meshType == 'eye') {
+            if(visited.includes(baseObject) || baseMesh.userData.meshType == 'eye' || connectedMesh.userData.meshType == 'eye') {
+                
                 continue;
             } 
 
