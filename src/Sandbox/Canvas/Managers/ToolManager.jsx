@@ -63,15 +63,15 @@ const ToolManager = forwardRef(({ raycaster, rotaterRef,intersectionManagerRef},
           setTool('none');
         } else {
         setTool("translate");
-        }
         setMode('none');
+        }
       } else if(keysPressed.includes("KeyR")) {
         if(tool == 'rotate') {
           setTool('none');
         } else {
           setTool("rotate");
+          setMode('none');
         }
-        setMode('none');
       }
     }
   },[keysPressed]);
