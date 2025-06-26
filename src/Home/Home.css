@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 350vh;
+  height: 300vh;
   width: var(--webpage-width);
   z-index: 1;
   background-color: rgb(228, 246, 255);

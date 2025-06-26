@@ -97,6 +97,7 @@ const Footer = () => {
                 setOnPhone(false);
             }
         }
+        handleResize();
         window.addEventListener('resize',handleResize);
 
         return () => {

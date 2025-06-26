@@ -46,9 +46,12 @@
   height:3vh;
 }
 
-@media (max-height:480px) {
+@media (max-width:480px) {
+  .profile-dropdown{
+    width:100vw;
+  }
   .profile-dropdown-option{
     height:6vh;
-    font-size:5vh;
+    font-size:3vh;
   }
 }
