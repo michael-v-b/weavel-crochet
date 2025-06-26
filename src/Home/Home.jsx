@@ -25,7 +25,7 @@ const Home = () => {
   const SPRING_TRANSITION = {
     type: "spring",
     stiffness: 100,
-    boune: 2,
+    bounce: 2,
   };
 
 
