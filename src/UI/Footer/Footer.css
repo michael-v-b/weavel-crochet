@@ -31,8 +31,8 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    margin-right:10vh;
-    margin-left:10vh;
+    margin-right:5vw;
+    margin-left:5vw;
 }
 .footer-logo{
     height:10vh;
@@ -42,6 +42,7 @@
 
 .footer-text {
     color:rgb(206, 227, 239);
+    text-align:center;
     font-family:"Nunito","sans-serif";
     font-size:1.5vw;
     font-weight:800;
@@ -54,6 +55,36 @@
 .footer-email {
     color:rgb(229, 226, 176);
     font-family:'Nunito','sans-serif';
-    font-size:'.5vw';
+    text-align:center;
+    font-size:1.5vw;
     text-decoration:underline;
+}
+@media (max-width:480px) {
+    .footer-logo-container{
+        margin-top:2vh;
+        margin-bottom:2vh;
+    }
+    .footer-top{
+        height:60vh;
+        flex-direction:column;
+        margin-bottom:2vh;
+    }
+    .footer-container{
+        flex-direction:column;
+        align-items:center;
+        height:97vh;
+    }
+    .footer-text{
+        font-size:6vw;
+    }
+    .footer-bottom{
+        margin-top:2vh;
+        width:60vw;
+    }
+    .footer-text-bottom{
+        font-size:4vw;
+    }
+    .footer-email{
+        font-size:4vw;
+    }
 }

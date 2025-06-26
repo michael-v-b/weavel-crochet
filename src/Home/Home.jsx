@@ -28,10 +28,6 @@ const Home = () => {
     boune: 2,
   };
 
-  useEffect(()=>{
-    console.log(window.width);
-    console.log("onPhone: " + onPhone);
-  },[onPhone]);
 
     useEffect(()=>{
     const handleResize = () => {

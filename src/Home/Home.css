@@ -199,6 +199,7 @@
   }
   .bubble-div{
     margin-top:20vh;
+    margin-bottom:30vh;
     flex-direction:column-reverse;
   }
   .bubble-screenshot{
@@ -226,6 +227,5 @@
   }
   .trial-error{
     font-size:5vw;
-    margin-bottom:10vw;
   }
 }

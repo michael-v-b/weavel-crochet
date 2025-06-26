@@ -3,6 +3,7 @@ import "./Footer.css";
 import logo from "../../assets/logo.png";
 import {motion} from 'framer-motion';
 import {useNavigate} from 'react-router';
+import {useEffect,useState} from 'react';
 
 /**
  * 
@@ -15,8 +16,29 @@ import {useNavigate} from 'react-router';
  */
    const VLine = () => {
         return <div style = {{height:'10vh',
-            width:'0.01vw',
+            width:'1px',
             backgroundColor:'rgb(176, 227, 229)'}}/>
+    }
+
+    /**
+     * 
+     * @returns HOrizontal Line to seperate elements in footer.
+     */
+    const HLine = () => {
+        return <div style = {{height:'1px',width:'80vw',backgroundColor:'rgb(176, 226, 229)'}}/>
+                
+    }
+
+    /**
+     * 
+     * @param {boolean} onPhone - a boolean value that states whether or not a user is on their phone. 
+     * @returns a horizontal line if the user is on their phone, and a vertical line if not.
+     */
+    const ChangeLine = ({onPhone}) => {
+        return <>
+        {onPhone && <HLine/>}
+        {!onPhone && <VLine/>}
+        </>
     }
 
     /**
@@ -64,43 +86,65 @@ const Footer = () => {
 
     const navigate = useNavigate();
 
+    const [onPhone,setOnPhone] = useState(false);
+
+    //update whether or not user is on phone
+    useEffect(()=>{
+        const handleResize = () => {
+            if(window.innerWidth < 480) {
+                setOnPhone(true);
+            } else {
+                setOnPhone(false);
+            }
+        }
+        window.addEventListener('resize',handleResize);
+
+        return () => {
+            window.removeEventListener('resize',handleResize);
+        }
+    },[]);
+
     return <>
         <div className = "footer-container">
             <div className = "footer-logo-container">
                 <motion.img 
                 whileHover = {{scale:1.1}} 
                 whileTap = {{scale:0.9}}
+                onClick = {()=>{
+                    navigate('/');
+                }}
                 src = {logo} 
                 className = "footer-logo clickable"/>
                 <div className = "footer-text footer-alt-color" > Follow Us: </div>
                 <div> Socials </div>
             </div>
+            {onPhone&& <HLine/>}
             <div className= "footer-link-container">
                 <div className = "footer-top">
                         <FooterOption onClick = {()=>{navigate('/about')}}>
                             About Weavel
                         </FooterOption> 
-                        <VLine/>
+                        <ChangeLine onPhone = {onPhone}/>
                         <FooterOption onClick = {()=>{
                             console.log("this will link to the Ko-Fi account");
                         }}>
                             Want to donate?
                         </FooterOption>
-                        <VLine/>
+                        <ChangeLine onPhone = {onPhone}/>
                         <FooterOption onClick = {()=>{navigate('/help')}}>
                             Help
                         </FooterOption>
-                        <VLine/>
+                        <ChangeLine onPhone = {onPhone}/>
                         <FooterOption onClick = {()=>{
                             console.log("this will link to a google form")}}> Give us feedback!</FooterOption>
-                        <VLine/>
+                        <ChangeLine onPhone = {onPhone}/>
                         <div>
                             <div className = "footer-text" > Contact us at: </div>
                             <div className = 'footer-email'>weavelcrochet@gmail.com</div>
                         </div>
                 </div>
+                <HLine/>
                 {/*line but hr has a border*/}
-                <div style = {{height:'0.01vh',width:'80vw',backgroundColor:'rgb(176, 226, 229)'}}/>
                 <div className = "footer-bottom">
                     <div className = "footer-text footer-text-bottom" >Privacy Policy</div>
                     <div className = "footer-text footer-text-bottom" >Terms of Service</div>

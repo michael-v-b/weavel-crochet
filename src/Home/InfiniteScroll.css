@@ -18,6 +18,9 @@
 }
 
 @media (max-width: 480px) {
+    .scroll-container{
+        margin-top:5vh;
+    }
     .scroll-image {
         height:30vw;
         width:30vw;

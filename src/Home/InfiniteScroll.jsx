@@ -1,8 +1,5 @@
 import {motion} from 'framer-motion';
-import {useEffect,useState} from 'react';
 import "./InfiniteScroll.css";
-import { createJSONStorage } from 'zustand/middleware';
-import jsPDF from 'jspdf';
 
 const InfiniteScroll = () => {
     const scrollList = [
