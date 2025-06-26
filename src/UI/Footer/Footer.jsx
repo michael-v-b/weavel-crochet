@@ -149,7 +149,7 @@ const Footer = () => {
                 <div className = "footer-bottom">
                     <div className = "footer-text footer-text-bottom" >Privacy Policy</div>
                     <div className = "footer-text footer-text-bottom" >Terms of Service</div>
-                    <div className = "footer-text footer-text-bottom" >Weavel Crochet</div>
+                    <div className = "footer-text footer-text-bottom copyright-text" >Weavel Crochet</div>
                 </div>
             </div>
         </div>

@@ -59,6 +59,12 @@
     font-size:1.5vw;
     text-decoration:underline;
 }
+
+.copyright-text {
+    font-family:"serif";
+    font-weight:100;
+    font-size:1.3vw;
+}
 @media (max-width:480px) {
     .footer-logo-container{
         margin-top:2vh;

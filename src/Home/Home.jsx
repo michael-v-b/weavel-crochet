@@ -14,7 +14,7 @@ const Home = () => {
   const [bubblePlayed, setBubblePlayed] = useState(false);
   const BUBBLE_SIZE = 30;
   const [onPhone,setOnPhone] = useState(window.innerWidth < 480);
-  const BUBBLE_RATIO = onPhone ? 0.7 : .5;
+  const BUBBLE_RATIO = onPhone ? 0.7 : .6;
   const BUBBLE_DELAY = 0.7;
   const heroSpace = useAnimation();
   const heroText = useAnimation();
