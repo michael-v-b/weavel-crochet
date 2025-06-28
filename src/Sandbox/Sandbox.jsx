@@ -1,12 +1,14 @@
 import "./styles.css";
 import CanvasWindow from "./Canvas/CanvasWindow";
 
+import Banner from "../UI/Banner/Banner";
+import Footer from "../UI/Footer/Footer";
+
 import ToolWindow from "./UI/ToolWindow/ToolWindow";
 import InfoWindow from "./UI/InfoWindow/InfoWindow";
 import Hierarchy from "./UI/Hierarchy/Hierarchy";
 import ColorWindow from "./UI/ColorWindow/ColorWindow";
 import NameTag from "./UI/NameTag/NameTag";
-import Banner from "../UI/Banner/Banner";
 import LoadScreen from "../UI/LoadScreen/LoadScreen";
 import ModeBar from "./UI/ModeBar/ModeBar";
 import WarningPop from "../UI/WarningPop/WarningPop";
@@ -34,6 +36,7 @@ import supabase from "../supabase";
 const Sandbox = () => {
   const selectionManagerRef = useRef(null);
   const canvasRef = useRef(null);
+  const screenshotRef = useRef(null);
   const meshSpawnerRef = useRef(null);
   const hierarchyRef = useRef(null);
   const exporterRef = useRef(null);
@@ -100,8 +103,6 @@ const Sandbox = () => {
 
   //updates file when change occurs but only if projectId is correct.
   useEffect(() => {
-    console.log("projectFile");
-    console.dir(projectFile);
     if (cameraTrackerRef?.current) {
       const cameraPosition = cameraTrackerRef.current.getCameraPosition();
       const cameraRotation = cameraTrackerRef.current.getCameraRotation();
@@ -141,7 +142,7 @@ const Sandbox = () => {
         <AuthTester reroute={"/"} />
         <NameTag />
         <div className="sandbox">
-          <Exporter ref={exporterRef} />
+          <Exporter ref={exporterRef} screenshotRef = {screenshotRef}/>
           <KeyTracker />
 
           <div className="left-window">
@@ -154,6 +155,7 @@ const Sandbox = () => {
             {!meshLoading && !nameLoading && <ProjectDim/>}
             <CanvasWindow
               ref={canvasRef}
+              screenshotRef = {screenshotRef}
               historyRef={historyRef}
               deleterRef = {deleterRef}
               selectionManagerRef={selectionManagerRef}
@@ -169,11 +171,8 @@ const Sandbox = () => {
             <InfoWindow deleterRef = {deleterRef}/>
           </div>
         </div>
-        <div className="bottom-area">
-          <h1>
-            promotional stuff, you can bring it to your website or whatever
-          </h1>
-        </div>
+        <div style = {{height:'10vh'}}></div>
+        <Footer/>
       </div>
     </>
   );

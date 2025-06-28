@@ -1,4 +1,5 @@
 import Banner from "../UI/Banner/Banner";
+import Footer from "../UI/Footer/Footer";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import AuthTester from "../AuthTester";
@@ -12,7 +13,8 @@ import "./Home.css";
 const Home = () => {
   const [bubblePlayed, setBubblePlayed] = useState(false);
   const BUBBLE_SIZE = 30;
-  const BUBBLE_RATIO = 0.5;
+  const [onPhone,setOnPhone] = useState(window.innerWidth < 480);
+  const BUBBLE_RATIO = onPhone ? 0.7 : .6;
   const BUBBLE_DELAY = 0.7;
   const heroSpace = useAnimation();
   const heroText = useAnimation();
@@ -23,8 +25,23 @@ const Home = () => {
   const SPRING_TRANSITION = {
     type: "spring",
     stiffness: 100,
-    boune: 2,
+    bounce: 2,
   };
+
+
+    useEffect(()=>{
+    const handleResize = () => {
+      if(window.innerHeight > 480) {
+        setOnPhone(false);
+      } else {
+        setOnPhone(true);
+      }
+    }
+    handleResize();
+    window.addEventListener('resize',handleResize);
+
+    return () => {window.removeEventListener('resize',handleResize)}
+  },[]);
 
   /**
    * plays opening animation.
@@ -73,9 +90,6 @@ const Home = () => {
   };
 
 
-  useEffect(()=>{
-
-  })
 
   return (
     <>
@@ -151,7 +165,7 @@ const Home = () => {
 
             <motion.div
               style={{
-                height: BUBBLE_SIZE * BUBBLE_RATIO + "%",
+                height: BUBBLE_SIZE * BUBBLE_RATIO + "vh",
               }}
               className="bubble-info small-bubble"
               initial={{ scale: 0 }}
@@ -200,6 +214,7 @@ const Home = () => {
         <div className="change-prop-img" />
         <div style={{ position: "absolute", bottom: "-265vh" }}> FOOTER </div>*/}
       </div>
+      <Footer/>
     </>
   );
 };

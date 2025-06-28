@@ -29,8 +29,8 @@ const BannerDropdown = () => {
   //resize dropdown if in portrait
   useEffect(()=>{
     const handleResize = () => {
-      if(window.innerHeight < 480) {
-        setOptionHeight(6);
+      if(window.innerWidth < 480) {
+        setOptionHeight(4);
       } else {
         setOptionHeight(3);
       }

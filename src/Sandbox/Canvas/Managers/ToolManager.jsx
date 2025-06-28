@@ -16,6 +16,7 @@ const ToolManager = forwardRef(({ raycaster, rotaterRef,intersectionManagerRef},
   ToolManager.displayName = "Tool Manager";
   const tool = useStore((state) => state.tool);
   const setTool = useStore((state)=>state.setTool);
+  const setMode = useStore((state)=>state.setMode);
   const selectedList = useStore((state) => state.selectedMeshes);
   const updateAvgPosition = useStore((state) => state.updateAvgPosition);
   const keysPressed = useStore((state)=>state.keysPressed);
@@ -62,12 +63,14 @@ const ToolManager = forwardRef(({ raycaster, rotaterRef,intersectionManagerRef},
           setTool('none');
         } else {
         setTool("translate");
+        setMode('none');
         }
       } else if(keysPressed.includes("KeyR")) {
         if(tool == 'rotate') {
           setTool('none');
         } else {
           setTool("rotate");
+          setMode('none');
         }
       }
     }

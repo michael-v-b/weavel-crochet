@@ -1,9 +1,11 @@
 import "./Register.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useState,useEffect} from "react";
 import supabase from "../../supabase";
 import HomeIcon from "../HomeIcon";
+import useStore from "../../Sandbox/DevTools/store";
+import KeyTracker from "../../Sandbox/DevTools/KeyTracker";
 
 /**
  *@typedef {Register} - Screen users navigate to to create their accounts.
@@ -15,6 +17,7 @@ const Register = () => {
   const [passTwo, setPassTwo] = useState("");
   const [email, setEmail] = useState("");
   const [warningText, setWarningText] = useState("");
+  const keysPressed = useStore((state)=>state.keysPressed);
 
   /**
    *Updates the state of passOne when the respective field is changed.
@@ -83,9 +86,16 @@ const Register = () => {
     }
   };
 
+  useEffect(()=>{
+    if(keysPressed.includes('Enter')) {
+      handleRegisterClick();
+    }
+  },[keysPressed]);
+
   return (
     <div className="web-container center">
       <HomeIcon/>
+      <KeyTracker/>
       <div className="register-window ">
         <div className="register-request">Please Create Your Account </div>
         <div className="register-inputs center">

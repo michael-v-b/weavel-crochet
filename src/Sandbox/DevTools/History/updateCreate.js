@@ -48,7 +48,6 @@
           //shape types
           objectTypes.push(objectData.meshType);
         }
-        //console.dir(objectData);
       }
       deleterRef.current.deleteMeshes(objects,true);
       action = [];

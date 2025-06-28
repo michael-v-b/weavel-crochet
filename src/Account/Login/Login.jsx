@@ -1,10 +1,12 @@
 import "./Login.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import logo from "../../assets/logo.png";
 import supabase from "../../supabase";
 import useGlobalStore from "../../globalStore";
+import useStore from "../../Sandbox/DevTools/store";
+import KeyTracker from "../../Sandbox/DevTools/KeyTracker";
 
 /**
  * @typedef {Login} - The screen users are taken to when logging in.
@@ -14,6 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
   const setAuth = useGlobalStore((state) => state.setAuth);
   const setAuthData = useGlobalStore((state) => state.setAuthData);
+  const keysPressed = useStore((state)=>state.keysPressed);
   const [warning, setWarning] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -73,8 +76,15 @@ const Login = () => {
     }
   };
 
+  useEffect(()=>{
+    if(keysPressed.includes("Enter")) {
+      handleLoginClick();
+    }
+  },[keysPressed]);
+
   return (
     <div className="web-container center">
+      <KeyTracker/>
       <motion.img
         className="login-logo"
         whileHover={{ scale: 1.1 }}

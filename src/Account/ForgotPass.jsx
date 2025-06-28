@@ -1,9 +1,13 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import supabase from "../supabase";
+import KeyTracker from "../Sandbox/DevTools/KeyTracker";
+import useStore from "../Sandbox/DevTools/store";
 
 const ForgotPass = () => {
+
+  const keysPressed = useStore((state)=>state.keysPressed);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -20,8 +24,15 @@ const ForgotPass = () => {
     navigate("/verification");
   };
 
+  useEffect(()=>{
+    if(keysPressed.includes('Enter')) {
+      sendEmail();
+    }
+  },[keysPressed])
+
   return (
     <div className="web-container center">
+      <KeyTracker/>
       <div className="register-window" style={{ height: "50vh" }}>
         <div className="register-request">Reset Your Password</div>
         <div className="register-inputs-container center">

@@ -67,6 +67,18 @@ const ModeBar = ({ exporterRef, historyRef }) => {
     }
   },[keysPressed]);
 
+  useEffect(()=>{
+    if(mode != 'camera') {
+      cameraButton.current.setPressed(false);
+    }
+    if(mode != 'transform') {
+      transformButton.current.setPressed(false);
+    }
+    if(mode != 'draw') {
+      drawButton.current.setPressed(false);
+    }
+  },[mode]);
+
 
   return (
     <div className="mode-bar">
