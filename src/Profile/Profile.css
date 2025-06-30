@@ -2,10 +2,12 @@
 
 .profile-option-container {
     padding-top:10vh;
-    padding-left:10vw;
     font-family:"Nunito";
     color:rgb(15, 70, 118);
     font-weight:800;
+}
+.profile-option-subcontainer{
+    padding-left:10vw;
 }
 .profile-option-title{
     background-color:rgb(207, 242, 255);
@@ -26,8 +28,9 @@
     width:10vw;;
 }
 .profile-line{
-    border-color:rgb(118, 153, 183);
+    border-color:rgb(111, 179, 238);
     margin-bottom:3vh;
+    width:85vw;
 }
 .profile-reset-pass{
     background-color:rgb(236, 250, 255);
