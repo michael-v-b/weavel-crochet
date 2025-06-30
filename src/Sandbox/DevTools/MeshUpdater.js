@@ -13,7 +13,7 @@ const updateMesh = (meshRef, saveData, circum_radius_convert) => {
 
   const userData = meshRef.current.userData;
   //UNIVERSAL ATTRIBUTES
-  
+
   // name
   meshRef.current.name = saveData.name;
   //position
@@ -29,6 +29,9 @@ const updateMesh = (meshRef, saveData, circum_radius_convert) => {
   const attributes = saveData.attributeList;
   const meshData = userData.meshData;
 
+  if (!attributes) {
+    return;
+  }
   //circumference
   if (attributes.includes("circum")) {
     meshData.setCircum(saveData.circum);
@@ -56,7 +59,7 @@ const updateMesh = (meshRef, saveData, circum_radius_convert) => {
     meshData.setHalf(saveData.isHalf);
   }
 
-  if(attributes.includes("size")) {
+  if (attributes.includes("size")) {
     meshData.setSize(saveData.size);
   }
 };
