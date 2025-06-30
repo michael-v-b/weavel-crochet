@@ -72,18 +72,27 @@ EyeTracker.testIntersectEye = (eye,mesh) => {
         return;
     }
     const eyeTip = eye.userData.visualRef.current.children[0];
-    const matrix = new Matrix4();
-    matrix.copy(mesh.matrixWorld).invert();
-    matrix.multiply(eyeTip.matrixWorld);
+    
+    //world matrix for eye tip
+    const tipMatrix = new Matrix4();
+    tipMatrix.copy(mesh.matrixWorld).invert();
+    tipMatrix.multiply(eyeTip.matrixWorld);
+
+    //world matrix for eye itself
+    const eyeMatrix = new Matrix4();
+    eyeMatrix.copy(mesh.matrixWorld).invert();
+    eyeMatrix.multiply(eye.matrixWorld);
+
     //CHAT GPT CODE end
     const bTree = mesh.geometry.boundsTree;
     eyeTip.geometry.computeBoundingBox();
     
-    //if selected mesh is eye, bTree
-    const intersects = bTree.intersectsBox(
+    //if selected mesh intersects with eyetip and eye
+    const intersects = (bTree.intersectsBox(
       eyeTip.geometry.boundingBox,
-      matrix
-    );
+      tipMatrix
+    ) && 
+    bTree.intersectsBox(eye.geometry.boundingBox,eyeMatrix));
 
     return intersects;
 }
