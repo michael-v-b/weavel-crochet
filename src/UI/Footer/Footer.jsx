@@ -5,16 +5,13 @@ import {motion} from 'framer-motion';
 import {useNavigate} from 'react-router';
 import {useEffect,useState} from 'react';
 
-/**
- * 
- * @returns Footer at the end of the page with information
- */
+//I know it doesn't make sense for vline and hline to be here.
 
 /**
  * 
  * @returns Vertical line to be used to seperate elements in footer.
  */
-   const VLine = () => {
+   export const VLine = () => {
         return <div style = {{height:'10vh',
             width:'1px',
             backgroundColor:'rgb(176, 227, 229)'}}/>
@@ -24,7 +21,7 @@ import {useEffect,useState} from 'react';
      * 
      * @returns HOrizontal Line to seperate elements in footer.
      */
-    const HLine = () => {
+    export const HLine = () => {
         return <div style = {{height:'1px',width:'80vw',backgroundColor:'rgb(176, 226, 229)'}}/>
                 
     }
@@ -34,7 +31,7 @@ import {useEffect,useState} from 'react';
      * @param {boolean} onPhone - a boolean value that states whether or not a user is on their phone. 
      * @returns a horizontal line if the user is on their phone, and a vertical line if not.
      */
-    const ChangeLine = ({onPhone}) => {
+    export const ChangeLine = ({onPhone}) => {
         return <>
         {onPhone && <HLine/>}
         {!onPhone && <VLine/>}
