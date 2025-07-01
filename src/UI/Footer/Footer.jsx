@@ -5,6 +5,7 @@ import {motion} from 'framer-motion';
 import {useNavigate} from 'react-router';
 import {useEffect,useState} from 'react';
 
+
 //I know it doesn't make sense for vline and hline to be here.
 
 /**
@@ -81,6 +82,7 @@ import {useEffect,useState} from 'react';
 
 const Footer = () => {
 
+    const FEEDBACK_FORM_LINK  = import.meta.env.VITE_FEEDBACK_FORM;
     const navigate = useNavigate();
 
     const [onPhone,setOnPhone] = useState(false);
@@ -134,7 +136,9 @@ const Footer = () => {
                         </FooterOption>
                         <ChangeLine onPhone = {onPhone}/>
                         <FooterOption onClick = {()=>{
-                            console.log("this will link to a google form")}}> Give us feedback!</FooterOption>
+                            window.open(FEEDBACK_FORM_LINK,'_blank');
+                        }}> '
+                            Give us feedback!</FooterOption>
                         <ChangeLine onPhone = {onPhone}/>
                         <div>
                             <div className = "footer-text" > Contact us at: </div>
