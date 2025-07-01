@@ -137,7 +137,7 @@ const Footer = () => {
                         <ChangeLine onPhone = {onPhone}/>
                         <FooterOption onClick = {()=>{
                             window.open(FEEDBACK_FORM_LINK,'_blank');
-                        }}> '
+                        }}>
                             Give us feedback!</FooterOption>
                         <ChangeLine onPhone = {onPhone}/>
                         <div>
