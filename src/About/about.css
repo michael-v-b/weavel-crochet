@@ -48,3 +48,26 @@
     font-family:"Nunito","sans-serif";
     font-size:1.5vw;
 }
+
+@media (max-width:480px) {
+    .about-webpage{
+        justify-content:flex-start;
+        height:200vh;
+    }
+    .about-image{
+        margin-bottom:5vh;
+    }
+    .about-text-container{
+        margin-top:10vh;
+        height:170vh;
+    }
+    .about-greeting{
+        font-size:6vw;
+    }
+    .about-top-text{
+        flex-direction:column;
+    }
+    .about-text{
+        font-size:5vw;
+    }
+}
