@@ -30,10 +30,10 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
   //const [currentMode, setMode] = useState("camera");
   const cameraButton = useRef(null);
   const transformButton = useRef(null);
-  const drawButton = useRef(null);
+  const shapeButton = useRef(null);
   const exportButton = useRef(null);
-  const buttonList = [cameraButton, transformButton, drawButton];
-  const modeKey = [["camera",cameraButton], ["transform",transformButton], ["draw",drawButton]];
+  const buttonList = [cameraButton, transformButton, shapeButton];
+  const modeKey = [["camera",cameraButton], ["transform",transformButton], ["shapes",shapeButton]];
   /*MODE KEY 
   0 = camera
   1 = transform
@@ -102,13 +102,13 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
           const tempMode = value[0];
           const capitalName = tempMode.charAt(0).toUpperCase() + tempMode.slice(1);
           const tempButtonRef = value[1];
-          return <ModeButton 
+          return <ModeButtonWrapper 
             key = {key} 
             ref = {tempButtonRef} 
             name = {capitalName} 
             onClick = {()=>{handleMode(tempMode)}}>
               {capitalName}
-              </ModeButton>
+              </ModeButtonWrapper>
 
         })}
       </div>

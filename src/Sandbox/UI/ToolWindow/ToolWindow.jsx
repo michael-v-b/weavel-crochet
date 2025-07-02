@@ -1,4 +1,4 @@
-import DrawWindow from "./DrawWindow";
+import ShapeWindow from "./ShapeWindow";
 import TransformWindow from "./TransformWindow";
 import "./ToolWindow.css";
 import useStore from "../../DevTools/store";
@@ -29,7 +29,7 @@ const ToolWindow = ({
           </div>
         )}
 
-        {mode == "draw" && <DrawWindow getShape={getShape} />}
+        {mode == "shapes" && <ShapeWindow getShape={getShape} />}
         {mode == "transform" && <TransformWindow />}
       </div>
     </div>
