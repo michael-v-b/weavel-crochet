@@ -24,8 +24,9 @@ const checkNames = (name,objectList) => {
 
     //while temp has overlapping names, add index to it
     while(nameList.includes(temp)) {
-        temp = name + " (" + index +")";
+        
         index +=1;
+        temp = name + " (" + index +")";
     }
 
     
