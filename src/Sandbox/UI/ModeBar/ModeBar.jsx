@@ -111,29 +111,6 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
               </ModeButton>
 
         })}
-        {/*<ModeButtonWrapper
-          ref={cameraButton}
-          name = 'camera'
-          mode = {0}
-        >
-          Camera
-        </ModeButtonWrapper>
-        <ModeButton
-          ref={transformButton}
-          onClick={() => {
-            handleMode(1);
-          }}
-        >
-          Transform
-        </ModeButton>
-        <ModeButton
-          ref={drawButton}
-          onClick={() => {
-            handleMode(2);
-          }}
-        >
-          Add Shape{" "}
-        </ModeButton>*/}
       </div>
       <div className="right-side">
         <ModeButton
