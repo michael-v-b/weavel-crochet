@@ -114,7 +114,7 @@ const CanvasWindow = forwardRef(
      *@param {string} shape - meshType being spawned.
      */
     const spawnMesh = (shape) => {
-      if (mode == "draw") {
+      if (mode == "shapes") {
         meshSpawnerRef.current.spawnMesh(shape);
       } else {
         console.log("can not spawn mesh outside of draw mode");

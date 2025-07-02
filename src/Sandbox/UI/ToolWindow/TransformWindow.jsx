@@ -24,7 +24,7 @@ const TransformWindow = ({mouseHoverRef}) => {
    */
   const handleClick = (newTool) => {
       if (newTool != currentTool) {
-        setTool(tool);
+        setTool(newTool);
       } else {
         setTool("none");
       }
