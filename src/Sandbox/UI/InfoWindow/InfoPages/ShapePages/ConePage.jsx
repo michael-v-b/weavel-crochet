@@ -13,7 +13,7 @@ const ConePage = ({ objects }) => {
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
 
-  const MAX_RATE = 3;
+  const MAX_RATE = 6;
   const heightRef = useRef(null);
   const circumRef = useRef(null);
 

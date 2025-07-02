@@ -9,14 +9,17 @@ const ConePattern = (object, eyeList) => {
   const objectData = object.userData.meshData;
   const height = objectData.height;
   const circum = objectData.circum;
-  const POINT_NUMBER = 3; //stitch count for point
+  console.log(circum + "/" + height);
+  const POINT_NUMBER = Math.floor(circum/height); //stitch count for point
+
+  console.log("point_number: " + POINT_NUMBER);
 
   let output = [];
 
-  output = ["Round 1: Put 3 sc into a magic ring."];
+  output = ["Round 1: Put " + POINT_NUMBER + " sc into a magic ring."];
   let roundNum = 1;
 
-  let stitchCount = 3;
+  let stitchCount = POINT_NUMBER;
 
   //the number of decreases to reach point
   const rate = Math.floor((circum - POINT_NUMBER) / (height - 1));
@@ -45,7 +48,9 @@ const ConePattern = (object, eyeList) => {
     const scString = scCount > 0 ? scCount + " sc, " : "";
     const incString = "inc) x" + repeatCount;
 
+    console.log("added " + order[i] + " to " + stitchCount);
     stitchCount += order[i];
+
 
     const extraScString = rowRemain == 0 ? "" : ", " + rowRemain + " sc";
 
