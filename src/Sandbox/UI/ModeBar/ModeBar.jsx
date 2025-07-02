@@ -32,7 +32,6 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
   const transformButton = useRef(null);
   const shapeButton = useRef(null);
   const exportButton = useRef(null);
-  const buttonList = [cameraButton, transformButton, shapeButton];
   const modeKey = [["camera",cameraButton], ["transform",transformButton], ["shapes",shapeButton]];
   /*MODE KEY 
   0 = camera
@@ -91,6 +90,9 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
       onMouseEnter = {()=>{
         mouseHoverRef.current.startTimer(name)
       }} 
+      onMouseLeave = {()=>{
+        mouseHoverRef.current.cancelTimer();
+      }}
       {...props}/>
   });
 
@@ -113,33 +115,36 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
         })}
       </div>
       <div className="right-side">
-        <ModeButton
+        <ModeButtonWrapper
           canPress={false}
+          name = {"Undo"}
           onClick={() => {
             historyRef.current.makeAction(undoList, true);
           }}
         >
           Undo
-        </ModeButton>
-        <ModeButton
+        </ModeButtonWrapper>
+        <ModeButtonWrapper
           canPress={false}
+          name = {"Redo"}
           onClick={() => {
             historyRef.current.makeAction(redoList, false);
           }}
         >
           {" "}
           Redo{" "}
-        </ModeButton>
-        <ModeButton
+        </ModeButtonWrapper>
+        <ModeButtonWrapper
           ref={exportButton}
           canPress={false}
+          name = {"Export PDF"}
           onClick={() => {
             exporterRef.current.exportPDF();
           }}
         >
           {" "}
           Export PDF
-        </ModeButton>
+        </ModeButtonWrapper>
       </div>
     </div>
   );

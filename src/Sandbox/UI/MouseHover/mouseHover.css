@@ -1,0 +1,17 @@
+.mouse-hover-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:absolute;
+    background-color:white;
+    font-family:"Nunito","sans-serif";
+    height:5vh;
+    width:15vh;
+
+    border-radius:0vh 15vh 15vh 15vh;
+
+    font-size:2vh;
+    z-index:10000;
+
+    overflow-x:hidden;
+}
