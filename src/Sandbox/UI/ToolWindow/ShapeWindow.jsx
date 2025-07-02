@@ -4,9 +4,10 @@ import ShapeButton from "../Buttons/ShapeButton.jsx";
 /**
  *@typedef {ShapeWindow} - Window that showcases all the different shapes that can be added to the scene.
  *@property {GetShapeCallback} - Allows shape that was just spawned to be accessible to parents.
+ *@property {Reference} mouseHoverRef - a reference to the mouseHover object
  *@returns {Component} - Div full of buttons representing every shape that can be added, organized by dimension.
  */
-const ShapeWindow = ({ getShape }) => {
+const ShapeWindow = ({ getShape,mouseHoverRef}) => {
   const handleClick = (shape) => {
     getShape(shape);
   };
@@ -26,6 +27,12 @@ const ShapeWindow = ({ getShape }) => {
                 onClick={() => {
                   handleClick(name);
                 }}
+                onMouseEnter = {()=>{
+                  mouseHoverRef.current.startTimer(capitalized);
+                }}
+                onMouseLeave = {()=>{
+                  mouseHoverRef.current.cancelTimer();
+                }}
               >
                 {capitalized}
               </ShapeButton>
@@ -43,6 +50,12 @@ const ShapeWindow = ({ getShape }) => {
                 key={index}
                 onClick={() => {
                   handleClick(name);
+                }}
+                onMouseEnter = {()=>{
+                  mouseHoverRef.current.startTimer(capitalized);
+                }}
+                onMouseLeave = {()=>{
+                  mouseHoverRef.current.cancelTimer();
                 }}
               >
                 {capitalized}

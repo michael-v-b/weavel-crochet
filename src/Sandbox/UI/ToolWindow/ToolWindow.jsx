@@ -6,10 +6,12 @@ import useStore from "../../DevTools/store";
 /**
  * @typedef {ToolWindow} - Window that changes depending on which mode is selected.
  * @property {GetShapeCallback} getShape - Lets most recently spawned shape be accessible by parents.
+ * @property {mouseHoverRef} mouseHoverRef - a reference to the Mouse Hover object. 
  * @returns {Component} - div with differing buttons with different purposes depending on the mode.
  */
 const ToolWindow = ({
   getShape,
+  mouseHoverRef
 }) => {
   const mode = useStore((state) => state.mode);
   return (
@@ -29,8 +31,8 @@ const ToolWindow = ({
           </div>
         )}
 
-        {mode == "shapes" && <ShapeWindow getShape={getShape} />}
-        {mode == "transform" && <TransformWindow />}
+        {mode == "shapes" && <ShapeWindow getShape={getShape} mouseHoverRef = {mouseHoverRef} />}
+        {mode == "transform" && <TransformWindow mouseHoverRef = {mouseHoverRef}/>}
       </div>
     </div>
   );

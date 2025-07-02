@@ -7,55 +7,69 @@ import useStore from "../../DevTools/store";
 
 /**
  *@typedef {TransformWindow} - Window that has many buttons that represent the different tools the user can utilize.
- *@property {string} currentTool - the tool being selected, used for button pressed state.
- *@property {GetToolCallback} getTool - Lets tool be accessible to parents.
- *@property {[{string}]} keysPressed - a list of keys currently pressed down.
- * @property {boolean} isFocused - is true when user is focused on input field.
+ *@property {Reference} mouseHoverRef - a reference to the MouseHover object.
  * @returns {Component} - div with all the different transformation tools the user can utilize.
  */
-const TransformWindow = () => {
+const TransformWindow = ({mouseHoverRef}) => {
   const translateButton = useRef(null);
   const rotateButton = useRef(null);
-  const toolButtonList = [translateButton, rotateButton];
-  const toolKey = ["translate", "rotate"];
+  const toolKey= [["translate",translateButton], ["rotate",rotateButton]];
 
-  const isFocused = useStore((state) => state.isFocused);
   const currentTool = useStore((state) => state.tool);
   const setTool = useStore((state) => state.setTool);
-  const keysPressed = useStore((state) => state.keysPressed);
 
   /**
    *When a button is pressed it will update its state in the  transform window.
-   *@param {string} tool - tool that was pressed.
+   *@param {string} newTool - tool that was pressed.
    */
-  const handleClick = (tool) => {
-    for (let i = 0; i < toolButtonList.length; i++) {
-      const button = toolButtonList[i].current;
-      if (i != tool) {
-        button.setPressed(false);
+  const handleClick = (newTool) => {
+      if (newTool != currentTool) {
+        setTool(tool);
       } else {
-        button.setPressed(!button.isPressed);
+        setTool("none");
+      }
+  }
+  
+
+
+  useEffect(()=>{
+
+    for(let i = 0; i < toolKey.length;i++) {
+      if(!toolKey[i][1]?.current) {
+        return;
+      }
+
+      if(currentTool == toolKey[i][0]) {
+        toolKey[i][1].current.setPressed(true);
+      } else {
+        toolKey[i][1].current.setPressed(false);
       }
     }
-    if (toolKey[tool] != currentTool) {
-      setTool(toolKey[tool]);
-    } else {
-      setTool("none");
-    }
-  };
-
-  useEffect(() => {
-    const toolIndex = toolKey.indexOf(currentTool);
-    const currentToolButton = toolButtonList[toolIndex];
-    if (currentToolButton) {
-      currentToolButton.current.setPressed(true);
-    }
-  }, []);
+  },[currentTool]);
 
 
   return (
     <>
-      <ToolButton
+    {toolKey.map((value,key) => {
+      const name = value[0];
+      const buttonRef = value[1];
+      const capital = name.charAt(0).toUpperCase() + name.slice(1);
+      return <ToolButton 
+      ref = {buttonRef}
+      key = {key}
+      onClick = {()=>{
+        handleClick(name);
+      }}
+      onMouseEnter = {()=>{
+        mouseHoverRef.current.startTimer(capital);
+      }}
+      onMouseLeave = {()=>{
+        mouseHoverRef.current.cancelTimer(capital);
+      }}>
+        {capital}
+      </ToolButton>
+    })}
+      {/*<ToolButton
         ref={translateButton}
         onClick={() => {
           handleClick(0);
@@ -71,7 +85,7 @@ const TransformWindow = () => {
         }}
       >
         Rotate{" "}
-      </ToolButton>
+      </ToolButton>*/}
     </>
   );
 };
