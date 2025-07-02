@@ -1,6 +1,6 @@
 
 import ModeButton from "../Buttons/ModeButton.jsx";
-import {useEffect,useRef} from "react";
+import {useEffect,forwardRef,useRef} from "react";
 import "./ModeBar.css";
 import useStore from "../../DevTools/store.js";
 
@@ -15,7 +15,7 @@ import useStore from "../../DevTools/store.js";
  *@property {ExporterRef} exporterRef- gives access to all of Exporter's public methods.
  *@returns {Component} - a div with buttons representing the different modes as well as the export button.
  */
-const ModeBar = ({ exporterRef, historyRef }) => {
+const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
   //allows current mode to be changed
   const mode = useStore((state)=>state.mode);
   const setMode = useStore((state) => state.setMode);
@@ -26,13 +26,14 @@ const ModeBar = ({ exporterRef, historyRef }) => {
   const isDragging = useStore((state)=>state.isDragging);
   const isFocused = useStore((state)=>state.isFocused);
 
-  const modeKey = ["camera", "transform", "draw"];
+  
   //const [currentMode, setMode] = useState("camera");
   const cameraButton = useRef(null);
   const transformButton = useRef(null);
   const drawButton = useRef(null);
   const exportButton = useRef(null);
   const buttonList = [cameraButton, transformButton, drawButton];
+  const modeKey = [["camera",cameraButton], ["transform",transformButton], ["draw",drawButton]];
   /*MODE KEY 
   0 = camera
   1 = transform
@@ -40,15 +41,15 @@ const ModeBar = ({ exporterRef, historyRef }) => {
 
   /*@function Sends mode to app className
   string mode: string that represents mode of app*/
-  const handleMode = (mode) => {
-    for (let i = 0; i < buttonList.length; i++) {
+  const handleMode = (newMode) => {
+    /*for (let i = 0; i < buttonList.length; i++) {
       if (i != mode) {
         buttonList[i].current.setPressed(false);
       }
-    }
+    }*/
 
-    if (modeKey[mode] != currentMode) {
-      setMode(modeKey[mode]);
+    if (newMode!= currentMode) {
+      setMode(newMode);
     } else {
       setMode("none");
     }
@@ -58,39 +59,65 @@ const ModeBar = ({ exporterRef, historyRef }) => {
     if(!isFocused && !isDragging && keysPressed.includes("KeyC")) {
       if(mode == 'camera') {
         setMode('none');
-        cameraButton.current.setPressed(false);
       } else {
         setMode('camera');
-        cameraButton.current.setPressed(true);
       }
 
     }
   },[keysPressed]);
 
   useEffect(()=>{
-    if(mode != 'camera') {
-      cameraButton.current.setPressed(false);
-    }
-    if(mode != 'transform') {
-      transformButton.current.setPressed(false);
-    }
-    if(mode != 'draw') {
-      drawButton.current.setPressed(false);
+
+    for(let i = 0; i < modeKey.length; i++) {
+      const modeButtonRef = modeKey[i][1];
+      if (!modeButtonRef?.current) {
+        return;
+      }
+      if(mode == modeKey[i][0]) {
+        modeButtonRef.current.setPressed(true);
+      } else {
+        modeButtonRef.current.setPressed(false);
+      }
     }
   },[mode]);
+
+  const handleMouseEnter = (element) => {
+    mouseHoverRef.current.startTimer(element);
+  }
+
+  const ModeButtonWrapper = forwardRef(({name, mode = -1,...props}, ref) => {
+    return <ModeButton 
+      ref = {ref} 
+      onMouseEnter = {()=>{
+        mouseHoverRef.current.startTimer(name)
+      }} 
+      {...props}/>
+  });
 
 
   return (
     <div className="mode-bar">
       <div className="mode-buttons">
-        <ModeButton
+        {modeKey.map((value,key) => {
+          const tempMode = value[0];
+          const capitalName = tempMode.charAt(0).toUpperCase() + tempMode.slice(1);
+          const tempButtonRef = value[1];
+          return <ModeButton 
+            key = {key} 
+            ref = {tempButtonRef} 
+            name = {capitalName} 
+            onClick = {()=>{handleMode(tempMode)}}>
+              {capitalName}
+              </ModeButton>
+
+        })}
+        {/*<ModeButtonWrapper
           ref={cameraButton}
-          onClick={() => {
-            handleMode(0);
-          }}
+          name = 'camera'
+          mode = {0}
         >
           Camera
-        </ModeButton>
+        </ModeButtonWrapper>
         <ModeButton
           ref={transformButton}
           onClick={() => {
@@ -106,7 +133,7 @@ const ModeBar = ({ exporterRef, historyRef }) => {
           }}
         >
           Add Shape{" "}
-        </ModeButton>
+        </ModeButton>*/}
       </div>
       <div className="right-side">
         <ModeButton

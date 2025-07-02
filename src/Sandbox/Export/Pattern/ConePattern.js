@@ -9,10 +9,8 @@ const ConePattern = (object, eyeList) => {
   const objectData = object.userData.meshData;
   const height = objectData.height;
   const circum = objectData.circum;
-  console.log(circum + "/" + height);
   const POINT_NUMBER = Math.floor(circum/height); //stitch count for point
 
-  console.log("point_number: " + POINT_NUMBER);
 
   let output = [];
 
@@ -48,7 +46,6 @@ const ConePattern = (object, eyeList) => {
     const scString = scCount > 0 ? scCount + " sc, " : "";
     const incString = "inc) x" + repeatCount;
 
-    console.log("added " + order[i] + " to " + stitchCount);
     stitchCount += order[i];
 
 

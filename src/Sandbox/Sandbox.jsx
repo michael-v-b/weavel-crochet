@@ -13,6 +13,7 @@ import LoadScreen from "../UI/LoadScreen/LoadScreen";
 import ModeBar from "./UI/ModeBar/ModeBar";
 import WarningPop from "../UI/WarningPop/WarningPop";
 import ProjectDim from "./UI/ProjectDim/ProjectDim";
+import MouseHover from "./UI/MouseHover/MouseHover";
 
 import KeyTracker from "./DevTools/KeyTracker";
 import ProjectReader from "./DevTools/ProjectReader";
@@ -44,6 +45,7 @@ const Sandbox = () => {
   const cameraTrackerRef = useRef(null);
   const projectReaderRef = useRef(null);
   const deleterRef = useRef(null);
+  const mouseHoverRef = useRef(null);
 
   const auth = useGlobalStore((state) => state.auth);
   const authData = useGlobalStore((state) => state.authData);
@@ -128,6 +130,7 @@ const Sandbox = () => {
 
   return (
     <>
+      <MouseHover ref = {mouseHoverRef}/>
       <div className="webpage">
         <WarningPop />
         {isPortrait && <PortraitWarning/>}
@@ -146,12 +149,12 @@ const Sandbox = () => {
           <KeyTracker />
 
           <div className="left-window">
-            <ToolWindow getShape={handleShape} />
+            <ToolWindow getShape={handleShape} mouseHoverRef = {mouseHoverRef}/>
             <ColorWindow />
           </div>
 
           <div className="canvas-div">
-            <ModeBar exporterRef={exporterRef} historyRef={historyRef} />
+            <ModeBar exporterRef={exporterRef} historyRef={historyRef} mouseHoverRef = {mouseHoverRef} />
             {!meshLoading && !nameLoading && <ProjectDim/>}
             <CanvasWindow
               ref={canvasRef}
