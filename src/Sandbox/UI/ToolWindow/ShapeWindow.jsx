@@ -71,7 +71,6 @@ const ShapeWindow = ({ getShape,mouseHoverRef}) => {
         <div className="title">2D Shapes </div>
         <div className="window">
           {secondShapes.map((value, index) => {
-            console.log("value: " + value);
             const name = value[0];
             const icon = value[1];
             const capitalized = name.charAt(0).toUpperCase() + name.slice(1);

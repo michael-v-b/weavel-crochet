@@ -126,7 +126,7 @@ const Footer = () => {
                         </FooterOption> 
                         <ChangeLine onPhone = {onPhone}/>
                         <FooterOption onClick = {()=>{
-                            console.log("this will link to the Ko-Fi account");
+                            console.log("this will link to the paypal account");
                         }}>
                             Want to donate?
                         </FooterOption>

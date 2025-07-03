@@ -26,10 +26,6 @@ const About = () => {
             window.removeEventListener('resize',handleResize);
         }
     },[]);
-
-    useEffect(()=>{
-        console.log("onPhone: " + onPhone);
-    },[onPhone])
     
     return <>
         <Banner/>
