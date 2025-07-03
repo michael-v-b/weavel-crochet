@@ -26,3 +26,8 @@
   align-items: center;
   padding-right: 5%;
 }
+.mode-icon{
+  height:3.5vh;
+  width:3.5vh;
+  color:rgb(211, 98, 23);
+}

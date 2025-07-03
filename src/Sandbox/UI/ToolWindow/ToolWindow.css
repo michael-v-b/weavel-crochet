@@ -32,7 +32,18 @@
   font-size:2vh;
 }
 .window {
-  height: 100%;
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
 
+  padding-top:2vh;
+
+  height: 100%;
   overflow-y: auto;
+}
+
+.tool-icon{
+  width:3vh;
+  height:3vh;
+  color:#4894c7
 }

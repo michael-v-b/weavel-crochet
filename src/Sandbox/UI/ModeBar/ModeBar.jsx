@@ -3,6 +3,12 @@ import ModeButton from "../Buttons/ModeButton.jsx";
 import {useEffect,forwardRef,useRef} from "react";
 import "./ModeBar.css";
 import useStore from "../../DevTools/store.js";
+import CameraIcon from '../../../assets/Icons/Modes/camera.svg?react';
+import TransformIcon from "../../../assets/Icons/Modes/transform.svg?react";
+import ShapesIcon from "../../../assets/Icons/Modes/shapes.svg?react";
+import UndoIcon from "../../../assets/Icons/Modes/undo.svg?react";
+import RedoIcon from "../../../assets/Icons/Modes/redo.svg?react";
+import DownloadIcon from "../../../assets/Icons/Modes/download.svg?react";
 
 /*modes: 
     -camera mode
@@ -32,7 +38,9 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
   const transformButton = useRef(null);
   const shapeButton = useRef(null);
   const exportButton = useRef(null);
-  const modeKey = [["camera",cameraButton], ["transform",transformButton], ["shapes",shapeButton]];
+  const modeKey = [["camera",cameraButton,<CameraIcon className = "mode-icon"/>],
+   ["transform",transformButton,<TransformIcon className = "mode-icon"/>],
+    ["shapes",shapeButton,<ShapesIcon className = "mode-icon"/>]];
   /*MODE KEY 
   0 = camera
   1 = transform
@@ -41,11 +49,6 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
   /*@function Sends mode to app className
   string mode: string that represents mode of app*/
   const handleMode = (newMode) => {
-    /*for (let i = 0; i < buttonList.length; i++) {
-      if (i != mode) {
-        buttonList[i].current.setPressed(false);
-      }
-    }*/
 
     if (newMode!= currentMode) {
       setMode(newMode);
@@ -104,12 +107,13 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
           const tempMode = value[0];
           const capitalName = tempMode.charAt(0).toUpperCase() + tempMode.slice(1);
           const tempButtonRef = value[1];
+          const icon = value[2];
           return <ModeButtonWrapper 
             key = {key} 
             ref = {tempButtonRef} 
             name = {capitalName} 
             onClick = {()=>{handleMode(tempMode)}}>
-              {capitalName}
+              {icon}
               </ModeButtonWrapper>
 
         })}
@@ -122,7 +126,7 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
             historyRef.current.makeAction(undoList, true);
           }}
         >
-          Undo
+          <UndoIcon className = "mode-icon"/>
         </ModeButtonWrapper>
         <ModeButtonWrapper
           canPress={false}
@@ -131,8 +135,7 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
             historyRef.current.makeAction(redoList, false);
           }}
         >
-          {" "}
-          Redo{" "}
+          <RedoIcon className = "mode-icon"/>
         </ModeButtonWrapper>
         <ModeButtonWrapper
           ref={exportButton}
@@ -142,8 +145,7 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
             exporterRef.current.exportPDF();
           }}
         >
-          {" "}
-          Export PDF
+          <DownloadIcon className = "mode-icon"/>
         </ModeButtonWrapper>
       </div>
     </div>

@@ -1,7 +1,11 @@
 .draw-button-style {
+  display:flex;
+  justify-content:center;
+  align-items:center;
   user-select: none;
   margin-left: 1%;
   margin-right: 1%;
+
   height: 20%;
   aspect-ratio: 1 / 1;
   background-color: #ebf5fb;

@@ -4,6 +4,8 @@ import {
   useEffect,
 } from "react";
 import useStore from "../../DevTools/store";
+import TranslateIcon from "../../../assets/Icons/Transform/translate.svg?react";
+import RotateIcon from "../../../assets/Icons/Transform/rotate.svg?react";
 
 /**
  *@typedef {TransformWindow} - Window that has many buttons that represent the different tools the user can utilize.
@@ -13,7 +15,9 @@ import useStore from "../../DevTools/store";
 const TransformWindow = ({mouseHoverRef}) => {
   const translateButton = useRef(null);
   const rotateButton = useRef(null);
-  const toolKey= [["translate",translateButton], ["rotate",rotateButton]];
+  const toolKey= [
+    ["translate",translateButton,<TranslateIcon className = 'tool-icon' />],
+     ["rotate",rotateButton,<RotateIcon className = 'tool-icon'/>]];
 
   const currentTool = useStore((state) => state.tool);
   const setTool = useStore((state) => state.setTool);
@@ -54,6 +58,7 @@ const TransformWindow = ({mouseHoverRef}) => {
       const name = value[0];
       const buttonRef = value[1];
       const capital = name.charAt(0).toUpperCase() + name.slice(1);
+      const icon = value[2];
       return <ToolButton 
       ref = {buttonRef}
       key = {key}
@@ -66,26 +71,9 @@ const TransformWindow = ({mouseHoverRef}) => {
       onMouseLeave = {()=>{
         mouseHoverRef.current.cancelTimer(capital);
       }}>
-        {capital}
+        {icon}
       </ToolButton>
     })}
-      {/*<ToolButton
-        ref={translateButton}
-        onClick={() => {
-          handleClick(0);
-        }}
-      >
-        {" "}
-        Translate{" "}
-      </ToolButton>
-      <ToolButton
-        ref={rotateButton}
-        onClick={() => {
-          handleClick(1);
-        }}
-      >
-        Rotate{" "}
-      </ToolButton>*/}
     </>
   );
 };
