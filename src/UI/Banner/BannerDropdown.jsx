@@ -2,6 +2,7 @@ import supabase from "../../supabase";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import pfp from "../../assets/weavelpfp.png";
 import useStore from "../../Sandbox/DevTools/store";
 import useGlobalStore from "../../globalStore";
 import "./BannerDropdown.css";
@@ -52,15 +53,18 @@ const BannerDropdown = () => {
 
   return (
     <div className="profile-container">
+      <>
       <motion.div
-        whileHover={{ backgroundColor: "#defaff" }}
+        
         className="banner-profile clickable"
         onClick={() => {
           setDropped(!dropped);
         }}
       >
-        {"[PUT PFP HERE]"}
+        
+        <motion.img whileHover={{ scale:1.05 }} whileTap ={{scale:0.95}} src = {pfp} className = "pfp-size"/>
       </motion.div>
+      </>
 
       <div
         className="profile-dropdown"

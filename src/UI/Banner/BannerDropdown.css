@@ -35,6 +35,10 @@
   overflow: hidden;
   z-index: 1000;
 }
+.pfp-size{
+  height:10vh;
+  border-radius:100vh;
+}
 .profile-dropdown-option {
   background-color: #ffffff;
   z-index: 1000;
