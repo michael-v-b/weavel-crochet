@@ -31,7 +31,7 @@ const Profile = () => {
 
           <div className="profile-option-container">
   
-            <hr className=  "profile-line"/>
+            {/*<hr className=  "profile-line"/>*/}
 
             {/*RESET PASSWORD ///////////////////////*/}
             <div className=  "profile-option-subcontainer">

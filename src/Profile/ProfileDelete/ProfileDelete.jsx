@@ -14,7 +14,7 @@ const ProjectDelete = ({setDeleteAccount}) => {
     const authData = useGlobalStore((state) => state.authData);
     const navigate = useNavigate();
 
-    const deleteAccount = async () => {
+    const deleteProjects = async () => {
         const user_id = authData.user.id;
         
         //get all the projects
@@ -35,10 +35,32 @@ const ProjectDelete = ({setDeleteAccount}) => {
         //delete profile
         const {data: userData, error: userError} = await supabase.from("Profiles").delete().eq("user_id",user_id);
 
-        //sign out
-        const {error:signOutError} = await supabase.auth.signOut();
+    }
 
-       navigate("/");
+    /*
+    *Delete a user's account
+    */
+    const deleteAccount = async () => {        
+        const {data: sessionData ,error: sessionError} = await supabase.auth.getSession();
+        if(!sessionData || sessionError) {
+            console.log("failed to delete");
+            return
+        }
+
+        const token = sessionData.session.access_token;
+
+
+        const response = await fetch('https://zilhlxacxrxymrrtdfmz.supabase.co/functions/v1/delete-user',{
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Bearer ' + token
+            }
+        });
+
+        const result = await response.json();
+        const {error:signOutError} = await supabase.auth.signOut();
+        navigate("/");
     }
 
     return <div className = "profile-delete-container">
@@ -54,6 +76,7 @@ const ProjectDelete = ({setDeleteAccount}) => {
             whileTap = {{scale:0.95}}
             className = "profile-delete-button clickable"
             onClick = {()=>{
+                //deleteProjects();
                 deleteAccount();
             }}>
                 <div>Delete Account</div>
