@@ -28,7 +28,7 @@ const MouseHover = forwardRef(({},ref) => {
             setVisible(true);
 
         }
-            ,1000);
+            ,1250);
     }
 
     const cancelTimer = () => {

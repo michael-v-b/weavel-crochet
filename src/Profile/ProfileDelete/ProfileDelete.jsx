@@ -50,7 +50,7 @@ const ProjectDelete = ({setDeleteAccount}) => {
         const token = sessionData.session.access_token;
 
 
-        const response = await fetch('https://zilhlxacxrxymrrtdfmz.supabase.co/functions/v1/delete-user',{
+        fetch('https://zilhlxacxrxymrrtdfmz.supabase.co/functions/v1/delete-user',{
             method: 'POST',
             headers: {
                 'Content-Type':'application/json',
@@ -58,8 +58,12 @@ const ProjectDelete = ({setDeleteAccount}) => {
             }
         });
 
-        const result = await response.json();
         const {error:signOutError} = await supabase.auth.signOut();
+
+        if(signOutError) {
+            console.log("Error with signing out");
+            console.dir(signOutError);
+        }
         navigate("/");
     }
 

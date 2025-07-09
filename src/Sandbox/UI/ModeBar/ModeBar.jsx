@@ -83,10 +83,6 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef}) => {
     }
   },[mode]);
 
-  const handleMouseEnter = (element) => {
-    mouseHoverRef.current.startTimer(element);
-  }
-
   const ModeButtonWrapper = forwardRef(({name, mode = -1,...props}, ref) => {
     return <ModeButton 
       ref = {ref} 
