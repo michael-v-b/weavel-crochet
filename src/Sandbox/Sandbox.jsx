@@ -69,6 +69,7 @@ const Sandbox = () => {
   };
 
   const uploadFile = async () => {
+
     const path = "" + authData.user.id + "/" + projectId + "/data.json";
     const jsonBlob = new Blob([JSON.stringify(projectFile)], {
       type: "application/json",

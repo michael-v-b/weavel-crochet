@@ -60,7 +60,7 @@ const ProjectManager = forwardRef((_, ref) => {
     });
 
     const path = "" + authData.user.id + "/" + id + "/data.json";
-
+    
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from("Project Files")
       .upload(path, jsonBlob);
@@ -73,6 +73,8 @@ const ProjectManager = forwardRef((_, ref) => {
         project_url: path,
       },
     ]);
+
+
 
     if (!insertError) {
       addNumOfProjects(1);

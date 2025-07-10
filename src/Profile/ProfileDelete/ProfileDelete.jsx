@@ -34,6 +34,7 @@ const ProjectDelete = ({setDeleteAccount}) => {
 
         //delete profile
         const {data: userData, error: userError} = await supabase.from("Profiles").delete().eq("user_id",user_id);
+        
 
     }
 
@@ -47,16 +48,17 @@ const ProjectDelete = ({setDeleteAccount}) => {
             return
         }
 
-        const token = sessionData.session.access_token;
 
-
-        fetch('https://zilhlxacxrxymrrtdfmz.supabase.co/functions/v1/delete-user',{
+       const {data:functionData,error:functionError}  = await supabase.functions.invoke('delete-user',{
             method: 'POST',
             headers: {
                 'Content-Type':'application/json',
-                'Authorization':'Bearer ' + token
             }
         });
+
+        if(functionError) {
+            console.dir(functionError);
+        }
 
         const {error:signOutError} = await supabase.auth.signOut();
 

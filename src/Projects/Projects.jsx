@@ -35,12 +35,6 @@ const Projects = () => {
   const projectManagerRef = useRef(null);
   const clickedX = useRef(false);
 
-  
-  useEffect(()=>{
-    if(projectNames) {
-      setProjectsLoading(true);
-    }
-  },[]);
 
   useEffect(()=>{
     if(projectNames) {
@@ -51,6 +45,28 @@ const Projects = () => {
   },[projectNames]);
 
 
+    /**
+   * Initializes event listeners and project data.
+   */
+  useEffect(() => {
+      if(projectNames) {
+        setProjectsLoading(true);
+      }
+
+      document.addEventListener("click", handleClick);
+      setWarningText("");
+      return () => {
+        document.removeEventListener("click", handleClick);
+      };
+  }, []);
+
+  useEffect(()=>{
+    if(authData) {
+      testProfile();
+    }
+  },[authData]);
+
+
   
 
     /**
@@ -59,11 +75,13 @@ const Projects = () => {
    *@param {data} data - The user's data from the supabase.auth table.
    */
    const createProfile = async (data) => {
-    const { error } = await supabase.from("Profiles").insert({
-      email: data.user.email,
-      user_id: data.user.id,
-      created_at: data.user.created_at,
-    });
+    const {data:functionData,error:functionError} = await supabase.functions.invoke('create-new-user',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json',
+      }});
+      getProjects();
   };
   
   /**
@@ -80,17 +98,7 @@ const Projects = () => {
     }
   }
 
-  /**
-   * Initializes event listeners and project data.
-   */
-  useEffect(() => {
-      testProfile();
-      document.addEventListener("click", handleClick);
-      setWarningText("");
-      return () => {
-        document.removeEventListener("click", handleClick);
-      };
-  }, []);
+
 
   /**
    * Creates projects based on user's supabase.
@@ -128,6 +136,7 @@ const Projects = () => {
   /**
    *Creates project if user is under 3 projects.
    */
+
   const handleCreateProject = () => {
     if (projectNames.length < 3) {
       const name = "New Project";
