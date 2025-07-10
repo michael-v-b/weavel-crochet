@@ -14,29 +14,7 @@ const ProjectDelete = ({setDeleteAccount}) => {
     const authData = useGlobalStore((state) => state.authData);
     const navigate = useNavigate();
 
-    const deleteProjects = async () => {
-        const user_id = authData.user.id;
-        
-        //get all the projects
-        const {data: projectData,error:projectError} = await supabase.from("Projects").select("*");
 
-        //remove all the projects one by one
-        projectData.forEach(async (object) => {
-            const project_id = object.project_id;
-            const {data:tableData,error:tableError} = await supabase.from("Projects").delete().eq("project_id",project_id);
-            
-            const path = "" + user_id +"/" +project_id + "/data.json";
-            const {data: storageData, error: storageError} = await supabase.storage.from("Project Files").remove([path]);
-        })
-
-        //set projects to 0
-        const {data:projectNumData, error:projectNumError} = await supabase.from("Profiles").update({num_of_projects:0}).eq("user_id",user_id);
-
-        //delete profile
-        const {data: userData, error: userError} = await supabase.from("Profiles").delete().eq("user_id",user_id);
-        
-
-    }
 
     /*
     *Delete a user's account
@@ -55,6 +33,10 @@ const ProjectDelete = ({setDeleteAccount}) => {
                 'Content-Type':'application/json',
             }
         });
+
+        console.log("functionData: ");
+        console.dir(functionData);
+
 
         if(functionError) {
             console.dir(functionError);
