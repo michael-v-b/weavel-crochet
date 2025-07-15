@@ -75,9 +75,11 @@ const Sandbox = () => {
       type: "application/json",
     });
 
+
+    console.log("update this path: " + path);
     const { data, error } = await supabase.storage
       .from("Project Files")
-      .upload(path, jsonBlob, { upsert: true });
+      .update(path, jsonBlob);\
   };
 
   //affects loading window

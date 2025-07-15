@@ -137,12 +137,10 @@ const Projects = () => {
    *Creates project if user is under 3 projects.
    */
 
-  const handleCreateProject = () => {
+  const handleCreateProject = async () => {
     if (projectNames.length < 3) {
       const name = "New Project";
-      const id = crypto.randomUUID();
-
-      projectManagerRef.current.createProject(name, id);
+      const id = await projectManagerRef.current.createProject();
 
       setProjectNames([...projectNames, [name, id]]);
     } else {

@@ -39,15 +39,13 @@ const ProjectManager = forwardRef((_, ref) => {
   };
 
   /**
-   *Creates a project in the "Projects" table and in the bucket?
-   *@param {string} name - name of the project.
-   *@param {string} id - value for project_id.
+   *Creates a project in the "Projects" table and in the bucket
    */
-  const createProject = async (name, id) => {
+  const createProject = async () => {
     /** default project entry
      * { projectName: name, colorList: ["#ff0000"], meshes: {} }
      */
-    const jsonData = {
+    /*const jsonData = {
       colorList: ["#ff0000"],
       meshes: {},
       cameraPosition: [0,0,5],
@@ -59,9 +57,19 @@ const ProjectManager = forwardRef((_, ref) => {
       type: "application/json",
     });
 
-    const path = "" + authData.user.id + "/" + id + "/data.json";
+    const path = "" + authData.user.id + "/" + id + "/data.json";*/
     
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const {data:invokeData,error:invokeError} = await supabase.functions.invoke('add-new-project',{method: 'POST',
+            body:"why is this not getting sent?",
+            headers: {
+                'Content-Type':'application/json',
+            }});
+
+    console.log("invoke data");
+    console.dir(invokeData);
+    return invokeData.message;
+    //return invokeData.message;
+    /*const { data: uploadData, error: uploadError } = await supabase.storage
       .from("Project Files")
       .upload(path, jsonBlob);
 
@@ -72,15 +80,7 @@ const ProjectManager = forwardRef((_, ref) => {
         project_id: id,
         project_url: path,
       },
-    ]);
-
-
-
-    if (!insertError) {
-      addNumOfProjects(1);
-    }
-    const output = [name, id];
-    return output;
+    ]);*/
   };
 
   /**

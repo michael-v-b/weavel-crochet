@@ -21,14 +21,14 @@ export default function App() {
   return (
     <BrowserRouter basename = "/weavel-crochet">
       <Routes>
-        <Route path="" element={<Home />} />
-        <Route path="sandbox/:info" element={<Sandbox />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route path= "" element={<Home />} />
+        <Route path= "sandbox/:info" element={<Sandbox />} />
+        <Route path= "login" element={<Login />} />
+        <Route path= "register" element={<Register />} />
         <Route path = "verification" element = {<Verification/>}/>
         <Route path = "forgot_pass" element = {<ForgotPass/>}/>
         <Route path = "reset_pass" element = {<ResetPass/>}/>
-        <Route path="projects" element={<Projects />} />
+        <Route path= "projects" element={<Projects />} />
         <Route path = "help" element = {<Help/>}/>
         <Route path = "profile" element = {<Profile/>}/>
         <Route path = "about" element = {<About/>}/>
