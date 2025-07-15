@@ -79,7 +79,7 @@ const Sandbox = () => {
     console.log("update this path: " + path);
     const { data, error } = await supabase.storage
       .from("Project Files")
-      .update(path, jsonBlob);\
+      .update(path, jsonBlob);
   };
 
   //affects loading window
