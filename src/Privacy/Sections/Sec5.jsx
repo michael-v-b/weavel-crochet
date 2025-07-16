@@ -35,7 +35,7 @@ const Sec5 = () => {
             Analytics Advertising Features through <span className = "link">Ads Settings</span> and Ad Settings for mobile apps. Other opt out means 
             include <span className= "link">http://optout.networkadvertising.org/</span> and
             <span className = "link">https://www.networkadvertising.org/mobile-choice.</span> For more information on the privacy 
-            practices of Google, please visit the <link>Google Privacy & Terms page.</link>
+            practices of Google, please visit the <span className = "link">Google Privacy & Terms page.</span>
 
         </div>
 
