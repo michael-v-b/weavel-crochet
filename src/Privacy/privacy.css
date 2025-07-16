@@ -1,0 +1,16 @@
+
+.privacy-text {
+    font-family:"Nunito","sans-serif";
+}
+.privacy-paragraph{
+    margin-top:10vh;
+}
+strong{
+    color:rgb(70, 70, 70);
+    margin-right:1vh;
+}
+.link{
+    margin-left:.5vh;
+    font-size:1.5vw;
+    color:blue;
+}

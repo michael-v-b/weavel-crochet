@@ -9,6 +9,7 @@ import Projects from "./Projects/Projects";
 import Help from "./Help/Help";
 import Profile from "./Profile/Profile";
 import About from "./About/About";
+import Privacy from "./Privacy/Privacy";
 import { BrowserRouter, Routes, Route } from "react-router";
 /**
  *@typedef {App} - page for full project, connects all parts of project together in a central unit.
@@ -32,6 +33,7 @@ export default function App() {
         <Route path = "help" element = {<Help/>}/>
         <Route path = "profile" element = {<Profile/>}/>
         <Route path = "about" element = {<About/>}/>
+        <Route path = "privacy" element = {<Privacy/>}/>
       </Routes>
     </BrowserRouter>
   );
