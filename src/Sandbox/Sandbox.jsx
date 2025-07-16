@@ -71,15 +71,22 @@ const Sandbox = () => {
   const uploadFile = async () => {
 
     const path = "" + authData.user.id + "/" + projectId + "/data.json";
-    const jsonBlob = new Blob([JSON.stringify(projectFile)], {
-      type: "application/json",
-    });
 
 
-    console.log("update this path: " + path);
-    const { data, error } = await supabase.storage
-      .from("Project Files")
-      .update(path, jsonBlob);
+    const {data,error} = await supabase.functions.invoke('test-file-size',{
+      method:'POST',
+      body:{
+        projectId:projectId,
+        projectFile:projectFile,
+      }
+    })
+
+      console.log("data: ");
+      console.dir(data);
+      console.log('error');
+      console.dir(error);
+    
+
   };
 
   //affects loading window

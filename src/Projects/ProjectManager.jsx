@@ -59,11 +59,7 @@ const ProjectManager = forwardRef((_, ref) => {
 
     const path = "" + authData.user.id + "/" + id + "/data.json";*/
     
-    const {data:invokeData,error:invokeError} = await supabase.functions.invoke('add-new-project',{method: 'POST',
-            body:"why is this not getting sent?",
-            headers: {
-                'Content-Type':'application/json',
-            }});
+    const {data:invokeData,error:invokeError} = await supabase.functions.invoke('add-new-project',{method: 'POST'});
 
     console.log("invoke data");
     console.dir(invokeData);
