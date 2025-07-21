@@ -14,7 +14,7 @@ const Sec15 = forwardRef((_, ref) => {
         information. These rights may be limited in some circumstances by
         applicable law To request to review, update or delete you personal
         information, please fill out and submit a{" "}
-        <span className="link not-added">data subject access request</span>
+        <span className="link">data subject access request</span>
       </div>
     </>
   );

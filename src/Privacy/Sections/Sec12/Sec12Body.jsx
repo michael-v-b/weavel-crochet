@@ -128,9 +128,9 @@ const Sec12Body = ({ sectionRefs }) => {
       <h3>How to Exercise Your Rights</h3>
       <div>
         To exercise these rights, you can contact us by submitting a{" "}
-        <span className="link not-added">data subject access request</span>, by
-        emailing us at weavelcrochet@gmaill.com, or by referring to the contact
-        details at the bottom of this document.
+        <span className="link">data subject access request</span>, by emailing
+        us at weavelcrochet@gmaill.com, or by referring to the contact details
+        at the bottom of this document.
       </div>
       <div>
         Under certain US state data protection laws, you can designate an
