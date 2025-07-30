@@ -23,7 +23,7 @@ import Exporter from "./Export/Exporter";
 
 import PortraitWarning from "./PortraitWarning/PortraitWarning";
 
-import { useRef, useEffect,useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import useGlobalStore from "../globalStore";
 import AuthTester from "../AuthTester";
@@ -69,24 +69,15 @@ const Sandbox = () => {
   };
 
   const uploadFile = async () => {
-
     const path = "" + authData.user.id + "/" + projectId + "/data.json";
 
-
-    const {data,error} = await supabase.functions.invoke('test-file-size',{
-      method:'POST',
-      body:{
-        projectId:projectId,
-        projectFile:projectFile,
-      }
-    })
-
-      console.log("data: ");
-      console.dir(data);
-      console.log('error');
-      console.dir(error);
-    
-
+    const { data, error } = await supabase.functions.invoke("test-file-size", {
+      method: "POST",
+      body: {
+        projectId: projectId,
+        projectFile: projectFile,
+      },
+    });
   };
 
   //affects loading window
@@ -94,23 +85,24 @@ const Sandbox = () => {
     setNameLoading(true);
     setMeshLoading(true);
     setWarningText("");
-    
+
     //set is landscape
 
     const handleResize = () => {
-      if(window.innerWidth > 480) {
+      if (window.innerWidth > 480) {
         setPortrait(false);
-      } else if (window.innerHeight > 480){
+      } else if (window.innerHeight > 480) {
         setPortrait(true);
       }
-    }
+    };
 
     handleResize();
 
-    window.addEventListener('resize',handleResize);
+    window.addEventListener("resize", handleResize);
 
-    return ()=> {window.removeEventListener('resize',handleResize)}
-    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   //updates file when change occurs but only if projectId is correct.
@@ -119,13 +111,12 @@ const Sandbox = () => {
       const cameraPosition = cameraTrackerRef.current.getCameraPosition();
       const cameraRotation = cameraTrackerRef.current.getCameraRotation();
 
-    
-      for(let i = 0; i < cameraPosition.length;i++) {
+      for (let i = 0; i < cameraPosition.length; i++) {
         cameraPosition[i] = parseFloat(cameraPosition[i].toFixed(2));
-        cameraRotation[i] = parseFloat(cameraRotation[i].toFixed(2)); 
+        cameraRotation[i] = parseFloat(cameraRotation[i].toFixed(2));
       }
       //update camera first prevents having to do this every frame
-  
+
       projectFile.cameraPosition = cameraPosition;
       projectFile.cameraRotation = cameraRotation;
     }
@@ -140,10 +131,10 @@ const Sandbox = () => {
 
   return (
     <>
-      <MouseHover ref = {mouseHoverRef}/>
+      <MouseHover ref={mouseHoverRef} />
       <div className="webpage">
         <WarningPop />
-        {isPortrait && <PortraitWarning/>}
+        {isPortrait && <PortraitWarning />}
         <LoadScreen visible={meshLoading || nameLoading} />
 
         <ProjectReader
@@ -155,22 +146,26 @@ const Sandbox = () => {
         <AuthTester reroute={"/"} />
         <NameTag />
         <div className="sandbox">
-          <Exporter ref={exporterRef} screenshotRef = {screenshotRef}/>
+          <Exporter ref={exporterRef} screenshotRef={screenshotRef} />
           <KeyTracker />
 
           <div className="left-window">
-            <ToolWindow getShape={handleShape} mouseHoverRef = {mouseHoverRef}/>
+            <ToolWindow getShape={handleShape} mouseHoverRef={mouseHoverRef} />
             <ColorWindow />
           </div>
 
           <div className="canvas-div">
-            <ModeBar exporterRef={exporterRef} historyRef={historyRef} mouseHoverRef = {mouseHoverRef} />
-            {!meshLoading && !nameLoading && <ProjectDim/>}
+            <ModeBar
+              exporterRef={exporterRef}
+              historyRef={historyRef}
+              mouseHoverRef={mouseHoverRef}
+            />
+            {!meshLoading && !nameLoading && <ProjectDim />}
             <CanvasWindow
               ref={canvasRef}
-              screenshotRef = {screenshotRef}
+              screenshotRef={screenshotRef}
               historyRef={historyRef}
-              deleterRef = {deleterRef}
+              deleterRef={deleterRef}
               selectionManagerRef={selectionManagerRef}
               meshSpawnerRef={meshSpawnerRef}
               cameraTrackerRef={cameraTrackerRef}
@@ -181,11 +176,11 @@ const Sandbox = () => {
               ref={hierarchyRef}
               selectionManager={selectionManagerRef}
             />
-            <InfoWindow deleterRef = {deleterRef}/>
+            <InfoWindow deleterRef={deleterRef} />
           </div>
         </div>
-        <div style = {{height:'10vh'}}></div>
-        <Footer/>
+        <div style={{ height: "10vh" }}></div>
+        <Footer />
       </div>
     </>
   );

@@ -83,20 +83,20 @@ const ProjectReader = forwardRef(
 
       const { data, error } = await supabase.storage
         .from("Project Files")
-        .download(path);
-      if (!data) {
+        .createSignedUrl(path, 60);
+
+      if (!data || error) {
+        navigate("/");
         return;
       }
+      const freshUrl = data.signedUrl + "&t=" + Date.now();
 
-      if (error) {
-        navigate("/");
-      }
-      const dataText = await data.text();
-      const project = JSON.parse(dataText);
+      const response = await fetch(freshUrl, { cache: "no-store" });
+      const project = await response.json();
+
       if (!project) {
         return;
       }
-
 
       setProjectId(tempId);
       setProjectFile(project);
@@ -139,7 +139,6 @@ const ProjectReader = forwardRef(
         meshKeys,
         false
       );
-
 
       numFinished = meshRefs.length;
 

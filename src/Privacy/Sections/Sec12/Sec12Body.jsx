@@ -74,7 +74,7 @@ const Sec12Body = ({ sectionRefs }) => {
         a business or commercial purpose in the preceding twelve (12) months. We
         have disclosed the following categories of personal information to third
         parties for a business or commercial purpose in the preceding twelve
-        (12) months:
+        (12) months: 
       </div>
       <div>
         The categories of third parties to whom we disclosed personal
