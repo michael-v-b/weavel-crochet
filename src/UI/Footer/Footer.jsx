@@ -187,9 +187,14 @@ const Footer = () => {
             >
               Privacy Policy
             </FooterOption>
-            <div className="footer-text footer-text-bottom">
+            <FooterOption
+              className="footer-text footer-text-bottom"
+              onClick={() => {
+                navigate("/tos");
+              }}
+            >
               Terms of Service
-            </div>
+            </FooterOption>
             <div className="footer-text footer-text-bottom copyright-text">
               Weavel Crochet
             </div>
