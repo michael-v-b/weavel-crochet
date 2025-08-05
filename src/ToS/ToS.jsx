@@ -77,7 +77,7 @@ const ToS = () => {
                 <Intro/>
                 <ToC sectionRefs = {sectionRefs}/>
                 {sections.map((Component, i ) => {
-                    return <Component ref = {sectionRefs[i]} key = {i}/>
+                    return <Component ref = {sectionRefs[i]} sectionRefs = {sectionRefs} key = {i}/>
                 })}
             </div>
         </div>

@@ -12,7 +12,7 @@ const Intro = () => {
         <div>We are Weavel Crochet.</div>
 
         <div>
-            We operate the website <span className = "link not-added">https://weavelcrochet.com</span> (the “<strong>Site</strong>”), 
+            We operate the website <a className = "link" href = "https://michael-v-b.github.io/weavel-crochet">https://weavelcrochet.com</a> (the “<strong>Site</strong>”), 
             as well as any other related products and services that refer or link to these legal terms 
             (the “<strong>Legal Terms</strong>”) (collectively the “<strong>Services</strong>”).
          </div>

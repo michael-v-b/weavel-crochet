@@ -1,6 +1,6 @@
 import {forwardRef} from 'react';
 
-const Sec2 = forwardRef((_,ref) => {
+const Sec2 = forwardRef(({sectionRefs},ref) => {
     return <>
         <h2 ref = {ref}>2. Intellectual Property Rights</h2>
 
@@ -18,7 +18,9 @@ const Sec2 = forwardRef((_,ref) => {
         <div>The Content and Marks are provided in or through the Services “AS IS” for yoru personal, non-commercial use only.</div>
 
         <div>Subject to your compliance with these Legal Terms, including the 
-            "<span className = "link not-added">Prohibited Activities</span>" section below, we grant you a non-exclusive, non-transferable, revocable license to:
+            "<span className = "link clickable" onClick = {()=>{
+                sectionRefs[5].current.scrollIntoView({behavior:'smooth'});
+            }}>Prohibited Activities</span>" section below, we grant you a non-exclusive, non-transferable, revocable license to:
         </div>
         <ul>
             <li>access the Services; and</li>
@@ -54,7 +56,9 @@ const Sec2 = forwardRef((_,ref) => {
         <h3> Your Submissions</h3>
         
         <div>
-            Please review this section and the “<span className = "link not-added">Prohibited Activites</span>” section carefully 
+            Please review this section and the “<span className = "link clickable" onClick = {()=>{
+                sectionRefs[5].current.scrollIntoView({behavior:'smooth'});
+            }}>Prohibited Activites</span>” section carefully 
             prior to using our Services to understand the (a) rights you give us and (b) obligations you have when you post or 
             upload any content through the Services.
         </div>
@@ -73,7 +77,9 @@ const Sec2 = forwardRef((_,ref) => {
 
         <ul>
             <li>
-                confirm that you have read and gree with our “<span className =  "link not-added">Prohibited Activites</span>” and 
+                confirm that you have read and gree with our “<span className = "link clickable" onClick = {()=>{
+                sectionRefs[5].current.scrollIntoView({behavior:'smooth'});
+            }}>Prohibited Activites</span>” and 
                 will not post, send, publish, upload, or transmit through the Services any Submission that is illegal, harassing, 
                 hateful, harmful, defamatory, obscene, bullying, abusive, discriminatory, threatening to any person or group, sexually
                  explicit, false, inaccurate, deceitful, or misleading;
