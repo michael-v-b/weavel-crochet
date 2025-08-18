@@ -10,18 +10,25 @@
 
 .scroll-image-container {
     display:flex;
-    position:absolute;
-    height:30vh;
-    width:60vh;
-    background-color:blue;
+    height:98%;
+    aspect-ratio:2/1;
     margin-right:1vw;
     margin-left:1vw;
     border-radius:25px;
     overflow:hidden;
+    border-style:solid;
+    border-color:rgb(69, 100, 187);
+    border-width:2%;
+}
+.full-scroll {
+    display:flex;
+    flex-direction:row;
+    position:absolute;
+    height:100%;
 }
 .scroll-image {
     height:100%;
-    width:50%;
+    aspect-ratio:1/1;
 }
 
 @media (max-width: 480px) {

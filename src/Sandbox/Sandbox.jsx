@@ -160,7 +160,7 @@ const Sandbox = () => {
               historyRef={historyRef}
               mouseHoverRef={mouseHoverRef}
             />
-            {!meshLoading && !nameLoading && <ProjectDim />}
+            {!meshLoading && !nameLoading /*&& <ProjectDim />*/}
             <CanvasWindow
               ref={canvasRef}
               screenshotRef={screenshotRef}

@@ -33,7 +33,7 @@ const GroupPage = ({ objects, deleterRef }) => {
 
   const CommonFields = () => {
     const ShapePage = shapePages[currentShape];
-    return <>{ShapePage && <ShapePage objects={objects} />};</>;
+    return <>{ShapePage && <ShapePage objects={objects} />}</>;
   };
 
   /**
