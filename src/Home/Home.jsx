@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import AuthTester from "../AuthTester";
 import InfiniteScroll from "./InfiniteScroll";
+import heroImage from "../assets/Home/Home.jpg";
 
 import "./Home.css";
 
@@ -101,6 +102,7 @@ const Home = () => {
           animate={heroSpace}
           className="hero-space"
         >
+          <img src=  {heroImage} className=  "hero-image"/>
           <motion.div
             initial={{ height: "0%", opacity: 0 }}
             animate={heroText}

@@ -8,13 +8,20 @@
     overflow:hidden;
 }
 
-.scroll-image {
+.scroll-image-container {
+    display:flex;
     position:absolute;
     height:30vh;
-    width:30vh;
+    width:60vh;
     background-color:blue;
     margin-right:1vw;
     margin-left:1vw;
+    border-radius:25px;
+    overflow:hidden;
+}
+.scroll-image {
+    height:100%;
+    width:50%;
 }
 
 @media (max-width: 480px) {

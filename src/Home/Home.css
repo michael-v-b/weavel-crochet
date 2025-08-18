@@ -14,9 +14,15 @@
   align-items: flex-end;
   justify-content: center;
   background-color: #4daa66;
-  height: 75vh;
+  height: 80vh;
   width: var(--webpage-width);
   position: absolute;
+  overflow:hidden;
+}
+.hero-image {
+  width:100%;
+  position:absolute;
+  top:-15vw;
 }
 .hero-text {
   display: flex;
@@ -30,6 +36,7 @@
   height: 30%;
   width: 100%;
   bottom: 0;
+  z-index:10;
 }
 
 .first-summary {
@@ -189,7 +196,15 @@
   background-color: orange;
 }
 
+
+@media (max-width:700px) {
+  .hero-image{
+    height:130%;
+    width:auto;
+  }
+}
 @media (max-width:480px) {
+
 
   .first-summary-title{
     font-size:5vw;
