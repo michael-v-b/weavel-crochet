@@ -6,7 +6,7 @@ const HomeIcon = () => {
 
     const navigate = useNavigate();
     return <motion.img
-        className="login-logo"
+        className= "register-logo"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={()=>{

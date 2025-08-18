@@ -1,0 +1,33 @@
+
+.ack-container {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    width:60vh;
+}
+.ack-check-container{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    width:30%;
+    padding-right:5vh;
+}
+.ack-check {
+    transform:scale(1.5);
+}
+.ack-text-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:50%;
+}
+.ack-text{
+    font-size:2vh;
+    text-align:center;
+    font-family:'Nunito','sans-serif';
+}
+
+.link{
+    color:blue;
+}

@@ -1,11 +1,12 @@
 import "./Register.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
-import { useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import supabase from "../../supabase";
 import HomeIcon from "../HomeIcon";
 import useStore from "../../Sandbox/DevTools/store";
 import KeyTracker from "../../Sandbox/DevTools/KeyTracker";
+import Agreement from "../Agreement/Agreement";
 
 /**
  *@typedef {Register} - Screen users navigate to to create their accounts.
@@ -17,7 +18,8 @@ const Register = () => {
   const [passTwo, setPassTwo] = useState("");
   const [email, setEmail] = useState("");
   const [warningText, setWarningText] = useState("");
-  const keysPressed = useStore((state)=>state.keysPressed);
+  const [agreedToTOS, setTOS] = useState(false);
+  const keysPressed = useStore((state) => state.keysPressed);
 
   /**
    *Updates the state of passOne when the respective field is changed.
@@ -69,6 +71,8 @@ const Register = () => {
       setWarningText("*Password must be over 6 characters");
     } else if (passOne != passTwo) {
       setWarningText("*Both passwords must match");
+    } else if (!agreedToTOS) {
+      setWarningText("*Please agree to our ToS and Privacy Policy");
     } else {
       //SUCCESS
       setWarningText("");
@@ -86,16 +90,16 @@ const Register = () => {
     }
   };
 
-  useEffect(()=>{
-    if(keysPressed.includes('Enter')) {
+  useEffect(() => {
+    if (keysPressed.includes("Enter")) {
       handleRegisterClick();
     }
-  },[keysPressed]);
+  }, [keysPressed]);
 
   return (
     <div className="web-container center">
-      <HomeIcon/>
-      <KeyTracker/>
+      <HomeIcon register={true} />
+      <KeyTracker />
       <div className="register-window ">
         <div className="register-request">Please Create Your Account </div>
         <div className="register-inputs center">
@@ -124,10 +128,12 @@ const Register = () => {
             onChange={handleChangeTwo}
           />
 
+          <Agreement getChecked={setTOS} />
           {/*displays warning text if exists*/}
           {warningText.length > 0 && (
             <div className="warning"> {warningText}</div>
           )}
+
           <motion.div
             className="register-button"
             whileHover={{ scale: 1.1, backgroundColor: "#11d5e9" }}

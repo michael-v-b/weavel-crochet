@@ -2,7 +2,7 @@ import "./Login.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 import { useState,useEffect } from "react";
-import logo from "../../assets/logo.png";
+import HomeIcon from "../HomeIcon";
 import supabase from "../../supabase";
 import useGlobalStore from "../../globalStore";
 import useStore from "../../Sandbox/DevTools/store";
@@ -85,13 +85,7 @@ const Login = () => {
   return (
     <div className="web-container center">
       <KeyTracker/>
-      <motion.img
-        className="login-logo"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={handleHomeClick}
-        src={logo}
-      />
+      <HomeIcon/>
       <div className="login-window ">
         <div className="login-request">Please Log In </div>
         <div className="center">

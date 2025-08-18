@@ -12,6 +12,7 @@ import About from "./About/About";
 import Privacy from "./Privacy/Privacy";
 import ToS from "./ToS/ToS";
 import { BrowserRouter, Routes, Route } from "react-router";
+
 /**
  *@typedef {App} - page for full project, connects all parts of project together in a central unit.
  *@returns {Component} main page of project, contains all of the windows.
