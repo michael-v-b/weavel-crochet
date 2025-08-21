@@ -3,6 +3,9 @@ import logo from "../../assets/logo.png";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import TikTok from "../../assets/Icons/Footer/tiktok.svg?react";
+import Instagram from "../../assets/Icons/Footer/instagram.svg?react";
+import Facebook from "../../assets/Icons/Footer/facebook.svg?react";
 
 //I know it doesn't make sense for vline and hline to be here.
 
@@ -74,29 +77,6 @@ const FooterOption = ({ children, onClick }) => {
   );
 };
 
-/*
-    Things to include in the footer
-    -About us
-    -Contact us
-    -Feedback
-    -Donate
-    -Create ACcount
-    -social media
-        -facebook
-        -instagram
-        -tiktok
-        -twitter
-
-    
-    -Resources
-        -Help
-        -How to crochet
-    -Terms of Service
-    -Privacy Policy
-    
-    
-    */
-
 const Footer = () => {
   const FEEDBACK_FORM_LINK = import.meta.env.VITE_FEEDBACK_FORM;
   const navigate = useNavigate();
@@ -134,7 +114,41 @@ const Footer = () => {
             className="footer-logo clickable"
           />
           <div className="footer-text footer-alt-color"> Follow Us: </div>
-          <div> Socials </div>
+          <div className="footer-socials">
+            <motion.div
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => {
+                window.open("https://www.tiktok.com/@weavelcrochet", "_blank");
+              }}
+            >
+              <TikTok className="footer-socials-icon" />
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => {
+                window.open(
+                  "https://www.instagram.com/weavelcrochet/",
+                  "_blank"
+                );
+              }}
+            >
+              <Instagram className="footer-socials-icon" />
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => {
+                window.open(
+                  "https://www.facebook.com/profile.php?id=61579224137661",
+                  "_blank"
+                );
+              }}
+            >
+              <Facebook className="footer-socials-icon" />
+            </motion.div>
+          </div>
         </div>
         {onPhone && <HLine />}
         <div className="footer-link-container">

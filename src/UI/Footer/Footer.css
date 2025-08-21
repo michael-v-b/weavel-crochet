@@ -26,6 +26,17 @@
     justify-content:space-between;
     width:40vw;
 }
+.footer-socials{
+    width:15vh;
+    display:flex;
+    flex-direction:reverse;
+    justify-content:space-between;
+}
+.footer-socials-icon {
+    color:rgb(206, 227, 239);
+    height:4vh;
+    width:4vh;
+}
 .footer-logo-container {
     display:flex;
     flex-direction:column;
