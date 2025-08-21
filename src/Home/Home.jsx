@@ -129,8 +129,8 @@ const Home = () => {
           </div>
           <div className="first-summary-text">
             Weavel is a 3D modeling software that lets you create your own
-            unique Amigurumi designs, and download it as a crochet pattern to
-            bring it to life.
+            unique Amigurumi designs, and download it as crochet patterns to
+            bring them to life.
           </div>
         </motion.div>
 
@@ -202,7 +202,7 @@ const Home = () => {
         {/*SCROLL ////////////////////////////////////////////////*/}
         <div className="trial-error">
           {" "}
-          No downloads, no installations, No more trial and error!
+          No downloads. No installations. No more trial and error!
         </div>
         <div className="trial-error">
           Just create an account and get stitching!

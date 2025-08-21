@@ -209,9 +209,9 @@ const Footer = () => {
             >
               Terms of Service
             </FooterOption>
-            <div className="footer-text footer-text-bottom copyright-text">
+            {/*<div className="footer-text footer-text-bottom copyright-text">
               Weavel Crochet
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>
