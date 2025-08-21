@@ -5,6 +5,7 @@ import { motion, useAnimation } from "framer-motion";
 import AuthTester from "../AuthTester";
 import InfiniteScroll from "./InfiniteScroll";
 import heroImage from "../assets/Home/Home.jpg";
+import VideoLoop from "../assets/Home/Videos/VideoLoop.mp4";
 
 import "./Home.css";
 
@@ -14,8 +15,8 @@ import "./Home.css";
 const Home = () => {
   const [bubblePlayed, setBubblePlayed] = useState(false);
   const BUBBLE_SIZE = 30;
-  const [onPhone,setOnPhone] = useState(window.innerWidth < 480);
-  const BUBBLE_RATIO = onPhone ? 0.7 : .6;
+  const [onPhone, setOnPhone] = useState(window.innerWidth < 480);
+  const BUBBLE_RATIO = onPhone ? 0.7 : 0.6;
   const BUBBLE_DELAY = 0.7;
   const heroSpace = useAnimation();
   const heroText = useAnimation();
@@ -29,20 +30,21 @@ const Home = () => {
     bounce: 2,
   };
 
-
-    useEffect(()=>{
+  useEffect(() => {
     const handleResize = () => {
-      if(window.innerHeight > 480) {
+      if (window.innerHeight > 480) {
         setOnPhone(false);
       } else {
         setOnPhone(true);
       }
-    }
+    };
     handleResize();
-    window.addEventListener('resize',handleResize);
+    window.addEventListener("resize", handleResize);
 
-    return () => {window.removeEventListener('resize',handleResize)}
-  },[]);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   /**
    * plays opening animation.
@@ -61,18 +63,17 @@ const Home = () => {
     };
     sequence();
   }, []);
-  
+
   /**
    * plays bubble animations once checkpoint is visible on screen.
    */
   const bubbleAnimations = async () => {
-
     let tempWidth = "50%";
-    if(window.innerWidth <= 480) {
+    if (window.innerWidth <= 480) {
       tempWidth = "98%";
     }
     screenshot.start({ width: tempWidth });
-    
+
     if (!bubblePlayed) {
       setBubblePlayed(true);
       bubbles.start({
@@ -90,19 +91,17 @@ const Home = () => {
     }
   };
 
-
-
   return (
     <>
       <Banner />
-      <AuthTester/>
+      <AuthTester />
       <div className="home-page-container">
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={heroSpace}
           className="hero-space"
         >
-          <img src=  {heroImage} className=  "hero-image"/>
+          <img src={heroImage} className="hero-image" />
           <motion.div
             initial={{ height: "0%", opacity: 0 }}
             animate={heroText}
@@ -116,24 +115,24 @@ const Home = () => {
             Custom Crochet Patterns!{" "}
           </motion.div>
         </motion.div>
-          
-        {/*CREATE YOUR OWN AMIGURUMI PATTERNS//////////////////*/}
-        <motion.div 
-        whileInView = {{scale:0.9}} 
-        transition ={{duration:0.4, ...SPRING_TRANSITION}}
-        initial = {{scale:0.8}}  
-        viewport ={{amount:0.7}}
-        className = "first-summary">
 
-          <div className = "first-summary-title">
+        {/*CREATE YOUR OWN AMIGURUMI PATTERNS//////////////////*/}
+        <motion.div
+          whileInView={{ scale: 0.9 }}
+          transition={{ duration: 0.4, ...SPRING_TRANSITION }}
+          initial={{ scale: 0.8 }}
+          viewport={{ amount: 0.7 }}
+          className="first-summary"
+        >
+          <div className="first-summary-title">
             Create Your Own Free Amigurumi Patterns!
           </div>
-          <div className = "first-summary-text">
-            Weavel is a 3D modeling software that lets you create your own unique Amigurumi designs,
-            and download it as a crochet pattern to bring it to life.
+          <div className="first-summary-text">
+            Weavel is a 3D modeling software that lets you create your own
+            unique Amigurumi designs, and download it as a crochet pattern to
+            bring it to life.
           </div>
         </motion.div>
-
 
         {/*BUBBLES/////////////////////////////////////////////*/}
         <motion.div className="bubble-div">
@@ -146,7 +145,10 @@ const Home = () => {
             }}
             className="bubble-screenshot"
           >
-            SCREEN SHOT GOES HERE
+            <div className="video-effects" />
+            <video autoPlay muted loop className="video-loop">
+              <source src={VideoLoop} type="video/mp4" />
+            </video>
           </motion.div>
 
           <div className="bubble-container">
@@ -190,33 +192,25 @@ const Home = () => {
               Access your projects from anywhere!
             </motion.div>
             <motion.div
-              style={{margin: "5%", position: "absolute" }}
+              style={{ margin: "5%", position: "absolute" }}
               whileInView={bubbleAnimations}
               className="animation-trigger"
             />
-
-
           </div>
         </motion.div>
-    
 
         {/*SCROLL ////////////////////////////////////////////////*/}
-        <div className="trial-error"> No downloads, no installations, No more trial and error!</div>
-        <div className="trial-error">Just create an account and get stitching!</div>
-
-        <InfiniteScroll/>
-
-
-       {/* <div className="change-prop-text">
+        <div className="trial-error">
           {" "}
-          Change proportions with the click of a button{" "}
+          No downloads, no installations, No more trial and error!
+        </div>
+        <div className="trial-error">
+          Just create an account and get stitching!
         </div>
 
-
-        <div className="change-prop-img" />
-        <div style={{ position: "absolute", bottom: "-265vh" }}> FOOTER </div>*/}
+        <InfiniteScroll />
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

@@ -140,6 +140,7 @@
   color: var(--project-text);
 }
 .bubble-screenshot {
+  position:relative;
   height: 100%;
   width: 50%;
   left: 0;
@@ -147,7 +148,20 @@
   border-radius: 15px;
   overflow:hidden;
 }
-
+.video-loop{
+  position:absolute;
+  height:101%;
+  top:-1vh;
+  z-index:1;
+}
+.video-effects{
+  position:absolute;
+  opacity:.15;
+  z-index:10;
+  background-color:rgb(0, 0, 0);
+  height:100%;
+  width:100%;
+}
 .download-container{
   margin-top:20vh;
   font-family:"Nunito","sans-serif";
@@ -197,6 +211,7 @@
 }
 
 
+
 @media (max-width:700px) {
   .hero-image{
     height:130%;
@@ -243,4 +258,5 @@
   .trial-error{
     font-size:5vw;
   }
+
 }
