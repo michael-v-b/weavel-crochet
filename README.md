@@ -1,12 +1,12 @@
-# 🧶 [webservice] – 3D Crochet Pattern Designer
+# 🧶 Weavel Crochet – 3D Crochet Pattern Designer
 
-[webservice] is a web-based tool that lets you design custom 3D models and automatically generate crochet patterns from them. Whether you're a hobbyist or a crochet pro, this tool bridges digital creativity and handmade art.
+Weavel Crochet is a web-based tool that lets you design custom 3D models and automatically generate crochet patterns from them. Whether you're a hobbyist or a crochet pro, this tool bridges digital creativity and handmade art.
 
 ---
 
 ## 🌐 Live Site
 
-🔗 [Visit the Web App](https://your-live-site-link.com)
+🔗 [Visit Weavel Crochet](https://weavelcrochet.com)
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## 🚀 Getting Started
 
-To use [webservice], just:
+To use WeavelCrochet, just:
 
 1. Create an account or log in
 2. Open the 3D model designer
