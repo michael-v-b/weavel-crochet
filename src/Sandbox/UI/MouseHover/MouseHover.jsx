@@ -1,69 +1,72 @@
-import {useState,
-    useEffect,
-    useRef,
-    forwardRef,
-    useImperativeHandle} from 'react';
+import {
+  useState,
+  useEffect,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 
-import {motion,useAnimation} from 'framer-motion';
+import { motion, useAnimation } from "framer-motion";
 
 import "./mouseHover.css";
 
 /**
- * 
+ *
  * @returns Div shows up after hover
  */
-const MouseHover = forwardRef(({},ref) => {
+const MouseHover = forwardRef(({}, ref) => {
+  const [isVisible, setVisible] = useState(false);
+  const [hoverText, setHoverText] = useState("");
+  const [mousePosition, setMousePosition] = useState([0, 0]);
+  const timerRef = useRef(null);
 
-    const [isVisible,setVisible] = useState(false);
-    const [hoverText,setHoverText] = useState("");
-    const [mousePosition,setMousePosition] = useState([0,0]);
-    const timerRef = useRef(null);
+  const startTimer = (element) => {
+    setHoverText(element);
+    timerRef.current = setTimeout(() => {
+      setVisible(true);
+    }, 1250);
+  };
 
-    const openBox = useAnimation();
+  const cancelTimer = () => {
+    clearTimeout(timerRef.current);
+  };
 
-    const startTimer = (element) => {
-        
-        setHoverText(element);
-        timerRef.current = setTimeout(()=>{
-            setVisible(true);
+  /**
+   * Use effect to find where the mouse position is on the page
+   */
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      mousePosition[0] = e.clientX;
+      mousePosition[1] = e.clientY;
+      setMousePosition([...mousePosition]);
+      setVisible(false);
+    };
 
-        }
-            ,1250);
-    }
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
-    const cancelTimer = () => {
-        clearTimeout(timerRef.current);
-    }
+  useImperativeHandle(ref, () => ({ startTimer, cancelTimer }));
 
-   
-
-    useEffect(()=>{
-        const handleMouseMove = (e) => {
-            mousePosition[0] = e.clientX;
-            mousePosition[1] = e.clientY;
-            setMousePosition([...mousePosition]);
-            setVisible(false);
-        }
-
-        window.addEventListener('mousemove',handleMouseMove);
-        return ()=>{
-            window.removeEventListener('mousemove',handleMouseMove);
-        }
-    },[]);
-
-    useImperativeHandle(ref,()=>({startTimer,cancelTimer}));
-
-    return <>
-        <motion.div 
-        className=  'mouse-hover-container'
-        animate = {{width: isVisible ? "15vh" : "0vh",height:isVisible ? "5vh" : "0vh"}}
-        style = {{
-            top:mousePosition[1] + 10 + 'px',
-            left:mousePosition[0] + 10 + 'px'
-        }}>
-            {hoverText}
-        </motion.div>
+  return (
+    <>
+      <motion.div
+        className="mouse-hover-container"
+        animate={{
+          width: isVisible ? "15vh" : "0vh",
+          height: isVisible ? "5vh" : "0vh",
+        }}
+        style={{
+          top: mousePosition[1] + window.scrollY + 10 + "px",
+          left: mousePosition[0] + 10 + "px",
+        }}
+      >
+        {hoverText}
+      </motion.div>
     </>
+  );
 });
 
 export default MouseHover;
