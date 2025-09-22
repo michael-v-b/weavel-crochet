@@ -14,6 +14,7 @@ import ModeBar from "./UI/ModeBar/ModeBar";
 import WarningPop from "../UI/WarningPop/WarningPop";
 import ProjectDim from "./UI/ProjectDim/ProjectDim";
 import MouseHover from "./UI/MouseHover/MouseHover";
+import Tutorial from "./UI/Tutorial/Tutorial";
 
 import KeyTracker from "./DevTools/KeyTracker";
 import ProjectReader from "./DevTools/ProjectReader";
