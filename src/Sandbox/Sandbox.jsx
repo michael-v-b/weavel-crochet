@@ -132,6 +132,7 @@ const Sandbox = () => {
 
   return (
     <>
+      <Tutorial />
       <MouseHover ref={mouseHoverRef} />
       <div className="webpage">
         <WarningPop />

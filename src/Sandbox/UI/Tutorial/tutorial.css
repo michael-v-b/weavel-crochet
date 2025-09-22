@@ -1,0 +1,25 @@
+.tutorial-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+    height:120vh;
+    width:100vw;
+    position:absolute;
+}
+.tutorial-blackout{
+    height:100%;
+    width:100%;
+    background-color:rgb(0, 0, 0);
+    opacity:0.5;
+    position:absolute;
+}
+.tutorial-text-container{
+    z-index:1;
+    background-color:white;
+    border-radius:25px;
+    height:50vh;
+    width:50vw;
+    border-color:magenta;
+    border-style:solid;
+}
