@@ -1,4 +1,4 @@
-import  { forwardRef, useImperativeHandle } from "react";
+import { forwardRef, useImperativeHandle } from "react";
 import useGlobalStore from "../globalStore";
 import supabase from "../supabase";
 
@@ -23,7 +23,7 @@ const ProjectManager = forwardRef((_, ref) => {
       0,
       selectData[0].num_of_projects + incrementNum
     );
-    
+
     if (selectError) {
       console.log("selectError: " + selectError);
     }
@@ -33,9 +33,9 @@ const ProjectManager = forwardRef((_, ref) => {
       .update({ num_of_projects: new_num_of_projects })
       .eq("user_id", authData.user.id);
 
-      if(updateError) {
-        console.log("updateError: " + updateError);
-      }
+    if (updateError) {
+      console.log("updateError: " + updateError);
+    }
   };
 
   /**
@@ -58,25 +58,13 @@ const ProjectManager = forwardRef((_, ref) => {
     });
 
     const path = "" + authData.user.id + "/" + id + "/data.json";*/
-    
-    const {data:invokeData,error:invokeError} = await supabase.functions.invoke('add-new-project',{method: 'POST'});
+
+    const { data: invokeData, error: invokeError } =
+      await supabase.functions.invoke("add-new-project", { method: "POST" });
 
     console.log("invoke data");
     console.dir(invokeData);
     return invokeData.message;
-    //return invokeData.message;
-    /*const { data: uploadData, error: uploadError } = await supabase.storage
-      .from("Project Files")
-      .upload(path, jsonBlob);
-
-    const { error: insertError } = await supabase.from("Projects").insert([
-      {
-        project_name: name,
-        user_id: authData.user.id,
-        project_id: id,
-        project_url: path,
-      },
-    ]);*/
   };
 
   /**

@@ -137,6 +137,9 @@ const useStore = create((set) => ({
 
   multiSelect: false,
   setMultiSelect: (newMultiSelect) => set({ multiSelect: newMultiSelect }),
+  
+  tutorialActive: false,
+  setTutorial: (newTutorial) => set({tutorialActive:newTutorial}),
 }));
 
 export default useStore;
