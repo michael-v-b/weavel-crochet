@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const TutorialWindow = ({ text = "n/a" }) => {
+const TutorialWindow = ({ text = "n/a", nextStep, prevStep }) => {
   return (
     <>
       <div className="tutorial-container">
@@ -11,6 +11,9 @@ const TutorialWindow = ({ text = "n/a" }) => {
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
+              onClick={() => {
+                prevStep();
+              }}
               className="tutorial-light small clickable"
             >
               {"< Previous"}
@@ -19,6 +22,9 @@ const TutorialWindow = ({ text = "n/a" }) => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="tutorial-dark small clickable"
+              onClick={() => {
+                nextStep();
+              }}
             >
               {" "}
               {"Next >"}
