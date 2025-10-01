@@ -16,7 +16,7 @@ const TutorialButton = () => {
       onClick={() => {
         setTutorial(true);
       }}
-      className="tutorial-prev tutorial-button"
+      className="tutorial-dark tutorial-button clickable"
     >
       Start Tutorial
     </motion.div>

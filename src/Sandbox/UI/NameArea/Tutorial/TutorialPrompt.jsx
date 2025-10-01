@@ -1,5 +1,6 @@
 import useGlobalStore from "../../../../globalStore";
 import supabase from "../../../../supabase";
+import useStore from "../../../DevTools/store";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "./tutorial.css";
@@ -8,7 +9,8 @@ import "./tutorial.css";
  * The main container class for all sub classes regarding the tutorial.
  */
 const TutorialPrompt = () => {
-  const [completedTutorial, setTutorial] = useState(true);
+  const [promptVisible, setPromptVisible] = useState(true);
+  const setTutorial = useStore((state) => state.setTutorial);
 
   //steps for tutorial. When Button pressed, iterate through step number, and subsequent lists
   //lists include, text list, reference list, and location list
@@ -19,24 +21,14 @@ const TutorialPrompt = () => {
       const { data, error } = await supabase
         .from("Profiles")
         .select("finished_tutorial");
-      setTutorial(data[0].finished_tutorial);
+      setPromptVisible(!data[0].finished_tutorial);
     };
     getTutorialCompletion();
   }, []);
 
-  //if user has not completed tutorial, then launch it
-  useEffect(() => {
-    if (!completedTutorial) {
-      console.log("launch tutorial");
-    }
-  }, [completedTutorial]);
-
   /**
    * Sets completedTutorial to true, thus closing the tutorial out
    */
-  const completeTutorial = () => {
-    setTutorial(true);
-  };
 
   //thinking it through
 
@@ -46,7 +38,7 @@ const TutorialPrompt = () => {
 
   return (
     <>
-      {!completedTutorial && (
+      {promptVisible && (
         <div className="tutorial-container">
           <div className="tutorial-text-container">
             <div className="tutorial-text">
@@ -55,17 +47,23 @@ const TutorialPrompt = () => {
             </div>
             <div className="tutorial-options-container">
               <motion.div
-                className="tutorial-prev"
+                className="tutorial-dark"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                onClick={() => {
+                  setPromptVisible(false);
+                  setTutorial(true);
+                }}
               >
                 Yes please
               </motion.div>
               <motion.div
-                className="tutorial-next"
+                className="tutorial-light"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={completeTutorial}
+                onClick={() => {
+                  setPromptVisible(false);
+                }}
               >
                 No, thank you
               </motion.div>

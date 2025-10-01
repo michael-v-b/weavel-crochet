@@ -15,6 +15,7 @@ import WarningPop from "../UI/WarningPop/WarningPop";
 import ProjectDim from "./UI/ProjectDim/ProjectDim";
 import MouseHover from "./UI/MouseHover/MouseHover";
 import TutorialPrompt from "./UI/NameArea/Tutorial/TutorialPrompt";
+import TutorialManager from "./UI/NameArea/Tutorial/TutorialManager";
 
 import KeyTracker from "./DevTools/KeyTracker";
 import ProjectReader from "./DevTools/ProjectReader";
@@ -133,6 +134,7 @@ const Sandbox = () => {
   return (
     <>
       <TutorialPrompt />
+      <TutorialManager />
       <MouseHover ref={mouseHoverRef} />
       <div className="webpage">
         <WarningPop />
