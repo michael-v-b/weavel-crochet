@@ -87,8 +87,7 @@
     justify-content:space-between;
     position:absolute;
 
-    top:50vh;
-    right:50vw;
+
 
     width:30vh;
 
@@ -100,7 +99,7 @@
 
     padding:3vh;
  
-    z-index:1000;
+    z-index:1;
     
 }
 .tutorial-window-text{

@@ -2,6 +2,7 @@ import ModeButton from "../Buttons/ModeButton.jsx";
 import { useEffect, forwardRef, useRef } from "react";
 import "./ModeBar.css";
 import useStore from "../../DevTools/store.js";
+import useRefStore from "../../DevTools/refStore.js";
 import CameraIcon from "../../../assets/Icons/Modes/camera.svg?react";
 import TransformIcon from "../../../assets/Icons/Modes/transform.svg?react";
 import ShapesIcon from "../../../assets/Icons/Modes/shapes.svg?react";
@@ -30,6 +31,7 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef }) => {
   const keysPressed = useStore((state) => state.keysPressed);
   const isDragging = useStore((state) => state.isDragging);
   const isFocused = useStore((state) => state.isFocused);
+  const setRefs = useRefStore((state) => state.setRefs);
 
   //const [currentMode, setMode] = useState("camera");
 
@@ -37,6 +39,7 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef }) => {
   const cameraButton = useRef(null);
   const shapeButton = useRef(null);
   const exportButton = useRef(null);
+  const modeBarRef = useRef(null);
   const modeKey = [
     ["camera", cameraButton, <CameraIcon className="mode-icon" />],
     ["transform", transformButton, <TransformIcon className="mode-icon" />],
@@ -57,6 +60,7 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef }) => {
     }
   };
 
+  //keyboard shortcut for the camera
   useEffect(() => {
     if (!isFocused && !isDragging && keysPressed.includes("KeyC")) {
       if (mode == "camera") {
@@ -67,6 +71,7 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef }) => {
     }
   }, [keysPressed]);
 
+  //autoamtically deselects other modes when one is selected
   useEffect(() => {
     for (let i = 0; i < modeKey.length; i++) {
       const modeButtonRef = modeKey[i][1];
@@ -80,6 +85,12 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef }) => {
       }
     }
   }, [mode]);
+
+  useEffect(() => {
+    if (modeBarRef) {
+      setRefs("modeBar", modeBarRef);
+    }
+  }, [modeBarRef]);
 
   const ModeButtonWrapper = forwardRef(({ name, mode = -1, ...props }, ref) => {
     return (
@@ -97,7 +108,7 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef }) => {
   });
 
   return (
-    <div className="mode-bar">
+    <div ref={modeBarRef} className="mode-bar">
       <div className="mode-buttons">
         {modeKey.map((value, key) => {
           const tempMode = value[0];
