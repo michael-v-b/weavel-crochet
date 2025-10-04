@@ -13,16 +13,12 @@ const TutorialWindow = ({
   const [tutorialTop, setTop] = useState("50vh");
   const [tutorialLeft, setLeft] = useState("45vw");
   let prevZIndex = 1;
-  let prevBorderStyle = null;
-  let prevBorderColor = null;
 
   //used to select anchor points in terms of tutorial
   useEffect(() => {
     if (anchor) {
       const anchorStyle = anchor.current.style;
       prevZIndex = anchorStyle.zIndex;
-      prevBorderStyle = anchorStyle.borderStyle;
-      prevBorderColor = anchorStyle.borderColor;
 
       highlightElement();
     }
@@ -34,8 +30,6 @@ const TutorialWindow = ({
     if (anchor) {
       const anchorStyle = anchor.current.style;
       anchorStyle.zIndex = prevZIndex;
-      anchorStyle.borderStyle = prevBorderStyle;
-      anchorStyle.borderColor = prevBorderColor;
     } else {
       console.log("anchor style doesn't exist");
     }
@@ -46,8 +40,6 @@ const TutorialWindow = ({
     if (anchor) {
       const anchorStyle = anchor.current.style;
       anchorStyle.zIndex = "1000";
-      anchorStyle.borderStyle = "solid";
-      anchorStyle.borderColor = "#ffa200ff";
     }
   };
 

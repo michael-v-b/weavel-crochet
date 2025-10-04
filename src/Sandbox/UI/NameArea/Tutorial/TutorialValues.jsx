@@ -25,7 +25,11 @@ const TutorialValues = () => {
       modeBar,
       mode == "camera",
     ],
-    ["Now you can drag your mouse around the Canvas to change the direction of the camera",canvas,true]
+    [
+      "Now you can drag your mouse around the Canvas to change the direction of the camera",
+      canvas,
+      true,
+    ],
     [],
   ];
 };
