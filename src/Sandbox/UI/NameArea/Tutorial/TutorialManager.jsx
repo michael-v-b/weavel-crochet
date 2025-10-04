@@ -2,24 +2,23 @@ import { useState, useEffect } from "react";
 import useStore from "../../../DevTools/store";
 import useRefStore from "../../../DevTools/refStore";
 import TutorialWindow from "./TutorialWindow";
+import TutorialValues from "./TutorialValues";
 
 const TutorialManager = ({}) => {
   const tutorialActive = useStore((state) => state.tutorialActive);
   const setTutorial = useStore((state) => state.setTutorial);
   const refs = useRefStore((state) => state.refs);
   const [currentStep, setStep] = useState(0);
-
-  useEffect(() => {
-    console.log("refs");
-    console.dir(refs["modeBar"]);
-  }, [refs]);
+  const tutorialValues = TutorialValues();
 
   /**
    * if current step is more than the text list length then the tutorial ends
    */
   useEffect(() => {
-    if (currentStep > textList.length - 1) {
+    if (currentStep >= tutorialValues.length - 1) {
+      console.log("tutorial is off now");
       setTutorial(false);
+    } else {
     }
   }, [currentStep]);
 
@@ -27,19 +26,11 @@ const TutorialManager = ({}) => {
    * if tutorial is set active, then reset tutorial to the front
    */
   useEffect(() => {
+    console.log("tutorial active: " + tutorialActive);
     if (tutorialActive) {
       setStep(0);
     }
   }, [tutorialActive]);
-
-  const textList = [
-    "Text bubble 1",
-    "Text bubble 2",
-    "Text bubble 3",
-    "Text bubble 4",
-  ];
-
-  const refList = [null, null, refs["modeBar"], null];
 
   /**
    * increase current step in tutorial
@@ -59,10 +50,12 @@ const TutorialManager = ({}) => {
     <>
       {tutorialActive && (
         <TutorialWindow
-          text={textList[currentStep]}
-          anchor={refList[currentStep]}
+          text={tutorialValues[currentStep][0]}
+          anchor={tutorialValues[currentStep][1]}
           prevStep={decrementStep}
           nextStep={incrementStep}
+          step={currentStep}
+          nextFlag={tutorialValues[currentStep][2]}
         />
       )}
     </>

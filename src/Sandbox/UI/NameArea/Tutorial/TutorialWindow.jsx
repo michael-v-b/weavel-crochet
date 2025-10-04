@@ -6,6 +6,8 @@ const TutorialWindow = ({
   anchor = null,
   nextStep,
   prevStep,
+  step,
+  nextFlag = "true",
 }) => {
   const tutorialRef = useRef(null);
   const [tutorialTop, setTop] = useState("50vh");
@@ -21,10 +23,11 @@ const TutorialWindow = ({
       prevZIndex = anchorStyle.zIndex;
       prevBorderStyle = anchorStyle.borderStyle;
       prevBorderColor = anchorStyle.borderColor;
+
       highlightElement();
     }
     calculateWindowPosition();
-  }, [anchor]);
+  }, [step]);
 
   //deselects the anchor element
   const unhighlightElement = () => {
@@ -89,18 +92,20 @@ const TutorialWindow = ({
             >
               {"< Previous"}
             </motion.div>{" "}
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="tutorial-dark small clickable"
-              onClick={() => {
-                unhighlightElement();
-                nextStep();
-              }}
-            >
-              {" "}
-              {"Next >"}
-            </motion.div>
+            {nextFlag && (
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="tutorial-dark small clickable"
+                onClick={() => {
+                  unhighlightElement();
+                  nextStep();
+                }}
+              >
+                {" "}
+                {"Next >"}
+              </motion.div>
+            )}
           </div>
         </div>
       </div>
