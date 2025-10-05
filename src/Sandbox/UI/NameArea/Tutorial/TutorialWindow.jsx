@@ -8,6 +8,7 @@ const TutorialWindow = ({
   prevStep,
   step,
   nextFlag = "true",
+  orientation = "bottom",
 }) => {
   const tutorialRef = useRef(null);
   const [tutorialTop, setTop] = useState("50vh");
@@ -48,17 +49,23 @@ const TutorialWindow = ({
     const tutorialBounds = tutorialRef.current.getBoundingClientRect();
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
-
     //if no anchor exists center the tutorial window
     if (!anchor) {
       setTop((windowHeight - tutorialBounds.height) / 2);
       setLeft((windowWidth - tutorialBounds.width) / 2);
     } else {
       const anchorBounds = anchor.current.getBoundingClientRect();
-      setTop(anchorBounds.top + anchorBounds.height);
-      setLeft(
-        anchorBounds.left + (anchorBounds.width - tutorialBounds.width) / 2
-      );
+      if (orientation == "bottom") {
+        setTop(anchorBounds.top + anchorBounds.height);
+        setLeft(
+          anchorBounds.left + (anchorBounds.width - tutorialBounds.width) / 2
+        );
+      } else if (orientation == "right") {
+        setTop(
+          anchorBounds.top + (anchorBounds.height - tutorialBounds.width) / 2
+        );
+        setLeft(anchorBounds.left + anchorBounds.width);
+      }
     }
   };
 

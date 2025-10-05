@@ -16,7 +16,6 @@ const TutorialManager = ({}) => {
    */
   useEffect(() => {
     if (currentStep >= tutorialValues.length - 1) {
-      console.log("tutorial is off now");
       setTutorial(false);
     } else {
     }
@@ -26,7 +25,6 @@ const TutorialManager = ({}) => {
    * if tutorial is set active, then reset tutorial to the front
    */
   useEffect(() => {
-    console.log("tutorial active: " + tutorialActive);
     if (tutorialActive) {
       setStep(0);
     }
@@ -52,10 +50,11 @@ const TutorialManager = ({}) => {
         <TutorialWindow
           text={tutorialValues[currentStep][0]}
           anchor={tutorialValues[currentStep][1]}
+          nextFlag={tutorialValues[currentStep][2]}
+          orientation={tutorialValues[currentStep][3]}
           prevStep={decrementStep}
           nextStep={incrementStep}
           step={currentStep}
-          nextFlag={tutorialValues[currentStep][2]}
         />
       )}
     </>
