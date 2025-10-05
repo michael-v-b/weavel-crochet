@@ -6,9 +6,6 @@ const TutorialButton = () => {
   const setTutorial = useStore((state) => state.setTutorial);
   const tutorialActive = useStore((state) => state.tutorialActive);
 
-  useEffect(() => {
-    console.log("tutorial is active: " + tutorialActive);
-  }, [tutorialActive]);
   return (
     <motion.div
       whileHover={{ scale: 1.1 }}

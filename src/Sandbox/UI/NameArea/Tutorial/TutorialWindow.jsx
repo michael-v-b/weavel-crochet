@@ -31,8 +31,6 @@ const TutorialWindow = ({
     if (anchor) {
       const anchorStyle = anchor.current.style;
       anchorStyle.zIndex = prevZIndex;
-    } else {
-      console.log("anchor style doesn't exist");
     }
   };
 
