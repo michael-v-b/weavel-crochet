@@ -62,9 +62,14 @@ const TutorialWindow = ({
         );
       } else if (orientation == "right") {
         setTop(
-          anchorBounds.top + (anchorBounds.height - tutorialBounds.width) / 2
+          anchorBounds.top + (anchorBounds.height - tutorialBounds.height) / 2
         );
         setLeft(anchorBounds.left + anchorBounds.width);
+      } else if (orientation == "left") {
+        setTop(
+          anchorBounds.top + (anchorBounds.height - tutorialBounds.height) / 2
+        );
+        setLeft(anchorBounds.left - tutorialBounds.width);
       }
     }
   };

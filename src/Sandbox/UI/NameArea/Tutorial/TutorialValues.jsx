@@ -4,10 +4,14 @@ const TutorialValues = () => {
   const refs = useRefStore((state) => state.refs);
   const mode = useStore((state) => state.mode);
   const meshList = useStore((state) => state.meshList);
+  const selectedMeshes = useStore((state) => state.selectedMeshes);
   const tool = useStore((state) => state.tool);
   const modeBar = refs["modeBar"];
   const canvas = refs["canvas"];
   const tools = refs["tools"];
+  const colorWindow = refs["colorWindow"];
+  const attributes = refs["attributes"];
+  const hierarchy = refs["hierarchy"];
   /*adding the extra value in the back is a quick fix
   [0] message
   [1] reference
@@ -78,16 +82,59 @@ const TutorialValues = () => {
     [
       "You can use the Translate tool to drag your shape into different areas, if you’re having trouble dragging it, move your camera to get a better vantage",
       canvas,
-      true,
+      selectedMeshes.length > 0,
       "right",
     ],
     ["Now try selecting the Rotate tool", tools, tool == "rotate", "right"],
     [
       "You can use the Rotate tool to rotate your object, the balls indicate the angle of the shape on each axis",
       canvas,
+      selectedMeshes.length > 0,
+      "right",
+    ],
+    [
+      "Here you can add colors to your scene, you can hit the plus sign to add new colors or each color icon to change the value of that color",
+      colorWindow,
       true,
       "right",
     ],
+    [
+      "Here you can change your shapes attribute, every shape has certain attributes such as name and color, while some shape’s attributes are unique",
+      attributes,
+      true,
+      "left",
+    ],
+    [
+      "You can also use this area to delete a shape, although you can also use the backspace or delete keys as a shortcut",
+      attributes,
+      true,
+      "left",
+    ],
+    [
+      "This is the Object List, it lists all shapes that are currently in your project, along with their names",
+      hierarchy,
+      true,
+      "left",
+    ],
+    [
+      "If you are having trouble selecting a certain shape, you can select it here instead",
+      hierarchy,
+      true,
+      "left",
+    ],
+    [
+      "You can click multi-select to select multiple objects at once",
+      hierarchy,
+      true,
+      "left",
+    ],
+    [
+      "Once you have finished with your project, you can click the download button on the right to download a pdf with your crochet pattern.",
+      modeBar,
+      true,
+      "bottom",
+    ],
+    ["Happy Crafting!", null, true, ""],
     [],
   ];
 };
