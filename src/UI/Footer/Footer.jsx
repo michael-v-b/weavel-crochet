@@ -79,6 +79,7 @@ const FooterOption = ({ children, onClick }) => {
 
 const Footer = () => {
   const FEEDBACK_FORM_LINK = import.meta.env.VITE_FEEDBACK_FORM;
+  const DONATION_FORM_LINK = import.meta.env.VITE_DONATION_FORM;
   const navigate = useNavigate();
 
   const [onPhone, setOnPhone] = useState(false);
@@ -163,7 +164,10 @@ const Footer = () => {
             <ChangeLine onPhone={onPhone} />
             <FooterOption
               onClick={() => {
-                console.log("this will link to the paypal account");
+                window.open(
+                  "https://www.paypal.com/donate/?hosted_button_id=3EVSGD9RV48HL",
+                  "_blank"
+                );
               }}
             >
               Want to donate?

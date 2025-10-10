@@ -2,9 +2,10 @@ import "../../styles.css";
 import "./ColorWindow.css";
 import ColorButton from "../Buttons/ColorButton/ColorButton";
 import MotionButton from "../Buttons/MotionButton";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import useStore from "../../DevTools/store";
+import useRefStore from "../../DevTools/refStore";
 
 /**
  * add new colors
@@ -16,12 +17,27 @@ import useStore from "../../DevTools/store";
  */
 
 const ColorWindow = () => {
+  const colorWindowRefs = useRef(null);
   const colorList = useStore((state) => state.colorList);
   const setColorList = useStore((state) => state.setColorList);
   const OBJECT_LIMIT = useStore((state) => state.OBJECT_LIMIT);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
   const setWarningText = useStore((state) => state.setWarningText);
+  const setRefs = useRefStore((state) => state.setRefs);
+
+  useEffect(() => {
+    if (colorWindowRefs) {
+      setRefs("colorWindow", colorWindowRefs);
+    }
+  }, [colorWindowRefs]);
+
+  useEffect(() => {
+    if (projectFile) {
+      projectFile.colorList = colorList;
+      setProjectFile({ ...projectFile });
+    }
+  }, [colorList]);
 
   const addColor = (color) => {
     if (colorList.length < OBJECT_LIMIT) {
@@ -33,15 +49,8 @@ const ColorWindow = () => {
     }
   };
 
-  useEffect(() => {
-    if (projectFile) {
-      projectFile.colorList = colorList;
-      setProjectFile({ ...projectFile });
-    }
-  }, [colorList]);
-
   return (
-    <div className="side-window">
+    <div className="side-window" ref={colorWindowRefs}>
       <div className="side-title-bar "> Colors </div>
       <div className="color-window">
         {colorList.map((color, key) => {

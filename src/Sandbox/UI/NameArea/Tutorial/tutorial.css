@@ -1,0 +1,117 @@
+.tutorial-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+    height:120vh;
+    width:100vw;
+    position:absolute;
+}
+.tutorial-blackout{
+    height:100%;
+    width:100%;
+    background-color:rgba(0, 0, 0,0.5);
+    position:absolute;
+}
+.tutorial-text-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:1;
+
+    background-color:rgb(153, 185, 219);
+    border-radius:25px;
+
+    height:50vh;
+    width:40vw;
+
+    border-color:rgb(125, 100, 198);
+    border-style:solid;
+
+    padding:5vh;
+}
+
+.tutorial-text{
+    color:rgb(90, 105, 160);
+    font-family:"Nunito",sans-serif;
+    font-weight:700;
+    font-size:5vh;
+    text-align:center;
+    margin-bottom:5vh;
+}
+.tutorial-options-container{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+}
+.tutorial-dark {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    height:10vh;
+    width:30vh;
+    background-color:rgb(88, 94, 201);
+    border-radius:100px;
+    font-size:3vh;
+    font-family:"Nunito",sans-serif;
+    font-weight:600;
+    user-select:none;
+}
+
+.tutorial-light {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:rgb(88, 94, 201);
+    height:10vh;
+    width:30vh;
+    background-color:white;
+    border-radius:100px;
+    font-size:3vh;
+    font-family:"Nunito",sans-serif;
+    font-weight:700;
+    user-select:none;
+}
+.tutorial-button{
+    height: 4vh;
+}
+
+.tutorial-window {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:space-between;
+    position:absolute;
+
+
+
+    width:30vh;
+
+    background-color:rgb(255, 255, 255);
+    border-radius:25px;
+    border-style:solid;
+    border-color:rgb(92, 140, 218);
+
+
+    padding:3vh;
+ 
+    z-index:1;
+    
+}
+.tutorial-window-text{
+        font-family:"Nunito",sans-serif;
+    font-weight:800;
+    text-align:center;
+    color:rgb(54, 117, 219);
+    font-size:2.2vh;
+    margin-bottom:2vh;
+}
+.small {
+    font-size:2vh;
+    height:5vh;
+    width:10vh;
+}

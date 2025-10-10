@@ -8,12 +8,15 @@ import ToolWindow from "./UI/ToolWindow/ToolWindow";
 import InfoWindow from "./UI/InfoWindow/InfoWindow";
 import Hierarchy from "./UI/Hierarchy/Hierarchy";
 import ColorWindow from "./UI/ColorWindow/ColorWindow";
-import NameTag from "./UI/NameTag/NameTag";
+import NameArea from "./UI/NameArea/NameArea";
 import LoadScreen from "../UI/LoadScreen/LoadScreen";
 import ModeBar from "./UI/ModeBar/ModeBar";
 import WarningPop from "../UI/WarningPop/WarningPop";
 import ProjectDim from "./UI/ProjectDim/ProjectDim";
 import MouseHover from "./UI/MouseHover/MouseHover";
+import TutorialPrompt from "./UI/NameArea/Tutorial/TutorialPrompt";
+import TutorialManager from "./UI/NameArea/Tutorial/TutorialManager";
+import FeedbackPrompt from "./UI/FeedbackPrompt/FeedbackPrompt";
 
 import KeyTracker from "./DevTools/KeyTracker";
 import ProjectReader from "./DevTools/ProjectReader";
@@ -131,12 +134,14 @@ const Sandbox = () => {
 
   return (
     <>
+      <TutorialPrompt />
+      <TutorialManager />
       <MouseHover ref={mouseHoverRef} />
       <div className="webpage">
         <WarningPop />
         {isPortrait && <PortraitWarning />}
         <LoadScreen visible={meshLoading || nameLoading} />
-
+        <FeedbackPrompt />
         <ProjectReader
           ref={projectReaderRef}
           cameraTrackerRef={cameraTrackerRef}
@@ -144,7 +149,7 @@ const Sandbox = () => {
         />
         <Banner />
         <AuthTester reroute={"/"} />
-        <NameTag />
+        <NameArea />
         <div className="sandbox">
           <Exporter ref={exporterRef} screenshotRef={screenshotRef} />
           <KeyTracker />
@@ -160,7 +165,7 @@ const Sandbox = () => {
               historyRef={historyRef}
               mouseHoverRef={mouseHoverRef}
             />
-            {!meshLoading && !nameLoading /*&& <ProjectDim />*/}
+            {!meshLoading && !nameLoading && <ProjectDim />}
             <CanvasWindow
               ref={canvasRef}
               screenshotRef={screenshotRef}

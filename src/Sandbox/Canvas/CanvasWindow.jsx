@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { CameraControls} from "@react-three/drei";
+import { CameraControls } from "@react-three/drei";
 import CameraTracker from "./Managers/CameraTracker";
 
 import MeshSpawner from "./Managers/MeshSpawner";
@@ -11,9 +11,17 @@ import IntersectionManager from "./Managers/IntersectionManager";
 import History from "../DevTools/History/History";
 import SizeManager from "./Managers/SizeManager";
 import Screenshotter from "../DevTools/Screenshotter";
+import "./canvasWindow.css";
 
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import useStore from "../DevTools/store";
+import useRefStore from "../DevTools/refStore";
 
 /**
  * @typedef {CanvasWindow} - window that shows and allows interaction with the meshes.
@@ -38,20 +46,19 @@ const CanvasWindow = forwardRef(
     },
     ref
   ) => {
-
-    
     CanvasWindow.displayName = "Canvas Window";
     const mode = useStore((state) => state.mode);
-    const isFocused = useStore((state)=>state.isFocused);
-  
-    const [pendingPointerEvent,setPendingPointerEvent] = useState(null);
+    const isFocused = useStore((state) => state.isFocused);
+
+    const setRefs = useRefStore((state) => state.setRefs);
+
+    const [pendingPointerEvent, setPendingPointerEvent] = useState(null);
 
     const raycasterRef = useRef(null);
     const toolManagerRef = useRef(null);
     const intersectionManagerRef = useRef(null);
     const rotaterRef = useRef(null);
-
-   
+    const canvasRef = useRef(null);
 
     /**
      * when mouseDown cast ray with raycaster and update selections.
@@ -71,43 +78,46 @@ const CanvasWindow = forwardRef(
       }
     };
 
-
     /**
      * initializes pointer event if focused, triggers handleRay when not.
      * @param {Event} event - The pointer event with onPointerDown in Canvas
      */
     const handleClick = (event) => {
-      if(isFocused) {
+      if (isFocused) {
         setPendingPointerEvent(event);
       } else {
         handleRay(event);
       }
-    }
+    };
 
     //use effect only triggers handle ray after isFocused is set to false
-    useEffect(()=>{
-      if(pendingPointerEvent && !isFocused) {
+    useEffect(() => {
+      if (pendingPointerEvent && !isFocused) {
         handleRay(pendingPointerEvent);
         setPendingPointerEvent(null);
       }
-
-    },[pendingPointerEvent, isFocused]);
-
+    }, [pendingPointerEvent, isFocused]);
 
     //removes touch move functionality.
-    useEffect(()=>{
-      const canvas = document.querySelector('canvas');
+    useEffect(() => {
+      const canvas = document.querySelector("canvas");
 
       const handleTouchMove = (e) => {
         e.preventDefault();
-      }
-      
-      canvas.addEventListener('touchmove',handleTouchMove,{passive:false});
+      };
 
-      return ()=>{
-        canvas.removeEventListener('touchmove',handleTouchMove);
+      canvas.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+      return () => {
+        canvas.removeEventListener("touchmove", handleTouchMove);
+      };
+    }, []);
+
+    useEffect(() => {
+      if (canvasRef) {
+        setRefs("canvas", canvasRef);
       }
-    },[]);
+    }, [canvasRef]);
 
     /**
      * Spawns a mesh in the canvas.
@@ -126,62 +136,61 @@ const CanvasWindow = forwardRef(
     //updates canvas once mode is changed
 
     return (
-      <Canvas
-        onPointerDown={handleClick}
-        shadows={true}
-        style={{
-          height: "90%",
-          width: "100%",
-          backgroundColor: "#ebf5fb ",
-          borderBottomRightRadius: "25px",
-          borderBottomLeftRadius: "25px",
-          touchAction:"none",
-        }}
-      >
-        <SizeManager/>
-        <Screenshotter ref = {screenshotRef}/>
+      <div ref={canvasRef} className="canvas">
+        <Canvas
+          onPointerDown={handleClick}
+          shadows={true}
+          style={{
+            backgroundColor: "#ebf5fb",
+            borderBottomRightRadius: "25px",
+            borderBottomLeftRadius: "25px",
+          }}
+        >
+          <SizeManager />
+          <Screenshotter ref={screenshotRef} />
 
-        <IntersectionManager ref = {intersectionManagerRef} />
-        <History
-          ref={historyRef}
-          meshSpawnerRef={meshSpawnerRef}
-          deleterRef={deleterRef}
-          rotaterRef={rotaterRef}
-        />
+          <IntersectionManager ref={intersectionManagerRef} />
+          <History
+            ref={historyRef}
+            meshSpawnerRef={meshSpawnerRef}
+            deleterRef={deleterRef}
+            rotaterRef={rotaterRef}
+          />
 
-        <ambientLight intensity={0.5} />
-        <pointLight
-          castShadow={true}
-          position={[20, 20, 10]}
-          intensity={1000}
-        />
-        {/*bottom platform*/}
-        <gridHelper args={[10, 10]} position={[0, 0, 0]} />
+          <ambientLight intensity={0.5} />
+          <pointLight
+            castShadow={true}
+            position={[20, 20, 10]}
+            intensity={1000}
+          />
+          {/*bottom platform*/}
+          <gridHelper args={[10, 10]} position={[0, 0, 0]} />
 
-        {/*mesh spawner*/}
-        <MeshSpawner ref={meshSpawnerRef} />
+          {/*mesh spawner*/}
+          <MeshSpawner ref={meshSpawnerRef} />
 
-        <ToolManager
-          ref={toolManagerRef}
-          intersectionManagerRef = {intersectionManagerRef}
-          rotaterRef={rotaterRef}
-          raycaster={raycasterRef}
-        />
+          <ToolManager
+            ref={toolManagerRef}
+            intersectionManagerRef={intersectionManagerRef}
+            rotaterRef={rotaterRef}
+            raycaster={raycasterRef}
+          />
 
-        <RayCaster ref={raycasterRef} />
+          <RayCaster ref={raycasterRef} />
 
-        <SelectionManager ref={selectionManagerRef} mode={mode} />
+          <SelectionManager ref={selectionManagerRef} mode={mode} />
 
-        <Deleter
-          ref={deleterRef}
-          selectionManagerRef={selectionManagerRef}
-          meshSpawnerRef={meshSpawnerRef}
-        />
-        {children}
+          <Deleter
+            ref={deleterRef}
+            selectionManagerRef={selectionManagerRef}
+            meshSpawnerRef={meshSpawnerRef}
+          />
+          {children}
 
-        <CameraTracker ref = {cameraTrackerRef}/>
-        {mode == "camera" && <CameraControls />}
-      </Canvas>
+          <CameraTracker ref={cameraTrackerRef} />
+          {mode == "camera" && <CameraControls />}
+        </Canvas>
+      </div>
     );
   }
 );
