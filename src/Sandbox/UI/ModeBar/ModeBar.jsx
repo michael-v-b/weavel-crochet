@@ -157,7 +157,7 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef }) => {
           name={"Export PDF"}
           onClick={() => {
             setDownloadClicks(downloadClicks + 1);
-            //exporterRef.current.exportPDF();
+            exporterRef.current.exportPDF();
           }}
         >
           <DownloadIcon className="mode-icon" />
