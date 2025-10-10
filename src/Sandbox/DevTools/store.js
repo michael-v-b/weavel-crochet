@@ -140,6 +140,9 @@ const useStore = create((set) => ({
   
   tutorialActive: false,
   setTutorial: (newTutorial) => set({tutorialActive:newTutorial}),
+
+  downloadClicks: 0,
+  setDownloadClicks: (newClicks) => set({downloadClicks:newClicks}),
 }));
 
 export default useStore;

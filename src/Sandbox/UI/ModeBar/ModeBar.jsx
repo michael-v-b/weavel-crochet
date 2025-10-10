@@ -32,6 +32,8 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef }) => {
   const isDragging = useStore((state) => state.isDragging);
   const isFocused = useStore((state) => state.isFocused);
   const setRefs = useRefStore((state) => state.setRefs);
+  const downloadClicks = useStore((state) => state.downloadClicks);
+  const setDownloadClicks = useStore((state) => state.setDownloadClicks);
 
   //const [currentMode, setMode] = useState("camera");
 
@@ -154,7 +156,8 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef }) => {
           canPress={false}
           name={"Export PDF"}
           onClick={() => {
-            exporterRef.current.exportPDF();
+            setDownloadClicks(downloadClicks + 1);
+            //exporterRef.current.exportPDF();
           }}
         >
           <DownloadIcon className="mode-icon" />

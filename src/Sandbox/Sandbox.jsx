@@ -16,6 +16,7 @@ import ProjectDim from "./UI/ProjectDim/ProjectDim";
 import MouseHover from "./UI/MouseHover/MouseHover";
 import TutorialPrompt from "./UI/NameArea/Tutorial/TutorialPrompt";
 import TutorialManager from "./UI/NameArea/Tutorial/TutorialManager";
+import FeedbackPrompt from "./UI/FeedbackPrompt/FeedbackPrompt";
 
 import KeyTracker from "./DevTools/KeyTracker";
 import ProjectReader from "./DevTools/ProjectReader";
@@ -140,7 +141,7 @@ const Sandbox = () => {
         <WarningPop />
         {isPortrait && <PortraitWarning />}
         <LoadScreen visible={meshLoading || nameLoading} />
-
+        <FeedbackPrompt />
         <ProjectReader
           ref={projectReaderRef}
           cameraTrackerRef={cameraTrackerRef}
