@@ -54,18 +54,22 @@ const TutorialWindow = ({
     } else {
       const anchorBounds = anchor.current.getBoundingClientRect();
       if (orientation == "bottom") {
-        setTop(anchorBounds.top + anchorBounds.height);
+        setTop(anchorBounds.top + anchorBounds.height + window.scrollY);
         setLeft(
           anchorBounds.left + (anchorBounds.width - tutorialBounds.width) / 2
         );
       } else if (orientation == "right") {
         setTop(
-          anchorBounds.top + (anchorBounds.height - tutorialBounds.height) / 2
+          anchorBounds.top +
+            window.scrollY +
+            (anchorBounds.height - tutorialBounds.height) / 2
         );
         setLeft(anchorBounds.left + anchorBounds.width);
       } else if (orientation == "left") {
         setTop(
-          anchorBounds.top + (anchorBounds.height - tutorialBounds.height) / 2
+          anchorBounds.top +
+            window.scrollY +
+            (anchorBounds.height - tutorialBounds.height) / 2
         );
         setLeft(anchorBounds.left - tutorialBounds.width);
       }

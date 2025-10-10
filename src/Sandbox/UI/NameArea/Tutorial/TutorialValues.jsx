@@ -21,9 +21,8 @@ const TutorialValues = () => {
 
   return [
     [
-      `Welcome to the Tutorial for Weavel Crochet, this guide will help start your journey 
-      to creating your own custom unique crochet creations! Hit next to continue, hit next 
-      to continue to the next step.`,
+      `Welcome to this tutorial for navigating Weavel Crochet! This guide will help start your journey 
+      to creating your own custom unique crochet creations. Hit \"Next\" to continue to the next step.`,
       null,
       true,
       "",
@@ -99,13 +98,13 @@ const TutorialValues = () => {
       "right",
     ],
     [
-      "Here you can change your shapes attribute, every shape has certain attributes such as name and color, while some shape’s attributes are unique",
+      "Here you can change your object's attributes, every shape has certain attributes in common such as Name and Color, while some shape’s attributes are unique",
       attributes,
       true,
       "left",
     ],
     [
-      "You can also use this area to delete a shape, although you can also use the backspace or delete keys as a shortcut",
+      "You can also use this area to delete a shape, you can also use the backspace or delete keys as a shortcut",
       attributes,
       true,
       "left",
