@@ -157,6 +157,7 @@ const ModeBar = ({ exporterRef, historyRef, mouseHoverRef }) => {
           name={"Export PDF"}
           onClick={() => {
             setDownloadClicks(downloadClicks + 1);
+            console.log("exporter ref should export pdf");
             exporterRef.current.exportPDF();
           }}
         >
