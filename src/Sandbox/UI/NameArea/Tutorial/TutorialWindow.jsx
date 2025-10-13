@@ -87,17 +87,19 @@ const TutorialWindow = ({
         >
           <div className="tutorial-window-text">{text}</div>
           <div className="tutorial-options-container">
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => {
-                unhighlightElement();
-                prevStep();
-              }}
-              className="tutorial-light small clickable"
-            >
-              {"< Previous"}
-            </motion.div>{" "}
+            {step > 0 && (
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => {
+                  unhighlightElement();
+                  prevStep();
+                }}
+                className="tutorial-light small clickable"
+              >
+                {"< Previous"}
+              </motion.div>
+            )}{" "}
             {nextFlag && (
               <motion.div
                 whileHover={{ scale: 1.1 }}

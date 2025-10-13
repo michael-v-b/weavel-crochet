@@ -1,8 +1,5 @@
 import "../InfoPages.css";
-import  {
-  useState,
-  useEffect,
-} from "react";
+import { useState, useEffect } from "react";
 import { Vector3 } from "three";
 import useStore from "../../../../DevTools/store";
 import InputField from "./InputField";
@@ -19,9 +16,9 @@ const PositionField = ({ object }) => {
   const updateAvgPosition = useStore((state) => state.updateAvgPosition);
   const projectFile = useStore((state) => state.projectFile);
   const setProjectFile = useStore((state) => state.setProjectFile);
-  const undoList = useStore((state)=>state.undoList);
-  const setUndoList = useStore((state)=>state.setUndoList);
-  const setWarningText = useStore((state)=>state.setWarningText);
+  const undoList = useStore((state) => state.undoList);
+  const setUndoList = useStore((state) => state.setUndoList);
+  const setWarningText = useStore((state) => state.setWarningText);
   const [newPosition, setNewPosition] = useState([...avgPosition]);
 
   /**
@@ -46,28 +43,27 @@ const PositionField = ({ object }) => {
    * Tests whether 2 arrays, a and b, are equal.
    */
 
-  const testEquals  = (a,b) => {
-    for(let i =0; i < a.length; i++) {
+  const testEquals = (a, b) => {
+    for (let i = 0; i < a.length; i++) {
       if (a[i] != b[i]) {
         return false;
       }
     }
     return true;
-  }
+  };
 
   /**
    * get displacement of the 2 objects
    */
 
-  const getDisplacement = (a,b) => {
+  const getDisplacement = (a, b) => {
     const displacement = [];
 
-    for(let i = 0; i < a.length;i++) {
-      
+    for (let i = 0; i < a.length; i++) {
       displacement.push(a[i] - b[i]);
     }
     return displacement;
-  }
+  };
 
   /**
    * Sets the focused state to true when input field is focused on.
@@ -81,22 +77,25 @@ const PositionField = ({ object }) => {
    */
   const handleBlur = () => {
     const positionStrings = [0, 1, 0];
-    const positionNums = [0,1,0]
+    const positionNums = [0, 1, 0];
     for (let i = 0; i < positionStrings.length; i++) {
       positionStrings[i] = parseFloat(newPosition[i])
         .toFixed(2)
         .replace(/[.,]00$/, "");
       positionNums[i] = parseFloat(positionStrings[i]);
       if (isNaN(positionStrings[i])) {
-        
         positionStrings[i] = 0;
+        positionNums[i] = 0;
       }
     }
 
-    if(!testEquals(positionNums,object.position.toArray())) {
-      const displacement = getDisplacement(positionNums,object.position.toArray());
+    if (!testEquals(positionNums, object.position.toArray())) {
+      const displacement = getDisplacement(
+        positionNums,
+        object.position.toArray()
+      );
 
-      const action = ['translate'];
+      const action = ["translate"];
       action.push([object]);
       action.push(displacement);
       undoList.push(action);
@@ -105,15 +104,10 @@ const PositionField = ({ object }) => {
 
     //update undo
 
-
-
-
     //recently changed from parsing float, make sure it works
     object.position.copy(new Vector3().fromArray(positionNums));
     setNewPosition(positionStrings);
     updateAvgPosition();
-
-
 
     setFocused(false);
 
@@ -131,7 +125,6 @@ const PositionField = ({ object }) => {
     }
     setNewPosition([...newPosition]);
   }, [avgPosition]);
-
 
   return (
     <>

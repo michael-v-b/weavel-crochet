@@ -10,7 +10,6 @@ import SiloPattern from "./Pattern/SiloPattern";
 import TrianglePattern from "./Pattern/TrianglePattern";
 import StadiumPattern from "./Pattern/StadiumPattern";
 
-
 import Title from "./Title";
 import ProjectImage from "./ProjectImage";
 import Disclaimer from "./Disclaimer";
@@ -25,7 +24,6 @@ import useStore from "../DevTools/store";
 
 import banner from "../../assets/banner.png";
 
-
 /**
  * @typedef {Exporter} - exports crochet patterns of every mesh in scene.
  * @property {[Mesh]} meshList - every mesh in the scene.
@@ -35,7 +33,7 @@ import banner from "../../assets/banner.png";
  * - silo
  * - chain
  */
-const Exporter = forwardRef(({screenshotRef}, ref) => {
+const Exporter = forwardRef(({ screenshotRef }, ref) => {
   Exporter.displayName = "Exporter";
   const colorList = useStore((state) => state.colorList);
   const meshList = useStore((state) => state.meshList);
@@ -59,8 +57,6 @@ const Exporter = forwardRef(({screenshotRef}, ref) => {
     triangle: TrianglePattern,
     stadium: StadiumPattern,
   };
-
-  
 
   /**
    *Converts hex codes to rgb values
@@ -144,15 +140,13 @@ const Exporter = forwardRef(({screenshotRef}, ref) => {
     }
   };
 
-
-
   const exportPDF = async () => {
     const doc = new jsPDF();
     pageHeight = doc.internal.pageSize.getHeight();
     pageWidth = doc.internal.pageSize.getWidth();
-    const canvas = document.querySelector('canvas');
-    const canvasFactor = canvas.width/canvas.height;
-    
+    const canvas = document.querySelector("canvas");
+    const canvasFactor = canvas.width / canvas.height;
+
     doc.setFont("Helvetica", "normal");
 
     row = 10;
@@ -174,31 +168,46 @@ const Exporter = forwardRef(({screenshotRef}, ref) => {
 
     //TOP IMAGE///////////////////////////////////////
     const imageHeight = 120;
-    const imageWidth = imageHeight*canvasFactor;
-    
-    doc.setFillColor(235, 245, 251);
-    doc.roundedRect((pageWidth-imageWidth)/2, row, imageWidth, imageHeight,5,5, "F");
-    const projectImage = screenshotRef.current.takeScreenshot();
-    doc.addImage(projectImage, 'png', (pageWidth-imageWidth)/2, row,imageWidth,imageHeight);
+    const imageWidth = imageHeight * canvasFactor;
 
-    addRow(imageHeight+10,doc);
+    doc.setFillColor(235, 245, 251);
+    doc.roundedRect(
+      (pageWidth - imageWidth) / 2,
+      row,
+      imageWidth,
+      imageHeight,
+      5,
+      5,
+      "F"
+    );
+    const projectImage = screenshotRef.current.takeScreenshot();
+    doc.addImage(
+      projectImage,
+      "png",
+      (pageWidth - imageWidth) / 2,
+      row,
+      imageWidth,
+      imageHeight
+    );
+
+    addRow(imageHeight + 10, doc);
 
     //DISCLAIMER//////////////////////////////////////
     doc.setTextColor(255, 90, 90);
 
     Disclaimer().forEach((line) => {
-      doc.text(line,10,row);
-      addRow(10,doc);
-    })
+      doc.text(line, 10, row);
+      addRow(10, doc);
+    });
     addRow(10, doc);
 
     //SUMMARY////////////////////////////////////////////
     doc.setTextColor(120, 165, 206);
 
-    Summary().forEach((line)=>{
-      doc.text(line,10,row);
+    Summary().forEach((line) => {
+      doc.text(line, 10, row);
       addRow(10);
-    })
+    });
 
     addRow(10, doc);
 
@@ -230,12 +239,12 @@ const Exporter = forwardRef(({screenshotRef}, ref) => {
 
     //if recommended materials would bleed to next page, make it on next page
     //otherwise keep it right under
-    if (pageHeight-row < 50) {
-      addRow(pageHeight-row,doc);
+    if (pageHeight - row < 50) {
+      addRow(pageHeight - row, doc);
       doc.line(10, row, pageWidth - 10, row);
-      addRow(10,doc);
+      addRow(10, doc);
     } else {
-      addRow(10,doc);
+      addRow(10, doc);
     }
 
     addRow(10, doc);
@@ -246,7 +255,7 @@ const Exporter = forwardRef(({screenshotRef}, ref) => {
     doc.text("- #4 weight yarn in previous colors", 10, row);
     addRow(10, doc);
 
-    doc.text("- 3.5mm corchet hook", 10, row);
+    doc.text("- 3.5mm crochet hook", 10, row);
     addRow(10, doc);
 
     doc.text("- Stuffing", 10, row);
@@ -258,25 +267,28 @@ const Exporter = forwardRef(({screenshotRef}, ref) => {
     //add eyes to materials
     const eyeCount = EyeTracker.getEyeCount(meshList);
     const eyeSizes = Object.keys(eyeCount);
-    for(let i = 0; i < eyeSizes.length;i++) {
-      doc.text("- " + eyeCount[eyeSizes[i]] + " x " + eyeSizes[i] + " mm. safety eyes",10,row);
-      addRow(10,doc);
+    for (let i = 0; i < eyeSizes.length; i++) {
+      doc.text(
+        "- " + eyeCount[eyeSizes[i]] + " x " + eyeSizes[i] + " mm. safety eyes",
+        10,
+        row
+      );
+      addRow(10, doc);
     }
 
     //iterate through every mesh and its mesh pattern to the list.
     for (let i = 0; i < meshList.length; i++) {
-     
       let stringList = [];
       const object = meshList[i];
-      
-      if(object.userData.meshType!="eye") {
+
+      if (object.userData.meshType != "eye") {
         doc.setDrawColor(120, 165, 206);
         doc.line(10, row, pageWidth - 10, row);
 
         addRow(14, doc);
 
         //Object Title
-        Title(doc,object.name,row);
+        Title(doc, object.name, row);
 
         addRow(14, doc);
 
@@ -289,11 +301,10 @@ const Exporter = forwardRef(({screenshotRef}, ref) => {
 
         addRow(14, doc);
 
-      
-        const meshEyeList = EyeTracker.getIntersectingEyes(object,meshList);
+        const meshEyeList = EyeTracker.getIntersectingEyes(object, meshList);
         //concat actual pattern
         stringList = stringList.concat(
-          Patterns[object.userData.meshType](object,meshEyeList)
+          Patterns[object.userData.meshType](object, meshEyeList)
         );
         stringList.push("\n");
       }
@@ -302,26 +313,25 @@ const Exporter = forwardRef(({screenshotRef}, ref) => {
 
     doc.setDrawColor(120, 165, 206);
     doc.line(10, row, pageWidth - 10, row);
-    
-    addRow(14,doc);
-    
+
+    addRow(14, doc);
+
     //Finishing ////////////////////
-    if(meshList.length > 1) {
-      Title(doc,"Finishing",row);
+    if (meshList.length > 1) {
+      Title(doc, "Finishing", row);
 
-      addRow(14,doc);
+      addRow(14, doc);
       const finishing = Finishing(meshList);
-      for(let i = 0; i < finishing.length;i++) {
-        printToDoc(finishing[i],doc);
+      for (let i = 0; i < finishing.length; i++) {
+        printToDoc(finishing[i], doc);
 
-        
-        if(i < finishing.length-1) { //prevent line on last entry
-          doc.line(10,row,pageWidth -10,row);
-          addRow(14,doc);
+        if (i < finishing.length - 1) {
+          //prevent line on last entry
+          doc.line(10, row, pageWidth - 10, row);
+          addRow(14, doc);
         }
       }
     }
-
 
     //doc.text("Sew all pieces together",row);
 

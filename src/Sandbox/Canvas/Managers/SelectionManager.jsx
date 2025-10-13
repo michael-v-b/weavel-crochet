@@ -17,7 +17,9 @@ const SelectionManager = forwardRef((_, ref) => {
   const setSelectedMeshes = useStore((state) => state.setSelectedMeshes);
   const selectedList = useStore((state) => state.selectedMeshes);
   const setSelectedList = useStore((state) => state.setSelectedMeshes);
-  const multiSelect = useStore((state)=>state.multiSelect);
+  const multiSelect = useStore((state) => state.multiSelect);
+  const isFocused = useStore((state) => state.isFocused);
+  const setFocused = useStore((state) => state.setFocused);
 
   let tempSelectedList = selectedList; //templist so updates can happen immediately, before state is changed
 
@@ -51,7 +53,7 @@ const SelectionManager = forwardRef((_, ref) => {
     //select object
     if (selected) {
       object.userData.setSelected(true);
-      if(!tempSelectedList.includes(object)) {
+      if (!tempSelectedList.includes(object)) {
         tempSelectedList = [...tempSelectedList, object];
       }
 
@@ -59,7 +61,7 @@ const SelectionManager = forwardRef((_, ref) => {
     } else {
       object.userData.setSelected(false);
       let objectIndex = tempSelectedList.indexOf(object);
-      tempSelectedList.splice(objectIndex,1);
+      tempSelectedList.splice(objectIndex, 1);
       tempSelectedList = [
         ...tempSelectedList.slice(0, objectIndex),
         ...tempSelectedList.slice(objectIndex + 1),
@@ -102,6 +104,11 @@ const SelectionManager = forwardRef((_, ref) => {
   const handleSelections = (clickedList) => {
     widgetList = clickedList[0];
     objectList = clickedList[1];
+    //if changing from a focused object, don't immediately deselect object
+    if (isFocused) {
+      setFocused(false);
+      return null;
+    }
     //clear if clicked on nothing clear selection list
     if (widgetList.length <= 0 && objectList.length <= 0) {
       clearSelectedList();
@@ -115,7 +122,8 @@ const SelectionManager = forwardRef((_, ref) => {
     //if shift is pressed, then it will add an object
     if (
       keysPressed.includes("ShiftLeft") ||
-      keysPressed.includes("ShiftRight") || multiSelect
+      keysPressed.includes("ShiftRight") ||
+      multiSelect
     ) {
       if (!selectedList.includes(objectList[0])) {
         setObjectSelected(objectList[0], true);
@@ -137,7 +145,6 @@ const SelectionManager = forwardRef((_, ref) => {
       }
     }
   };
-  
 
   useImperativeHandle(ref, () => ({
     handleSelections,

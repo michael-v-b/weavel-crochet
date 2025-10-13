@@ -1,5 +1,4 @@
-
-import {forwardRef} from 'react';
+import { forwardRef, useRef, useImperativeHandle } from "react";
 
 /**
  * Component made to prevent ctrl+z interference while maintianing ctrl+c and ctrl+v
@@ -7,15 +6,20 @@ import {forwardRef} from 'react';
  * @returns {HTMLElement} - input field that is highly customizable but has ctrl+z and ctrl+y functionality
  * disabled.
  */
-const InputField = forwardRef(({...props},ref) => {
-
-    const handleKeyPressed = (event) => {
-        if(event.ctrlKey && (event.code == 'KeyZ' || event.code == 'KeyY')) {
-            event.preventDefault();
-        }
+const InputField = forwardRef(({ ...props }, ref) => {
+  const internalRef = useRef(null);
+  const handleKeyPressed = (event) => {
+    if (event.ctrlKey && (event.code == "KeyZ" || event.code == "KeyY")) {
+      event.preventDefault();
     }
+    if (event.code == "Enter") {
+      internalRef.current.blur();
+    }
+  };
 
-    return <input ref = {ref} onKeyDown ={handleKeyPressed}{...props}/>
+  useImperativeHandle(ref, () => internalRef.current);
+
+  return <input ref={internalRef} onKeyDown={handleKeyPressed} {...props} />;
 });
 
 export default InputField;
