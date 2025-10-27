@@ -2,7 +2,7 @@
 const Disclaimer = () => [
     "DISCLAIMER: The size estimation is a loose approximation. There are many ",
     "factors that can affect the size of a pattern including the yarn weight, tension,",
-    " and hook size. For the best results, use the recommended materials.",  
+    " and hook size. For the best results, use the recommended materials. ",  
       
 ];
 
