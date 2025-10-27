@@ -18,7 +18,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
  *@returns {Component} main page of project, contains all of the windows.
  */
 
-//THIS IS YET ANOTHER TEST TO SEE IF IT WILL UPDATE IN GITHUB
+//testing to see if necessary for vercel
 
 export default function App() {
   return (
