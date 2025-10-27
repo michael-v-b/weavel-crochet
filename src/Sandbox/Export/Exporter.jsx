@@ -95,11 +95,11 @@ const Exporter = forwardRef(({ screenshotRef }, ref) => {
 
   const addStitchKey = (doc) => {
     const stitch_key_text = [
-      "-sc: single crochet",
-      "-ch: chain",
-      "-inc: increase",
-      "-dec: decrease",
-      "-sl st: slip stitch",
+      "- sc: single crochet",
+      "- ch: chain",
+      "- inc: increase",
+      "- dec: decrease",
+      "- sl st: slip stitch",
     ];
     doc.text("Stitch Key: ", 10, row);
     for (let i = 0; i < stitch_key_text.length; i++) {
