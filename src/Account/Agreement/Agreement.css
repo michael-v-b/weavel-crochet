@@ -20,7 +20,10 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    width:50%;
+    width:80%;
+    margin-right:10%;
+    margin-top:3vh;
+    margin-bottom:5vh;
 }
 .ack-text{
     font-size:2vh;

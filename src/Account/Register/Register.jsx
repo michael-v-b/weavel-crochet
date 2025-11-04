@@ -1,12 +1,13 @@
 import "./Register.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import supabase from "../../supabase";
 import HomeIcon from "../HomeIcon";
 import useStore from "../../Sandbox/DevTools/store";
 import KeyTracker from "../../Sandbox/DevTools/KeyTracker";
 import Agreement from "../Agreement/Agreement";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 /**
  *@typedef {Register} - Screen users navigate to to create their accounts.
@@ -20,6 +21,8 @@ const Register = () => {
   const [warningText, setWarningText] = useState("");
   const [agreedToTOS, setTOS] = useState(false);
   const keysPressed = useStore((state) => state.keysPressed);
+  const [captchaToken, setCaptchaToken] = useState("");
+  const captcha = useRef(null);
 
   /**
    *Updates the state of passOne when the respective field is changed.
@@ -80,7 +83,11 @@ const Register = () => {
       const { data, error } = await supabase.auth.signUp({
         email: email,
         password: passOne,
+        options: { captchaToken },
       });
+
+      captcha.current.resetCaptcha();
+
       if (error && error.message == "User already registered") {
         setWarningText("*Email already in use");
       } else if (data) {
@@ -127,13 +134,18 @@ const Register = () => {
             maxLength="30"
             onChange={handleChangeTwo}
           />
-
           <Agreement getChecked={setTOS} />
           {/*displays warning text if exists*/}
           {warningText.length > 0 && (
             <div className="warning"> {warningText}</div>
           )}
-
+          <HCaptcha
+            ref={captcha}
+            sitekey="cae2db14-776c-485a-be1a-b1e6f5dc5f46"
+            onVerify={(token) => {
+              setCaptchaToken(token);
+            }}
+          />
           <motion.div
             className="register-button"
             whileHover={{ scale: 1.1, backgroundColor: "#11d5e9" }}
