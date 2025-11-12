@@ -22,6 +22,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [captchaToken, setCaptchaToken] = useState("");
+  const [willRemember, setRemember] = useState(false);
   const captcha = useRef(null);
 
   /**
@@ -62,6 +63,7 @@ const Login = () => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
+      persistSession: willRemember,
       options: { captchaToken },
     });
 
@@ -118,6 +120,16 @@ const Login = () => {
               setCaptchaToken(token);
             }}
           />
+          <div className="remember-container">
+            <input
+              className="ack-check"
+              type="checkbox"
+              onChange={(e) => {
+                setRemember(e.target.checked);
+              }}
+            />
+            <div className="remember-me">Remember Me</div>
+          </div>
 
           <div className="login-button-container">
             <motion.div
