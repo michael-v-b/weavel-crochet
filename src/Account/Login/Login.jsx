@@ -1,12 +1,13 @@
 import "./Login.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
-import { useState,useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import HomeIcon from "../HomeIcon";
 import supabase from "../../supabase";
 import useGlobalStore from "../../globalStore";
 import useStore from "../../Sandbox/DevTools/store";
 import KeyTracker from "../../Sandbox/DevTools/KeyTracker";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 /**
  * @typedef {Login} - The screen users are taken to when logging in.
@@ -16,10 +17,12 @@ const Login = () => {
   const navigate = useNavigate();
   const setAuth = useGlobalStore((state) => state.setAuth);
   const setAuthData = useGlobalStore((state) => state.setAuthData);
-  const keysPressed = useStore((state)=>state.keysPressed);
+  const keysPressed = useStore((state) => state.keysPressed);
   const [warning, setWarning] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
+  const captcha = useRef(null);
 
   /**
    *Updates email state when respective field is filled out.
@@ -36,8 +39,6 @@ const Login = () => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-
- 
 
   /**
    * When logo is clicked on, it will lead back to the home page.
@@ -61,6 +62,7 @@ const Login = () => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
+      options: { captchaToken },
     });
 
     if (!error) {
@@ -76,20 +78,19 @@ const Login = () => {
     }
   };
 
-  useEffect(()=>{
-    if(keysPressed.includes("Enter")) {
+  useEffect(() => {
+    if (keysPressed.includes("Enter")) {
       handleLoginClick();
     }
-  },[keysPressed]);
+  }, [keysPressed]);
 
   return (
     <div className="web-container center">
-      <KeyTracker/>
-      <HomeIcon/>
+      <KeyTracker />
+      <HomeIcon />
       <div className="login-window ">
         <div className="login-request">Please Log In </div>
         <div className="center">
-
           <div className="login-field-name"> Email Address: </div>
           <motion.input
             className="login-field"
@@ -110,9 +111,15 @@ const Login = () => {
 
           {/*warning only renders after failed attempt*/}
           <div className="warning-message">{warning} </div>
+          <HCaptcha
+            ref={captcha}
+            sitekey="cae2db14-776c-485a-be1a-b1e6f5dc5f46"
+            onVerify={(token) => {
+              setCaptchaToken(token);
+            }}
+          />
 
           <div className="login-button-container">
-           
             <motion.div
               className="login-button"
               whileHover={{ scale: 1.1, backgroundColor: "#11d5e9" }}
@@ -125,15 +132,16 @@ const Login = () => {
             >
               Log In{" "}
             </motion.div>
-            <motion.div 
-            className = "forgot-pass"
-            whileHover = {{ color:"#000000",scale:1.1}} 
-            whileTap = {{ color:"#888888",scale:0.9}} 
-            onClick = {()=>{navigate ("/forgot_pass")}}
+            <motion.div
+              className="forgot-pass"
+              whileHover={{ color: "#000000", scale: 1.1 }}
+              whileTap={{ color: "#888888", scale: 0.9 }}
+              onClick={() => {
+                navigate("/forgot_pass");
+              }}
             >
               Forgot password?
             </motion.div>
-            
           </div>
           <motion.div
             className="register"
