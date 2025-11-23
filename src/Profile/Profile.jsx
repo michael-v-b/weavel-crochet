@@ -21,7 +21,6 @@ const Profile = () => {
       <div className="projects-web-container">
         <Banner />
         <AuthTester reroute="" />
-        <div> This is added to test if it's a different branch</div>
         {deleteAccount && <ProfileDelete setDeleteAccount={setDeleteAccount} />}
 
         <div className="projects-container">

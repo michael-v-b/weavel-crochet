@@ -61,6 +61,7 @@ const Sandbox = () => {
   const setWarningText = useStore((state) => state.setWarningText);
 
   const [isPortrait, setPortrait] = useState(false);
+  const [isTrial, setTrial] = useState(true);
 
   const location = useLocation();
   /**
@@ -129,18 +130,23 @@ const Sandbox = () => {
     const tempId = currentURL.substring(idIndex + "sandbox/".length);
     if (auth && projectId == tempId && projectFile != null) {
       uploadFile();
+    } else if (tempId == "trial") {
+      console.log("is trial");
+      setTrial(true);
+    } else {
+      setTrial(false);
     }
   }, [projectFile]);
 
   return (
     <>
-      <TutorialPrompt />
+      <TutorialPrompt isTrial={isTrial} />
       <TutorialManager />
       <MouseHover ref={mouseHoverRef} />
       <div className="webpage">
         <WarningPop />
         {isPortrait && <PortraitWarning />}
-        <LoadScreen visible={meshLoading || nameLoading} />
+        {!isTrial && <LoadScreen visible={meshLoading || nameLoading} />}
         <FeedbackPrompt />
         <ProjectReader
           ref={projectReaderRef}
@@ -148,7 +154,7 @@ const Sandbox = () => {
           meshSpawnerRef={meshSpawnerRef}
         />
         <Banner />
-        <AuthTester reroute={"/"} />
+        {!isTrial && <AuthTester reroute={"/"} />}
         <NameArea />
         <div className="sandbox">
           <Exporter ref={exporterRef} screenshotRef={screenshotRef} />

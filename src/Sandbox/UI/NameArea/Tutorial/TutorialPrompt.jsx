@@ -8,7 +8,7 @@ import "./tutorial.css";
 /**
  * The main container class for all sub classes regarding the tutorial.
  */
-const TutorialPrompt = () => {
+const TutorialPrompt = ({ isTrial }) => {
   const [promptVisible, setPromptVisible] = useState(true);
   const setTutorial = useStore((state) => state.setTutorial);
 
@@ -18,10 +18,15 @@ const TutorialPrompt = () => {
   //when program runs test to see if user has completed tutorial already
   useEffect(() => {
     const getTutorialCompletion = async () => {
-      const { data, error } = await supabase
-        .from("Profiles")
-        .select("finished_tutorial");
-      setPromptVisible(!data[0].finished_tutorial);
+      if (!isTrial) {
+        const { data, error } = await supabase
+          .from("Profiles")
+          .select("finished_tutorial");
+
+        setPromptVisible(!data[0].finished_tutorial);
+      } else {
+        setPromptVisible(true);
+      }
     };
     getTutorialCompletion();
   }, []);
